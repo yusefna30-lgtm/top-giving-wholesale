@@ -6,35 +6,32 @@
     <title>TOP GIVING | Wholesale</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #D4AF37; --black: #000; --card: #0c0c0e; --sub-bg: #111; }
+        :root { --gold: #D4AF37; --black: #000; --card: #0c0c0e; }
         body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 120px; }
+        .brand { font-size: 2.8rem; color: var(--gold); margin: 30px 0; font-weight: 900; letter-spacing: 5px; }
         
-        .brand { font-size: 2.5rem; color: var(--gold); margin: 30px 0; font-weight: 900; letter-spacing: 5px; text-transform: uppercase; }
-        
-        /* القسم الرئيسي (رجالي / جامبو) */
+        /* شريط القسم الرئيسي (رجالي / جامبو) */
         .main-section { 
-            background: linear-gradient(90deg, transparent, var(--gold), transparent); 
-            color: #000; padding: 12px; font-size: 1.5rem; font-weight: 900; 
-            margin: 40px 0 20px 0; text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+            background: var(--gold); color: #000; padding: 12px; 
+            font-size: 1.5rem; font-weight: 900; margin: 40px 0 10px 0;
         }
 
-        /* المجموعات المختصرة */
-        .group-title {
-            color: var(--gold); font-size: 1.1rem; font-weight: bold;
-            margin: 25px 0 15px 0; padding-bottom: 5px;
-            border-bottom: 1px solid #333; display: inline-block; width: 80%;
+        /* عنوان المجموعة (الدمج) */
+        .group-header {
+            color: var(--gold); font-size: 1.1rem; border-bottom: 1px solid #333;
+            display: inline-block; width: 90%; margin: 20px 0; padding-bottom: 5px;
         }
 
         .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 1200px; margin: auto; padding: 0 12px; }
-        .card { background: var(--card); padding: 10px; border-radius: 15px; border: 1px solid #222; display: flex; flex-direction: column; transition: 0.3s; }
-        .img-wrapper { width: 100%; height: 180px; border-radius: 10px; overflow: hidden; background: #111; }
+        .card { background: var(--card); padding: 10px; border-radius: 15px; border: 1px solid #222; display: flex; flex-direction: column; }
+        .img-wrapper { width: 100%; height: 200px; border-radius: 10px; overflow: hidden; background: #111; }
         .product-img { width: 100%; height: 100%; object-fit: cover; }
-        .model-title { font-size: 0.85rem; font-weight: bold; margin: 10px 0; color: #ddd; height: 35px; overflow: hidden; }
+        .model-title { font-size: 0.85rem; font-weight: bold; margin: 10px 0; color: #ddd; height: 35px; }
         
-        .qty-box { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px; background: #000; padding: 5px; border-radius: 8px; border: 1px solid #333; }
+        .qty-box { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px; background: #000; padding: 5px; border-radius: 8px; }
         .qty-btn { background: #222; color: #fff; border: none; width: 28px; height: 28px; border-radius: 5px; cursor: pointer; }
         .qty-val { font-weight: bold; color: var(--gold); min-width: 20px; }
-        .add-btn { background: var(--gold); color: #000; padding: 10px; border-radius: 8px; font-weight: 900; border: none; width: 100%; cursor: pointer; font-size: 0.8rem; }
+        .add-btn { background: var(--gold); color: #000; padding: 10px; border-radius: 8px; font-weight: 900; border: none; width: 100%; cursor: pointer; }
 
         .order-summary { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.95); border-top: 2px solid var(--gold); padding: 15px; display: none; z-index: 1000; }
         @media (min-width: 768px) { .grid { grid-template-columns: repeat(4, 1fr); } .img-wrapper { height: 320px; } }
@@ -46,58 +43,86 @@
 
     <div class="main-section">القسم الرجالي</div>
 
-    <div class="group-title">التيشيرتات والقمصان</div>
+    <div class="group-header">التيشيرتات والقمصان</div>
     <div class="grid">
         <div class="card">
-            <div class="model-title">تيشيرت رجالي</div>
-            <div class="img-wrapper"><img src="pant-mens01.jpg" class="product-img"></div>
+            <div class="model-title">تيشيرت رجالي فاخر</div>
+            <div class="img-wrapper"><img src="tshert-mens01.jpg" class="product-img"></div>
             <div class="qty-box">
-                <button class="qty-btn" onclick="changeQty('rt1', -12, 12)">-</button><span id="rt1" class="qty-val">12</span><button class="qty-btn" onclick="changeQty('rt1', 12, 12)">+</button>
+                <button class="qty-btn" onclick="changeQty('m1', -12, 12)">-</button><span id="m1" class="qty-val">12</span><button class="qty-btn" onclick="changeQty('m1', 12, 12)">+</button>
             </div>
-            <button class="add-btn" onclick="add('تيشيرت رجالي', 'rt1')">إضافة للطلب</button>
+            <button class="add-btn" onclick="add('تيشيرت رجالي', 'm1')">إضافة</button>
         </div>
-        </div>
-
-    <div class="group-title">البناطيل والشورتات</div>
-    <div class="grid">
         <div class="card">
-            <div class="model-title">بنطلون رجالي</div>
-            <div class="img-wrapper"><img src="pant-mens02.jpg" class="product-img"></div>
+            <div class="model-title">قميص رجالي كاجوال</div>
+            <div class="img-wrapper"><img src="shirt-men01.jpg" class="product-img"></div>
             <div class="qty-box">
-                <button class="qty-btn" onclick="changeQty('rb1', -6, 6)">-</button><span id="rb1" class="qty-val">6</span><button class="qty-btn" onclick="changeQty('rb1', 6, 6)">+</button>
+                <button class="qty-btn" onclick="changeQty('m2', -6, 6)">-</button><span id="m2" class="qty-val">6</span><button class="qty-btn" onclick="changeQty('m2', 6, 6)">+</button>
             </div>
-            <button class="add-btn" onclick="add('بنطلون رجالي', 'rb1')">إضافة للطلب</button>
+            <button class="add-btn" onclick="add('قميص رجالي', 'm2')">إضافة</button>
         </div>
     </div>
 
-    <div class="group-title">الأطقم الكاملة</div>
+    <div class="group-header">البناطيل والشورتات</div>
+    <div class="grid">
+        <div class="card">
+            <div class="model-title">بنطلون رجالي PM0269</div>
+            <div class="img-wrapper"><img src="pant-mens01.jpg" class="product-img"></div>
+            <div class="qty-box">
+                <button class="qty-btn" onclick="changeQty('m3', -6, 6)">-</button><span id="m3" class="qty-val">6</span><button class="qty-btn" onclick="changeQty('m3', 6, 6)">+</button>
+            </div>
+            <button class="add-btn" onclick="add('بنطلون رجالي 0269', 'm3')">إضافة</button>
+        </div>
+        <div class="card">
+            <div class="model-title">شورت رجالي 0295</div>
+            <div class="img-wrapper"><img src="short-men02.jpg" class="product-img"></div>
+            <div class="qty-box">
+                <button class="qty-btn" onclick="changeQty('m4', -6, 6)">-</button><span id="m4" class="qty-val">6</span><button class="qty-btn" onclick="changeQty('m4', 6, 6)">+</button>
+            </div>
+            <button class="add-btn" onclick="add('شورت رجالي 0295', 'm4')">إضافة</button>
+        </div>
+    </div>
+
+    <div class="group-header">الأطقم الكاملة</div>
     <div class="grid">
         <div class="card">
             <div class="model-title">طقم رجالي قطعتين</div>
             <div class="img-wrapper"><img src="mens-set02.jpg" class="product-img"></div>
             <div class="qty-box">
-                <button class="qty-btn" onclick="changeQty('rs1', -6, 6)">-</button><span id="rs1" class="qty-val">6</span><button class="qty-btn" onclick="changeQty('rs1', 6, 6)">+</button>
+                <button class="qty-btn" onclick="changeQty('m5', -6, 6)">-</button><span id="m5" class="qty-val">6</span><button class="qty-btn" onclick="changeQty('m5', 6, 6)">+</button>
             </div>
-            <button class="add-btn" onclick="add('طقم رجالي', 'rs1')">إضافة للطلب</button>
+            <button class="add-btn" onclick="add('طقم رجالي 02', 'm5')">إضافة</button>
         </div>
     </div>
 
     <div class="main-section">القسم الجامبو</div>
 
-    <div class="group-title">التيشيرتات والقمصان (جامبو)</div>
+    <div class="group-header">التيشيرتات والقمصان (جامبو)</div>
     <div class="grid">
         <div class="card">
-            <div class="model-title">تيشيرت جامبو</div>
+            <div class="model-title">تيشيرت جامبو موديل 01</div>
             <div class="img-wrapper"><img src="tshert-jampo01.png" class="product-img"></div>
             <div class="qty-box">
-                <button class="qty-btn" onclick="changeQty('jt1', -12, 12)">-</button><span id="jt1" class="qty-val">12</span><button class="qty-btn" onclick="changeQty('jt1', 12, 12)">+</button>
+                <button class="qty-btn" onclick="changeQty('j1', -12, 12)">-</button><span id="j1" class="qty-val">12</span><button class="qty-btn" onclick="changeQty('j1', 12, 12)">+</button>
             </div>
-            <button class="add-btn" onclick="add('تيشيرت جامبو', 'jt1')">إضافة للطلب</button>
+            <button class="add-btn" onclick="add('تيشيرت جامبو', 'j1')">إضافة</button>
+        </div>
+    </div>
+
+    <div class="group-header">البناطيل والشورتات (جامبو)</div>
+    <div class="grid">
+        <div class="card">
+            <div class="model-title">بنطلون جامبو موديل 01</div>
+            <div class="img-wrapper"><img src="pant-jampo01.jpg" class="product-img"></div>
+            <div class="qty-box">
+                <button class="qty-btn" onclick="changeQty('j2', -6, 6)">-</button><span id="j2" class="qty-val">6</span><button class="qty-btn" onclick="changeQty('j2', 6, 6)">+</button>
+            </div>
+            <button class="add-btn" onclick="add('بنطلون جامبو', 'j2')">إضافة</button>
         </div>
     </div>
 
     <div id="cart-summary" class="order-summary">
-        <button class="add-btn" style="background:#fff; color:#000;" onclick="sendWA()">إرسال طلب TOP GIVING المجمع (<span id="count">0</span>)</button>
+        <button class="add-btn" style="background:#fff" onclick="sendWA()">إرسال طلب TOP GIVING المجمع (<span id="count">0</span>)</button>
     </div>
 
     <script>
@@ -113,7 +138,7 @@
             cart.push(`*${name}* ← الكمية: ${qty}`);
             document.getElementById('cart-summary').style.display = 'block';
             document.getElementById('count').innerText = cart.length;
-            alert('تمت الإضافة للسلة');
+            alert('تمت الإضافة');
         }
         function sendWA() {
             let msg = "أهلاً TOP GIVING، طلب جملة جديد:\n\n" + cart.join("\n");
