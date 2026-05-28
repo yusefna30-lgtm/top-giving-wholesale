@@ -8,61 +8,57 @@
     <style>
         :root { --gold: #D4AF37; --gold-glow: rgba(212, 175, 55, 0.6); --black: #000; }
         body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 120px; direction: rtl; }
-        .brand { font-size: 3rem; color: var(--gold); margin: 30px 0; font-weight: 900; letter-spacing: 5px; text-shadow: 0 0 15px var(--gold-glow); }
         
-        .main-section-header { 
-            background: linear-gradient(to right, transparent, #4a3a1d, var(--gold), #4a3a1d, transparent); 
-            padding: 15px; font-size: 1.6rem; font-weight: 900; color: #000; margin: 30px 0; 
-            border-top: 1px solid #f1d38e; border-bottom: 1px solid #f1d38e;
-        }
+        .brand { font-size: 3rem; color: var(--gold); margin: 35px 0; font-weight: 900; letter-spacing: 5px; text-shadow: 0 0 15px var(--gold-glow); }
+        .main-section-header { background: linear-gradient(to right, transparent, #4a3a1d, var(--gold), #4a3a1d, transparent); padding: 15px; font-size: 1.6rem; font-weight: 900; color: #000; margin: 30px 0; border-top: 1px solid #f1d38e; border-bottom: 1px solid #f1d38e; }
 
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+        .grid { display: flex; justify-content: center; padding: 0 15px; }
         
         .card { 
-            background: #0c0c0e; padding: 15px; border-radius: 15px; border: 1px solid #1a1a1a; 
-            display: flex; flex-direction: column; transition: all 0.4s ease; position: relative; 
+            background: #0c0c0e; padding: 20px; border-radius: 20px; border: 1px solid #1a1a1a; 
+            display: flex; flex-direction: column; transition: all 0.4s ease; max-width: 400px; width: 100%;
         }
-        .card:hover { transform: translateY(-8px); border-color: var(--gold); box-shadow: 0 0 25px var(--gold-glow); }
+        /* تأثير التوهج والزوم */
+        .card:hover { transform: translateY(-10px); border-color: var(--gold); box-shadow: 0 0 30px var(--gold-glow); }
 
-        .img-box { width: 100%; height: 210px; border-radius: 10px; overflow: hidden; background: #fff; margin-bottom: 15px; border: 2px solid transparent; transition: 0.3s; }
-        .product-img { width: 100%; height: 100%; object-fit: contain; transition: 0.5s; }
+        .img-box { width: 100%; height: 400px; border-radius: 15px; overflow: hidden; background: #fff; margin-bottom: 20px; border: 2px solid transparent; transition: 0.3s; }
+        .product-img { width: 100%; height: 100%; object-fit: contain; transition: 0.5s ease; }
+        .card:hover .product-img { transform: scale(1.1); }
         
-        .color-dots { display: flex; justify-content: center; gap: 12px; margin-bottom: 15px; }
-        .dot { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #fff; cursor: pointer; transition: 0.3s; position: relative; }
+        .color-dots { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
+        .dot { width: 30px; height: 30px; border-radius: 50%; border: 2px solid #fff; cursor: pointer; transition: 0.3s; }
         .dot:hover { transform: scale(1.2); }
-        .dot.active { border-color: var(--gold); box-shadow: 0 0 12px var(--gold); transform: scale(1.2); }
+        .dot.active { border-color: var(--gold); box-shadow: 0 0 15px var(--gold); transform: scale(1.2); }
 
-        .model-name { font-size: 1.1rem; font-weight: bold; margin-bottom: 5px; }
-        .packing-info { font-size: 0.9rem; color: var(--gold); margin-bottom: 15px; }
+        .model-name { font-size: 1.2rem; font-weight: bold; margin-bottom: 10px; }
+        .packing-info { font-size: 1rem; color: var(--gold); margin-bottom: 20px; font-weight: bold; }
 
-        .qty-control { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px; background: #1a1a1a; padding: 8px; border-radius: 8px; }
-        .btn-q { background: #333; color: #fff; border: none; width: 35px; height: 35px; border-radius: 6px; cursor: pointer; font-size: 1.4rem; font-weight: bold; }
-        .q-val { font-weight: bold; color: var(--gold); min-width: 35px; font-size: 1.3rem; }
+        .qty-control { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 20px; background: #1a1a1a; padding: 10px; border-radius: 10px; border: 1px solid #333; }
+        .btn-q { background: #333; color: #fff; border: none; width: 40px; height: 40px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1.5rem; }
+        .btn-q:hover { background: var(--gold); color: #000; }
+        .q-val { font-weight: bold; color: var(--gold); min-width: 40px; font-size: 1.4rem; }
 
-        .btn-add { background: linear-gradient(to bottom, #e2c06d, #8a6d3b); color: #000; padding: 13px; border-radius: 10px; font-weight: 900; border: none; cursor: pointer; width: 100%; font-size: 1rem; }
+        .btn-add { background: linear-gradient(to bottom, #e2c06d, #8a6d3b); color: #000; padding: 15px; border-radius: 12px; font-weight: 900; border: none; cursor: pointer; width: 100%; font-size: 1.1rem; }
 
         .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.96); border-top: 2px solid var(--gold); padding: 20px; z-index: 1000; display: none; backdrop-filter: blur(10px); }
-
-        @media (min-width: 768px) { .grid { grid-template-columns: repeat(4, 1fr); } .img-box { height: 350px; } }
     </style>
 </head>
 <body>
 
     <div class="brand">TOP GIVING</div>
-
     <div class="main-section-header">تيشيرتات أوفراسايز (موديل 01)</div>
 
     <div class="grid">
         <div class="card">
             <div class="img-box" id="box-01">
-                <img src="t1-yellow.png" id="img-01" class="product-img">
+                <img src="t1-white.png" id="img-01" class="product-img">
             </div>
             
             <div class="color-dots">
-                <div class="dot active" style="background: #DAA520;" onclick="changeProduct('01', 't1-yellow.png', 'خردلي', this)"></div>
-                <div class="dot" style="background: #87CEEB;" onclick="changeProduct('01', 't1-blue.png', 'سماوي', this)"></div>
-                <div class="dot" style="background: #000000;" onclick="changeProduct('01', 't1-black.png', 'أسود', this)"></div>
-                <div class="dot" style="background: #ffffff;" onclick="changeProduct('01', 't1-white.png', 'أبيض', this)"></div>
+                <div class="dot active" style="background: #ffffff;" onclick="update('01', 't1-white.png', 'أبيض', this)"></div>
+                <div class="dot" style="background: #000000;" onclick="update('01', 't1-black.png', 'أسود', this)"></div>
+                <div class="dot" style="background: #87CEEB;" onclick="update('01', 't1-blue.png', 'سماوي', this)"></div>
+                <div class="dot" style="background: #DAA520;" onclick="update('01', 't1-yellow.png', 'خردلي', this)"></div>
             </div>
 
             <div class="model-name">تيشيرت موديل 01</div>
@@ -74,4 +70,50 @@
                 <button class="btn-q" onclick="chg('t01',16,16)">+</button>
             </div>
             
-            <button class="btn
+            <button class="btn-add" onclick="buy('موديل 01','t01')">إضافة للطلب</button>
+        </div>
+    </div>
+
+    <div id="cart-bar" class="cart-bar">
+        <div style="max-width:1200px; margin:auto; display:flex; justify-content:space-between; align-items:center;">
+            <div style="color:var(--gold); font-weight:bold;">الطلبات: <span id="c-count">0</span></div>
+            <button class="btn-add" style="width:auto; padding:10px 40px; background:#fff; color:#000;" onclick="sendWA()">إرسال الطلب واتساب</button>
+        </div>
+    </div>
+
+    <script>
+        let items = [];
+        let selColors = { '01': 'أبيض' };
+
+        function update(id, src, color, el) {
+            document.getElementById('img-' + id).src = src;
+            let dots = el.parentElement.querySelectorAll('.dot');
+            dots.forEach(d => d.classList.remove('active'));
+            el.classList.add('active');
+            selColors[id] = color;
+        }
+
+        function chg(id, s, m) {
+            let e = document.getElementById(id);
+            let v = parseInt(e.innerText) + s;
+            if (v < m) v = m;
+            e.innerText = v;
+        }
+
+        function buy(n, qId) {
+            let q = document.getElementById(qId).innerText;
+            let id = qId.replace('t', '');
+            let color = selColors[id];
+            items.push(`*${n}* | اللون: ${color} | الكمية: ${q} حبة`);
+            document.getElementById('cart-bar').style.display = 'block';
+            document.getElementById('c-count').innerText = items.length;
+            alert('تمت إضافة ' + n + ' باللون ' + color);
+        }
+
+        function sendWA() {
+            let msg = "أهلاً TOP GIVING، طلب جملة جديد:\n\n" + items.join("\n");
+            window.location.href = `https://wa.me/966560564719?text=${encodeURIComponent(msg)}`;
+        }
+    </script>
+</body>
+</html>
