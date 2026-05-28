@@ -1,39 +1,77 @@
-<div class="card">
-    <div class="img-box">
-        <img src="tshert-oversize01-white.png" id="main-img-01" class="product-img">
-    </div>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOP GIVING | Wholesale</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root { --gold: #D4AF37; --gold-glow: rgba(212, 175, 55, 0.6); --black: #000; }
+        body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 120px; direction: rtl; }
+        .brand { font-size: 3rem; color: var(--gold); margin: 30px 0; font-weight: 900; letter-spacing: 5px; text-shadow: 0 0 15px var(--gold-glow); }
+        
+        .main-section-header { 
+            background: linear-gradient(to right, transparent, #4a3a1d, var(--gold), #4a3a1d, transparent); 
+            padding: 15px; font-size: 1.6rem; font-weight: 900; color: #000; margin: 30px 0; 
+            border-top: 1px solid #f1d38e; border-bottom: 1px solid #f1d38e;
+        }
 
-    <div class="color-dots">
-        <div class="dot" style="background: #fff;" onclick="changeProductImage('01', 'tshert-oversize01-white.png', 'أبيض', this)"></div>
-        <div class="dot" style="background: #87CEEB;" onclick="changeProductImage('01', 'tshert-oversize01-blue.png', 'سماوي', this)"></div>
-        <div class="dot" style="background: #000;" onclick="changeProductImage('01', 'tshert-oversize01-black.png', 'أسود', this)"></div>
-        <div class="dot" style="background: #DAA520;" onclick="changeProductImage('01', 'tshert-oversize01-yellow.png', 'خردلي', this)"></div>
-    </div>
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+        
+        .card { 
+            background: #0c0c0e; padding: 15px; border-radius: 15px; border: 1px solid #1a1a1a; 
+            display: flex; flex-direction: column; transition: all 0.4s ease; position: relative; 
+        }
+        .card:hover { transform: translateY(-8px); border-color: var(--gold); box-shadow: 0 0 25px var(--gold-glow); }
 
-    <div class="model-name">تيشيرت موديل 01</div>
-    <div class="packing-info">الشد: 16 حبة</div>
-    
-    <div class="qty-control">
-        <button class="btn-q" onclick="chg('t01',-16,16)">-</button>
-        <span id="t01" class="q-val">16</span>
-        <button class="btn-q" onclick="chg('t01',16,16)">+</button>
-    </div>
-    <button class="btn-add" onclick="buy('موديل 01','t01')">إضافة للطلب</button>
-</div>
+        .img-box { width: 100%; height: 210px; border-radius: 10px; overflow: hidden; background: #fff; margin-bottom: 15px; border: 2px solid transparent; transition: 0.3s; }
+        .product-img { width: 100%; height: 100%; object-fit: contain; transition: 0.5s; }
+        
+        .color-dots { display: flex; justify-content: center; gap: 12px; margin-bottom: 15px; }
+        .dot { width: 28px; height: 28px; border-radius: 50%; border: 2px solid #fff; cursor: pointer; transition: 0.3s; position: relative; }
+        .dot:hover { transform: scale(1.2); }
+        .dot.active { border-color: var(--gold); box-shadow: 0 0 12px var(--gold); transform: scale(1.2); }
 
-<script>
-// هذه الوظيفة هي المسؤولة عن تغيير الصورة وتحديد اللون
-function changeProductImage(modelId, newSrc, colorName, element) {
-    // 1. تغيير مسار الصورة الأساسية
-    document.getElementById('main-img-' + modelId).src = newSrc;
-    
-    // 2. تمييز الدائرة المختارة (إضافة إطار ذهبي وتوهج)
-    let dots = element.parentElement.querySelectorAll('.dot');
-    dots.forEach(d => d.style.border = "2px solid #fff"); // إعادة تعيين الكل
-    element.style.border = "3px solid #D4AF37"; // تمييز المختارة
-    element.style.boxShadow = "0 0 10px #D4AF37";
-    
-    // 3. تخزين اللون المختار لإرساله في الواتساب
-    selColors['t' + modelId] = colorName;
-}
-</script>
+        .model-name { font-size: 1.1rem; font-weight: bold; margin-bottom: 5px; }
+        .packing-info { font-size: 0.9rem; color: var(--gold); margin-bottom: 15px; }
+
+        .qty-control { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px; background: #1a1a1a; padding: 8px; border-radius: 8px; }
+        .btn-q { background: #333; color: #fff; border: none; width: 35px; height: 35px; border-radius: 6px; cursor: pointer; font-size: 1.4rem; font-weight: bold; }
+        .q-val { font-weight: bold; color: var(--gold); min-width: 35px; font-size: 1.3rem; }
+
+        .btn-add { background: linear-gradient(to bottom, #e2c06d, #8a6d3b); color: #000; padding: 13px; border-radius: 10px; font-weight: 900; border: none; cursor: pointer; width: 100%; font-size: 1rem; }
+
+        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.96); border-top: 2px solid var(--gold); padding: 20px; z-index: 1000; display: none; backdrop-filter: blur(10px); }
+
+        @media (min-width: 768px) { .grid { grid-template-columns: repeat(4, 1fr); } .img-box { height: 350px; } }
+    </style>
+</head>
+<body>
+
+    <div class="brand">TOP GIVING</div>
+
+    <div class="main-section-header">تيشيرتات أوفراسايز (موديل 01)</div>
+
+    <div class="grid">
+        <div class="card">
+            <div class="img-box" id="box-01">
+                <img src="t1-yellow.png" id="img-01" class="product-img">
+            </div>
+            
+            <div class="color-dots">
+                <div class="dot active" style="background: #DAA520;" onclick="changeProduct('01', 't1-yellow.png', 'خردلي', this)"></div>
+                <div class="dot" style="background: #87CEEB;" onclick="changeProduct('01', 't1-blue.png', 'سماوي', this)"></div>
+                <div class="dot" style="background: #000000;" onclick="changeProduct('01', 't1-black.png', 'أسود', this)"></div>
+                <div class="dot" style="background: #ffffff;" onclick="changeProduct('01', 't1-white.png', 'أبيض', this)"></div>
+            </div>
+
+            <div class="model-name">تيشيرت موديل 01</div>
+            <div class="packing-info">الشد: 16 حبة</div>
+            
+            <div class="qty-control">
+                <button class="btn-q" onclick="chg('t01',-16,16)">-</button>
+                <span id="t01" class="q-val">16</span>
+                <button class="btn-q" onclick="chg('t01',16,16)">+</button>
+            </div>
+            
+            <button class="btn
