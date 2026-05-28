@@ -9,9 +9,9 @@
         :root { --gold: #D4AF37; --black: #000; --card-bg: #0c0c0e; }
         body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 120px; }
         .brand { font-size: 2.2rem; color: var(--gold); margin: 20px 0; font-weight: 900; letter-spacing: 3px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; max-width: 1200px; margin: 0 auto; padding: 0 10px; }
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 1200px; margin: 0 auto; padding: 0 10px; }
         .card { background: var(--card-bg); padding: 12px; border-radius: 15px; border: 1px solid #1a1a1a; display: flex; flex-direction: column; transition: 0.3s; }
-        .card:hover { border-color: var(--gold); box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
+        .card:hover { border-color: var(--gold); box-shadow: 0 0 15px rgba(212,175,55,0.3); }
         .img-box { width: 100%; height: 220px; border-radius: 10px; overflow: hidden; background: #fff; margin-bottom: 12px; }
         .product-img { width: 100%; height: 100%; object-fit: contain; }
         .color-dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 12px; }
@@ -23,7 +23,7 @@
         .q-val { color: var(--gold); font-weight: bold; min-width: 30px; }
         .btn-add { background: linear-gradient(to bottom, #e2c06d, #8a6d3b); color: #000; padding: 12px; border-radius: 10px; font-weight: 900; border: none; width: 100%; font-size: 0.9rem; cursor: pointer; }
         .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.95); border-top: 2px solid var(--gold); padding: 15px; display: none; z-index: 1000; }
-        @media (min-width: 768px) { .grid { grid-template-columns: repeat(3, 1fr); gap: 20px; } .img-box { height: 380px; } }
+        @media (min-width: 768px) { .grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } .img-box { height: 380px; } }
     </style>
 </head>
 <body>
@@ -41,9 +41,7 @@
             </div>
             <div class="model-name">موديل 01</div>
             <div class="qty-control">
-                <button class="btn-q" onclick="chg('q01', -16)">-</button>
-                <span id="q01" class="q-val">16</span>
-                <button class="btn-q" onclick="chg('q01', 16)">+</button>
+                <button class="btn-q" onclick="chg('q01', -16)">-</button><span id="q01" class="q-val">16</span><button class="btn-q" onclick="chg('q01', 16)">+</button>
             </div>
             <button class="btn-add" onclick="buy('01', 'موديل 01')">إضافة للطلب</button>
         </div>
@@ -58,9 +56,7 @@
             </div>
             <div class="model-name">موديل 02</div>
             <div class="qty-control">
-                <button class="btn-q" onclick="chg('q02', -16)">-</button>
-                <span id="q02" class="q-val">16</span>
-                <button class="btn-q" onclick="chg('q02', 16)">+</button>
+                <button class="btn-q" onclick="chg('q02', -16)">-</button><span id="q02" class="q-val">16</span><button class="btn-q" onclick="chg('q02', 16)">+</button>
             </div>
             <button class="btn-add" onclick="buy('02', 'موديل 02')">إضافة للطلب</button>
         </div>
@@ -75,11 +71,24 @@
             </div>
             <div class="model-name">موديل 03 (BALANCE)</div>
             <div class="qty-control">
-                <button class="btn-q" onclick="chg('q03', -16)">-</button>
-                <span id="q03" class="q-val">16</span>
-                <button class="btn-q" onclick="chg('q03', 16)">+</button>
+                <button class="btn-q" onclick="chg('q03', -16)">-</button><span id="q03" class="q-val">16</span><button class="btn-q" onclick="chg('q03', 16)">+</button>
             </div>
             <button class="btn-add" onclick="buy('03', 'موديل 03')">إضافة للطلب</button>
+        </div>
+
+        <div class="card">
+            <div class="img-box"><img src="tr1-red.png.png" id="img-04" class="product-img"></div>
+            <div class="color-dots">
+                <div class="dot active" style="background: #BA1313;" onclick="update('04', 'tr1-red.png.png', 'أحمر', this)"></div>
+                <div class="dot" style="background: #000000;" onclick="update('04', 'tr2-black.png.png', 'أسود', this)"></div>
+                <div class="dot" style="background: #F5F5DC;" onclick="update('04', 'tr3-beige.png.png', 'بيج', this)"></div>
+                <div class="dot" style="background: #ffffff;" onclick="update('04', 'tr4-white.png.png', 'أبيض مطبوع', this)"></div>
+            </div>
+            <div class="model-name">موديل 04 (TREND)</div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="chg('q04', -16)">-</button><span id="q04" class="q-val">16</span><button class="btn-q" onclick="chg('q04', 16)">+</button>
+            </div>
+            <button class="btn-add" onclick="buy('04', 'موديل 04')">إضافة للطلب</button>
         </div>
     </div>
 
@@ -89,7 +98,7 @@
 
     <script>
         let items = [];
-        let selColors = { '01': 'أبيض', '02': 'بنفسجي', '03': 'أبيض' };
+        let selColors = { '01': 'أبيض', '02': 'بنفسجي', '03': 'أبيض', '04': 'أحمر' };
 
         function update(id, src, c, el) {
             document.getElementById('img-' + id).src = src;
@@ -109,7 +118,7 @@
             let qVal = document.getElementById('q' + id).innerText;
             items.push(`${name} (${selColors[id]}) - كمية: ${qVal}`);
             document.getElementById('cart-bar').style.display = 'block';
-            alert('تمت إضافة ' + name + ' باللون ' + selColors[id]);
+            alert('تمت إضافة ' + name + ' بنجاح!');
         }
 
         function sendWA() {
