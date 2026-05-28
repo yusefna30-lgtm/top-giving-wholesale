@@ -3,25 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOP GIVING | Wholesale Portal</title>
+    <title>TOP GIVING | Wholesale</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --gold-main: #D4AF37; --gold-light: #f1d38e; --black: #000; --card-bg: #0c0c0e; }
         body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 120px; direction: rtl; }
+        
         .brand { font-size: 2.8rem; color: var(--gold-main); margin: 30px 0; font-weight: 900; letter-spacing: 5px; }
-        .main-section-header { background: linear-gradient(to right, transparent, #4a3a1d, var(--gold-main), #4a3a1d, transparent); padding: 15px; font-size: 1.6rem; font-weight: 900; color: #000; margin: 30px 0; border-top: 1px solid var(--gold-light); border-bottom: 1px solid var(--gold-light); }
-        .sub-group-title { color: var(--gold-light); font-size: 1.2rem; font-weight: bold; margin: 20px 0; display: block; border-bottom: 1px solid #222; padding-bottom: 10px; width: 90%; margin: 0 auto; }
+
+        .main-section-header {
+            background: linear-gradient(to right, transparent, #4a3a1d, var(--gold-main), #4a3a1d, transparent);
+            padding: 15px; font-size: 1.6rem; font-weight: 900; color: #000; margin: 30px 0;
+            border-top: 1px solid var(--gold-light); border-bottom: 1px solid var(--gold-light);
+        }
+
+        .sub-group-title { color: var(--gold-light); font-size: 1.2rem; font-weight: bold; margin: 25px 0 15px; display: block; border-bottom: 1px solid #222; padding-bottom: 10px; width: 90%; margin: 0 auto; }
+
         .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
-        .card { background: var(--card-bg); padding: 12px; border-radius: 12px; border: 1px solid #1a1a1a; display: flex; flex-direction: column; }
+        
+        .card { background: var(--card-bg); padding: 12px; border-radius: 12px; border: 1px solid #1a1a1a; display: flex; flex-direction: column; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+
         .img-box { width: 100%; height: 200px; border-radius: 8px; overflow: hidden; background: #111; }
         .product-img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .color-dots { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
+        .dot { width: 14px; height: 14px; border-radius: 50%; border: 1px solid #fff; }
+
         .model-name { font-size: 0.85rem; font-weight: bold; margin: 10px 0; color: #fff; min-height: 35px; }
         .packing-info { font-size: 0.75rem; color: var(--gold-light); margin-bottom: 10px; }
+
         .qty-control { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 12px 0; background: #000; padding: 5px; border-radius: 6px; border: 1px solid #333; }
-        .btn-q { background: #222; color: #fff; border: none; width: 28px; height: 28px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .btn-q { background: #222; color: #fff; border: none; width: 30px; height: 30px; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 1.1rem; }
         .q-val { font-weight: bold; color: var(--gold-main); min-width: 25px; font-size: 1.1rem; }
-        .btn-add { background: linear-gradient(to bottom, #e2c06d, #8a6d3b); color: #000; padding: 10px; border-radius: 8px; font-weight: 900; border: none; cursor: pointer; width: 100%; }
+
+        .btn-add { 
+            background: linear-gradient(to bottom, #e2c06d, #8a6d3b); 
+            color: #000; padding: 12px; border-radius: 8px; 
+            font-weight: 900; border: none; cursor: pointer; width: 100%; font-size: 0.9rem;
+        }
+
         .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.95); border-top: 2px solid var(--gold-main); padding: 15px; z-index: 1000; display: none; backdrop-filter: blur(5px); }
+
         @media (min-width: 768px) { .grid { grid-template-columns: repeat(4, 1fr); } .img-box { height: 320px; } }
     </style>
 </head>
@@ -36,6 +58,7 @@
         <div class="card">
             <div class="model-name">تيشيرت أوفراسايز 15</div>
             <div class="img-box"><img src="tshert-oversize15.png" class="product-img"></div>
+            <div class="color-dots"><div class="dot" style="background: black;"></div><div class="dot" style="background: white;"></div></div>
             <div class="packing-info">الشد: 16 حبة</div>
             <div class="qty-control"><button class="btn-q" onclick="chg('t15',-16,16)">-</button><span id="t15" class="q-val">16</span><button class="btn-q" onclick="chg('t15',16,16)">+</button></div>
             <button class="btn-add" onclick="buy('تيشيرت أوفراسايز 15','t15')">إضافة للطلب</button>
@@ -43,6 +66,7 @@
         <div class="card">
             <div class="model-name">تيشيرت أوفراسايز 14</div>
             <div class="img-box"><img src="tshert-oversize14.png" class="product-img"></div>
+            <div class="color-dots"><div class="dot" style="background: navy;"></div><div class="dot" style="background: grey;"></div></div>
             <div class="packing-info">الشد: 16 حبة</div>
             <div class="qty-control"><button class="btn-q" onclick="chg('t14',-16,16)">-</button><span id="t14" class="q-val">16</span><button class="btn-q" onclick="chg('t14',16,16)">+</button></div>
             <button class="btn-add" onclick="buy('تيشيرت أوفراسايز 14','t14')">إضافة للطلب</button>
@@ -50,6 +74,7 @@
         <div class="card">
             <div class="model-name">تيشيرت أوفراسايز 13</div>
             <div class="img-box"><img src="tshert-oversize13.png" class="product-img"></div>
+            <div class="color-dots"><div class="dot" style="background: white;"></div><div class="dot" style="background: black;"></div></div>
             <div class="packing-info">الشد: 16 حبة</div>
             <div class="qty-control"><button class="btn-q" onclick="chg('t13',-16,16)">-</button><span id="t13" class="q-val">16</span><button class="btn-q" onclick="chg('t13',16,16)">+</button></div>
             <button class="btn-add" onclick="buy('تيشيرت أوفراسايز 13','t13')">إضافة للطلب</button>
@@ -57,13 +82,14 @@
         <div class="card">
             <div class="model-name">تيشيرت أوفراسايز 12</div>
             <div class="img-box"><img src="tshert-oversize12.png" class="product-img"></div>
+            <div class="color-dots"><div class="dot" style="background: grey;"></div><div class="dot" style="background: black;"></div></div>
             <div class="packing-info">الشد: 16 حبة</div>
             <div class="qty-control"><button class="btn-q" onclick="chg('t12',-16,16)">-</button><span id="t12" class="q-val">16</span><button class="btn-q" onclick="chg('t12',16,16)">+</button></div>
             <button class="btn-add" onclick="buy('تيشيرت أوفراسايز 12','t12')">إضافة للطلب</button>
         </div>
     </div>
 
-    <div class="sub-group-title">البناطيل والأطقم (الرجالي)</div>
+    <div class="sub-group-title">أطقم وبناطيل</div>
     <div class="grid">
         <div class="card">
             <div class="model-name">طقم رجالي موديل 02</div>
@@ -82,7 +108,6 @@
     </div>
 
     <div class="main-section-header">قسم الجامبو (JAMPO)</div>
-    <div class="sub-group-title">تيشيرتات وبناطيل (جامبو)</div>
     <div class="grid">
         <div class="card">
             <div class="model-name">تيشيرت جامبو 01</div>
@@ -102,8 +127,8 @@
 
     <div id="cart-bar" class="cart-bar">
         <div style="max-width:1200px; margin:auto; display:flex; justify-content:space-between; align-items:center;">
-            <div style="color:var(--gold-main); font-weight:bold;">الطلبات: <span id="c-count" style="font-size:1.3rem;">0</span></div>
-            <button class="btn-add" style="width:auto; padding:10px 30px; background:#fff; color:#000;" onclick="sendWA()">إرسال واتساب</button>
+            <div style="color:var(--gold-main); font-weight:bold;">الأصناف المختارة: <span id="c-count" style="font-size:1.3rem;">0</span></div>
+            <button class="btn-add" style="width:auto; padding:10px 40px; background:#fff; color:#000;" onclick="sendWA()">إرسال طلب TOP GIVING المجمع</button>
         </div>
     </div>
 
