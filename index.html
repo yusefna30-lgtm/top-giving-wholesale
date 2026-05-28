@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOP GIVING | Wholesale</title>
-    <link href="https://fonts.googleapis.com/css2 family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         /* المتغيرات البرمجية للألوان */
         :root { 
@@ -23,42 +23,46 @@
         }
         
         .brand { 
-            font-size: 2.8rem; 
+            font-size: 2.2rem; 
             color: var(--gold); 
-            margin: 30px 0; 
+            margin: 20px 0; 
             font-weight: 900; 
-            letter-spacing: 5px; 
+            letter-spacing: 3px; 
         }
         
-        /* شبكة عرض الموديلات متجاوبة */
+        /* شبكة عرض الموديلات متجاوبة (عمودين في الجوال الصغير) */
         .grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-            gap: 30px; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 12px; 
             max-width: 1000px; 
             margin: 0 auto; 
-            padding: 0 20px; 
+            padding: 0 10px; 
         }
         
         .card { 
             background: var(--card-bg); 
-            padding: 20px; 
-            border-radius: 20px; 
+            padding: 12px; 
+            border-radius: 15px; 
             border: 1px solid #1a1a1a; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
             transition: 0.3s ease-in-out; 
         }
         .card:hover { 
             border-color: var(--gold); 
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); 
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); 
         }
         
+        /* تعديل برمجي: جعل حجم الصندوق افتراضياً صغير ليناسب الجوال */
         .img-box { 
             width: 100%; 
-            height: 400px; 
-            border-radius: 15px; 
+            height: 220px; /* الارتفاع المناسب جداً لشاشات الجوال */
+            border-radius: 10px; 
             overflow: hidden; 
             background: #fff; 
-            margin-bottom: 20px; 
+            margin-bottom: 12px; 
         }
         .product-img { 
             width: 100%; 
@@ -69,12 +73,12 @@
         .color-dots { 
             display: flex; 
             justify-content: center; 
-            gap: 12px; 
-            margin-bottom: 20px; 
+            gap: 8px; 
+            margin-bottom: 12px; 
         }
         .dot { 
-            width: 32px; 
-            height: 32px; 
+            width: 24px; /* تصغير حجم دوائر الألوان لتناسب شاشة الجوال */
+            height: 24px; 
             border-radius: 50%; 
             border: 2px solid #fff; 
             cursor: pointer; 
@@ -82,48 +86,54 @@
         }
         .dot.active { 
             border-color: var(--gold); 
-            box-shadow: 0 0 10px var(--gold); 
-            transform: scale(1.15); 
+            box-shadow: 0 0 8px var(--gold); 
+            transform: scale(1.1); 
+        }
+        
+        .model-name { 
+            font-size: 0.95rem; 
+            margin-bottom: 10px; 
+            font-weight: bold; 
         }
         
         .qty-control { 
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            gap: 15px; 
-            margin-bottom: 20px; 
+            gap: 10px; 
+            margin-bottom: 12px; 
             background: #1a1a1a; 
-            padding: 10px; 
-            border-radius: 10px; 
+            padding: 6px; 
+            border-radius: 8px; 
         }
         .btn-q { 
             background: #333; 
             color: #fff; 
             border: none; 
-            width: 40px; 
-            height: 40px; 
-            border-radius: 8px; 
+            width: 32px; 
+            height: 32px; 
+            border-radius: 6px; 
             cursor: pointer; 
-            font-size: 1.5rem; 
+            font-size: 1.2rem; 
             font-weight: bold; 
         }
         .q-val { 
             font-weight: bold; 
             color: var(--gold); 
-            min-width: 40px; 
-            font-size: 1.4rem; 
+            min-width: 30px; 
+            font-size: 1.1rem; 
         }
         
         .btn-add { 
             background: linear-gradient(to bottom, #e2c06d, #8a6d3b); 
             color: #000; 
-            padding: 15px; 
-            border-radius: 12px; 
+            padding: 10px; 
+            border-radius: 10px; 
             font-weight: 900; 
             border: none; 
             cursor: pointer; 
             width: 100%; 
-            font-size: 1.1rem; 
+            font-size: 0.9rem; 
         }
         .cart-bar { 
             position: fixed; 
@@ -132,9 +142,28 @@
             right: 0; 
             background: rgba(0, 0, 0, 0.95); 
             border-top: 2px solid var(--gold); 
-            padding: 20px; 
+            padding: 15px; 
             display: none; 
             z-index: 1000;
+        }
+
+        /* 🛠️ الاستعلام البرمجي (Media Query) للأجهزة الكبيرة كالكمبيوتر والتابلت */
+        @media (min-width: 768px) { 
+            .grid { 
+                grid-template-columns: repeat(2, 1fr); /* الحفاظ على عمودين متناسقين */
+                gap: 30px; 
+                padding: 0 20px;
+            }
+            .brand { font-size: 2.8rem; margin: 30px 0; }
+            .card { padding: 20px; border-radius: 20px; }
+            .img-box { height: 400px; margin-bottom: 20px; } /* تكبير الصندوق فقط في الكمبيوتر */
+            .dot { width: 32px; height: 32px; }
+            .color-dots { gap: 12px; margin-bottom: 20px; }
+            .model-name { font-size: 1.2rem; margin-bottom: 12px; }
+            .qty-control { padding: 10px; border-radius: 10px; gap: 15px; margin-bottom: 20px; }
+            .btn-q { width: 40px; height: 40px; font-size: 1.5rem; }
+            .q-val { font-size: 1.4rem; min-width: 40px; }
+            .btn-add { padding: 15px; font-size: 1.1rem; border-radius: 12px; }
         }
     </style>
 </head>
@@ -153,7 +182,7 @@
                 <div class="dot" style="background: #000000;" onclick="updateProduct('01', 't1-black.png', 'أسود', this)"></div>
                 <div class="dot active" style="background: #ffffff;" onclick="updateProduct('01', 't1-white.png', 'أبيض', this)"></div>
             </div>
-            <div class="model-name" style="margin-bottom:10px; font-weight:bold;">تيشيرت موديل 01</div>
+            <div class="model-name">تيشيرت موديل 01</div>
             <div class="qty-control">
                 <button class="btn-q" onclick="changeQty('q01', -16)">-</button>
                 <span id="q01" class="q-val">16</span>
@@ -162,18 +191,16 @@
             <button class="btn-add" onclick="addToOrder('01', 'موديل 01')">إضافة للطلب</button>
         </div>
 
-        <!-- بطاقة الموديل 02 (تعديل الامتدادات تِبعاً للمستودع الفعلي) -->
+        <!-- بطاقة الموديل 02 -->
         <div class="card">
-            <!-- تم تعديل الرابط الافتراضي ليطابق ملفك الفعلي t2-purple.png.png -->
             <div class="img-box"><img src="t2-purple.png.png" id="img-02" class="product-img"></div>
             <div class="color-dots">
-                <!-- تم تصحيح امتدادات الصور هنا لتنتهي بـ .png.png لتقرأ مباشرة -->
                 <div class="dot active" style="background: #A020F0;" onclick="updateProduct('02', 't2-purple.png.png', 'بنفسجي', this)"></div>
                 <div class="dot" style="background: #ffffff;" onclick="updateProduct('02', 't2-white.png.png', 'أبيض مطبوع', this)"></div>
                 <div class="dot" style="background: #000000;" onclick="updateProduct('02', 't2-black.png.png', 'أسود', this)"></div>
                 <div class="dot" style="background: #808080;" onclick="updateProduct('02', 't2-grey.png.png', 'رصاصي', this)"></div>
             </div>
-            <div class="model-name" style="margin-bottom:10px; font-weight:bold;">تيشيرت موديل 02</div>
+            <div class="model-name">تيشيرت موديل 02</div>
             <div class="qty-control">
                 <button class="btn-q" onclick="changeQty('q02', -16)">-</button>
                 <span id="q02" class="q-val">16</span>
@@ -184,7 +211,7 @@
 
     </div>
 
-    <!-- شريط طلبات السلة السفلي -->
+    <!-- شريط سلة المشتريات السفلي -->
     <div id="cart-bar" class="cart-bar">
         <button class="btn-add" style="width:auto; padding:10px 50px; background:#fff;" onclick="sendOrder()">إرسال الطلب واتساب</button>
     </div>
@@ -193,7 +220,6 @@
         let orderList = [];
         let selectedProductColors = { '01': 'أبيض', '02': 'بنفسجي' };
 
-        // وظيفة تحديث الصورة للموديل المختار بشكل منعزل
         function updateProduct(modelId, imageSrc, colorName, dotElement) {
             document.getElementById('img-' + modelId).src = imageSrc;
             let dots = dotElement.parentElement.querySelectorAll('.dot');
@@ -202,7 +228,6 @@
             selectedProductColors[modelId] = colorName;
         }
 
-        // وظيفة التحكم بالعداد البرمجي
         function changeQty(qtyId, amount) {
             let qtyDisplay = document.getElementById(qtyId);
             let val = parseInt(qtyDisplay.innerText) + amount;
@@ -210,7 +235,6 @@
             qtyDisplay.innerText = val;
         }
 
-        // وظيفة البناء البرمجي لنص السلة
         function addToOrder(modelId, modelName) {
             let currentQty = document.getElementById('q' + modelId).innerText;
             let currentColor = selectedProductColors[modelId];
@@ -219,7 +243,6 @@
             alert('تم إضافة ' + modelName + ' باللون ' + currentColor + ' بنجاح!');
         }
 
-        // وظيفة التوجيه للواتساب للطلب
         function sendOrder() {
             let textMessage = encodeURIComponent("طلب جملة جديد من متجر TOP GIVING:\n" + orderList.join("\n"));
             window.location.href = "https://wa.me/966560564719?text=" + textMessage;
