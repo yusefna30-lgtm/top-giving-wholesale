@@ -3,74 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOP GIVING | Wholesale Portal</title>
+    <title>TOP GIVING | Wholesale</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --main: #D4AF37; --black: #000; --card: #0c0c0e; }
-        body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding: 10px; padding-bottom: 120px; }
+        :root { --gold: #D4AF37; --black: #000; --card: #0c0c0e; --gray: #1a1a1a; }
+        body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 120px; }
         
-        .brand { font-size: 2.5rem; color: var(--main); margin: 25px 0; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; }
+        /* الهيدر والأقسام */
+        .brand { font-size: 2.2rem; color: var(--gold); margin: 20px 0; font-weight: 900; letter-spacing: 2px; }
+        .filter-container { position: sticky; top: 0; background: rgba(0,0,0,0.9); z-index: 1000; padding: 10px 0; border-bottom: 1px solid #333; }
+        .main-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 10px; }
+        .tab-btn { background: var(--gray); color: #fff; border: 1px solid #333; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .tab-btn.active { background: var(--gold); color: #000; border-color: var(--gold); }
         
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 1000px; margin: auto; }
+        /* الشبكة والبطاقات */
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 1000px; margin: 20px auto; padding: 0 10px; }
+        .card { background: var(--card); border-radius: 15px; border: 1px solid #222; padding: 10px; display: none; transition: 0.3s; }
+        .card.show { display: flex; flex-direction: column; }
+        .img-wrapper { width: 100%; height: 200px; border-radius: 10px; overflow: hidden; background: #111; }
+        .product-img { width: 100%; height: 100%; object-fit: cover; }
         
-        .card { 
-            background: var(--card); padding: 12px; border-radius: 20px; 
-            border: 1px solid rgba(212,175,55,0.15); display: flex; flex-direction: column; 
-            transition: 0.3s; position: relative; overflow: hidden;
-        }
-        .card:hover { border-color: var(--main); box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); transform: translateY(-5px); }
+        .model-info { margin: 10px 0; }
+        .category-tag { font-size: 0.6rem; color: var(--gold); text-transform: uppercase; border: 1px solid var(--gold); padding: 2px 6px; border-radius: 4px; display: inline-block; }
+        .model-title { font-size: 0.85rem; font-weight: bold; margin-top: 5px; }
 
-        .img-wrapper { width: 100%; height: 230px; border-radius: 12px; overflow: hidden; background: #111; margin-bottom: 10px; }
-        .product-img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s ease; }
-        .card:hover .product-img { transform: scale(1.1); }
+        .qty-box { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 10px 0; background: #111; padding: 5px; border-radius: 8px; }
+        .qty-btn { background: #333; color: #fff; border: none; width: 30px; height: 30px; border-radius: 5px; cursor: pointer; }
+        .add-btn { background: var(--gold); color: #000; border: none; padding: 10px; border-radius: 8px; font-weight: 900; width: 100%; cursor: pointer; }
 
-        .model-title { color: var(--main); font-size: 0.95rem; font-weight: 700; margin-bottom: 5px; }
+        .order-summary { position: fixed; bottom: 0; left: 0; right: 0; background: #111; border-top: 2px solid var(--gold); padding: 15px; display: none; z-index: 2000; }
         
-        .qty-box { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 10px 0; background: #1a1a1a; padding: 5px; border-radius: 8px; }
-        .qty-btn { background: #333; color: #fff; border: none; width: 28px; height: 28px; border-radius: 5px; cursor: pointer; font-weight: bold; }
-        .qty-val { font-weight: bold; font-size: 1rem; color: var(--main); min-width: 20px; }
-
-        .add-btn { 
-            display: block; background: var(--main); color: #000; padding: 10px; 
-            border-radius: 10px; text-decoration: none; font-weight: 900; font-size: 0.85rem; 
-            border: none; cursor: pointer; width: 100%;
-        }
-
-        .order-summary { 
-            position: fixed; bottom: 0; left: 0; right: 0; 
-            background: #111; border-top: 2px solid var(--main); 
-            padding: 15px; z-index: 100; display: none;
-        }
-        .summary-content { max-width: 1000px; margin: auto; display: flex; justify-content: space-between; align-items: center; }
-        .final-btn { background: var(--main); color: #000; padding: 12px 25px; border-radius: 10px; font-weight: 900; text-decoration: none; }
-
-        @media (min-width: 768px) {
-            .grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-            .img-wrapper { height: 400px; }
-        }
+        @media (min-width: 768px) { .grid { grid-template-columns: repeat(3, 1fr); } .img-wrapper { height: 300px; } }
     </style>
 </head>
 <body>
 
     <div class="brand">TOP GIVING</div>
 
-    <div class="grid">
-        <p style="grid-column: 1/-1; color: #555; margin-top: 50px;">بانتظار إضافة المنتجات والصور لـ TOP GIVING...</p>
-    </div>
-
-    <div id="cart-summary" class="order-summary">
-        <div class="summary-content">
-            <div id="order-count" style="color:var(--main); font-size:0.9rem;">أضفت منتجات للطلب..</div>
-            <a href="javascript:void(0)" class="final-btn" onclick="sendWhatsApp()">إرسال الطلب النهائي</a>
+    <div class="filter-container">
+        <div class="main-tabs">
+            <button class="tab-btn active" onclick="filterCat('men', this)">رجالي</button>
+            <button class="tab-btn" onclick="filterCat('jumbo', this)">جامبو</button>
+            <button class="tab-btn" onclick="filterCat('youth', this)">شبابي</button>
         </div>
     </div>
 
-    <script>
-        // عدل الرقم هنا للماركة الجديدة
-        const WHATSAPP_NUM = "966502777884"; 
-        const BRAND_NAME = "TOP GIVING";
+    <div class="grid" id="product-grid">
+        <div class="card men show">
+            <div class="category-tag">رجالي - بنطلون</div>
+            <div class="img-wrapper"><img src="m-pants.jpg" class="product-img"></div>
+            <div class="model-title">بنطلون جينز كلاسيك</div>
+            <div class="qty-box">
+                <button class="qty-btn" onclick="changeQty('q1', -6, 6)">-</button>
+                <span id="q1">6</span>
+                <button class="qty-btn" onclick="changeQty('q1', 6, 6)">+</button>
+            </div>
+            <button class="add-btn" onclick="add('بنطلون رجالي', 'q1')">إضافة للطلب</button>
+        </div>
 
+        <div class="card men show">
+            <div class="category-tag">رجالي - تيشيرت</div>
+            <div class="img-wrapper"><img src="m-tshirt.jpg" class="product-img"></div>
+            <div class="model-title">تيشيرت قطن فاخر</div>
+            <div class="qty-box">
+                <button class="qty-btn" onclick="changeQty('q2', -12, 12)">-</button>
+                <span id="q2">12</span>
+                <button class="qty-btn" onclick="changeQty('q2', 12, 12)">+</button>
+            </div>
+            <button class="add-btn" onclick="add('تيشيرت رجالي', 'q2')">إضافة للطلب</button>
+        </div>
+
+        <div class="card jumbo">
+            <div class="category-tag">جامبو - قميص</div>
+            <div class="img-wrapper"><img src="j-shirt.jpg" class="product-img"></div>
+            <div class="model-title">قميص جامبو مقاسات خاصة</div>
+            <div class="qty-box">
+                <button class="qty-btn" onclick="changeQty('q3', -6, 6)">-</button>
+                <span id="q3">6</span>
+                <button class="qty-btn" onclick="changeQty('q3', 6, 6)">+</button>
+            </div>
+            <button class="add-btn" onclick="add('قميص جامبو', 'q3')">إضافة للطلب</button>
+        </div>
+
+        <div class="card youth">
+            <div class="category-tag">شبابي - طقم</div>
+            <div class="img-wrapper"><img src="y-set.jpg" class="product-img"></div>
+            <div class="model-title">طقم شبابي كاجوال</div>
+            <div class="qty-box">
+                <button class="qty-btn" onclick="changeQty('q4', -4, 4)">-</button>
+                <span id="q4">4</span>
+                <button class="qty-btn" onclick="changeQty('q4', 4, 4)">+</button>
+            </div>
+            <button class="add-btn" onclick="add('طقم شبابي', 'q4')">إضافة للطلب</button>
+        </div>
+    </div>
+
+    <div id="cart-summary" class="order-summary">
+        <button class="add-btn" onclick="sendToWA()">إرسال طلب TOP GIVING المجمع (<span id="cart-count">0</span>)</button>
+    </div>
+
+    <script>
         let cart = [];
+
+        function filterCat(cat, btn) {
+            // تحديث شكل الأزرار
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            // إخفاء وإظهار البطاقات
+            document.querySelectorAll('.card').forEach(card => {
+                card.classList.remove('show');
+                if(card.classList.contains(cat)) card.classList.add('show');
+            });
+        }
 
         function changeQty(id, step, min) {
             const el = document.getElementById(id);
@@ -79,19 +124,17 @@
             el.innerText = val;
         }
 
-        function addToCart(name, info, qtyId) {
-            const qty = document.getElementById(qtyId).innerText;
-            cart.push({ name, info, qty });
+        function add(name, qId) {
+            const qty = document.getElementById(qId).innerText;
+            cart.push(`${name} (الكمية: ${qty})`);
             document.getElementById('cart-summary').style.display = 'block';
-            document.getElementById('order-count').innerText = `تم إضافة ${cart.length} أصناف للطلب..`;
-            alert(`تمت إضافة ${name} لطلبية ${BRAND_NAME}`);
+            document.getElementById('cart-count').innerText = cart.length;
+            alert(`تمت إضافة ${name}`);
         }
 
-        function sendWhatsApp() {
-            if (cart.length === 0) return;
-            let msg = `أهلاً ${BRAND_NAME}، طلب جملة جديد:\n\n`;
-            cart.forEach((item, i) => msg += `${i+1}. ${item.name} (${item.info}) - ${item.qty} حبة\n`);
-            window.location.href = `https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(msg)}`;
+        function sendToWA() {
+            let msg = "أهلاً TOP GIVING، طلبية جملة جديدة:\n\n" + cart.join("\n");
+            window.location.href = `https://wa.me/966502777884?text=${encodeURIComponent(msg)}`;
         }
     </script>
 </body>
