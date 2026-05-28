@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOP GIVING | Wholesale Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root { --main: #D4AF37; --black: #000; --card: #0c0c0e; }
+        body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding: 10px; padding-bottom: 120px; }
+        
+        .brand { font-size: 2.5rem; color: var(--main); margin: 25px 0; font-weight: 900; letter-spacing: 3px; text-transform: uppercase; }
+        
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 1000px; margin: auto; }
+        
+        .card { 
+            background: var(--card); padding: 12px; border-radius: 20px; 
+            border: 1px solid rgba(212,175,55,0.15); display: flex; flex-direction: column; 
+            transition: 0.3s; position: relative; overflow: hidden;
+        }
+        .card:hover { border-color: var(--main); box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); transform: translateY(-5px); }
+
+        .img-wrapper { width: 100%; height: 230px; border-radius: 12px; overflow: hidden; background: #111; margin-bottom: 10px; }
+        .product-img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s ease; }
+        .card:hover .product-img { transform: scale(1.1); }
+
+        .model-title { color: var(--main); font-size: 0.95rem; font-weight: 700; margin-bottom: 5px; }
+        
+        .qty-box { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 10px 0; background: #1a1a1a; padding: 5px; border-radius: 8px; }
+        .qty-btn { background: #333; color: #fff; border: none; width: 28px; height: 28px; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .qty-val { font-weight: bold; font-size: 1rem; color: var(--main); min-width: 20px; }
+
+        .add-btn { 
+            display: block; background: var(--main); color: #000; padding: 10px; 
+            border-radius: 10px; text-decoration: none; font-weight: 900; font-size: 0.85rem; 
+            border: none; cursor: pointer; width: 100%;
+        }
+
+        .order-summary { 
+            position: fixed; bottom: 0; left: 0; right: 0; 
+            background: #111; border-top: 2px solid var(--main); 
+            padding: 15px; z-index: 100; display: none;
+        }
+        .summary-content { max-width: 1000px; margin: auto; display: flex; justify-content: space-between; align-items: center; }
+        .final-btn { background: var(--main); color: #000; padding: 12px 25px; border-radius: 10px; font-weight: 900; text-decoration: none; }
+
+        @media (min-width: 768px) {
+            .grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+            .img-wrapper { height: 400px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="brand">TOP GIVING</div>
+
+    <div class="grid">
+        <p style="grid-column: 1/-1; color: #555; margin-top: 50px;">بانتظار إضافة المنتجات والصور لـ TOP GIVING...</p>
+    </div>
+
+    <div id="cart-summary" class="order-summary">
+        <div class="summary-content">
+            <div id="order-count" style="color:var(--main); font-size:0.9rem;">أضفت منتجات للطلب..</div>
+            <a href="javascript:void(0)" class="final-btn" onclick="sendWhatsApp()">إرسال الطلب النهائي</a>
+        </div>
+    </div>
+
+    <script>
+        // عدل الرقم هنا للماركة الجديدة
+        const WHATSAPP_NUM = "966502777884"; 
+        const BRAND_NAME = "TOP GIVING";
+
+        let cart = [];
+
+        function changeQty(id, step, min) {
+            const el = document.getElementById(id);
+            let val = parseInt(el.innerText) + step;
+            if (val < min) val = min;
+            el.innerText = val;
+        }
+
+        function addToCart(name, info, qtyId) {
+            const qty = document.getElementById(qtyId).innerText;
+            cart.push({ name, info, qty });
+            document.getElementById('cart-summary').style.display = 'block';
+            document.getElementById('order-count').innerText = `تم إضافة ${cart.length} أصناف للطلب..`;
+            alert(`تمت إضافة ${name} لطلبية ${BRAND_NAME}`);
+        }
+
+        function sendWhatsApp() {
+            if (cart.length === 0) return;
+            let msg = `أهلاً ${BRAND_NAME}، طلب جملة جديد:\n\n`;
+            cart.forEach((item, i) => msg += `${i+1}. ${item.name} (${item.info}) - ${item.qty} حبة\n`);
+            window.location.href = `https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(msg)}`;
+        }
+    </script>
+</body>
+</html>
