@@ -7,24 +7,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #D4AF37; --black: #000; }
-        body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 100px; }
-        .brand { font-size: 2.5rem; color: var(--gold); margin: 20px 0; font-weight: 900; }
-        .grid { display: flex; justify-content: center; padding: 10px; }
-        .card { background: #0c0c0e; padding: 15px; border-radius: 15px; border: 1px solid #333; width: 100%; max-width: 350px; }
-        
-        /* مربع الصورة - تأكد من إزالة الخلفية البيضاء إذا كانت الصور شفافة */
-        .img-box { width: 100%; height: 350px; border-radius: 10px; overflow: hidden; background: #1a1a1a; margin-bottom: 15px; }
-        .product-img { width: 100%; height: 100%; object-fit: contain; }
-        
-        .color-dots { display: flex; justify-content: center; gap: 15px; margin-bottom: 15px; }
-        .dot { width: 30px; height: 30px; border-radius: 50%; border: 2px solid #fff; cursor: pointer; }
-        .dot.active { border-color: var(--gold); box-shadow: 0 0 10px var(--gold); }
-
-        .qty-control { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px; }
-        .btn-q { background: #333; color: #fff; border: none; width: 35px; height: 35px; border-radius: 5px; cursor: pointer; font-size: 1.2rem; }
-        .q-val { font-weight: bold; color: var(--gold); font-size: 1.2rem; min-width: 30px; }
-        .btn-add { background: linear-gradient(to bottom, #e2c06d, #8a6d3b); color: #000; padding: 12px; border-radius: 10px; font-weight: bold; border: none; cursor: pointer; width: 100%; }
-        .cart-bar { position: fixed; bottom: 0; width: 100%; background: #000; border-top: 2px solid var(--gold); padding: 15px; display: none; }
+        body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 120px; }
+        .brand { font-size: 2.8rem; color: var(--gold); margin: 30px 0; font-weight: 900; letter-spacing: 5px; }
+        .grid { display: flex; justify-content: center; padding: 0 15px; }
+        .card { background: #0c0c0e; padding: 20px; border-radius: 20px; border: 1px solid #1a1a1a; width: 100%; max-width: 400px; transition: 0.3s; }
+        .card:hover { border-color: var(--gold); box-shadow: 0 0 20px rgba(212,175,55,0.3); }
+        .img-box { width: 100%; height: 400px; border-radius: 15px; overflow: hidden; background: #fff; margin-bottom: 20px; }
+        .product-img { width: 100%; height: 100%; object-fit: contain; transition: 0.4s; }
+        .color-dots { display: flex; justify-content: center; gap: 12px; margin-bottom: 20px; }
+        .dot { width: 30px; height: 30px; border-radius: 50%; border: 2px solid #fff; cursor: pointer; transition: 0.2s; }
+        .dot.active { border-color: var(--gold); box-shadow: 0 0 10px var(--gold); transform: scale(1.2); }
+        .qty-control { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 20px; background: #1a1a1a; padding: 10px; border-radius: 10px; }
+        .btn-q { background: #333; color: #fff; border: none; width: 40px; height: 40px; border-radius: 8px; cursor: pointer; font-size: 1.5rem; }
+        .q-val { font-weight: bold; color: var(--gold); min-width: 40px; font-size: 1.4rem; }
+        .btn-add { background: linear-gradient(to bottom, #e2c06d, #8a6d3b); color: #000; padding: 15px; border-radius: 12px; font-weight: 900; border: none; cursor: pointer; width: 100%; font-size: 1.1rem; }
+        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.95); border-top: 2px solid var(--gold); padding: 20px; display: none; }
     </style>
 </head>
 <body>
@@ -34,17 +31,18 @@
     <div class="grid">
         <div class="card">
             <div class="img-box">
-                <img src="ص.PNG" id="main-img" class="product-img">
+                <img src="t1-white.png" id="main-img" class="product-img">
             </div>
             
             <div class="color-dots">
-                <div class="dot active" style="background: #ffffff;" onclick="up('ص.PNG', 'أبيض', this)"></div>
-                <div class="dot" style="background: #000000;" onclick="up('ص1.PNG', 'أسود', this)"></div>
-                <div class="dot" style="background: #87CEEB;" onclick="up('التقاط.PNG', 'سماوي', this)"></div>
+                <div class="dot active" style="background: #ffffff;" onclick="update('t1-white.png', 'أبيض', this)"></div>
+                <div class="dot" style="background: #000000;" onclick="update('t1-black.png', 'أسود', this)"></div>
+                <div class="dot" style="background: #87CEEB;" onclick="update('t1-blue.png', 'سماوي', this)"></div>
+                <div class="dot" style="background: #DAA520;" onclick="update('t1-yellow.png', 'خردلي', this)"></div>
             </div>
 
-            <div class="model-name">تيشيرت موديل 01</div>
-            <div class="packing-info" style="color:var(--gold); margin:10px 0;">الشد: 16 حبة</div>
+            <div class="model-name" style="margin-bottom:10px; font-weight:bold;">تيشيرت موديل 01</div>
+            <div style="color:var(--gold); margin-bottom:15px;">الشد: 16 حبة</div>
             
             <div class="qty-control">
                 <button class="btn-q" onclick="chg(-16)">-</button>
@@ -57,19 +55,18 @@
     </div>
 
     <div id="cart-bar" class="cart-bar">
-        <button class="btn-add" style="width:auto; padding:10px 30px;" onclick="send()">إرسال الطلب (واتساب)</button>
+        <button class="btn-add" style="width:auto; padding:10px 50px; background:#fff;" onclick="sendWA()">إرسال الطلب واتساب</button>
     </div>
 
     <script>
         let items = [];
-        let color = "أبيض";
+        let selectedColor = "أبيض";
 
-        function up(src, c, el) {
+        function update(src, color, el) {
             document.getElementById('main-img').src = src;
-            let dots = document.querySelectorAll('.dot');
-            dots.forEach(d => d.classList.remove('active'));
+            document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
             el.classList.add('active');
-            color = c;
+            selectedColor = color;
         }
 
         function chg(v) {
@@ -81,13 +78,13 @@
 
         function buy() {
             let q = document.getElementById('qty').innerText;
-            items.push(`موديل 01 - لون ${color} - كمية ${q}`);
+            items.push(`موديل 01 (${selectedColor}) - كمية: ${q}`);
             document.getElementById('cart-bar').style.display = 'block';
-            alert('تمت الإضافة');
+            alert('تمت الإضافة بنجاح');
         }
 
-        function send() {
-            let msg = encodeURIComponent("طلب جملة:\n" + items.join("\n"));
+        function sendWA() {
+            let msg = encodeURIComponent("طلب جديد:\n" + items.join("\n"));
             window.location.href = "https://wa.me/966560564719?text=" + msg;
         }
     </script>
