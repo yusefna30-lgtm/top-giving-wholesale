@@ -58,4 +58,115 @@
 
         .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.96); border-top: 2px solid var(--gold); padding: 20px; z-index: 1000; display: none; backdrop-filter: blur(10px); }
 
-        @media (min-width: 768px) { .grid { grid-
+        @media (min-width: 768px) { .grid { grid-template-columns: repeat(4, 1fr); } .img-box { height: 320px; } }
+    </style>
+</head>
+<body>
+
+    <div class="brand">TOP GIVING</div>
+
+    <div class="main-section-header">تيشيرتات أوفراسايز (شد 16 حبة)</div>
+
+    <div class="grid">
+        
+        <div class="card">
+            <div class="img-box"><img src="t1.png" class="product-img"></div>
+            <div class="color-dots">
+                <div class="dot" style="background: #000;"></div>
+                <div class="dot" style="background: #fff;"></div>
+                <div class="dot" style="background: #2c3e50;"></div>
+                <div class="dot" style="background: #7f8c8d;"></div>
+            </div>
+            <div class="model-name">تيشيرت موديل 01</div>
+            <div class="packing-info">الشد: 16 حبة</div>
+            <div class="qty-control"><button class="btn-q" onclick="chg('t1',-16,16)">-</button><span id="t1" class="q-val">16</span><button class="btn-q" onclick="chg('t1',16,16)">+</button></div>
+            <button class="btn-add" onclick="buy('موديل 01','t1')">إضافة للطلب</button>
+        </div>
+
+        <div class="card">
+            <div class="img-box"><img src="t2.png" class="product-img"></div>
+            <div class="color-dots">
+                <div class="dot" style="background: #800000;"></div>
+                <div class="dot" style="background: #fff;"></div>
+                <div class="dot" style="background: #000;"></div>
+                <div class="dot" style="background: #333;"></div>
+            </div>
+            <div class="model-name">تيشيرت موديل 02</div>
+            <div class="packing-info">الشد: 16 حبة</div>
+            <div class="qty-control"><button class="btn-q" onclick="chg('t2',-16,16)">-</button><span id="t2" class="q-val">16</span><button class="btn-q" onclick="chg('t2',16,16)">+</button></div>
+            <button class="btn-add" onclick="buy('موديل 02','t2')">إضافة للطلب</button>
+        </div>
+
+        <div class="card">
+            <div class="img-box"><img src="t3.png" class="product-img"></div>
+            <div class="color-dots">
+                <div class="dot" style="background: #2e4053;"></div>
+                <div class="dot" style="background: #000;"></div>
+                <div class="dot" style="background: #fff;"></div>
+                <div class="dot" style="background: #5d6d7e;"></div>
+            </div>
+            <div class="model-name">تيشيرت موديل 03</div>
+            <div class="packing-info">الشد: 16 حبة</div>
+            <div class="qty-control"><button class="btn-q" onclick="chg('t3',-16,16)">-</button><span id="t3" class="q-val">16</span><button class="btn-q" onclick="chg('t3',16,16)">+</button></div>
+            <button class="btn-add" onclick="buy('موديل 03','t3')">إضافة للطلب</button>
+        </div>
+
+        <div class="card">
+            <div class="img-box"><img src="t4.png" class="product-img"></div>
+            <div class="color-dots">
+                <div class="dot" style="background: #000;"></div>
+                <div class="dot" style="background: #fff;"></div>
+                <div class="dot" style="background: #8e44ad;"></div>
+                <div class="dot" style="background: #34495e;"></div>
+            </div>
+            <div class="model-name">تيشيرت موديل 04</div>
+            <div class="packing-info">الشد: 16 حبة</div>
+            <div class="qty-control"><button class="btn-q" onclick="chg('t4',-16,16)">-</button><span id="t4" class="q-val">16</span><button class="btn-q" onclick="chg('t4',16,16)">+</button></div>
+            <button class="btn-add" onclick="buy('موديل 04','t4')">إضافة للطلب</button>
+        </div>
+
+        <div class="card">
+            <div class="img-box"><img src="t5.png" class="product-img"></div>
+            <div class="color-dots">
+                <div class="dot" style="background: #111;"></div>
+                <div class="dot" style="background: #fff;"></div>
+                <div class="dot" style="background: #7d6608;"></div>
+                <div class="dot" style="background: #273746;"></div>
+            </div>
+            <div class="model-name">تيشيرت موديل 05</div>
+            <div class="packing-info">الشد: 16 حبة</div>
+            <div class="qty-control"><button class="btn-q" onclick="chg('t5',-16,16)">-</button><span id="t5" class="q-val">16</span><button class="btn-q" onclick="chg('t5',16,16)">+</button></div>
+            <button class="btn-add" onclick="buy('موديل 05','t5')">إضافة للطلب</button>
+        </div>
+
+    </div>
+
+    <div id="cart-bar" class="cart-bar">
+        <div style="max-width:1200px; margin:auto; display:flex; justify-content:space-between; align-items:center;">
+            <div style="color:var(--gold); font-weight:bold;">الطلبات: <span id="c-count" style="font-size:1.5rem;">0</span></div>
+            <button class="btn-add" style="width:auto; padding:10px 40px; background:#fff; color:#000;" onclick="sendWA()">إرسال الطلب المجمع</button>
+        </div>
+    </div>
+
+    <script>
+        let items = [];
+        function chg(id, s, m) {
+            let e = document.getElementById(id);
+            let v = parseInt(e.innerText) + s;
+            if (v < m) v = m;
+            e.innerText = v;
+        }
+        function buy(n, qId) {
+            let q = document.getElementById(qId).innerText;
+            items.push(`*${n}* ← ${q} حبة`);
+            document.getElementById('cart-bar').style.display = 'block';
+            document.getElementById('c-count').innerText = items.length;
+            alert('تمت إضافة ' + n);
+        }
+        function sendWA() {
+            let msg = "أهلاً TOP GIVING، طلب جملة جديد:\n\n" + items.join("\n");
+            window.location.href = `https://wa.me/966560564719?text=${encodeURIComponent(msg)}`;
+        }
+    </script>
+</body>
+</html>
