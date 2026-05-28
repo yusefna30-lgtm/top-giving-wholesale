@@ -6,7 +6,7 @@
     <title>TOP GIVING | Wholesale</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --gold-main: #D4AF37; --gold-light: #f1d38e; --black: #000; --card-bg: #0c0c0e; --sub-group-bg: #111; }
+        :root { --gold-main: #D4AF37; --gold-light: #f1d38e; --black: #000; }
         body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 120px; direction: rtl; }
         .brand { font-size: 2.8rem; color: var(--gold-main); margin: 30px 0; font-weight: 900; letter-spacing: 5px; }
 
@@ -28,7 +28,7 @@
         }
         
         .card { 
-            background: var(--card-bg); padding: 12px; border-radius: 12px; 
+            background: #0a0a0a; padding: 12px; border-radius: 12px; 
             border: 1px solid #1a1a1a; box-shadow: 0 4px 10px rgba(0,0,0,0.5);
             display: flex; flex-direction: column;
         }
@@ -48,6 +48,7 @@
         }
 
         .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.95); border-top: 2px solid var(--gold-main); padding: 15px; z-index: 1000; display: none; backdrop-filter: blur(5px); }
+
         @media (min-width: 768px) {
             .grid { grid-template-columns: repeat(4, 1fr); }
             .img-box { height: 320px; }
@@ -64,7 +65,7 @@
     <div class="grid">
         <div class="card">
             <div class="model-name">تيشيرت رجالي</div>
-            <div class="img-box"><img src="pant-mens02.jpg" class="product-img"></div>
+            <div class="img-box"><img src="mens-set02.jpg" class="product-img"></div>
             <div class="qty-control">
                 <button class="btn-q" onclick="chg('m1',-12,12)">-</button><span id="m1" class="q-val">12</span><button class="btn-q" onclick="chg('m1',12,12)">+</button>
             </div>
@@ -82,6 +83,14 @@
             </div>
             <button class="btn-add" onclick="buy('بنطلون 0269','m2')">إضافة</button>
         </div>
+        <div class="card">
+            <div class="model-name">شورت رجالي 0295</div>
+            <div class="img-box"><img src="short-men02.jpg" class="product-img"></div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="chg('m3',-6,6)">-</button><span id="m3" class="q-val">6</span><button class="btn-q" onclick="chg('m3',6,6)">+</button>
+            </div>
+            <button class="btn-add" onclick="buy('شورت 0295','m3')">إضافة</button>
+        </div>
     </div>
 
     <div class="sub-group-title">الأطقم الكاملة</div>
@@ -90,5 +99,76 @@
             <div class="model-name">طقم رجالي موديل 02</div>
             <div class="img-box"><img src="mens-set02.jpg" class="product-img"></div>
             <div class="qty-control">
-                <button class="btn-q" onclick="chg('m3',-6,6)">-</button><span id="m3" class="q-val">6</span><button class="btn-q" onclick="chg('m3',6,6)">+</button>
+                <button class="btn-q" onclick="chg('m4',-6,6)">-</button><span id="m4" class="q-val">6</span><button class="btn-q" onclick="chg('m4',6,6)">+</button>
             </div>
+            <button class="btn-add" onclick="buy('طقم رجالي 02','m4')">إضافة</button>
+        </div>
+    </div>
+
+    <div class="main-section-header">قسم الجامبو (JAMPO)</div>
+
+    <div class="sub-group-title">التيشيرتات والقمصان (جامبو)</div>
+    <div class="grid">
+        <div class="card">
+            <div class="model-name">تيشيرت جامبو موديل 01</div>
+            <div class="img-box"><img src="tshert-jampo01.png" class="product-img"></div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="chg('j1',-12,12)">-</button><span id="j1" class="q-val">12</span><button class="btn-q" onclick="chg('j1',12,12)">+</button>
+            </div>
+            <button class="btn-add" onclick="buy('تيشيرت جامبو','j1')">إضافة</button>
+        </div>
+    </div>
+
+    <div class="sub-group-title">البناطيل والشورتات (جامبو)</div>
+    <div class="grid">
+        <div class="card">
+            <div class="model-name">بنطلون جامبو موديل 01</div>
+            <div class="img-box"><img src="pant-jampo01.jpg" class="product-img"></div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="chg('j2',-6,6)">-</button><span id="j2" class="q-val">6</span><button class="btn-q" onclick="chg('j2',6,6)">+</button>
+            </div>
+            <button class="btn-add" onclick="buy('بنطلون جامبو','j2')">إضافة</button>
+        </div>
+    </div>
+
+    <div class="sub-group-title">الأطقم الكاملة (جامبو)</div>
+    <div class="grid">
+        <div class="card">
+            <div class="model-name">طقم جامبو موديل 01</div>
+            <div class="img-box"><img src="jampo-set 01.jpg" class="product-img"></div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="chg('j3',-6,6)">-</button><span id="j3" class="q-val">6</span><button class="btn-q" onclick="chg('j3',6,6)">+</button>
+            </div>
+            <button class="btn-add" onclick="buy('طقم جامبو 01','j3')">إضافة</button>
+        </div>
+    </div>
+
+    <div id="cart-bar" class="cart-bar">
+        <div style="max-width:1200px; margin:auto; display:flex; justify-content:space-between; align-items:center;">
+            <div style="color:var(--gold-main); font-weight:bold;">الأصناف المختارة: <span id="c-count" style="font-size:1.2rem;">0</span></div>
+            <button class="btn-add" style="width:auto; padding:10px 30px; background:#fff;" onclick="sendWA()">إرسال طلب الجملة</button>
+        </div>
+    </div>
+
+    <script>
+        let items = [];
+        function chg(id, s, m) {
+            let e = document.getElementById(id);
+            let v = parseInt(e.innerText) + s;
+            if (v < m) v = m;
+            e.innerText = v;
+        }
+        function buy(n, qId) {
+            let q = document.getElementById(qId).innerText;
+            items.push(`*${n}* ← ${q} حبة`);
+            document.getElementById('cart-bar').style.display = 'block';
+            document.getElementById('c-count').innerText = items.length;
+            alert('تمت إضافة ' + n);
+        }
+        function sendWA() {
+            let msg = "أهلاً TOP GIVING، طلب جملة جديد:\n\n" + items.join("\n");
+            window.location.href = `https://wa.me/966560564719?text=${encodeURIComponent(msg)}`;
+        }
+    </script>
+</body>
+</html>
