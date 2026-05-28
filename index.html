@@ -6,7 +6,7 @@
     <title>TOP GIVING | Wholesale</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* إعداد متغيرات الألوان لتسهيل التحكم بالهوية البصرية للموقع */
+        /* المتغيرات البرمجية للألوان */
         :root { 
             --gold: #D4AF37; 
             --black: #000; 
@@ -30,7 +30,7 @@
             letter-spacing: 5px; 
         }
         
-        /* شبكة عرض مرنة (Grid) تضمن ظهور البطاقات بجانب بعضها بشكل متناسق */
+        /* شبكة العرض المرنة للبطاقات */
         .grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
@@ -128,7 +128,8 @@
         .cart-bar { 
             position: fixed; 
             bottom: 0; 
-            left: 0; right: 0; 
+            left: 0; 
+            right: 0; 
             background: rgba(0, 0, 0, 0.95); 
             border-top: 2px solid var(--gold); 
             padding: 20px; 
@@ -143,14 +144,14 @@
 
     <div class="grid">
         
-        <!-- الموديل 01 -->
+        <!-- بطاقة الموديل 01 -->
         <div class="card">
-            <div class="img-box"><img src="t1-white.png" id="img-01" class="product-img"></div>
+            <div class="img-box"><img src="./t1-white.png" id="img-01" class="product-img"></div>
             <div class="color-dots">
-                <div class="dot" style="background: #DAA520;" onclick="updateProduct('01', 't1-yellow.png', 'خردلي', this)"></div>
-                <div class="dot" style="background: #87CEEB;" onclick="updateProduct('01', 't1-blue.png', 'سماوي', this)"></div>
-                <div class="dot" style="background: #000000;" onclick="updateProduct('01', 't1-black.png', 'أسود', this)"></div>
-                <div class="dot active" style="background: #ffffff;" onclick="updateProduct('01', 't1-white.png', 'أبيض', this)"></div>
+                <div class="dot" style="background: #DAA520;" onclick="updateProduct('01', './t1-yellow.png', 'خردلي', this)"></div>
+                <div class="dot" style="background: #87CEEB;" onclick="updateProduct('01', './t1-blue.png', 'سماوي', this)"></div>
+                <div class="dot" style="background: #000000;" onclick="updateProduct('01', './t1-black.png', 'أسود', this)"></div>
+                <div class="dot active" style="background: #ffffff;" onclick="updateProduct('01', './t1-white.png', 'أبيض', this)"></div>
             </div>
             <div class="model-name" style="margin-bottom:10px; font-weight:bold;">تيشيرت موديل 01</div>
             <div class="qty-control">
@@ -161,16 +162,14 @@
             <button class="btn-add" onclick="addToOrder('01', 'موديل 01')">إضافة للطلب</button>
         </div>
 
-        <!-- الموديل 02 المصلح والمعدل بالترتيب الصحيح ليتوافق مع لقطة الشاشة التقاط_8.jpg -->
+        <!-- بطاقة الموديل 02 المحدثة بمسارات برمجية مؤمنة لقراءة الصور بجانب index.html -->
         <div class="card">
-            <!-- تم جعل الصورة الافتراضية للموديل الثاني هي البنفسجية لتطابق الزر النشط أولاً -->
-            <div class="img-box"><img src="t2-purple.png" id="img-02" class="product-img"></div>
+            <div class="img-box"><img src="./t2-purple.png" id="img-02" class="product-img"></div>
             <div class="color-dots">
-                <!-- تم جعل اللون البنفسجي هو الخيار الفعال الافتراضي تطابقاً مع الترتيب المرئي لديك -->
-                <div class="dot active" style="background: #A020F0;" onclick="updateProduct('02', 't2-purple.png', 'بنفسجي', this)"></div>
-                <div class="dot" style="background: #ffffff;" onclick="updateProduct('02', 't2-white.png', 'أبيض مطبوع', this)"></div>
-                <div class="dot" style="background: #000000;" onclick="updateProduct('02', 't2-black.png', 'أسود', this)"></div>
-                <div class="dot" style="background: #808080;" onclick="updateProduct('02', 't2-grey.png', 'رصاصي', this)"></div>
+                <div class="dot active" style="background: #A020F0;" onclick="updateProduct('02', './t2-purple.png', 'بنفسجي', this)"></div>
+                <div class="dot" style="background: #ffffff;" onclick="updateProduct('02', './t2-white.png', 'أبيض مطبوع', this)"></div>
+                <div class="dot" style="background: #000000;" onclick="updateProduct('02', './t2-black.png', 'أسود', this)"></div>
+                <div class="dot" style="background: #808080;" onclick="updateProduct('02', './t2-grey.png', 'رصاصي', this)"></div>
             </div>
             <div class="model-name" style="margin-bottom:10px; font-weight:bold;">تيشيرت موديل 02</div>
             <div class="qty-control">
@@ -183,17 +182,16 @@
 
     </div>
 
-    <!-- شريط إرسال الطلبات السفلي -->
+    <!-- شريط السلة المنبثق -->
     <div id="cart-bar" class="cart-bar">
         <button class="btn-add" style="width:auto; padding:10px 50px; background:#fff;" onclick="sendOrder()">إرسال الطلب واتساب</button>
     </div>
 
     <script>
         let orderList = [];
-        // تعيين الذاكرة البرمجية للون الافتراضي الأولي لكل منتج بشكل مستقل
         let selectedProductColors = { '01': 'أبيض', '02': 'بنفسجي' };
 
-        // وظيفة جافا سكريبت لتحديث مسار الصورة وإدارة الفئات النشطة (Active Classes) للدوائر
+        // وظيفة تحديث الصورة البرمجية بشكل مستقل
         function updateProduct(modelId, imageSrc, colorName, dotElement) {
             document.getElementById('img-' + modelId).src = imageSrc;
             let dots = dotElement.parentElement.querySelectorAll('.dot');
@@ -202,7 +200,6 @@
             selectedProductColors[modelId] = colorName;
         }
 
-        // وظيفة العداد للتحكم بالكميات بمضاعفات الرقم 16 بناءً على الـ ID الممرر
         function changeQty(qtyId, amount) {
             let qtyDisplay = document.getElementById(qtyId);
             let val = parseInt(qtyDisplay.innerText) + amount;
@@ -210,16 +207,14 @@
             qtyDisplay.innerText = val;
         }
 
-        // وظيفة تجميع بيانات الموديل المختار وضخها في مصفوفة الطلبات
         function addToOrder(modelId, modelName) {
             let currentQty = document.getElementById('q' + modelId).innerText;
             let currentColor = selectedProductColors[modelId];
             orderList.push(`${modelName} (${currentColor}) - كمية: ${currentQty} حبة`);
             document.getElementById('cart-bar').style.display = 'block';
-            alert('تم إضافة ' + modelName + ' باللون ' + currentColor + ' بنجاح للطلب!');
+            alert('تم إضافة ' + modelName + ' باللون ' + currentColor + ' بنجاح!');
         }
 
-        // وظيفة تشفير الرسالة وتوجيه المستخدم بالكامل للواتساب
         function sendOrder() {
             let textMessage = encodeURIComponent("طلب جملة جديد من متجر TOP GIVING:\n" + orderList.join("\n"));
             window.location.href = "https://wa.me/966560564719?text=" + textMessage;
