@@ -6,35 +6,152 @@
     <title>TOP GIVING | Wholesale</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #D4AF37; --black: #000; --card-bg: #0c0c0e; }
-        body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 120px; }
-        .brand { font-size: 2.2rem; color: var(--gold); margin: 20px 0; font-weight: 900; letter-spacing: 3px; }
+        :root { 
+            --gold: #D4AF37; 
+            --black: #000; 
+            --card-bg: #0c0c0e;
+        }
         
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 1200px; margin: 0 auto; padding: 0 10px; }
+        body { 
+            font-family: 'Cairo', sans-serif; 
+            background: var(--black); 
+            color: #fff; 
+            text-align: center; 
+            margin: 0; 
+            padding-bottom: 120px; 
+        }
         
-        .card { background: var(--card-bg); padding: 12px; border-radius: 15px; border: 1px solid #1a1a1a; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; }
-        .card:hover { border-color: var(--gold); box-shadow: 0 0 15px rgba(212,175,55,0.3); }
+        .brand { 
+            font-size: 2.2rem; 
+            color: var(--gold); 
+            margin: 20px 0; 
+            font-weight: 900; 
+            letter-spacing: 3px; 
+        }
         
-        .img-box { width: 100%; height: 220px; border-radius: 10px; overflow: hidden; background: #fff; margin-bottom: 12px; }
-        .product-img { width: 100%; height: 100%; object-fit: contain; }
+        /* شبكة عرض الموديلات - عمودين في الجوال */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 12px; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 10px; 
+        }
         
-        .color-dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 12px; }
-        .dot { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #fff; cursor: pointer; }
-        .dot.active { border-color: var(--gold); box-shadow: 0 0 8px var(--gold); transform: scale(1.1); }
+        .card { 
+            background: var(--card-bg); 
+            padding: 12px; 
+            border-radius: 15px; 
+            border: 1px solid #1a1a1a; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+            transition: 0.3s ease-in-out; 
+        }
+        .card:hover { 
+            border-color: var(--gold); 
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); 
+        }
         
-        .model-name { font-size: 0.85rem; margin-bottom: 8px; font-weight: bold; }
-        .qty-control { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px; background: #1a1a1a; padding: 5px; border-radius: 8px; }
-        .btn-q { background: #333; color: #fff; border: none; width: 28px; height: 28px; border-radius: 5px; cursor: pointer; font-size: 1rem; }
-        .q-val { color: var(--gold); font-weight: bold; font-size: 1rem; }
+        /* حجم الصندوق الصغير للجوال */
+        .img-box { 
+            width: 100%; 
+            height: 220px; 
+            border-radius: 10px; 
+            overflow: hidden; 
+            background: #fff; 
+            margin-bottom: 12px; 
+        }
+        .product-img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; 
+        }
         
-        .btn-add { background: linear-gradient(to bottom, #e2c06d, #8a6d3b); color: #000; padding: 10px; border-radius: 8px; font-weight: 900; border: none; width: 100%; font-size: 0.85rem; }
-        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.95); border-top: 2px solid var(--gold); padding: 15px; display: none; z-index: 1000; }
+        .color-dots { 
+            display: flex; 
+            justify-content: center; 
+            gap: 8px; 
+            margin-bottom: 12px; 
+        }
+        .dot { 
+            width: 24px; 
+            height: 24px; 
+            border-radius: 50%; 
+            border: 2px solid #fff; 
+            cursor: pointer; 
+            transition: 0.2s; 
+        }
+        .dot.active { 
+            border-color: var(--gold); 
+            box-shadow: 0 0 8px var(--gold); 
+            transform: scale(1.1); 
+        }
+        
+        .model-name { 
+            font-size: 0.9rem; 
+            margin-bottom: 10px; 
+            font-weight: bold; 
+        }
+        
+        .qty-control { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 8px; 
+            margin-bottom: 12px; 
+            background: #1a1a1a; 
+            padding: 6px; 
+            border-radius: 8px; 
+        }
+        .btn-q { 
+            background: #333; 
+            color: #fff; 
+            border: none; 
+            width: 32px; 
+            height: 32px; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            font-size: 1.2rem; 
+            font-weight: bold; 
+        }
+        .q-val { 
+            font-weight: bold; 
+            color: var(--gold); 
+            min-width: 30px; 
+            font-size: 1.1rem; 
+        }
+        
+        .btn-add { 
+            background: linear-gradient(to bottom, #e2c06d, #8a6d3b); 
+            color: #000; 
+            padding: 10px; 
+            border-radius: 10px; 
+            font-weight: 900; 
+            border: none; 
+            cursor: pointer; 
+            width: 100%; 
+            font-size: 0.85rem; 
+        }
 
+        .cart-bar { 
+            position: fixed; 
+            bottom: 0; left: 0; right: 0; 
+            background: rgba(0, 0, 0, 0.95); 
+            border-top: 2px solid var(--gold); 
+            padding: 15px; 
+            display: none; 
+            z-index: 1000;
+        }
+
+        /* تعديلات الكمبيوتر */
         @media (min-width: 768px) { 
             .grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
-            .img-box { height: 350px; }
-            .dot { width: 30px; height: 30px; }
-            .model-name { font-size: 1.1rem; }
+            .img-box { height: 380px; }
+            .dot { width: 32px; height: 32px; }
+            .model-name { font-size: 1.2rem; }
+            .btn-add { font-size: 1.1rem; padding: 15px; }
         }
     </style>
 </head>
@@ -43,6 +160,7 @@
     <div class="brand">TOP GIVING</div>
 
     <div class="grid">
+        
         <div class="card">
             <div class="img-box"><img src="t1-white.png" id="img-01" class="product-img"></div>
             <div class="color-dots">
@@ -52,7 +170,11 @@
                 <div class="dot" style="background: #DAA520;" onclick="update('01', 't1-yellow.png', 'خردلي', this)"></div>
             </div>
             <div class="model-name">موديل 01</div>
-            <div class="qty-control"><button class="btn-q" onclick="chg('q01', -16)">-</button><span id="q01" class="q-val">16</span><button class="btn-q" onclick="chg('q01', 16)">+</button></div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="chg('q01', -16)">-</button>
+                <span id="q01" class="q-val">16</span>
+                <button class="btn-q" onclick="chg('q01', 16)">+</button>
+            </div>
             <button class="btn-add" onclick="buy('01', 'موديل 01')">إضافة للطلب</button>
         </div>
 
@@ -65,7 +187,11 @@
                 <div class="dot" style="background: #808080;" onclick="update('02', 't2-grey.png.png', 'رصاصي', this)"></div>
             </div>
             <div class="model-name">موديل 02</div>
-            <div class="qty-control"><button class="btn-q" onclick="chg('q02', -16)">-</button><span id="q02" class="q-val">16</span><button class="btn-q" onclick="chg('q02', 16)">+</button></div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="chg('q02', -16)">-</button>
+                <span id="q02" class="q-val">16</span>
+                <button class="btn-q" onclick="chg('q02', 16)">+</button>
+            </div>
             <button class="btn-add" onclick="buy('02', 'موديل 02')">إضافة للطلب</button>
         </div>
 
@@ -78,43 +204,5 @@
                 <div class="dot" style="background: #DAA520;" onclick="update('03', 'te4-white.png.png', 'خردلي', this)"></div>
             </div>
             <div class="model-name">موديل 03 (BALANCE)</div>
-            <div class="qty-control"><button class="btn-q" onclick="chg('q03', -16)">-</button><span id="q03" class="q-val">16</span><button class="btn-q" onclick="chg('q03', 16)">+</button></div>
-            <button class="btn-add" onclick="buy('03', 'موديل 03')">إضافة للطلب</button>
-        </div>
-    </div>
-
-    <div id="cart-bar" class="cart-bar">
-        <button class="btn-add" style="width:auto; padding:10px 50px; background:#fff;" onclick="sendWA()">إرسال الطلب واتساب</button>
-    </div>
-
-    <script>
-        let items = [];
-        let selColors = { '01': 'أبيض', '02': 'بنفسجي', '03': 'بيج' };
-
-        function update(id, src, c, el) {
-            document.getElementById('img-' + id).src = src;
-            el.parentElement.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
-            el.classList.add('active');
-            selColors[id] = c;
-        }
-
-        function chg(id, v) {
-            let q = document.getElementById(id);
-            let res = parseInt(q.innerText) + v;
-            if(res < 16) res = 16;
-            q.innerText = res;
-        }
-
-        function buy(id, name) {
-            items.push(`${name} (${selColors[id]}) - كمية: ${document.getElementById('q'+id).innerText}`);
-            document.getElementById('cart-bar').style.display = 'block';
-            alert('تمت الإضافة بنجاح');
-        }
-
-        function sendWA() {
-            let msg = encodeURIComponent("طلب جملة جديد:\n" + items.join("\n"));
-            window.location.href = "https://wa.me/966560564719?text=" + msg;
-        }
-    </script>
-</body>
-</html>
+            <div class="qty-control">
+                <button class="btn-q" onclick="chg('q03', -16)">-</button
