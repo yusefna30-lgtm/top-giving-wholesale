@@ -6,7 +6,7 @@
     <title>TOP GIVING | Wholesale</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* [توثيق]: إعداد الهوية اللونية للمتجر المتوافق مع شاشات الجوال */
+        /* [التوثيق]: إعداد المتغيرات اللونية الأساسية للموقع لضمان مظهر احترافي */
         :root { 
             --gold: #D4AF37; 
             --black: #000; 
@@ -51,7 +51,7 @@
             font-weight: 700; 
         }
 
-        /* [توثيق]: تنسيق شبكة العرض المرنة لتوزيع الكروت بشكل متساوٍ وثابت */
+        /* [التوثيق]: شبكة العرض المرنة (تمنع تداخل الكروت وتوفر عمودين في الجوال) */
         .grid { 
             display: grid; 
             grid-template-columns: repeat(2, 1fr); 
@@ -173,7 +173,7 @@
     <div class="section-header"><div class="section-title">تيشيرتات OVERSYZE</div></div>
     <div class="grid">
         
-        <!-- [توثيق]: كارت موديل 04 المعتمد والمضبوط حالياً -->
+        <!-- [التوثيق]: كارت موديل 04 المعتمد والمضبوط حالياً -->
         <div class="card">
             <div class="img-box"><img src="tr1-red.png.png" id="img-04" class="product-img"></div>
             <div class="color-dots">
@@ -190,7 +190,7 @@
             <button class="btn-add" onclick="buy('04', 'موديل 04')">إضافة للطلب</button>
         </div>
 
-        <!-- [توثيق]: كارت موديل 05 المعتمد والمضبوط حالياً -->
+        <!-- [التوثيق]: كارت موديل 05 المعتمد والمضبوط حالياً -->
         <div class="card">
             <div class="img-box"><img src="n5-white.png.png" id="img-05" class="product-img"></div>
             <div class="color-dots">
@@ -207,14 +207,16 @@
             <button class="btn-add" onclick="buy('05', 'موديل 05')">إضافة للطلب</button>
         </div>
 
-        <!-- [توثيق]: كارت موديل 06 (تم إصلاح مسارات الصور هنا بربطها بالملفات المرفوعة) -->
+        <!-- [التوثيق]: كارت موديل 06 المطور برابط احتياطي ذكي لمنع الاختفاء -->
         <div class="card">
-            <!-- إذا لم تظهر الصورة الافتراضية، قم بتغيير n6-grey.png.png إلى الاسم الأصلي tshert-oversize08.jpg -->
-            <div class="img-box"><img src="n6-grey.png.png" id="img-06" class="product-img" onerror="this.src='tshert-oversize08.jpg'"></div>
+            <!-- الخاصية onerror تقوم تلقائياً بتحميل الصورة البديلة tshert-oversize08.jpg في حال لم يجد المتصفح الاسم الأول -->
+            <div class="img-box">
+                <img src="n6-grey.png" id="img-06" class="product-img" onerror="this.onerror=null; this.src='tshert-oversize08.jpg';">
+            </div>
             <div class="color-dots">
+                <div class="dot active" style="background: #808080;" onclick="update('06', 'tshert-oversize08.jpg', 'رصاصي', this)"></div>
+                <div class="dot" style="background: #ffffff;" onclick="update('06', 'n6-white.png.png', 'أبيض', this)"></div>
                 <div class="dot" style="background: #000000;" onclick="update('06', 'n6-black.png.png', 'أسود', this)"></div>
-                <div class="dot active" style="background: #ffffff;" onclick="update('06', 'n6-white.png.png', 'أبيض', this)"></div>
-                <div class="dot" style="background: #808080;" onclick="update('06', 'tshert-oversize08.jpg', 'رصاصي', this)"></div>
             </div>
             <div class="model-name">موديل 06 (N.C)</div>
             <div class="qty-control">
@@ -234,9 +236,9 @@
 
     <script>
         let items = [];
-        let selColors = { '04':'أحمر', '05':'بنفسجي', '06':'أبيض' };
+        let selColors = { '04':'أحمر', '05':'بنفسجي', '06':'رصاصي' };
 
-        // دالة تبديل مسار الصورة وإدارة الدوائر النشطة
+        // [التوثيق]: دالة تبديل مسار الصورة وإدارة الدوائر النشطة عند النقر
         function update(id, src, c, el) {
             document.getElementById('img-' + id).src = src;
             el.parentElement.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
@@ -244,7 +246,7 @@
             selColors[id] = c;
         }
 
-        // دالة زيادة ونقصان كميات العداد بمضاعفات الرقم 16 للتيشيرتات
+        // [التوثيق]: دالة زيادة ونقصان كميات العداد بمضاعفات الرقم 16 للتيشيرتات
         function chg(id, v) {
             let q = document.getElementById(id);
             let res = parseInt(q.innerText) + v;
@@ -252,7 +254,7 @@
             q.innerText = res;
         }
 
-        // دالة إضافة البيانات الفنية للمنتج داخل السلة
+        // [التوثيق]: دالة إضافة البيانات الفنية للمنتج داخل سلة الطلبات وإظهار شريط الواتساب
         function buy(id, name) {
             let qVal = document.getElementById('q' + id).innerText;
             items.push(`${name} (${selColors[id]}) - كمية: ${qVal}`);
@@ -260,7 +262,7 @@
             alert('تمت إضافة ' + name + ' باللون ' + selColors[id]);
         }
 
-        // تشفير نص الطلب النهائي وإرساله لحساب الواتساب المعتمد
+        // [التوثيق]: تشفير نص الطلب النهائي وإرساله لحساب الواتساب المعتمد
         function sendWA() {
             let msg = encodeURIComponent("طلب جملة جديد من TOP GIVING:\n" + items.join("\n"));
             window.location.href = "https://wa.me/966560564719?text=" + msg;
