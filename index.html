@@ -113,4 +113,51 @@
                 <div class="dot" style="background: white;"></div>
                 <div class="dot" style="background: #333;"></div>
             </div>
-            <div class="model-name">تيشيرت أوف
+            <div class="model-name">تيشيرت أوفراسايز 14</div>
+            <div class="packing-info">الشد: 16 حبة</div>
+            <div class="qty-control"><button class="btn-q" onclick="chg('t14',-16,16)">-</button><span id="t14" class="q-val">16</span><button class="btn-q" onclick="chg('t14',16,16)">+</button></div>
+            <button class="btn-add" onclick="buy('تيشيرت 14','t14')">إضافة للطلب</button>
+        </div>
+
+        <div class="card">
+            <div class="img-box"><img src="tshert-oversize15.png" class="product-img"></div>
+            <div class="color-dots">
+                <div class="dot" style="background: grey;"></div>
+                <div class="dot" style="background: black;"></div>
+            </div>
+            <div class="model-name">تيشيرت أوفراسايز 15</div>
+            <div class="packing-info">الشد: 16 حبة</div>
+            <div class="qty-control"><button class="btn-q" onclick="chg('t15',-16,16)">-</button><span id="t15" class="q-val">16</span><button class="btn-q" onclick="chg('t15',16,16)">+</button></div>
+            <button class="btn-add" onclick="buy('تيشيرت 15','t15')">إضافة للطلب</button>
+        </div>
+    </div>
+
+    <div id="cart-bar" class="cart-bar">
+        <div style="max-width:1200px; margin:auto; display:flex; justify-content:space-between; align-items:center;">
+            <div style="color:var(--gold); font-weight:bold;">الأصناف: <span id="c-count" style="font-size:1.4rem;">0</span></div>
+            <button class="btn-add" style="width:auto; padding:10px 30px; background:#fff;" onclick="sendWA()">إرسال طلب المجموع</button>
+        </div>
+    </div>
+
+    <script>
+        let items = [];
+        function chg(id, s, m) {
+            let e = document.getElementById(id);
+            let v = parseInt(e.innerText) + s;
+            if (v < m) v = m;
+            e.innerText = v;
+        }
+        function buy(n, qId) {
+            let q = document.getElementById(qId).innerText;
+            items.push(`*${n}* ← ${q} حبة`);
+            document.getElementById('cart-bar').style.display = 'block';
+            document.getElementById('c-count').innerText = items.length;
+            alert('تمت إضافة ' + n);
+        }
+        function sendWA() {
+            let msg = "أهلاً TOP GIVING، طلب جملة جديد:\n\n" + items.join("\n");
+            window.location.href = `https://wa.me/966560564719?text=${encodeURIComponent(msg)}`;
+        }
+    </script>
+</body>
+</html>
