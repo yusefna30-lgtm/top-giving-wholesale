@@ -6,22 +6,145 @@
     <title>TOP GIVING</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #D4AF37; --black: #000; }
-        body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 120px; }
-        .brand { font-size: 2.8rem; color: var(--gold); margin: 30px 0; font-weight: 900; letter-spacing: 5px; }
-        .grid { display: flex; justify-content: center; padding: 0 15px; }
-        .card { background: #0c0c0e; padding: 20px; border-radius: 20px; border: 1px solid #1a1a1a; width: 100%; max-width: 400px; transition: 0.3s; }
-        .card:hover { border-color: var(--gold); box-shadow: 0 0 20px rgba(212,175,55,0.3); }
-        .img-box { width: 100%; height: 400px; border-radius: 15px; overflow: hidden; background: #fff; margin-bottom: 20px; }
-        .product-img { width: 100%; height: 100%; object-fit: contain; transition: 0.4s; }
-        .color-dots { display: flex; justify-content: center; gap: 12px; margin-bottom: 20px; }
-        .dot { width: 30px; height: 30px; border-radius: 50%; border: 2px solid #fff; cursor: pointer; transition: 0.2s; }
-        .dot.active { border-color: var(--gold); box-shadow: 0 0 10px var(--gold); transform: scale(1.2); }
-        .qty-control { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 20px; background: #1a1a1a; padding: 10px; border-radius: 10px; }
-        .btn-q { background: #333; color: #fff; border: none; width: 40px; height: 40px; border-radius: 8px; cursor: pointer; font-size: 1.5rem; }
-        .q-val { font-weight: bold; color: var(--gold); min-width: 40px; font-size: 1.4rem; }
-        .btn-add { background: linear-gradient(to bottom, #e2c06d, #8a6d3b); color: #000; padding: 15px; border-radius: 12px; font-weight: 900; border: none; cursor: pointer; width: 100%; font-size: 1.1rem; }
-        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.95); border-top: 2px solid var(--gold); padding: 20px; display: none; }
+        /* إعداد المتغيرات الأساسية للألوان */
+        :root { 
+            --gold: #D4AF37; 
+            --black: #000; 
+            --card-bg: #0c0c0e;
+        }
+        
+        /* تنسيق الهيكل العام للموقع */
+        body { 
+            font-family: 'Cairo', sans-serif; 
+            background: var(--black); 
+            color: #fff; 
+            text-align: center; 
+            margin: 0; 
+            padding-bottom: 120px; 
+        }
+        
+        .brand { 
+            font-size: 2.8rem; 
+            color: var(--gold); 
+            margin: 30px 0; 
+            font-weight: 900; 
+            letter-spacing: 5px; 
+        }
+        
+        .grid { 
+            display: flex; 
+            justify-content: center; 
+            padding: 0 15px; 
+        }
+        
+        /* تنسيق بطاقة العرض وتأثير التوهج */
+        .card { 
+            background: var(--card-bg); 
+            padding: 20px; 
+            border-radius: 20px; 
+            border: 1px solid #1a1a1a; 
+            width: 100%; 
+            max-width: 400px; 
+            transition: 0.3s ease-in-out; 
+        }
+        .card:hover { 
+            border-color: var(--gold); 
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); 
+        }
+        
+        /* صندوق الصورة وتأثير الزوم */
+        .img-box { 
+            width: 100%; 
+            height: 400px; 
+            border-radius: 15px; 
+            overflow: hidden; 
+            background: #fff; 
+            margin-bottom: 20px; 
+        }
+        .product-img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; 
+            transition: 0.4s ease; 
+        }
+        .card:hover .product-img { 
+            transform: scale(1.08); 
+        }
+        
+        /* دوائر اختيار الألوان */
+        .color-dots { 
+            display: flex; 
+            justify-content: center; 
+            gap: 12px; 
+            margin-bottom: 20px; 
+        }
+        .dot { 
+            width: 30px; 
+            height: 30px; 
+            border-radius: 50%; 
+            border: 2px solid #fff; 
+            cursor: pointer; 
+            transition: 0.2s; 
+        }
+        .dot.active { 
+            border-color: var(--gold); 
+            box-shadow: 0 0 10px var(--gold); 
+            transform: scale(1.15); 
+        }
+        
+        /* أدوات التحكم بالكمية (العداد) */
+        .qty-control { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 15px; 
+            margin-bottom: 20px; 
+            background: #1a1a1a; 
+            padding: 10px; 
+            border-radius: 10px; 
+        }
+        .btn-q { 
+            background: #333; 
+            color: #fff; 
+            border: none; 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-size: 1.5rem; 
+            font-weight: bold;
+        }
+        .q-val { 
+            font-weight: bold; 
+            color: var(--gold); 
+            min-width: 40px; 
+            font-size: 1.4rem; 
+        }
+        
+        /* زر الإضافة للطلب */
+        .btn-add { 
+            background: linear-gradient(to bottom, #e2c06d, #8a6d3b); 
+            color: #000; 
+            padding: 15px; 
+            border-radius: 12px; 
+            font-weight: 900; 
+            border: none; 
+            cursor: pointer; 
+            width: 100%; 
+            font-size: 1.1rem; 
+        }
+        
+        /* شريط السلة السفلي */
+        .cart-bar { 
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            right: 0; 
+            background: rgba(0, 0, 0, 0.95); 
+            border-top: 2px solid var(--gold); 
+            padding: 20px; 
+            display: none; 
+        }
     </style>
 </head>
 <body>
@@ -30,62 +153,72 @@
 
     <div class="grid">
         <div class="card">
+            <!-- صندوق الصورة الرئيسي -->
             <div class="img-box">
-                <img src="t1-white.png" id="main-img" class="product-img">
+                <!-- تم تصحيح الامتداد هنا ليطابق ملفك الفعلي -->
+                <img src="t1-white.png.png" id="main-img" class="product-img">
             </div>
             
+            <!-- أزرار اختيار الألوان الأربعة التفاعلية -->
             <div class="color-dots">
-                <div class="dot active" style="background: #ffffff;" onclick="update('t1-white.png', 'أبيض', this)"></div>
-                <div class="dot" style="background: #000000;" onclick="update('t1-black.png', 'أسود', this)"></div>
-                <div class="dot" style="background: #87CEEB;" onclick="update('t1-blue.png', 'سماوي', this)"></div>
-                <div class="dot" style="background: #DAA520;" onclick="update('t1-yellow.png', 'خردلي', this)"></div>
+                <div class="dot active" style="background: #ffffff;" onclick="updateImage('t1-white.png.png', 'أبيض', this)"></div>
+                <div class="dot" style="background: #000000;" onclick="updateImage('t1-black.png.png', 'أسود', this)"></div>
+                <div class="dot" style="background: #87CEEB;" onclick="updateImage('t1-blue.png.png', 'سماوي', this)"></div>
+                <div class="dot" style="background: #DAA520;" onclick="updateImage('t1-yellow.png.png', 'خردلي', this)"></div>
             </div>
 
             <div class="model-name" style="margin-bottom:10px; font-weight:bold;">تيشيرت موديل 01</div>
-            <div style="color:var(--gold); margin-bottom:15px;">الشد: 16 حبة</div>
+            <div style="color:var(--gold); margin-bottom:15px; font-weight: bold;">الشد: 16 حبة</div>
             
+            <!-- أزرار التحكم بالكمية بمضاعفات الـ 16 حبة -->
             <div class="qty-control">
-                <button class="btn-q" onclick="chg(-16)">-</button>
+                <button class="btn-q" onclick="changeQuantity(-16)">-</button>
                 <span id="qty" class="q-val">16</span>
-                <button class="btn-q" onclick="chg(16)">+</button>
+                <button class="btn-q" onclick="changeQuantity(16)">+</button>
             </div>
             
-            <button class="btn-add" onclick="buy()">إضافة للطلب</button>
+            <button class="btn-add" onclick="addToCart()">إضافة للطلب</button>
         </div>
     </div>
 
+    <!-- شريط السلة المنبثق لطلب الواتساب -->
     <div id="cart-bar" class="cart-bar">
-        <button class="btn-add" style="width:auto; padding:10px 50px; background:#fff;" onclick="sendWA()">إرسال الطلب واتساب</button>
+        <button class="btn-add" style="width:auto; padding:10px 50px; background:#fff;" onclick="sendToWhatsApp()">إرسال الطلب واتساب</button>
     </div>
 
     <script>
-        let items = [];
-        let selectedColor = "أبيض";
+        // مصفوفة لتخزين العناصر المطلوبة ومتغير للون الافتراضي
+        let orderItems = [];
+        let currentSelectedColor = "أبيض";
 
-        function update(src, color, el) {
-            document.getElementById('main-img').src = src;
-            document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
-            el.classList.add('active');
-            selectedColor = color;
+        // وظيفة جافا سكريبت لتحديث الصورة واللون عند الضغط على الدائرة
+        function updateImage(imageSource, colorName, dotElement) {
+            document.getElementById('main-img').src = imageSource;
+            document.querySelectorAll('.dot').forEach(dot => dot.classList.remove('active'));
+            dotElement.classList.add('active');
+            currentSelectedColor = colorName;
         }
 
-        function chg(v) {
-            let q = document.getElementById('qty');
-            let res = parseInt(q.innerText) + v;
-            if(res < 16) res = 16;
-            q.innerText = res;
+        // وظيفة التحكم بالعداد وزيادة/نقصان الشد بمقدار 16
+        function changeQuantity(amount) {
+            let qtyDisplay = document.getElementById('qty');
+            let newQuantity = parseInt(qtyDisplay.innerText) + amount;
+            if(newQuantity < 16) newQuantity = 16; // الحد الأدنى هو شد واحد
+            qtyDisplay.innerText = newQuantity;
         }
 
-        function buy() {
-            let q = document.getElementById('qty').innerText;
-            items.push(`موديل 01 (${selectedColor}) - كمية: ${q}`);
+        // وظيفة إضافة المنتج إلى السلة المؤقتة
+        function addToCart() {
+            let finalQty = document.getElementById('qty').innerText;
+            orderItems.push(`موديل 01 (${currentSelectedColor}) - كمية: ${finalQty} حبة`);
             document.getElementById('cart-bar').style.display = 'block';
-            alert('تمت الإضافة بنجاح');
+            alert('تمت إضافة المنتج بنجاح إلى طلبك!');
         }
 
-        function sendWA() {
-            let msg = encodeURIComponent("طلب جديد:\n" + items.join("\n"));
-            window.location.href = "https://wa.me/966560564719?text=" + msg;
+        // وظيفة تشفير البيانات وتوجيه المستخدم إلى الواتساب
+        function sendToWhatsApp() {
+            let messageText = encodeURIComponent("طلب جملة جديد من متجر TOP GIVING:\n" + orderItems.join("\n"));
+            window.location.href = "https://wa.me/966560564719?text=" + messageText;
         }
     </script>
 </body>
