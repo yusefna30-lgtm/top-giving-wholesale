@@ -66,12 +66,12 @@
         </div>
 
         <div class="card">
-            <div class="img-box"><img src="te3-beige.png.png" id="img-03" class="product-img"></div>
+            <div class="img-box"><img src="te4-white.png.png" id="img-03" class="product-img"></div>
             <div class="color-dots">
-                <div class="dot active" style="background: #F5F5DC;" onclick="update('03', 'te3-beige.png.png', 'بيج', this)"></div>
+                <div class="dot active" style="background: #ffffff;" onclick="update('03', 'te4-white.png.png', 'أبيض', this)"></div>
+                <div class="dot" style="background: #F5F5DC;" onclick="update('03', 'te3-beige.png.png', 'بيج', this)"></div>
                 <div class="dot" style="background: #000000;" onclick="update('03', 'te1-black.png.png', 'أسود', this)"></div>
                 <div class="dot" style="background: #87CEEB;" onclick="update('03', 'te2-blue.png.png', 'سماوي', this)"></div>
-                <div class="dot" style="background: #DAA520;" onclick="update('03', 'te4-white.png.png', 'خردلي', this)"></div>
             </div>
             <div class="model-name">موديل 03 (BALANCE)</div>
             <div class="qty-control">
@@ -89,7 +89,7 @@
 
     <script>
         let items = [];
-        let selColors = { '01': 'أبيض', '02': 'بنفسجي', '03': 'بيج' };
+        let selColors = { '01': 'أبيض', '02': 'بنفسجي', '03': 'أبيض' };
 
         function update(id, src, c, el) {
             document.getElementById('img-' + id).src = src;
@@ -109,7 +109,7 @@
             let qVal = document.getElementById('q' + id).innerText;
             items.push(`${name} (${selColors[id]}) - كمية: ${qVal}`);
             document.getElementById('cart-bar').style.display = 'block';
-            alert('تمت الإضافة بنجاح!');
+            alert('تمت إضافة ' + name + ' باللون ' + selColors[id]);
         }
 
         function sendWA() {
