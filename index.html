@@ -6,58 +6,196 @@
     <title>TOP GIVING | Wholesale</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #D4AF37; --black: #000; --card-bg: #0c0c0e; --accent: #1a1a1a; }
-        body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 120px; }
-        .brand { font-size: 2.5rem; color: var(--gold); margin: 30px 0; font-weight: 900; letter-spacing: 4px; }
-
-        /* فواصل الأقسام الذهبية */
-        .section-header { margin: 50px 0 30px; display: flex; align-items: center; justify-content: center; }
-        .section-header::before, .section-header::after { content: ""; height: 2px; width: 60px; background: var(--gold); margin: 0 15px; border-radius: 2px; }
-        .section-title { color: var(--gold); font-size: 1.4rem; font-weight: 700; }
-
-        /* شبكة المنتجات متجاوبة */
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
-        .card { background: var(--card-bg); padding: 15px; border-radius: 20px; border: 1px solid var(--accent); display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; }
-        .img-box { width: 100%; height: 220px; border-radius: 15px; overflow: hidden; background: #fff; margin-bottom: 15px; }
-        .product-img { width: 100%; height: 100%; object-fit: contain; }
+        /* [توثيق]: إعداد متغيرات الألوان العامة للموقع لتوحيد الهوية البصرية */
+        :root { 
+            --gold: #D4AF37; 
+            --black: #000; 
+            --card-bg: #0c0c0e; 
+            --accent: #1a1a1a; 
+        }
         
-        .color-dots { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
-        .dot { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #333; cursor: pointer; }
-        .dot.active { border-color: var(--gold); transform: scale(1.1); box-shadow: 0 0 8px var(--gold); }
+        body { 
+            font-family: 'Cairo', sans-serif; 
+            background: var(--black); 
+            color: #fff; 
+            text-align: center; 
+            margin: 0; 
+            padding-bottom: 120px; 
+        }
         
-        .model-name { font-size: 0.9rem; margin-bottom: 12px; font-weight: 700; color: #eee; }
-        .qty-control { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px; background: #151515; padding: 8px; border-radius: 12px; }
-        .btn-q { background: #252525; color: #fff; border: none; width: 35px; height: 35px; border-radius: 10px; cursor: pointer; font-size: 1.2rem; font-weight: bold; }
-        .q-val { color: var(--gold); font-weight: 900; min-width: 35px; font-size: 1.2rem; }
-        
-        .btn-add { background: linear-gradient(135deg, #D4AF37, #8A6D3B); color: #000; padding: 14px; border-radius: 12px; font-weight: 900; border: none; width: 100%; font-size: 0.9rem; cursor: pointer; }
-        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10, 10, 10, 0.95); border-top: 1px solid var(--gold); padding: 20px; display: none; z-index: 1000; }
+        .brand { 
+            font-size: 2.5rem; 
+            color: var(--gold); 
+            margin: 30px 0; 
+            font-weight: 900; 
+            letter-spacing: 4px; 
+        }
 
-        @media (min-width: 768px) { .grid { grid-template-columns: repeat(3, 1fr); gap: 25px; } .img-box { height: 400px; } }
+        /* [توثيق]: تنسيق الفواصل الذهبية الأنيقة المعتمدة بين الأقسام */
+        .section-header { 
+            margin: 50px 0 30px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        .section-header::before, .section-header::after { 
+            content: ""; 
+            height: 2px; 
+            width: 60px; 
+            background: var(--gold); 
+            margin: 0 15px; 
+            border-radius: 2px; 
+        }
+        .section-title { 
+            color: var(--gold); 
+            font-size: 1.4rem; 
+            font-weight: 700; 
+        }
+
+        /* [توثيق]: شبكة العرض (Grid) المنظمة - تمنع تداخل العناصر وتضمن عمودين متناسقين على الجوال */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 15px; 
+        }
+        
+        /* [توثيق]: بطاقة المنتج (Card) المعزولة لمنع اختفاء الأزرار */
+        .card { 
+            background: var(--card-bg); 
+            padding: 15px; 
+            border-radius: 20px; 
+            border: 1px solid var(--accent); 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+            transition: 0.3s; 
+        }
+        
+        .img-box { 
+            width: 100%; 
+            height: 220px; 
+            border-radius: 15px; 
+            overflow: hidden; 
+            background: #fff; 
+            margin-bottom: 15px; 
+        }
+        .product-img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; 
+        }
+        
+        .color-dots { 
+            display: flex; 
+            justify-content: center; 
+            gap: 10px; 
+            margin-bottom: 15px; 
+        }
+        .dot { 
+            width: 26px; 
+            height: 26px; 
+            border-radius: 50%; 
+            border: 2px solid #333; 
+            cursor: pointer; 
+        }
+        .dot.active { 
+            border-color: var(--gold); 
+            transform: scale(1.1); 
+            box-shadow: 0 0 8px var(--gold); 
+        }
+        
+        .model-name { 
+            font-size: 0.9rem; 
+            margin-bottom: 12px; 
+            font-weight: 700; 
+            color: #eee; 
+        }
+        
+        .qty-control { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px; 
+            margin-bottom: 15px; 
+            background: #151515; 
+            padding: 8px; 
+            border-radius: 12px; 
+        }
+        .btn-q { 
+            background: #252525; 
+            color: #fff; 
+            border: none; 
+            width: 35px; 
+            height: 35px; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            font-size: 1.2rem; 
+        }
+        .q-val { 
+            color: var(--gold); 
+            font-weight: 900; 
+            min-width: 35px; 
+        }
+        
+        .btn-add { 
+            background: linear-gradient(135deg, #D4AF37, #8A6D3B); 
+            color: #000; 
+            padding: 14px; 
+            border-radius: 12px; 
+            font-weight: 900; 
+            border: none; 
+            width: 100%; 
+            font-size: 0.9rem; 
+            cursor: pointer; 
+        }
+        
+        .cart-bar { 
+            position: fixed; 
+            bottom: 0; left: 0; right: 0; 
+            background: rgba(10, 10, 10, 0.95); 
+            border-top: 1px solid var(--gold); 
+            padding: 20px; 
+            display: none; 
+            z-index: 1000; 
+        }
+
+        /* [توثيق]: إعدادات العرض لشاشات الكمبيوتر (تصبح الشبكة 3 أعمدة تلقائياً) */
+        @media (min-width: 768px) { 
+            .grid { grid-template-columns: repeat(3, 1fr); gap: 25px; } 
+            .img-box { height: 400px; } 
+        }
     </style>
 </head>
 <body>
 
     <div class="brand">TOP GIVING</div>
 
+    <!-- ================= قسم 1: التيشيرتات ================= -->
     <div class="section-header"><div class="section-title">تيشيرتات OVERSYZE</div></div>
     <div class="grid">
         
+        <!-- موديل 01 -->
         <div class="card">
             <div class="img-box"><img src="t1-white.png" id="img-01" class="product-img"></div>
             <div class="color-dots">
                 <div class="dot active" style="background: #ffffff;" onclick="update('01', 't1-white.png', 'أبيض', this)"></div>
-                <div class="dot" style="background: #DAA520;" onclick="update('01', 't1-yellow.png', 'خردلي', this)"></div>
-                <div class="dot" style="background: #87CEEB;" onclick="update('01', 't1-blue.png', 'سماوي', this)"></div>
                 <div class="dot" style="background: #000000;" onclick="update('01', 't1-black.png', 'أسود', this)"></div>
+                <div class="dot" style="background: #87CEEB;" onclick="update('01', 't1-blue.png', 'سماوي', this)"></div>
+                <div class="dot" style="background: #DAA520;" onclick="update('01', 't1-yellow.png', 'خردلي', this)"></div>
             </div>
             <div class="model-name">موديل 01</div>
             <div class="qty-control">
-                <button class="btn-q" onclick="chg('q01', -16)">-</button><span id="q01" class="q-val">16</span><button class="btn-q" onclick="chg('q01', 16)">+</button>
+                <button class="btn-q" onclick="chg('q01', -16)">-</button>
+                <span id="q01" class="q-val">16</span>
+                <button class="btn-q" onclick="chg('q01', 16)">+</button>
             </div>
             <button class="btn-add" onclick="buy('01', 'موديل 01')">إضافة للطلب</button>
         </div>
 
+        <!-- موديل 02 -->
         <div class="card">
             <div class="img-box"><img src="t2-purple.png.png" id="img-02" class="product-img"></div>
             <div class="color-dots">
@@ -68,11 +206,14 @@
             </div>
             <div class="model-name">موديل 02</div>
             <div class="qty-control">
-                <button class="btn-q" onclick="chg('q02', -16)">-</button><span id="q02" class="q-val">16</span><button class="btn-q" onclick="chg('q02', 16)">+</button>
+                <button class="btn-q" onclick="chg('q02', -16)">-</button>
+                <span id="q02" class="q-val">16</span>
+                <button class="btn-q" onclick="chg('q02', 16)">+</button>
             </div>
             <button class="btn-add" onclick="buy('02', 'موديل 02')">إضافة للطلب</button>
         </div>
 
+        <!-- موديل 03 -->
         <div class="card">
             <div class="img-box"><img src="te4-white.png.png" id="img-03" class="product-img"></div>
             <div class="color-dots">
@@ -83,13 +224,162 @@
             </div>
             <div class="model-name">موديل 03 (BALANCE)</div>
             <div class="qty-control">
-                <button class="btn-q" onclick="chg('q03', -16)">-</button><span id="q03" class="q-val">16</span><button class="btn-q" onclick="chg('q03', 16)">+</button>
+                <button class="btn-q" onclick="chg('q03', -16)">-</button>
+                <span id="q03" class="q-val">16</span>
+                <button class="btn-q" onclick="chg('q03', 16)">+</button>
             </div>
             <button class="btn-add" onclick="buy('03', 'موديل 03')">إضافة للطلب</button>
         </div>
 
+        <!-- موديل 04 -->
         <div class="card">
             <div class="img-box"><img src="tr1-red.png.png" id="img-04" class="product-img"></div>
             <div class="color-dots">
                 <div class="dot active" style="background: #BA1313;" onclick="update('04', 'tr1-red.png.png', 'أحمر', this)"></div>
-                <div class="dot" style="background: #000000;" onclick="update('04', 'tr2-black.png.
+                <div class="dot" style="background: #000000;" onclick="update('04', 'tr2-black.png.png', 'أسود', this)"></div>
+                <div class="dot" style="background: #ffffff;" onclick="update('04', 'tr4-white.png.png', 'أبيض', this)"></div>
+            </div>
+            <div class="model-name">موديل 04 (TREND)</div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="chg('q04', -16)">-</button>
+                <span id="q04" class="q-val">16</span>
+                <button class="btn-q" onclick="chg('q04', 16)">+</button>
+            </div>
+            <button class="btn-add" onclick="buy('04', 'موديل 04')">إضافة للطلب</button>
+        </div>
+
+        <!-- موديل 05 -->
+        <div class="card">
+            <div class="img-box"><img src="n5-white.png.png" id="img-05" class="product-img"></div>
+            <div class="color-dots">
+                <div class="dot active" style="background: #ffffff;" onclick="update('05', 'n5-white.png.png', 'أبيض', this)"></div>
+                <div class="dot" style="background: #000000;" onclick="update('05', 'n5-black.png.png', 'أسود', this)"></div>
+                <div class="dot" style="background: #A020F0;" onclick="update('05', 'n5-purple.png.png', 'بنفسجي', this)"></div>
+            </div>
+            <div class="model-name">موديل 05 (N.C)</div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="chg('q05', -16)">-</button>
+                <span id="q05" class="q-val">16</span>
+                <button class="btn-q" onclick="chg('q05', 16)">+</button>
+            </div>
+            <button class="btn-add" onclick="buy('05', 'موديل 05')">إضافة للطلب</button>
+        </div>
+
+        <!-- موديل 06 -->
+        <div class="card">
+            <div class="img-box"><img src="n6-grey.png.png" id="img-06" class="product-img"></div>
+            <div class="color-dots">
+                <div class="dot active" style="background: #808080;" onclick="update('06', 'n6-grey.png.png', 'رصاصي', this)"></div>
+                <div class="dot" style="background: #ffffff;" onclick="update('06', 'n6-white.png.png', 'أبيض', this)"></div>
+                <div class="dot" style="background: #000000;" onclick="update('06', 'n6-black.png.png', 'أسود', this)"></div>
+            </div>
+            <div class="model-name">موديل 06 (N.C)</div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="chg('q06', -16)">-</button>
+                <span id="q06" class="q-val">16</span>
+                <button class="btn-q" onclick="chg('q06', 16)">+</button>
+            </div>
+            <button class="btn-add" onclick="buy('06', 'موديل 06')">إضافة للطلب</button>
+        </div>
+
+    </div>
+
+    <!-- ================= قسم 2: شورتات وبناطيل ================= -->
+    <div class="section-header"><div class="section-title">شورتات وبناطيل</div></div>
+    <div class="grid">
+        <!-- بنطلون -->
+        <div class="card">
+            <div class="img-box"><img src="Picsart_26-05-28_16-16-16-2.jpg" id="img-p1" class="product-img"></div>
+            <div class="color-dots">
+                <div class="dot active" style="background: #333333;" onclick="update('p1', 'Picsart_26-05-28_16-16-16-2.jpg', 'رصاصي', this)"></div>
+            </div>
+            <div class="model-name">بنطلون رجالي مريح</div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="chg('qp1', -12)">-</button>
+                <span id="qp1" class="q-val">12</span>
+                <button class="btn-q" onclick="chg('qp1', 12)">+</button>
+            </div>
+            <button class="btn-add" onclick="buy('p1', 'بنطلون')">إضافة للطلب</button>
+        </div>
+        
+        <!-- شورت -->
+        <div class="card">
+            <div class="img-box"><img src="Picsart_26-05-28_16-17-00-2.jpg" id="img-p2" class="product-img"></div>
+            <div class="color-dots">
+                <div class="dot active" style="background: #000000;" onclick="update('p2', 'Picsart_26-05-28_16-17-00-2.jpg', 'أسود', this)"></div>
+            </div>
+            <div class="model-name">شورت رجالي كاجوال</div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="chg('qp2', -12)">-</button>
+                <span id="qp2" class="q-val">12</span>
+                <button class="btn-q" onclick="chg('qp2', 12)">+</button>
+            </div>
+            <button class="btn-add" onclick="buy('p2', 'شورت')">إضافة للطلب</button>
+        </div>
+    </div>
+
+    <!-- ================= قسم 3: الأطقم الكاملة ================= -->
+    <div class="section-header"><div class="section-title">أطقم كاملة</div></div>
+    <div class="grid">
+        <div class="card">
+            <div class="img-box"><img src="s1-white.png.png" id="img-s1" class="product-img"></div>
+            <div class="color-dots">
+                <div class="dot active" style="background: #ffffff;" onclick="update('s1', 's1-white.png.png', 'أبيض', this)"></div>
+                <div class="dot" style="background: #000000;" onclick="update('s1', 's1-black.png.png', 'أسود', this)"></div>
+                <div class="dot" style="background: #5D4037;" onclick="update('s1', 's1-grey.png.png', 'رصاصي بني', this)"></div>
+                <div class="dot" style="background: #87CEEB;" onclick="update('s1', 's1-blue.png.png', 'سماوي', this)"></div>
+            </div>
+            <div class="model-name">طقم موديل S250</div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="chg('qs1', -12)">-</button>
+                <span id="qs1" class="q-val">12</span>
+                <button class="btn-q" onclick="chg('qs1', 12)">+</button>
+            </div>
+            <button class="btn-add" onclick="buy('s1', 'طقم S250')">إضافة للطلب</button>
+        </div>
+    </div>
+
+    <!-- شريط السلة السفلي لإرسال الطلبات للواتساب -->
+    <div id="cart-bar" class="cart-bar">
+        <button class="btn-add" style="width:auto; padding:12px 60px; background:#fff;" onclick="sendWA()">إرسال الطلب عبر واتساب</button>
+    </div>
+
+    <script>
+        // مصفوفة جافا سكريبت لتجميع الطلبات
+        let items = [];
+        // كائن لحفظ الألوان الافتراضية المختارة عند تحميل الصفحة
+        let selColors = { '01':'أبيض','02':'بنفسجي','03':'أبيض','04':'أحمر','05':'أبيض','06':'رصاصي','p1':'رصاصي','p2':'أسود','s1':'أبيض' };
+
+        // وظيفة تحديث مسارات الصور برمجياً عند النقر على دوائر الألوان
+        function update(id, src, c, el) {
+            document.getElementById('img-' + id).src = src;
+            el.parentElement.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+            el.classList.add('active');
+            selColors[id] = c;
+        }
+
+        // وظيفة التحكم الموحد بالعدادات (التيشيرتات مضاعفات 16، البناطيل والأطقم مضاعفات 12)
+        function chg(id, v) {
+            let q = document.getElementById(id);
+            let res = parseInt(q.innerText) + v;
+            let min = (id.startsWith('q0') || id === 'q01' || id === 'q02' || id === 'q03' || id === 'q04' || id === 'q05' || id === 'q06') ? 16 : 12;
+            if(res < min) res = min;
+            q.innerText = res;
+        }
+
+        // إضافة الطلب إلى القائمة وتفعيل شريط الإرسال
+        function buy(id, name) {
+            let qVal = document.getElementById('q' + id).innerText;
+            items.push(`${name} (${selColors[id]}) - كمية: ${qVal}`);
+            document.getElementById('cart-bar').style.display = 'block';
+            alert('تمت إضافة ' + name + ' بنجاح');
+        }
+
+        // تجميع وتوجيه رسالة الطلب النهائية إلى رقم الواتساب المعتمد
+        function sendWA() {
+            let msg = encodeURIComponent("طلب جملة جديد من TOP GIVING:\n" + items.join("\n"));
+            window.location.href = "https://wa.me/966560564719?text=" + msg;
+        }
+    </script>
+</body>
+</html>
