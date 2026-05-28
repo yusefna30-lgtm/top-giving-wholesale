@@ -6,59 +6,67 @@
     <title>TOP GIVING | Wholesale</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --gold-light: #f1d38e; --gold-dark: #8a6d3b; --gold-main: #D4AF37; --black: #000; }
-        body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 120px; }
+        :root { --gold-main: #D4AF37; --gold-light: #f1d38e; --black: #000; }
+        body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 120px; direction: rtl; }
         
-        /* تصميم العنوان الرئيسي */
         .brand { font-size: 2.8rem; color: var(--gold-main); margin: 30px 0; font-weight: 900; letter-spacing: 5px; }
 
-        /* ثيم القسم الذهبي المتدرج (مثل الصورة) */
+        /* شريط القسم الذهبي المتدرج */
         .main-section-header {
             background: linear-gradient(to right, transparent, #4a3a1d, var(--gold-main), #4a3a1d, transparent);
             padding: 15px; font-size: 1.6rem; font-weight: 900; color: #000; margin: 30px 0;
             border-top: 1px solid var(--gold-light); border-bottom: 1px solid var(--gold-light);
         }
 
-        /* عنوان المجموعة الفرعية */
+        /* عنوان المجموعة */
         .sub-group-title {
-            color: var(--gold-light); font-size: 1.1rem; font-weight: bold;
-            margin: 25px 0 15px 0; position: relative; display: block;
-        }
-        .sub-group-title::after {
-            content: ''; display: block; width: 100px; height: 1px; background: var(--gold-dark); margin: 8px auto;
+            color: var(--gold-light); font-size: 1.2rem; font-weight: bold;
+            margin: 20px 0; display: block; border-bottom: 1px solid #222;
+            padding-bottom: 10px; width: 90%; margin-right: auto; margin-left: auto;
         }
 
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 1200px; margin: auto; padding: 0 15px; }
+        /* ضبط الشبكة لتظهر البطاقات بجانب بعضها من اليمين */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 15px;
+            justify-items: center; /* توسيط البطاقات داخل الأعمدة */
+        }
         
-        /* تصميم البطاقة */
         .card { 
-            background: #0a0a0a; padding: 10px; border-radius: 12px; 
-            border: 1px solid #1a1a1a; display: flex; flex-direction: column; 
+            background: #0a0a0a; 
+            padding: 12px; 
+            border-radius: 12px; 
+            border: 1px solid #1a1a1a; 
+            width: 100%; /* تأخذ كامل عرض العمود */
+            max-width: 280px; /* لا تكبر أكثر من اللازم في الشاشات الواسعة */
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
-        .model-name { font-size: 0.85rem; font-weight: bold; margin-bottom: 8px; color: #fff; }
-        .img-box { width: 100%; height: 200px; border-radius: 8px; overflow: hidden; background: #111; }
+
+        .img-box { width: 100%; height: 220px; border-radius: 8px; overflow: hidden; background: #111; }
         .product-img { width: 100%; height: 100%; object-fit: cover; }
+        .model-name { font-size: 0.9rem; font-weight: bold; margin: 10px 0; color: #fff; }
         
-        /* عداد الكمية */
-        .qty-control { 
-            display: flex; align-items: center; justify-content: center; 
-            gap: 10px; margin: 12px 0; background: #111; padding: 5px; border-radius: 6px;
-        }
+        .qty-control { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 12px 0; background: #111; padding: 5px; border-radius: 6px; }
         .btn-q { background: #222; color: #fff; border: 1px solid #333; width: 30px; height: 30px; border-radius: 4px; cursor: pointer; }
         .q-val { font-weight: bold; color: var(--gold-main); min-width: 25px; }
 
-        /* زر الإضافة الذهبي */
         .btn-add { 
             background: linear-gradient(to bottom, #e2c06d, #8a6d3b); 
             color: #000; padding: 10px; border-radius: 6px; 
-            font-weight: 900; border: none; cursor: pointer; font-size: 0.85rem;
+            font-weight: 900; border: none; cursor: pointer; width: 100%;
         }
 
-        /* شريط الطلب السفلي */
         .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.95); border-top: 2px solid var(--gold-main); padding: 15px; z-index: 1000; display: none; }
 
-        @media (min-width: 768px) { .grid { grid-template-columns: repeat(4, 1fr); } .img-box { height: 350px; } }
+        /* تعديل الترتيب للشاشات الأكبر */
+        @media (min-width: 768px) {
+            .grid { grid-template-columns: repeat(4, 1fr); gap: 20px; }
+            .img-box { height: 320px; }
+        }
     </style>
 </head>
 <body>
@@ -70,14 +78,14 @@
     <div class="sub-group-title">التيشيرتات والقمصان</div>
     <div class="grid">
         <div class="card">
-            <div class="model-name">تيشيرت رجالي</div>
+            <div class="model-name">تيشيرت رجالي موديل 01</div>
             <div class="img-box"><img src="pant-mens02.jpg" class="product-img"></div>
             <div class="qty-control">
                 <button class="btn-q" onclick="chg('m1',-12,12)">-</button><span id="m1" class="q-val">12</span><button class="btn-q" onclick="chg('m1',12,12)">+</button>
             </div>
-            <button class="btn-add" onclick="buy('تيشيرت رجالي','m1')">إضافة للطلب</button>
+            <button class="btn-add" onclick="buy('تيشيرت رجالي 01','m1')">إضافة للطلب</button>
         </div>
-    </div>
+        </div>
 
     <div class="sub-group-title">البناطيل والشورتات</div>
     <div class="grid">
@@ -87,30 +95,33 @@
             <div class="qty-control">
                 <button class="btn-q" onclick="chg('m2',-6,6)">-</button><span id="m2" class="q-val">6</span><button class="btn-q" onclick="chg('m2',6,6)">+</button>
             </div>
-            <button class="btn-add" onclick="buy('بنطلون رجالي 0269','m2')">إضافة للطلب</button>
+            <button class="btn-add" onclick="buy('بنطلون 0269','m2')">إضافة للطلب</button>
         </div>
     </div>
 
-    <div class="sub-group-title">الأطقم الكاملة</div>
-    <div class="grid">
-        <div class="card">
-            <div class="model-name">طقم رجالي موديل 02</div>
-            <div class="img-box"><img src="mens-set02.jpg" class="product-img"></div>
-            <div class="qty-control">
-                <button class="btn-q" onclick="chg('m3',-6,6)">-</button><span id="m3" class="q-val">6</span><button class="btn-q" onclick="chg('m3',6,6)">+</button>
-            </div>
-            <button class="btn-add" onclick="buy('طقم رجالي موديل 02','m3')">إضافة للطلب</button>
-        </div>
+    <div id="cart-bar" class="cart-bar">
+        <button class="btn-add" style="font-size:1.1rem;" onclick="send()">إرسال طلب TOP GIVING المجمع (<span id="c-count">0</span>)</button>
     </div>
 
-    <div class="main-section-header">قسم الجامبو (JAMPO)</div>
-
-    <div class="sub-group-title">التيشيرتات والقمصان</div>
-    <div class="grid">
-        <div class="card">
-            <div class="model-name">تيشيرت جامبو موديل 01</div>
-            <div class="img-box"><img src="tshert-jampo01.png" class="product-img"></div>
-            <div class="qty-control">
-                <button class="btn-q" onclick="chg('j1',-12,12)">-</button><span id="j1" class="q-val">12</span><button class="btn-q" onclick="chg('j1',12,12)">+</button>
-            </div>
-            <button class="btn-add" onclick="buy('تيشيرت جام
+    <script>
+        let items = [];
+        function chg(id, s, m) {
+            let e = document.getElementById(id);
+            let v = parseInt(e.innerText) + s;
+            if (v < m) v = m;
+            e.innerText = v;
+        }
+        function buy(n, qId) {
+            let q = document.getElementById(qId).innerText;
+            items.push(`*${n}* ← الكمية: ${q}`);
+            document.getElementById('cart-bar').style.display = 'block';
+            document.getElementById('c-count').innerText = items.length;
+            alert('تمت الإضافة');
+        }
+        function send() {
+            let msg = "أهلاً TOP GIVING، طلب جملة جديد:\n\n" + items.join("\n");
+            window.location.href = `https://wa.me/966560564719?text=${encodeURIComponent(msg)}`;
+        }
+    </script>
+</body>
+</html>
