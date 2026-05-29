@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOP GIVING | Model 01 Fixed</title>
+    <title>TOP GIVING | Model 01 Reversed</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #D4AF37; --black: #000; --card-bg: #0c0c0e; --accent: #1a1a1a; }
@@ -11,7 +11,6 @@
         .card { background: var(--card-bg); padding: 20px; border-radius: 20px; border: 1px solid var(--accent); max-width: 320px; margin: 40px auto; transition: 0.3s; }
         .img-box { width: 100%; height: 250px; border-radius: 15px; overflow: hidden; background: #fff; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; border: 2px solid transparent; transition: 0.4s; }
         .product-img { max-width: 85%; max-height: 85%; object-fit: contain; transition: 0.5s; }
-        /* التوهج والزوم */
         .card:hover .img-box { border-color: var(--gold); box-shadow: 0 0 20px 5px rgba(212, 175, 55, 0.4); }
         .card:hover .product-img { transform: scale(1.15); }
         .color-dots { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
@@ -26,13 +25,13 @@
 <body>
     <div class="card">
         <div class="img-box">
-            <img src="n5-white.png.png" id="img-01" class="product-img">
+            <img src="n5-back.png.png" id="img-01" class="product-img">
         </div>
         <div class="color-dots">
-            <div class="dot active" style="background: #fff;" onclick="v('01', 'n5-white.png.png', this)"></div>
+            <div class="dot active" style="background: #e0e0e0;" onclick="v('01', 'n5-back.png.png', this)"></div>
             <div class="dot" style="background: purple;" onclick="v('01', 'n5-purple.png.png', this)"></div>
             <div class="dot" style="background: #000;" onclick="v('01', 'n5-black.png.png', this)"></div>
-            <div class="dot" style="background: #e0e0e0;" onclick="v('01', 'n5-back.png.png', this)"></div>
+            <div class="dot" style="background: #fff;" onclick="v('01', 'n5-white.png.png', this)"></div>
         </div>
         <div class="model-name">تيشيرت موديل 01</div>
         <div class="qty-control">
