@@ -12,7 +12,7 @@
         .brand { font-size: 2.5rem; color: var(--gold); margin: 30px 0 10px; font-weight: 900; letter-spacing: 3px; }
         .tagline { color: var(--gray); font-size: 0.9rem; margin-bottom: 30px; letter-spacing: 2px; }
 
-        .nav-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; overflow-x: auto; padding: 10px; position: sticky; top: 0; background: var(--black); z-index: 100; }
+        .nav-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; overflow-x: auto; padding: 10px; position: sticky; top: 0; background: var(--black); z-index: 100; border-bottom: 1px solid var(--accent); }
         .tab-btn { background: var(--accent); color: #fff; border: 1px solid var(--gold); padding: 10px 20px; border-radius: 25px; cursor: pointer; font-weight: 700; white-space: nowrap; transition: 0.3s; }
         .tab-btn.active { background: var(--gold); color: #000; }
 
@@ -26,9 +26,10 @@
         .img-box { width: 100%; height: 200px; border-radius: 15px; overflow: hidden; background: #fff; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; }
         .product-img { max-width: 90%; max-height: 90%; object-fit: contain; }
 
-        .color-dots { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
-        .dot { width: 25px; height: 25px; border-radius: 50%; border: 2px solid #333; cursor: pointer; }
-        .dot.active { border-color: var(--gold); transform: scale(1.2); box-shadow: 0 0 8px var(--gold); }
+        .color-preview-text { font-size: 0.8rem; color: var(--gray); margin-bottom: 5px; }
+        .color-dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 15px; }
+        .dot { width: 20px; height: 20px; border-radius: 50%; border: 1px solid #333; cursor: pointer; }
+        .dot.active { border: 2px solid var(--gold); transform: scale(1.1); }
 
         .model-name { font-weight: 700; margin-bottom: 10px; font-size: 1.1rem; }
         
@@ -36,23 +37,21 @@
         .btn-q { background: #252525; color: #fff; border: none; width: 35px; height: 35px; border-radius: 10px; cursor: pointer; font-size: 1.2rem; }
         .q-val { color: var(--gold); font-weight: 900; min-width: 40px; }
 
-        .btn-add { background: linear-gradient(135deg, #D4AF37, #8A6D3B); color: #000; padding: 15px; border-radius: 12px; font-weight: 900; border: none; width: 100%; cursor: pointer; }
+        .btn-add { background: linear-gradient(135deg, #D4AF37, #8A6D3B); color: #000; padding: 15px; border-radius: 12px; font-weight: 900; border: none; width: 100%; cursor: pointer; font-size: 0.9rem; }
 
-        /* شريط السلة السفلي المطور لعرض تفاصيل الشدات والألوان */
-        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(12, 12, 14, 0.98); border-top: 2px solid var(--gold); padding: 15px; display: none; z-index: 1000; box-shadow: 0 -5px 25px rgba(0,0,0,0.8); }
-        .cart-container { max-width: 1200px; margin: 0 auto; padding: 0 15px; display: flex; flex-direction: column; gap: 10px; }
-        .cart-details { text-align: right; font-size: 0.9rem; color: #ccc; max-height: 80px; overflow-y: auto; padding: 5px; background: #151515; border-radius: 8px; }
+        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(12, 12, 14, 0.98); border-top: 2px solid var(--gold); padding: 15px; display: none; z-index: 1000; }
+        .cart-container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
+        .cart-details { text-align: right; font-size: 0.85rem; color: #ccc; max-height: 100px; overflow-y: auto; background: #151515; padding: 10px; border-radius: 8px; }
         .cart-summary-line { display: flex; justify-content: space-between; align-items: center; }
-        .cart-text { font-size: 1.1rem; font-weight: 700; color: var(--gold); }
-        .btn-submit { background: var(--gold); color: #000; border: none; padding: 12px 30px; border-radius: 10px; font-weight: 900; cursor: pointer; font-size: 1rem; }
+        .btn-submit { background: var(--gold); color: #000; border: none; padding: 12px 25px; border-radius: 10px; font-weight: 900; cursor: pointer; }
 
-        @media (min-width: 992px) { .grid { grid-template-columns: repeat(4, 1fr); gap: 25px; } .img-box { height: 280px; } }
+        @media (min-width: 992px) { .grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } .img-box { height: 250px; } }
     </style>
 </head>
 <body>
 
     <div class="brand">TOP GIVING</div>
-    <div class="tagline">WHOLESALE - جودة الفخامة</div>
+    <div class="tagline">WHOLESALE - الشد المشكل الأصلي</div>
 
     <div class="nav-tabs">
         <button class="tab-btn active" onclick="openSection('tshirts', this)">التيشيرتات</button>
@@ -61,125 +60,68 @@
         <button class="tab-btn" onclick="openSection('shirts', this)">القمصان</button>
     </div>
 
-    <!-- قسم التيشيرتات -->
     <div id="tshirts" class="section-content active">
         <div class="grid">
-            <!-- موديل 01 -->
-            <div class="card" id="card-01">
+            <div class="card">
                 <div class="img-box"><img src="t1-white.png" id="img-01" class="product-img"></div>
                 <div class="color-dots">
-                    <div class="dot active" style="background: #fff;" data-color="أبيض" onclick="upd('01','t1-white.png','أبيض',this)"></div>
-                    <div class="dot" style="background: #000;" data-color="أسود" onclick="upd('01','t1-black.png','أسود',this)"></div>
-                    <div class="dot" style="background: #0000FF;" data-color="أزرق" onclick="upd('01','t1-blue.png','أزرق',this)"></div>
-                    <div class="dot" style="background: #DAA520;" data-color="خردلي" onclick="upd('01','t1-yellow.png','خردلي',this)"></div>
+                    <div class="dot active" style="background: #fff;" onclick="viewColor('01','t1-white.png',this)"></div>
+                    <div class="dot" style="background: #000;" onclick="viewColor('01','t1-black.png',this)"></div>
+                    <div class="dot" style="background: blue;" onclick="viewColor('01','t1-blue.png',this)"></div>
+                    <div class="dot" style="background: gold;" onclick="viewColor('01','t1-yellow.png',this)"></div>
                 </div>
-                <div class="model-name">تيشيرت أوفرسايز - موديل 01</div>
+                <div class="model-name">تيشيرت - موديل 01</div>
                 <div class="qty-control"><button class="btn-q" onclick="chg('q01',-16)">-</button><span id="q01" class="q-val">16</span><button class="btn-q" onclick="chg('q01',16)">+</button></div>
-                <button class="btn-add" onclick="addToCart('موديل 01', '01', 'q01')">إضافة للطلب</button>
+                <button class="btn-add" onclick="addAssortedPackToCart('تيشيرت موديل 01', 'q01')">إضافة الشد المشكل</button>
             </div>
-        </div>
-    </div>
 
-    <!-- قسم الأطقم -->
-    <div id="sets" class="section-content">
-        <div class="grid">
-            <!-- موديل الطقم -->
-            <div class="card" id="card-set">
-                <div class="img-box"><img src="Picsart_26-05-28_16-28-24-642.jpg" id="img-set" class="product-img"></div>
+            <div class="card">
+                <div class="img-box"><img src="t2-purple.png.png" id="img-02" class="product-img"></div>
                 <div class="color-dots">
-                    <div class="dot active" style="background: #000;" data-color="أسود" onclick="upd('set','Picsart_black.jpg','أسود',this)"></div>
-                    <div class="dot" style="background: #FFFDD0;" data-color="سكري" onclick="upd('set','Picsart_beige.jpg','سكري',this)"></div>
-                    <div class="dot" style="background: #808080;" data-color="رمادي" onclick="upd('set','Picsart_gray.jpg','رمادي',this)"></div>
-                    <div class="dot" style="background: #000080;" data-color="كحلي" onclick="upd('set','Picsart_navy.jpg','كحلي',this)"></div>
+                    <div class="dot active" style="background: purple;" onclick="viewColor('02','t2-purple.png.png',this)"></div>
+                    <div class="dot" style="background: #fff;" onclick="viewColor('02','t2-white.png.png',this)"></div>
+                    <div class="dot" style="background: #000;" onclick="viewColor('02','t2-black.png.png',this)"></div>
+                    <div class="dot" style="background: gray;" onclick="viewColor('02','t1-white.png',this)"></div>
                 </div>
-                <div class="model-name">طقم رجالي فاخر - موديل 01</div>
-                <div class="qty-control"><button class="btn-q" onclick="chg('qset',-16)">-</button><span id="qset" class="q-val">16</span><button class="btn-q" onclick="chg('qset',16)">+</button></div>
-                <button class="btn-add" onclick="addToCart('طقم موديل 01', 'set', 'qset')">إضافة للطلب</button>
+                <div class="model-name">تيشيرت - موديل 02</div>
+                <div class="qty-control"><button class="btn-q" onclick="chg('q02',-16)">-</button><span id="q02" class="q-val">16</span><button class="btn-q" onclick="chg('q02',16)">+</button></div>
+                <button class="btn-add" onclick="addAssortedPackToCart('تيشيرت موديل 02', 'q02')">إضافة الشد المشكل</button>
             </div>
-        </div>
-    </div>
 
-    <div id="pants" class="section-content"><p>قريباً.. قسم البنطلون والشورت</p></div>
-    <div id="shirts" class="section-content"><p>قريباً.. قسم القمصان</p></div>
-
-    <!-- شريط السلة المطور -->
-    <div class="cart-bar" id="cartBar">
-        <div class="cart-container">
-            <div class="cart-details" id="cartDetails"></div>
-            <div class="cart-summary-line">
-                <div class="cart-text" id="cartSummary">إجمالي الطلب: 0 قطعة</div>
-                <button class="btn-submit" onclick="submitOrder()">تأكيد الطلب</button>
+            <div class="card">
+                <div class="img-box"><img src="te3-beige.png.png" id="img-03" class="product-img"></div>
+                <div class="color-dots">
+                    <div class="dot active" style="background: beige;" onclick="viewColor('03','te3-beige.png.png',this)"></div>
+                    <div class="dot" style="background: #000;" onclick="viewColor('03','te1-black.png.png',this)"></div>
+                    <div class="dot" style="background: #fff;" onclick="viewColor('03','te4-white.png.png',this)"></div>
+                    <div class="dot" style="background: skyblue;" onclick="viewColor('03','te2-blue.png.png',this)"></div>
+                </div>
+                <div class="model-name">تيشيرت - موديل 03</div>
+                <div class="qty-control"><button class="btn-q" onclick="chg('q03',-16)">-</button><span id="q03" class="q-val">16</span><button class="btn-q" onclick="chg('q03',16)">+</button></div>
+                <button class="btn-add" onclick="addAssortedPackToCart('تيشيرت موديل 03', 'q03')">إضافة الشد المشكل</button>
             </div>
-        </div>
-    </div>
 
-    <script>
-        // مصفوفة السلة الذكية لشدات الجملة المغلقة
-        let cart = [];
+            <div class="card">
+                <div class="img-box"><img src="tr1-red.png.png" id="img-04" class="product-img"></div>
+                <div class="color-dots">
+                    <div class="dot active" style="background: red;" onclick="viewColor('04','tr1-red.png.png',this)"></div>
+                    <div class="dot" style="background: #000;" onclick="viewColor('04','tr2-black.png.png',this)"></div>
+                    <div class="dot" style="background: #fff;" onclick="viewColor('04','tr4-white.png.png',this)"></div>
+                    <div class="dot" style="background: gray;" onclick="viewColor('04','tr3-grey.png.png',this)"></div>
+                </div>
+                <div class="model-name">تيشيرت - موديل 04</div>
+                <div class="qty-control"><button class="btn-q" onclick="chg('q04',-16)">-</button><span id="q04" class="q-val">16</span><button class="btn-q" onclick="chg('q04',16)">+</button></div>
+                <button class="btn-add" onclick="addAssortedPackToCart('تيشيرت موديل 04', 'q04')">إضافة الشد المشكل</button>
+            </div>
 
-        function openSection(sectionId, btn) {
-            let contents = document.querySelectorAll('.section-content');
-            let tabs = document.querySelectorAll('.tab-btn');
-            contents.forEach(c => c.classList.remove('active'));
-            tabs.forEach(t => t.classList.remove('active'));
-            document.getElementById(sectionId).classList.add('active');
-            btn.classList.add('active');
-        }
-
-        function chg(id, val) {
-            let el = document.getElementById(id);
-            let curr = parseInt(el.innerText);
-            if (curr + val >= 16) el.innerText = curr + val;
-        }
-
-        function upd(id, img, color, dot) {
-            document.getElementById('img-' + id).src = img;
-            let dots = dot.parentElement.querySelectorAll('.dot');
-            dots.forEach(d => d.classList.remove('active'));
-            dot.classList.add('active');
-        }
-
-        // دالة إضافة الشدات الذكية
-        function addToCart(modelName, cardId, qtyId) {
-            let qty = parseInt(document.getElementById(qtyId).innerText);
-            let activeDot = document.querySelector(`#card-${cardId} .dot.active`);
-            let color = activeDot ? activeDot.getAttribute('data-color') : 'غير محدد';
-            
-            // البحث إذا كان نفس الموديل ونفس اللون مضافاً مسبقاً لزيادة عدد الشدات
-            let existingItem = cart.find(item => item.model === modelName && item.color === color);
-            
-            if (existingItem) {
-                existingItem.qty += qty;
-            } else {
-                cart.push({ model: modelName, color: color, qty: qty });
-            }
-            
-            updateCartBar();
-        }
-
-        function updateCartBar() {
-            let totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
-            let cartBar = document.getElementById('cartBar');
-            let cartSummary = document.getElementById('cartSummary');
-            let cartDetails = document.getElementById('cartDetails');
-            
-            if(totalQty > 0) {
-                cartBar.style.display = 'block';
-                cartSummary.innerText = `إجمالي الكمية: ${totalQty} قطعة (${totalQty / 16} شدّ جَملة)`;
-                
-                // تفصيل الطلب بوضوح للعميل
-                cartDetails.innerHTML = cart.map(item => 
-                    `• ${item.model} [لون: ${item.color}] -> كمية: ${item.qty} قطعة (${item.qty / 16} شدّ)`
-                ).join('<br>');
-            } else {
-                cartBar.style.display = 'none';
-            }
-        }
-
-        function submitOrder() {
-            alert('تم حفظ شدات الجملة بنجاح! جاهزون للانتقال لربط الواتساب.');
-        }
-    </script>
-
-</body>
-</html>
+            <div class="card">
+                <div class="img-box"><img src="n5-white.png.png" id="img-05" class="product-img"></div>
+                <div class="color-dots">
+                    <div class="dot active" style="background: #fff;" onclick="viewColor('05','n5-white.png.png',this)"></div>
+                    <div class="dot" style="background: #000;" onclick="viewColor('05','n5-black.png.png',this)"></div>
+                    <div class="dot" style="background: purple;" onclick="viewColor('05','n5-purple.png.png',this)"></div>
+                    <div class="dot" style="background: gray;" onclick="viewColor('05','n6-grey.png.png',this)"></div>
+                </div>
+                <div class="model-name">تيشيرت - موديل 05</div>
+                <div class="qty-control"><button class="btn-q" onclick="chg('q05',-16)">-</button><span id="q05" class="q-val">16</span><button class="btn-q" onclick="chg('q05',16)">+</button></div>
+                <button class="btn-add" onclick="addAssortedPackToCart('تيشيرت موديل 05', 'q05')">إضافة الشد المش
