@@ -108,4 +108,56 @@
                 <div class="dot active" style="background: #fff;" onclick="v('02', 't1-white.png', this)"></div>
                 <div class="dot" style="background: #000;" onclick="v('02', 't1-black.png', this)"></div>
                 <div class="dot" style="background: blue;" onclick="v('02', 't1-blue.png', this)"></div>
-                <div class="dot" style="background: gold;" onclick="v('02',
+                <div class="dot" style="background: gold;" onclick="v('02', 't1-yellow.png', this)"></div>
+            </div>
+            <div class="model-name">موديل 02</div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('q-02', 16)">+</button>
+                <span id="q-02" class="q-val">16</span>
+                <button class="btn-q" onclick="c('q-02', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="addToOrder('موديل 02', 'q-02')">إضافة للطلب</button>
+        </div>
+    </div>
+
+    <div class="cart-bar" id="cart-bar">
+        <div class="cart-flex">
+            <div id="cart-info" style="font-weight: 900; color: var(--gold);">الإجمالي: 0 شدة</div>
+            <button class="btn-add" style="width: auto; padding: 10px 25px;" onclick="sendWhatsApp()">إرسال الطلب</button>
+        </div>
+    </div>
+
+    <script>
+        let order = [];
+        function v(id, path, el) {
+            document.getElementById('img-' + id).src = path;
+            let dots = el.parentElement.getElementsByClassName('dot');
+            for (let d of dots) { d.classList.remove('active'); }
+            el.classList.add('active');
+        }
+        function c(id, val) {
+            let el = document.getElementById(id);
+            let current = parseInt(el.innerText);
+            if (current + val >= 16) { el.innerText = current + val; }
+        }
+        function addToOrder(name, qtyId) {
+            let qty = parseInt(document.getElementById(qtyId).innerText);
+            let existing = order.find(item => item.name === name);
+            if (existing) { existing.qty += qty; } else { order.push({ name: name, qty: qty }); }
+            updateCartBar();
+        }
+        function updateCartBar() {
+            let totalQty = order.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cart-bar').style.display = 'block';
+            document.getElementById('cart-info').innerText = `الإجمالي: ${totalQty/16} شدة (${totalQty} قطعة)`;
+        }
+        function sendWhatsApp() {
+            let message = "📦 *طلب جملة جديد من TOP GIVING* 📦\n\n";
+            order.forEach(item => { message += `• *${item.name}*: ${item.qty} قطعة ( ${item.qty/16} شدة )\n`; });
+            let totalQty = order.reduce((sum, item) => sum + item.qty, 0);
+            message += `\n━━━━━━━━━━━━━━\n💰 *إجمالي الطلب:* ${totalQty/16} شدة`;
+            window.open(`https://wa.me/966560564719?text=${encodeURIComponent(message)}`, '_blank');
+        }
+    </script>
+</body>
+</html>
