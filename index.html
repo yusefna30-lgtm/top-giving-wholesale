@@ -3,79 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOP GIVING | Luxury View</title>
+    <title>TOP GIVING | Luxury Store</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #D4AF37; --black: #000; --card-bg: #0c0c0e; --accent: #1a1a1a; }
         body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding: 15px; padding-bottom: 120px; }
         
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 15px; 
-            max-width: 1200px; 
-            margin: 0 auto; 
-        }
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 1200px; margin: 0 auto; }
+        @media (min-width: 992px) { .grid { grid-template-columns: repeat(3, 1fr); } } /* 3 في السطر للكمبيوتر */
 
-        @media (min-width: 992px) {
-            .grid { grid-template-columns: repeat(4, 1fr); }
-        }
-
-        .card { 
-            background: var(--card-bg); 
-            padding: 12px; 
-            border-radius: 20px; 
-            border: 1px solid var(--accent); 
-            transition: 0.3s;
-        }
+        .card { background: var(--card-bg); padding: 12px; border-radius: 18px; border: 1px solid var(--accent); transition: 0.3s; }
         
-        /* 1. تصغير الإطار الأبيض */
+        /* إطار المودل الرشيق المطلب */
         .img-box { 
-            width: 100%; 
-            height: 160px; /* تقليل الارتفاع لضغط الخلفية البيضاء */
-            border-radius: 12px; 
-            overflow: hidden; 
-            background: #fff; 
-            margin-bottom: 12px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            border: 1.5px solid transparent;
-            transition: 0.4s;
+            width: 100%; height: 170px; border-radius: 12px; overflow: hidden; background: #fff; 
+            margin-bottom: 12px; display: flex; align-items: center; justify-content: center;
+            border: 1.5px solid transparent; transition: 0.4s;
         }
+        @media (min-width: 992px) { .img-box { height: 210px; } }
 
-        @media (min-width: 992px) {
-            .img-box { height: 200px; } 
-        }
-
-        /* 2. تكبير صورة المودل لملء الفراغ */
+        /* صورة المودل الكبيرة داخل الإطار */
         .product-img { 
-            max-width: 95%; /* زادت من 85% لتصبح أكبر داخل الإطار */
-            max-height: 95%; 
-            object-fit: contain; 
-            transform: scale(1.1); /* تكبير افتراضي طفيف */
-            transition: 0.5s ease; 
+            max-width: 98%; max-height: 98%; object-fit: contain; 
+            transform: scale(1.1); transition: 0.5s ease; 
         }
 
-        /* 3. تأثير التوهج الذهبي والزوم عند التمرير */
-        .card:hover .img-box { 
-            border-color: var(--gold); 
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); 
-        }
-        .card:hover .product-img { 
-            transform: scale(1.25); /* زوم أوضح عند التمرير */
-        }
+        .card:hover .img-box { border-color: var(--gold); box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
+        .card:hover .product-img { transform: scale(1.25); }
 
         .color-dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 12px; }
-        .dot { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #333; cursor: pointer; }
+        .dot { width: 20px; height: 20px; border-radius: 50%; border: 2px solid #333; cursor: pointer; }
         .dot.active { border-color: var(--gold); box-shadow: 0 0 5px var(--gold); }
 
         .model-name { font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; color: #fff; }
-        
-        .qty-control { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 12px; background: #151515; padding: 8px; border-radius: 10px; border: 1px solid #222; }
+        .qty-control { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 12px; background: #151515; padding: 8px; border-radius: 10px; }
         .btn-q { background: #252525; color: #fff; border: 1px solid var(--gold); width: 35px; height: 35px; border-radius: 8px; cursor: pointer; font-weight: 900; }
         .q-val { color: var(--gold); font-weight: 900; min-width: 35px; font-size: 1.1rem; }
-
         .btn-add { background: linear-gradient(135deg, #D4AF37, #8A6D3B); color: #000; padding: 12px; border-radius: 10px; font-weight: 900; border: none; width: 100%; cursor: pointer; }
 
         .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10, 10, 10, 0.98); border-top: 2px solid var(--gold); padding: 20px; display: none; z-index: 1000; }
@@ -94,11 +57,7 @@
                 <div class="dot" style="background: #fff;" onclick="v('01', 'n5-white.png.png', this)"></div>
             </div>
             <div class="model-name">موديل 01</div>
-            <div class="qty-control">
-                <button class="btn-q" onclick="c('q-01', 16)">+</button>
-                <span id="q-01" class="q-val">16</span>
-                <button class="btn-q" onclick="c('q-01', -16)">-</button>
-            </div>
+            <div class="qty-control"><button class="btn-q" onclick="c('q-01', 16)">+</button><span id="q-01" class="q-val">16</span><button class="btn-q" onclick="c('q-01', -16)">-</button></div>
             <button class="btn-add" onclick="addToOrder('موديل 01', 'q-01')">إضافة للطلب</button>
         </div>
 
@@ -111,12 +70,21 @@
                 <div class="dot" style="background: gold;" onclick="v('02', 't1-yellow.png', this)"></div>
             </div>
             <div class="model-name">موديل 02</div>
-            <div class="qty-control">
-                <button class="btn-q" onclick="c('q-02', 16)">+</button>
-                <span id="q-02" class="q-val">16</span>
-                <button class="btn-q" onclick="c('q-02', -16)">-</button>
-            </div>
+            <div class="qty-control"><button class="btn-q" onclick="c('q-02', 16)">+</button><span id="q-02" class="q-val">16</span><button class="btn-q" onclick="c('q-02', -16)">-</button></div>
             <button class="btn-add" onclick="addToOrder('موديل 02', 'q-02')">إضافة للطلب</button>
+        </div>
+
+        <div class="card">
+            <div class="img-box"><img src="t2-black.png.png" id="img-03" class="product-img"></div>
+            <div class="color-dots">
+                <div class="dot active" style="background: #000;" onclick="v('03', 't2-black.png.png', this)"></div>
+                <div class="dot" style="background: purple;" onclick="v('03', 't2-purple.png.png', this)"></div>
+                <div class="dot" style="background: #fff;" onclick="v('03', 't2-white.png.png', this)"></div>
+                <div class="dot" style="background: gray;" onclick="v('03', 't2-grey.png.png', this)"></div>
+            </div>
+            <div class="model-name">موديل 03</div>
+            <div class="qty-control"><button class="btn-q" onclick="c('q-03', 16)">+</button><span id="q-03" class="q-val">16</span><button class="btn-q" onclick="c('q-03', -16)">-</button></div>
+            <button class="btn-add" onclick="addToOrder('موديل 03', 'q-03')">إضافة للطلب</button>
         </div>
     </div>
 
