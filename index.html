@@ -19,7 +19,7 @@
         .color-dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 10px; height: 30px; align-items: center; }
         .dot { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #333; cursor: pointer; transition: 0.2s; }
         .dot.active { border-color: var(--gold); transform: scale(1.1); box-shadow: 0 0 6px var(--gold); }
-        .model-name { font-size: 0.85rem; margin-bottom: 10px; font-weight: 700; color: #eee; min-height: 35px; }
+        .model-name { font-size: 0.85rem; margin-bottom: 10px; font-weight: 700; color: #eee; }
         .qty-control { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 12px; background: #151515; padding: 8px; border-radius: 10px; }
         .btn-q { background: #252525; color: #fff; border: none; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; font-size: 1.1rem; }
         .q-val { color: var(--gold); font-weight: 900; min-width: 32px; }
@@ -103,16 +103,16 @@
     <div class="section-header"><div class="section-title">الأطقم الرجالية</div></div>
     <div class="grid">
         <div class="card">
-            <div class="img-box"><img src="Picsart_26-05-28_16-28-24-642.jpg" id="img-sm0242" class="product-img"></div>
+            <div class="img-box"><img src="Picsart_26-05-28_16-28-24-642.jpg" id="img-sm" class="product-img"></div>
             <div class="color-dots">
-                <div class="dot active" style="background: #000;" onclick="upd('sm0242','Picsart_26-05-28_16-28-24-642.jpg','أسود',this)"></div>
-                <div class="dot" style="background: #FFFDD0;" onclick="upd('sm0242','Picsart_26-05-28_16-26-55-580.jpg','سكري',this)"></div>
-                <div class="dot" style="background: #0000FF;" onclick="upd('sm0242','Picsart_26-05-28_16-26-21-567.jpg','أزرق',this)"></div>
-                <div class="dot" style="background: #808080;" onclick="upd('sm0242','Picsart_26-05-28_16-27-32-471.jpg','رصاصي',this)"></div>
+                <div class="dot active" style="background: #000;" onclick="upd('sm','Picsart_26-05-28_16-28-24-642.jpg','أسود',this)"></div>
+                <div class="dot" style="background: #FFFDD0;" onclick="upd('sm','Picsart_26-05-28_16-26-55-580.jpg','سكري',this)"></div>
+                <div class="dot" style="background: #0000FF;" onclick="upd('sm','Picsart_26-05-28_16-26-21-567.jpg','أزرق',this)"></div>
+                <div class="dot" style="background: #808080;" onclick="upd('sm','Picsart_26-05-28_16-27-32-471.jpg','رصاصي',this)"></div>
             </div>
             <div class="model-name">طقم رجالي طويل SM0242</div>
-            <div class="qty-control"><button class="btn-q" onclick="chg('qsm0242',-16)">-</button><span id="qsm0242" class="q-val">16</span><button class="btn-q" onclick="chg('qsm0242',16)">+</button></div>
-            <button class="btn-add" onclick="buy('sm0242','طقم رجالي طويل','qsm0242')">إضافة للطلب</button>
+            <div class="qty-control"><button class="btn-q" onclick="chg('qsm',-16)">-</button><span id="qsm" class="q-val">16</span><button class="btn-q" onclick="chg('qsm',16)">+</button></div>
+            <button class="btn-add" onclick="buy('sm','طقم رجالي طويل','qsm')">إضافة للطلب</button>
         </div>
     </div>
 
@@ -122,7 +122,7 @@
         let cart = {}; let selColors = {};
         function initDefaults() { 
             selColors['01']='أبيض'; selColors['02']='بنفسجي'; selColors['03']='بيج'; 
-            selColors['04']='أحمر'; selColors['05']='أبيض'; selColors['sm0242']='أسود'; 
+            selColors['04']='أحمر'; selColors['05']='أبيض'; selColors['sm']='أسود'; 
         }
         function upd(id, src, c, el) {
             let img = document.getElementById('img-' + id);
