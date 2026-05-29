@@ -3,73 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOP GIVING | Luxury View</title>
+    <title>TOP GIVING | Official Store</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #D4AF37; --black: #000; --card-bg: #0c0c0e; --accent: #1a1a1a; }
-        body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding: 10px; padding-bottom: 100px; }
+        body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding: 10px; padding-bottom: 120px; }
         
         .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 1200px; margin: 0 auto; }
-
-        .card { 
-            background: var(--card-bg); 
-            padding: 12px; 
-            border-radius: 18px; 
-            border: 1px solid var(--accent); 
-            transition: 0.3s;
-        }
+        .card { background: var(--card-bg); padding: 12px; border-radius: 18px; border: 1px solid var(--accent); transition: 0.3s; }
         
-        /* إطار الصورة المطور */
+        /* إطار الصورة الفخم مع التكبير المطلب */
         .img-box { 
-            width: 100%; 
-            height: 180px; 
-            border-radius: 12px; 
-            overflow: hidden; 
-            background: #fff; 
-            margin-bottom: 12px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            position: relative;
-            border: 1.5px solid transparent;
-            transition: 0.4s ease-in-out;
+            width: 100%; height: 180px; border-radius: 12px; overflow: hidden; background: #fff; 
+            margin-bottom: 12px; display: flex; align-items: center; justify-content: center;
+            border: 1.5px solid transparent; transition: 0.4s;
         }
-
-        /* تكبير صورة الموديل لملء الفراغ */
-        .product-img { 
-            width: 100%; /* تأخذ العرض بالكامل */
-            height: 100%; /* تأخذ الطول بالكامل */
-            object-fit: contain; /* تحافظ على الأبعاد دون قص */
-            transform: scale(1.15); /* تكبير بنسبة 15% إضافية داخل الإطار */
-            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-        }
-
-        /* تأثير التوهج والزوم عند التمرير */
-        .card:hover .img-box { 
-            border-color: var(--gold); 
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); /* توهج ذهبي ناعم */
-        }
-        .card:hover .product-img { 
-            transform: scale(1.3); /* زوم إضافي عند التمرير لمشاهدة التفاصيل */
-            filter: drop-shadow(0 0 10px rgba(0,0,0,0.1)); /* ظل خفيف للصورة لإبرازها */
-        }
+        .product-img { width: 100%; height: 100%; object-fit: contain; transform: scale(1.15); transition: 0.5s; }
+        
+        /* تأثير التوهج الذهبي والزوم عند التمرير */
+        .card:hover .img-box { border-color: var(--gold); box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+        .card:hover .product-img { transform: scale(1.3); }
 
         .color-dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 12px; }
         .dot { width: 20px; height: 20px; border-radius: 50%; border: 2px solid #333; cursor: pointer; }
         .dot.active { border-color: var(--gold); box-shadow: 0 0 8px var(--gold); }
 
-        .model-name { font-size: 0.9rem; font-weight: 700; margin-bottom: 10px; color: #eee; }
-        
         .qty-control { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 12px; background: #151515; padding: 6px; border-radius: 10px; }
-        .btn-q { background: #252525; color: #fff; border: 1px solid var(--gold); width: 35px; height: 35px; border-radius: 8px; cursor: pointer; font-size: 1.3rem; }
-        .q-val { color: var(--gold); font-weight: 900; font-size: 1.1rem; }
+        .btn-q { background: #252525; color: #fff; border: 1px solid var(--gold); width: 35px; height: 35px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .q-val { color: var(--gold); font-weight: 900; min-width: 30px; }
 
-        .btn-add { background: linear-gradient(135deg, #D4AF37, #8A6D3B); color: #000; padding: 12px; border-radius: 10px; font-weight: 900; border: none; width: 100%; cursor: pointer; font-size: 0.9rem; }
+        .btn-add { background: linear-gradient(135deg, #D4AF37, #8A6D3B); color: #000; padding: 12px; border-radius: 10px; font-weight: 900; border: none; width: 100%; cursor: pointer; }
 
-        @media (min-width: 768px) {
-            .grid { grid-template-columns: repeat(4, 1fr); gap: 20px; }
-            .img-box { height: 280px; }
+        /* شريط السلة السفلي */
+        .cart-bar {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: rgba(10, 10, 10, 0.95); border-top: 2px solid var(--gold);
+            padding: 15px; display: none; z-index: 1000;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
         }
+        .cart-flex { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        #cart-info { font-weight: 900; color: var(--gold); font-size: 1.1rem; }
     </style>
 </head>
 <body>
@@ -89,7 +62,7 @@
                 <span id="q-01" class="q-val">16</span>
                 <button class="btn-q" onclick="c('q-01', -16)">-</button>
             </div>
-            <button class="btn-add">إضافة للطلب</button>
+            <button class="btn-add" onclick="addToOrder('موديل 01', 'q-01')">إضافة للطلب</button>
         </div>
 
         <div class="card">
@@ -106,21 +79,58 @@
                 <span id="q-02" class="q-val">16</span>
                 <button class="btn-q" onclick="c('q-02', -16)">-</button>
             </div>
-            <button class="btn-add">إضافة للطلب</button>
+            <button class="btn-add" onclick="addToOrder('موديل 02', 'q-02')">إضافة للطلب</button>
+        </div>
+    </div>
+
+    <div class="cart-bar" id="cart-bar">
+        <div class="cart-flex">
+            <div id="cart-info">الإجمالي: 0 شدة</div>
+            <button class="btn-add" style="width: auto; padding: 8px 20px;" onclick="sendWhatsApp()">إرسال الطلب</button>
         </div>
     </div>
 
     <script>
+        let order = [];
+
         function v(id, path, el) {
             document.getElementById('img-' + id).src = path;
             let dots = el.parentElement.getElementsByClassName('dot');
             for (let d of dots) { d.classList.remove('active'); }
             el.classList.add('active');
         }
+
         function c(id, val) {
             let el = document.getElementById(id);
             let current = parseInt(el.innerText);
             if (current + val >= 16) { el.innerText = current + val; }
+        }
+
+        function addToOrder(name, qtyId) {
+            let qty = parseInt(document.getElementById(qtyId).innerText);
+            let existing = order.find(item => item.name === name);
+            if (existing) { existing.qty += qty; } else { order.push({ name: name, qty: qty }); }
+            updateCartBar();
+        }
+
+        function updateCartBar() {
+            let totalQty = order.reduce((sum, item) => sum + item.qty, 0);
+            let totalBundles = totalQty / 16;
+            document.getElementById('cart-bar').style.display = 'block';
+            document.getElementById('cart-info').innerText = `الإجمالي: ${totalBundles} شدة (${totalQty} قطعة)`;
+        }
+
+        function sendWhatsApp() {
+            let message = "📦 *طلب جملة جديد من TOP GIVING* 📦\n\n";
+            order.forEach(item => {
+                message += `• *${item.name}*: ${item.qty} قطعة ( ${item.qty/16} شدة )\n`;
+            });
+            let totalQty = order.reduce((sum, item) => sum + item.qty, 0);
+            message += `\n━━━━━━━━━━━━━━\n💰 *إجمالي الطلب:* ${totalQty/16} شدة`;
+            
+            // تم ربط الرقم الخاص بك هنا
+            let whatsappUrl = `https://wa.me/966560564719?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
         }
     </script>
 </body>
