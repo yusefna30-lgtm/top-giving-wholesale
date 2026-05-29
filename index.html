@@ -12,7 +12,7 @@
         .brand-name { font-size: 2.2rem; font-weight: 900; color: var(--gold); margin-bottom: 15px; }
         .nav-tabs { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
         .tab { background: #111; color: #fff; padding: 8px 25px; border-radius: 25px; border: 1px solid var(--accent); cursor: pointer; transition: 0.3s; }
-        .tab.active { background: var(--gold); color: #000; font-weight: bold; border-color: var(--gold); }
+        .tab.active { background: var(--gold); color: #000; font-weight: bold; }
         .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 1200px; margin: 20px auto; padding: 0 12px; }
         @media (min-width: 992px) { .grid { grid-template-columns: repeat(4, 1fr); } }
         .card { display: none; background: var(--card-bg); padding: 12px; border-radius: 18px; border: 1px solid var(--accent); flex-direction: column; }
@@ -82,12 +82,12 @@
         </div>
 
         <div class="card tshirt">
-            <div class="img-box"><img src="tr1-red.PNG" id="p-t4" class="product-img"></div>
+            <div class="img-box"><img src="tr1-red.png.png" id="p-t4" class="product-img"></div>
             <div class="color-dots">
-                <div class="dot active" style="background: red;" onclick="v('p-t4', 'tr1-red.PNG', this)"></div>
-                <div class="dot" style="background: #000;" onclick="v('p-t4', 'tr2-black.PNG', this)"></div>
-                <div class="dot" style="background: #d2b48c;" onclick="v('p-t4', 'tr3-beige.PNG', this)"></div>
-                <div class="dot" style="background: #fff;" onclick="v('p-t4', 'tr4-white.PNG', this)"></div>
+                <div class="dot active" style="background: red;" onclick="v('p-t4', 'tr1-red.png.png', this)"></div>
+                <div class="dot" style="background: #000;" onclick="v('p-t4', 'tr2-black.png.png', this)"></div>
+                <div class="dot" style="background: #d2b48c;" onclick="v('p-t4', 'tr3-beige.png.png', this)"></div>
+                <div class="dot" style="background: #fff;" onclick="v('p-t4', 'tr4-white.png.png', this)"></div>
             </div>
             <div class="model-name">تيشيرت موديل 04</div>
             <div class="qty-control"><button class="btn-q" onclick="c('q-t4', 16)">+</button><span id="q-t4">16</span><button class="btn-q" onclick="c('q-t4', -16)">-</button></div>
@@ -95,12 +95,12 @@
         </div>
 
         <div class="card tshirt">
-            <div class="img-box"><img src="te1-black.PNG" id="p-t5" class="product-img"></div>
+            <div class="img-box"><img src="te1-black.png.png" id="p-t5" class="product-img"></div>
             <div class="color-dots">
-                <div class="dot active" style="background: #000;" onclick="v('p-t5', 'te1-black.PNG', this)"></div>
-                <div class="dot" style="background: blue;" onclick="v('p-t5', 'te2-blue.PNG', this)"></div>
-                <div class="dot" style="background: #d2b48c;" onclick="v('p-t5', 'te3-beige.PNG', this)"></div>
-                <div class="dot" style="background: #fff;" onclick="v('p-t5', 'te4-white.PNG', this)"></div>
+                <div class="dot active" style="background: #000;" onclick="v('p-t5', 'te1-black.png.png', this)"></div>
+                <div class="dot" style="background: blue;" onclick="v('p-t5', 'te2-blue.png.png', this)"></div>
+                <div class="dot" style="background: #d2b48c;" onclick="v('p-t5', 'te3-beige.png.png', this)"></div>
+                <div class="dot" style="background: #fff;" onclick="v('p-t5', 'te4-white.png.png', this)"></div>
             </div>
             <div class="model-name">تيشيرت موديل 05</div>
             <div class="qty-control"><button class="btn-q" onclick="c('q-t5', 16)">+</button><span id="q-t5">16</span><button class="btn-q" onclick="c('q-t5', -16)">-</button></div>
@@ -115,48 +115,9 @@
                 <div class="dot" style="background: #d2b48c;" onclick="v('p-s1', 'st3-beige.PNG', this)"></div>
                 <div class="dot" style="background: #fff;" onclick="v('p-s1', 'st4-white.PNG', this)"></div>
             </div>
-            <div class="model-name">طقم موديل 01</div>
+            <div class="model-name">طقم صيفي موديل 01</div>
             <div class="qty-control"><button class="btn-q" onclick="c('q-s1', 16)">+</button><span id="q-s1">16</span><button class="btn-q" onclick="c('q-s1', -16)">-</button></div>
-            <button class="btn-add" onclick="add('طقم 01', 'q-s1')">إضافة</button>
-        </div>
-
-        <div class="card set">
-            <div class="img-box"><img src="st5-black.PNG" id="p-s2" class="product-img"></div>
-            <div class="color-dots">
-                <div class="dot active" style="background: #000;" onclick="v('p-s2', 'st5-black.PNG', this)"></div>
-                <div class="dot" style="background: blue;" onclick="v('p-s2', 'st6-blue.PNG', this)"></div>
-                <div class="dot" style="background: #d2b48c;" onclick="v('p-s2', 'st7-beige.PNG', this)"></div>
-                <div class="dot" style="background: #fff;" onclick="v('p-s2', 'st8-white.PNG', this)"></div>
-            </div>
-            <div class="model-name">طقم موديل 02</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('q-s2', 16)">+</button><span id="q-s2">16</span><button class="btn-q" onclick="c('q-s2', -16)">-</button></div>
-            <button class="btn-add" onclick="add('طقم 02', 'q-s2')">إضافة</button>
-        </div>
-
-        <div class="card set">
-            <div class="img-box"><img src="st9-black.PNG" id="p-s3" class="product-img"></div>
-            <div class="color-dots">
-                <div class="dot active" style="background: #000;" onclick="v('p-s3', 'st9-black.PNG', this)"></div>
-                <div class="dot" style="background: blue;" onclick="v('p-s3', 'st10-blue.PNG', this)"></div>
-                <div class="dot" style="background: #d2b48c;" onclick="v('p-s3', 'st11-beige.PNG', this)"></div>
-                <div class="dot" style="background: #fff;" onclick="v('p-s3', 'st12-white.PNG', this)"></div>
-            </div>
-            <div class="model-name">طقم موديل 03</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('q-s3', 16)">+</button><span id="q-s3">16</span><button class="btn-q" onclick="c('q-s3', -16)">-</button></div>
-            <button class="btn-add" onclick="add('طقم 03', 'q-s3')">إضافة</button>
-        </div>
-
-        <div class="card set">
-            <div class="img-box"><img src="st13-black.PNG" id="p-s4" class="product-img"></div>
-            <div class="color-dots">
-                <div class="dot active" style="background: #000;" onclick="v('p-s4', 'st13-black.PNG', this)"></div>
-                <div class="dot" style="background: blue;" onclick="v('p-s4', 'st14-blue.PNG', this)"></div>
-                <div class="dot" style="background: #d2b48c;" onclick="v('p-s4', 'st15-beige.PNG', this)"></div>
-                <div class="dot" style="background: #fff;" onclick="v('p-s4', 'st16-white.PNG', this)"></div>
-            </div>
-            <div class="model-name">طقم موديل 04</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('q-s4', 16)">+</button><span id="q-s4">16</span><button class="btn-q" onclick="c('q-s4', -16)">-</button></div>
-            <button class="btn-add" onclick="add('طقم 04', 'q-s4')">إضافة</button>
+            <button class="btn-add" onclick="add('طقم 01', 'q-s1')">إضافة للطلب</button>
         </div>
     </div>
 
@@ -173,9 +134,7 @@
             let cards = document.getElementsByClassName('card');
             for (let card of cards) {
                 card.classList.remove('show');
-                if (card.classList.contains(cat)) {
-                    card.classList.add('show');
-                }
+                if (card.classList.contains(cat)) card.classList.add('show');
             }
             let tabs = document.getElementsByClassName('tab');
             for (let tab of tabs) tab.classList.remove('active');
@@ -201,7 +160,7 @@
             document.getElementById('cart-info').innerText = `الإجمالي: ${total/16} شدة`;
         }
         function send() {
-            let msg = "📦 *طلب جديد من TOP GIVING* 📦\n\n";
+            let msg = "📦 *طلب من TOP GIVING* 📦\n\n";
             myOrder.forEach(i => { msg += `• *${i.name}*: ${i.qty/16} شدة\n`; });
             window.open(`https://wa.me/966560564719?text=${encodeURIComponent(msg)}`, '_blank');
         }
