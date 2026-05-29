@@ -135,4 +135,73 @@
                 </div>
                 <div class="model-name">تيشيرت موديل 05</div>
                 <div class="qty-control">
-                    <button class="btn-q" onclick="ch
+                    <button class="btn-q" onclick="chg('qm5',-16)">-</button><span id="qm5" class="q-val">16</span><button class="btn-q" onclick="chg('qm5',16)">+</button>
+                </div>
+                <button class="btn-add" onclick="add('موديل 05', 'qm5')">إضافة الشد المشكل</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="sets" class="section-content">
+        <div class="grid">
+            <div class="card">
+                <div class="img-box"><img src="Picsart_26-05-28_16-28-24-642.jpg" id="img-set1" class="product-img"></div>
+                <div class="color-dots">
+                    <div class="dot active" style="background: #000;" onclick="view('set1','Picsart_26-05-28_16-28-24-642.jpg',this)"></div>
+                    <div class="dot" style="background: beige;" onclick="view('set1','Picsart_beige.jpg',this)"></div>
+                </div>
+                <div class="model-name">طقم رجالي فاخر</div>
+                <div class="qty-control">
+                    <button class="btn-q" onclick="chg('qset1',-16)">-</button><span id="qset1" class="q-val">16</span><button class="btn-q" onclick="chg('qset1',16)">+</button>
+                </div>
+                <button class="btn-add" onclick="add('طقم فاخر', 'qset1')">إضافة الشد المشكل</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="cart-bar" id="cartBar">
+        <div class="cart-container">
+            <div id="cartSummary">إجمالي: 0 قطعة</div>
+            <button class="btn-add" style="width: auto; padding: 10px 30px;" onclick="send()">إتمام الطلب</button>
+        </div>
+    </div>
+
+    <script>
+        let cart = [];
+
+        function openSection(id, btn) {
+            document.querySelectorAll('.section-content').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        function chg(id, val) {
+            let el = document.getElementById(id);
+            let current = parseInt(el.innerText);
+            if (current + val >= 16) el.innerText = current + val;
+        }
+
+        function view(id, img, dot) {
+            document.getElementById('img-' + id).src = img;
+            dot.parentElement.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+            dot.classList.add('active');
+        }
+
+        function add(name, qtyId) {
+            let q = parseInt(document.getElementById(qtyId).innerText);
+            let item = cart.find(i => i.name === name);
+            if (item) item.qty += q; else cart.push({ name: name, qty: q });
+            
+            let total = cart.reduce((s, i) => s + i.qty, 0);
+            document.getElementById('cartBar').style.display = 'block';
+            document.getElementById('cartSummary').innerText = `إجمالي: ${total} قطعة (${total/16} شد)`;
+        }
+
+        function send() {
+            let msg = "طلب جملة جديد:\n" + cart.map(i => `• ${i.name}: ${i.qty} قطعة`).join('\n');
+            window.open(`https://wa.me/966XXXXXXXXX?text=${encodeURIComponent(msg)}`);
+        }
+    </script>
+</body>
+</html>
