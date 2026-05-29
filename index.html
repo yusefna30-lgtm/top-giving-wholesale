@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOP GIVING | المتجر المتكامل</title>
+    <title>TOP GIVING | متجر الجملة</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #D4AF37; --black: #000; --card-bg: #0c0c0e; --accent: #1a1a1a; }
@@ -18,10 +18,11 @@
         .card { display: none; background: var(--card-bg); padding: 12px; border-radius: 18px; border: 1px solid var(--accent); flex-direction: column; }
         .card.show { display: flex; }
         .img-box { width: 100%; height: 170px; border-radius: 12px; overflow: hidden; background: #fff; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; }
-        .product-img { max-width: 95%; max-height: 95%; object-fit: contain; }
+        .product-img { max-width: 95%; max-height: 95%; object-fit: contain; transform: scale(1.1); transition: 0.4s; }
+        .product-img:hover { transform: scale(1.25); } /* تأثير الزوم [cite: 156, 334] */
         .color-dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 12px; min-height: 25px; }
         .dot { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #333; cursor: pointer; }
-        .dot.active { border-color: var(--gold); transform: scale(1.1); }
+        .dot.active { border-color: var(--gold); box-shadow: 0 0 8px var(--gold); transform: scale(1.1); }
         .model-name { font-size: 0.9rem; font-weight: 700; margin-bottom: 12px; }
         .qty-control { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 12px; background: #151515; padding: 6px; border-radius: 10px; }
         .btn-q { background: #252525; color: #fff; border: 1px solid var(--gold); width: 34px; height: 34px; border-radius: 8px; cursor: pointer; }
@@ -41,21 +42,11 @@
     </div>
 
     <div class="grid">
-        <div class="card tshirt show"><div class="img-box"><img src="n5-back.png.png" id="p1" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#eee" onclick="v('p1','n5-back.png.png',this)"></div><div class="dot" style="background:purple" onclick="v('p1','n5-purple.png.png',this)"></div><div class="dot" style="background:#000" onclick="v('p1','n5-black.png.png',this)"></div></div><div class="model-name">تيشيرت 01</div><div class="qty-control"><button class="btn-q" onclick="c('q1',16)">+</button><span id="q1">16</span><button class="btn-q" onclick="c('q1',-16)">-</button></div><button class="btn-add" onclick="add('تيشيرت 01','q1',this)">إضافة للطلب</button></div>
-        <div class="card tshirt show"><div class="img-box"><img src="n2-white.png.png" id="p2" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#eee" onclick="v('p2','n2-white.png.png',this)"></div><div class="dot" style="background:#000" onclick="v('p2','n2-black.png.png',this)"></div></div><div class="model-name">تيشيرت 02</div><div class="qty-control"><button class="btn-q" onclick="c('q2',16)">+</button><span id="q2">16</span><button class="btn-q" onclick="c('q2',-16)">-</button></div><button class="btn-add" onclick="add('تيشيرت 02','q2',this)">إضافة للطلب</button></div>
-        <div class="card tshirt show"><div class="img-box"><img src="n3-white.png.png" id="p3" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#eee" onclick="v('p3','n3-white.png.png',this)"></div><div class="dot" style="background:#000" onclick="v('p3','n3-black.png.png',this)"></div></div><div class="model-name">تيشيرت 03</div><div class="qty-control"><button class="btn-q" onclick="c('q3',16)">+</button><span id="q3">16</span><button class="btn-q" onclick="c('q3',-16)">-</button></div><button class="btn-add" onclick="add('تيشيرت 03','q3',this)">إضافة للطلب</button></div>
-        <div class="card tshirt show"><div class="img-box"><img src="n4-white.png.png" id="p4" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#eee" onclick="v('p4','n4-white.png.png',this)"></div><div class="dot" style="background:#000" onclick="v('p4','n4-black.png.png',this)"></div></div><div class="model-name">تيشيرت 04</div><div class="qty-control"><button class="btn-q" onclick="c('q4',16)">+</button><span id="q4">16</span><button class="btn-q" onclick="c('q4',-16)">-</button></div><button class="btn-add" onclick="add('تيشيرت 04','q4',this)">إضافة للطلب</button></div>
-        <div class="card tshirt show"><div class="img-box"><img src="n1-white.png.png" id="p5" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#eee" onclick="v('p5','n1-white.png.png',this)"></div><div class="dot" style="background:#000" onclick="v('p5','n1-black.png.png',this)"></div></div><div class="model-name">تيشيرت 05</div><div class="qty-control"><button class="btn-q" onclick="c('q5',16)">+</button><span id="q5">16</span><button class="btn-q" onclick="c('q5',-16)">-</button></div><button class="btn-add" onclick="add('تيشيرت 05','q5',this)">إضافة للطلب</button></div>
+        <div class="card tshirt"><div class="img-box"><img src="n5-back.png.png" id="p-t1" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#000" onclick="v('p-t1','n5-back.png.png',this)"></div><div class="dot" style="background:purple" onclick="v('p-t1','n5-purple.png.png',this)"></div><div class="dot" style="background:#fff" onclick="v('p-t1','n5-white.png.png',this)"></div></div><div class="model-name">تيشيرت 01</div><div class="qty-control"><button class="btn-q" onclick="c('q-t1',16)">+</button><span id="q-t1">16</span><button class="btn-q" onclick="c('q-t1',-16)">-</button></div><button class="btn-add" onclick="add('تيشيرت 01','q-t1',this)">إضافة</button></div>
 
-        <div class="card set"><div class="img-box"><img src="s1.png" id="s1" class="product-img"></div><div class="model-name">طقم صيفي 01</div><div class="qty-control"><button class="btn-q" onclick="c('qs1',16)">+</button><span id="qs1">16</span><button class="btn-q" onclick="c('qs1',-16)">-</button></div><button class="btn-add" onclick="add('طقم 01','qs1',this)">إضافة</button></div>
-        <div class="card set"><div class="img-box"><img src="s2.png" id="s2" class="product-img"></div><div class="model-name">طقم صيفي 02</div><div class="qty-control"><button class="btn-q" onclick="c('qs2',16)">+</button><span id="qs2">16</span><button class="btn-q" onclick="c('qs2',-16)">-</button></div><button class="btn-add" onclick="add('طقم 02','qs2',this)">إضافة</button></div>
-        <div class="card set"><div class="img-box"><img src="s3.png" id="s3" class="product-img"></div><div class="model-name">طقم صيفي 03</div><div class="qty-control"><button class="btn-q" onclick="c('qs3',16)">+</button><span id="qs3">16</span><button class="btn-q" onclick="c('qs3',-16)">-</button></div><button class="btn-add" onclick="add('طقم 03','qs3',this)">إضافة</button></div>
-        <div class="card set"><div class="img-box"><img src="s4.png" id="s4" class="product-img"></div><div class="model-name">طقم صيفي 04</div><div class="qty-control"><button class="btn-q" onclick="c('qs4',16)">+</button><span id="qs4">16</span><button class="btn-q" onclick="c('qs4',-16)">-</button></div><button class="btn-add" onclick="add('طقم 04','qs4',this)">إضافة</button></div>
-        <div class="card set"><div class="img-box"><img src="s5.png" id="s5" class="product-img"></div><div class="model-name">طقم صيفي 05</div><div class="qty-control"><button class="btn-q" onclick="c('qs5',16)">+</button><span id="qs5">16</span><button class="btn-q" onclick="c('qs5',-16)">-</button></div><button class="btn-add" onclick="add('طقم 05','qs5',this)">إضافة</button></div>
-        
-        <div class="card set"><div class="img-box"><img src="sea-black.png" id="p-sea" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#000" onclick="v('p-sea','sea-black.png',this)"></div></div><div class="model-name">طقم شورت Sea 01</div><div class="qty-control"><button class="btn-q" onclick="c('q-sea',12)">+</button><span id="q-sea">12</span><button class="btn-q" onclick="c('q-sea',-12)">-</button></div><button class="btn-add" onclick="add('طقم Sea 01','q-sea',this)">إضافة</button></div>
+        <div class="card set"><div class="img-box"><img src="sea-black.png" id="p-sea" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#000" onclick="v('p-sea','sea-black.png',this)"></div><div class="dot" style="background:red" onclick="v('p-sea','sea-red.png',this)"></div><div class="dot" style="background:navy" onclick="v('p-sea','sea-navy.png',this)"></div></div><div class="model-name">طقم شورت Sea</div><div class="qty-control"><button class="btn-q" onclick="c('q-sea',12)">+</button><span id="q-sea">12</span><button class="btn-q" onclick="c('q-sea',-12)">-</button></div><button class="btn-add" onclick="add('طقم Sea','q-sea',this)">إضافة</button></div>
 
-        <div class="card set"><div class="img-box"><img src="sea1-off-withe.png" id="p-sea2" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#f5f5f5;border:1px solid #ccc" onclick="v('p-sea2','sea1-off-withe.png',this)"></div><div class="dot" style="background:#000" onclick="v('p-sea2','sea1-black.png',this)"></div><div class="dot" style="background:#000080" onclick="v('p-sea2','sea1-navy.png',this)"></div></div><div class="model-name">طقم شورت Sea 02</div><div class="qty-control"><button class="btn-q" onclick="c('q-sea2',12)">+</button><span id="q-sea2">12</span><button class="btn-q" onclick="c('q-sea2',-12)">-</button></div><button class="btn-add" onclick="add('طقم Sea 02','q-sea2',this)">إضافة</button></div>
+        <div class="card set"><div class="img-box"><img src="sea1-off-withe.png" id="p-sea2" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#f5f5f5" onclick="v('p-sea2','sea1-off-withe.png',this)"></div><div class="dot" style="background:#000" onclick="v('p-sea2','sea1-black.png',this)"></div><div class="dot" style="background:navy" onclick="v('p-sea2','sea1-navy.png',this)"></div></div><div class="model-name">طقم شورت Sea 02</div><div class="qty-control"><button class="btn-q" onclick="c('q-sea2',12)">+</button><span id="q-sea2">12</span><button class="btn-q" onclick="c('q-sea2',-12)">-</button></div><button class="btn-add" onclick="add('طقم Sea 02','q-sea2',this)">إضافة</button></div>
     </div>
 
     <div class="cart-bar" id="cart-bar"><div class="cart-flex"><div id="cart-info" style="color:var(--gold); font-weight:900;">الإجمالي: 0 حبة</div><button class="btn-add" style="width:auto; padding:10px 20px;" onclick="send()">إرسال ✅</button></div></div>
@@ -72,7 +63,7 @@
         function c(id, val) { 
             let el = document.getElementById(id); 
             let curr = parseInt(el.innerText); 
-            let min = (id.includes('sea')) ? 12 : 16;
+            let min = (id.includes('sea')) ? 12 : 16; /* نظام الشد الذكي [cite: 783] */
             if (curr + val >= min) el.innerText = curr + val; 
         }
         function add(name, qtyId, btn) {
@@ -81,12 +72,12 @@
             document.getElementById('cart-bar').style.display = 'block';
             let total = order.reduce((sum, i) => sum + i.qty, 0);
             document.getElementById('cart-info').innerText = `الإجمالي: ${total} حبة`;
-            btn.innerText = "تمت الإضافة ✅";
+            btn.innerText = "تمت الإضافة ✅"; /* تأكيد الإضافة [cite: 707] */
         }
         function send() {
             let msg = "📦 *طلب جديد من TOP GIVING* 📦\n\n";
             order.forEach(i => { msg += `• *${i.name}*: ${i.qty} حبة\n`; });
-            window.open(`https://wa.me/966560564719?text=${encodeURIComponent(msg)}`, '_blank');
+            window.open(`https://wa.me/966560564719?text=${encodeURIComponent(msg)}`, '_blank'); /* ربط واتساب [cite: 784] */
         }
     </script>
 </body>
