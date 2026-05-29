@@ -6,132 +6,94 @@
     <title>TOP GIVING | Wholesale</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --gold: #D4AF37; 
-            --black: #000; 
-            --card-bg: #0c0c0e; 
-            --accent: #1a1a1a; 
-            --white: #ffffff;
-        }
-
-        body { 
-            font-family: 'Cairo', sans-serif; 
-            background: var(--black); 
-            color: var(--white); 
-            text-align: center; 
-            margin: 0; 
-            padding-bottom: 180px; 
-        }
-
-        .brand { font-size: 2.5rem; color: var(--gold); margin: 30px 0; font-weight: 900; letter-spacing: 5px; }
-
-        .section-header { margin: 40px 0 25px; display: flex; align-items: center; justify-content: center; }
-        .section-header::before, .section-header::after { content: ""; height: 2px; width: 50px; background: var(--gold); margin: 0 15px; }
-        .section-title { color: var(--gold); font-size: 1.4rem; font-weight: 700; }
+        :root { --gold: #D4AF37; --black: #000; --card-bg: #0c0c0e; --accent: #1a1a1a; }
+        
+        body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; margin: 0; padding-bottom: 150px; text-align: center; }
+        .brand { font-size: 2.2rem; color: var(--gold); margin: 20px 0; font-weight: 900; letter-spacing: 3px; }
 
         .grid { 
             display: grid; 
-            grid-template-columns: repeat(2, 1fr); 
-            gap: 15px; 
-            max-width: 1200px; 
-            margin: 0 auto; 
-            padding: 0 15px; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 20px; max-width: 1200px; margin: 0 auto; padding: 20px;
         }
 
         .card { 
-            background: var(--card-bg); 
-            padding: 15px; 
-            border-radius: 20px; 
-            border: 1px solid var(--accent); 
-            transition: 0.3s;
+            background: var(--card-bg); border-radius: 20px; border: 1px solid var(--accent); 
+            padding: 20px; transition: 0.3s; position: relative;
         }
 
-        /* تأثير الزوم والتوهج للصورة */
+        /* إصلاح حجم الصورة والتوهج */
         .img-box { 
-            width: 100%; 
-            height: 220px; 
-            border-radius: 15px; 
-            overflow: hidden; 
-            background: #fff; 
-            margin-bottom: 15px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            position: relative;
+            width: 100%; height: 250px; /* حجم ثابت ومتناسق */
+            background: #fff; border-radius: 15px; margin-bottom: 15px;
+            display: flex; align-items: center; justify-content: center; overflow: hidden;
         }
-
+        
         .product-img { 
-            max-width: 90%; 
-            max-height: 90%; 
-            object-fit: contain; 
-            transition: transform 0.5s ease, filter 0.5s ease;
+            max-width: 80%; max-height: 80%; /* تصغير الصورة لتناسب الإطار */
+            transition: 0.5s ease; 
         }
 
-        /* الحالة عند اختيار اللون أو الحوّم */
-        .card:hover .product-img {
-            transform: scale(1.15); /* زوم */
-            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.5)); /* توهج ذهبي */
+        .card:hover .product-img { 
+            transform: scale(1.1); 
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.6)); /* توهج ذهبي ناعم */
         }
 
         /* دوائر الألوان */
-        .color-dots { display: flex; justify-content: center; gap: 10px; margin: 15px 0; }
+        .color-dots { display: flex; justify-content: center; gap: 12px; margin: 15px 0; }
         .dot { 
-            width: 28px; height: 28px; border-radius: 50%; 
-            border: 2px solid #333; cursor: pointer; transition: 0.3s; 
+            width: 25px; height: 25px; border-radius: 50%; border: 2px solid #444; 
+            cursor: pointer; transition: 0.3s;
         }
         .dot.active { 
-            border-color: var(--gold); 
-            transform: scale(1.25); 
-            box-shadow: 0 0 12px var(--gold); 
+            border-color: var(--gold); transform: scale(1.2); 
+            box-shadow: 0 0 15px var(--gold); /* توهج اللون النشط */
         }
 
-        .model-name { font-weight: 700; font-size: 1.1rem; margin-bottom: 10px; color: #eee; }
-
+        /* التحكم بالكمية - أزرار الجملة */
         .qty-control { 
             display: flex; align-items: center; justify-content: center; 
-            gap: 10px; margin-bottom: 15px; background: #1a1a1a; 
-            padding: 10px; border-radius: 12px; 
+            background: #1a1a1a; border-radius: 12px; padding: 10px; margin-bottom: 15px;
         }
-        .btn-q { background: #333; color: #fff; border: none; width: 35px; height: 35px; border-radius: 8px; cursor: pointer; font-weight: bold; }
-        .q-val { color: var(--gold); font-weight: 900; min-width: 40px; font-size: 1.2rem; }
+        .btn-q { 
+            background: #333; color: var(--gold); border: none; 
+            width: 40px; height: 40px; border-radius: 8px; 
+            font-size: 1.5rem; cursor: pointer; font-weight: bold;
+        }
+        .q-val { font-size: 1.3rem; font-weight: 900; color: #fff; margin: 0 20px; min-width: 40px; }
 
         .btn-add { 
             background: linear-gradient(135deg, #D4AF37, #8A6D3B); 
-            color: #000; padding: 15px; border-radius: 12px; 
-            font-weight: 900; border: none; width: 100%; cursor: pointer; font-family: 'Cairo';
+            color: #000; border: none; width: 100%; padding: 15px; 
+            border-radius: 12px; font-weight: 900; cursor: pointer; font-family: 'Cairo';
         }
 
-        /* شريط السلة */
+        /* شريط السلة السفلي */
         .cart-bar { 
             position: fixed; bottom: 0; left: 0; right: 0; 
-            background: rgba(10, 10, 10, 0.98); 
-            border-top: 2px solid var(--gold); 
-            padding: 20px; display: none; z-index: 2000;
+            background: rgba(10, 10, 10, 0.95); border-top: 2px solid var(--gold); 
+            padding: 20px; display: none; z-index: 1000;
         }
-
-        @media (min-width: 992px) { .grid { grid-template-columns: repeat(3, 1fr); } }
     </style>
 </head>
 <body onload="initDefaults()">
 
     <div class="brand">TOP GIVING</div>
 
-    <div class="section-header"><div class="section-title">تيشيرتات OVERSYZE (الشد 16 حبة)</div></div>
-    
     <div class="grid">
         <div class="card">
             <div class="img-box"><img src="t1-white.png" id="img-01" class="product-img"></div>
             <div class="color-dots">
-                <div class="dot active" style="background: #ffffff;" onclick="upd('01','t1-white.png','أبيض',this)"></div>
-                <div class="dot" style="background: #000000;" onclick="upd('01','t1-black.png','أسود',this)"></div>
-                <div class="dot" style="background: #0000FF;" onclick="upd('01','t1-blue.png','أزرق',this)"></div>
-                <div class="dot" style="background: #DAA520;" onclick="upd('01','t1-yellow.png','خردلي',this)"></div>
+                <div class="dot active" style="background: #fff;" onclick="upd('01','t1-white.png','أبيض',this)"></div>
+                <div class="dot" style="background: #000;" onclick="upd('01','t1-black.png','أسود',this)"></div>
+                <div class="dot" style="background: #00f;" onclick="upd('01','t1-blue.png','أزرق',this)"></div>
+                <div class="dot" style="background: #daa520;" onclick="upd('01','t1-yellow.png','خردلي',this)"></div>
             </div>
             <div class="model-name">موديل 01</div>
             <div class="qty-control">
-                <button class="btn-q" onclick="chg('q01',-16)">-</button>
+                <button class="btn-q" onclick="chg('q01', 16)">+</button>
                 <span id="q01" class="q-val">16</span>
-                <button class="btn-q" onclick="chg('q01',16)">+</button>
+                <button class="btn-q" onclick="chg('q01', -16)">-</button>
             </div>
             <button class="btn-add" onclick="buy('01','موديل 01','q01')">إضافة للطلب</button>
         </div>
@@ -140,40 +102,4 @@
             <div class="img-box"><img src="t2-purple.png.png" id="img-02" class="product-img"></div>
             <div class="color-dots">
                 <div class="dot active" style="background: #A020F0;" onclick="upd('02','t2-purple.png.png','بنفسجي',this)"></div>
-                <div class="dot" style="background: #ffffff;" onclick="upd('02','t2-white.png.png','أبيض',this)"></div>
-                <div class="dot" style="background: #000000;" onclick="upd('02','t2-black.png.png','أسود',this)"></div>
-                <div class="dot" style="background: #808080;" onclick="upd('02','t1-white.png','رصاصي',this)"></div>
-            </div>
-            <div class="model-name">موديل 02</div>
-            <div class="qty-control">
-                <button class="btn-q" onclick="chg('q02',-16)">-</button>
-                <span id="q02" class="q-val">16</span>
-                <button class="btn-q" onclick="chg('q02',16)">+</button>
-            </div>
-            <button class="btn-add" onclick="buy('02','موديل 02','q02')">إضافة للطلب</button>
-        </div>
-
-        <div class="card">
-            <div class="img-box"><img src="te3-beige.png.png" id="img-03" class="product-img"></div>
-            <div class="color-dots">
-                <div class="dot active" style="background: #F5F5DC;" onclick="upd('03','te3-beige.png.png','بيج',this)"></div>
-                <div class="dot" style="background: #000;" onclick="upd('03','te1-black.png.png','أسود',this)"></div>
-                <div class="dot" style="background: #fff;" onclick="upd('03','te4-white.png.png','أبيض',this)"></div>
-                <div class="dot" style="background: #87CEEB;" onclick="upd('03','te2-blue.png.png','سماوي',this)"></div>
-            </div>
-            <div class="model-name">موديل 03</div>
-            <div class="qty-control">
-                <button class="btn-q" onclick="chg('q03',-16)">-</button>
-                <span id="q03" class="q-val">16</span>
-                <button class="btn-q" onclick="chg('q03',16)">+</button>
-            </div>
-            <button class="btn-add" onclick="buy('03','موديل 03','q03')">إضافة للطلب</button>
-        </div>
-
-        <div class="card">
-            <div class="img-box"><img src="tr1-red.png.png" id="img-04" class="product-img"></div>
-            <div class="color-dots">
-                <div class="dot active" style="background: #BA1313;" onclick="upd('04','tr1-red.png.png','أحمر',this)"></div>
-                <div class="dot" style="background: #000;" onclick="upd('04','tr2-black.png.png','أسود',this)"></div>
-                <div class="dot" style="background: #fff;" onclick="upd('04','tr4-white.png.png','أبيض',this)"></div>
-                <div class="dot" style="background: #808080;" onclick="upd('04','tr3-grey.png.png','رصاصي',this)"></div>
+                <div class="dot" style="background: #fff;" onclick="upd('02','t2-white.png.png','أبيض',this
