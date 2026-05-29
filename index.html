@@ -3,170 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOP GIVING | Wholesale</title>
+    <title>TOP GIVING | Template</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #D4AF37; --black: #000; --card-bg: #0c0c0e; --accent: #1a1a1a; --gray: #888; }
-        body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 200px; }
-        .brand { font-size: 2.5rem; color: var(--gold); margin: 30px 0 10px; font-weight: 900; letter-spacing: 3px; }
-        .nav-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; position: sticky; top: 0; background: rgba(0,0,0,0.95); z-index: 100; padding: 15px; flex-wrap: wrap; }
-        .tab-btn { background: var(--accent); color: #fff; border: 1px solid var(--gold); padding: 8px 18px; border-radius: 25px; cursor: pointer; font-weight: 700; transition: 0.3s; }
-        .tab-btn.active { background: var(--gold); color: #000; }
-        .section-content { display: none; }
-        .section-content.active { display: block; }
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
-        .card { background: var(--card-bg); padding: 15px; border-radius: 20px; border: 1px solid var(--accent); display: flex; flex-direction: column; transition: 0.3s; }
-        .img-box { width: 100%; height: 220px; border-radius: 15px; overflow: hidden; background: #fff; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; border: 2px solid transparent; transition: 0.4s ease; }
-        .product-img { max-width: 88%; max-height: 88%; object-fit: contain; transition: 0.5s; }
-        .card:hover .img-box { border-color: var(--gold); box-shadow: 0 0 25px 5px rgba(212, 175, 55, 0.5); }
+        :root { --gold: #D4AF37; --black: #000; --card-bg: #0c0c0e; --accent: #1a1a1a; }
+        body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; padding: 20px; }
+        
+        /* الكرت والتأثيرات */
+        .card { 
+            background: var(--card-bg); padding: 20px; border-radius: 20px; 
+            border: 1px solid var(--accent); max-width: 300px; margin: 0 auto;
+            transition: 0.3s;
+        }
+        .img-box { 
+            width: 100%; height: 250px; border-radius: 15px; overflow: hidden; 
+            background: #fff; margin-bottom: 15px; display: flex; 
+            align-items: center; justify-content: center;
+            border: 2px solid transparent; transition: 0.4s;
+        }
+        .product-img { max-width: 85%; max-height: 85%; transition: 0.5s; }
+
+        /* التوهج والزوم المطلوبين */
+        .card:hover .img-box { border-color: var(--gold); box-shadow: 0 0 20px 5px rgba(212, 175, 55, 0.4); }
         .card:hover .product-img { transform: scale(1.15); }
-        .color-dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 15px; height: 30px; }
-        .dot { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #333; cursor: pointer; }
-        .dot.active { border-color: var(--gold); box-shadow: 0 0 5px var(--gold); }
-        .model-name { font-weight: 700; margin-bottom: 15px; font-size: 1.1rem; }
-        .qty-control { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 15px; background: #151515; padding: 10px; border-radius: 12px; }
+
+        .color-dots { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+        .dot { width: 25px; height: 25px; border-radius: 50%; border: 2px solid #333; cursor: pointer; }
+        .dot.active { border-color: var(--gold); box-shadow: 0 0 8px var(--gold); }
+
+        .qty-control { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 20px; background: #151515; padding: 10px; border-radius: 12px; }
         .btn-q { background: #252525; color: #fff; border: 1px solid var(--gold); width: 40px; height: 40px; border-radius: 10px; cursor: pointer; font-size: 1.5rem; }
-        .q-val { color: var(--gold); font-weight: 900; min-width: 40px; font-size: 1.2rem; }
+        .q-val { color: var(--gold); font-weight: 900; min-width: 40px; font-size: 1.3rem; }
+
         .btn-add { background: linear-gradient(135deg, #D4AF37, #8A6D3B); color: #000; padding: 15px; border-radius: 12px; font-weight: 900; border: none; width: 100%; cursor: pointer; }
-        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10, 10, 10, 0.98); border-top: 2px solid var(--gold); padding: 20px; display: none; z-index: 1000; }
-        @media (min-width: 992px) { .grid { grid-template-columns: repeat(4, 1fr); } .img-box { height: 280px; } }
     </style>
 </head>
 <body>
-    <div class="brand">TOP GIVING</div>
-    <div class="nav-tabs">
-        <button class="tab-btn active" onclick="openS('tshirts', this)">التيشيرتات</button>
-        <button class="tab-btn" onclick="openS('sets', this)">الأطقم</button>
-        <button class="tab-btn" onclick="openS('pants', this)">البنطلون والشورت</button>
-        <button class="tab-btn" onclick="openS('shirts', this)">القمصان</button>
-    </div>
 
-    <div id="tshirts" class="section-content active">
-        <div class="grid">
-            <div class="card">
-                <div class="img-box"><img src="n5-white.png.png" id="img-01" class="product-img"></div>
-                <div class="color-dots">
-                    <div class="dot active" style="background: #fff;" onclick="v('01','n5-white.png.png',this)"></div>
-                    <div class="dot" style="background: purple;" onclick="v('01','n5-purple.png.png',this)"></div>
-                    <div class="dot" style="background: #000;" onclick="v('01','n5-black.png.png',this)"></div>
-                    <div class="dot" style="background: gold;" onclick="v('01','t1-yellow.png',this)"></div>
-                </div>
-                <div class="model-name">تيشيرت موديل 01</div>
-                <div class="qty-control"><button class="btn-q" onclick="c('q01',-16)">-</button><span id="q01" class="q-val">16</span><button class="btn-q" onclick="c('q01',16)">+</button></div>
-                <button class="btn-add" onclick="a('تيشيرت موديل 01', 'q01')">إضافة للطلب</button>
-            </div>
-
-            <div class="card">
-                <div class="img-box"><img src="t2-purple.png.png" id="img-02" class="product-img"></div>
-                <div class="color-dots">
-                    <div class="dot active" style="background: purple;" onclick="v('02','t2-purple.png.png',this)"></div>
-                    <div class="dot" style="background: #fff;" onclick="v('02','t2-white.png.png',this)"></div>
-                    <div class="dot" style="background: #000;" onclick="v('02','t2-black.png.png',this)"></div>
-                    <div class="dot" style="background: gray;" onclick="v('02','t1-white.png',this)"></div>
-                </div>
-                <div class="model-name">تيشيرت موديل 02</div>
-                <div class="qty-control"><button class="btn-q" onclick="c('q02',-16)">-</button><span id="q02" class="q-val">16</span><button class="btn-q" onclick="c('q02',16)">+</button></div>
-                <button class="btn-add" onclick="a('تيشيرت موديل 02', 'q02')">إضافة للطلب</button>
-            </div>
-
-            <div class="card">
-                <div class="img-box"><img src="te3-beige.png.png" id="img-03" class="product-img"></div>
-                <div class="color-dots">
-                    <div class="dot active" style="background: #F5F5DC;" onclick="v('03','te3-beige.png.png',this)"></div>
-                    <div class="dot" style="background: skyblue;" onclick="v('03','te2-blue.png.png',this)"></div>
-                    <div class="dot" style="background: #000;" onclick="v('03','te1-black.png.png',this)"></div>
-                    <div class="dot" style="background: #fff;" onclick="v('03','te4-white.png.png',this)"></div>
-                </div>
-                <div class="model-name">تيشيرت موديل 03</div>
-                <div class="qty-control"><button class="btn-q" onclick="c('q03',-16)">-</button><span id="q03" class="q-val">16</span><button class="btn-q" onclick="c('q03',16)">+</button></div>
-                <button class="btn-add" onclick="a('تيشيرت موديل 03', 'q03')">إضافة للطلب</button>
-            </div>
-
-            <div class="card">
-                <div class="img-box"><img src="tr1-red.png.png" id="img-04" class="product-img"></div>
-                <div class="color-dots">
-                    <div class="dot active" style="background: red;" onclick="v('04','tr1-red.png.png',this)"></div>
-                    <div class="dot" style="background: #fff;" onclick="v('04','tr4-white.png.png',this)"></div>
-                    <div class="dot" style="background: #000;" onclick="v('04','tr2-black.png.png',this)"></div>
-                    <div class="dot" style="background: gray;" onclick="v('04','tr3-grey.png.png',this)"></div>
-                </div>
-                <div class="model-name">تيشيرت موديل 04</div>
-                <div class="qty-control"><button class="btn-q" onclick="c('q04',-16)">-</button><span id="q04" class="q-val">16</span><button class="btn-q" onclick="c('q04',16)">+</button></div>
-                <button class="btn-add" onclick="a('تيشيرت موديل 04', 'q04')">إضافة للطلب</button>
-            </div>
-
-            <div class="card">
-                <div class="img-box"><img src="n5-white.png.png" id="img-05" class="product-img"></div>
-                <div class="color-dots">
-                    <div class="dot active" style="background: #fff;" onclick="v('05','n5-white.png.png',this)"></div>
-                    <div class="dot" style="background: purple;" onclick="v('05','n5-purple.png.png',this)"></div>
-                    <div class="dot" style="background: #000;" onclick="v('05','n5-black.png.png',this)"></div>
-                    <div class="dot" style="background: gray;" onclick="v('05','n6-grey.png.png',this)"></div>
-                </div>
-                <div class="model-name">تيشيرت موديل 05</div>
-                <div class="qty-control"><button class="btn-q" onclick="c('q05',-16)">-</button><span id="q05" class="q-val">16</span><button class="btn-q" onclick="c('q05',16)">+</button></div>
-                <button class="btn-add" onclick="a('تيشيرت موديل 05', 'q05')">إضافة للطلب</button>
-            </div>
+    <div class="card">
+        <div class="img-box">
+            <img src="n5-white.png.png" id="img-01" class="product-img">
         </div>
-    </div>
 
-    <div id="sets" class="section-content">
-        <div class="grid">
-            <div class="card">
-                <div class="img-box"><img src="Picsart_26-05-28_16-28-24-642.jpg" id="img-set" class="product-img"></div>
-                <div class="color-dots">
-                    <div class="dot active" style="background: #000;" onclick="v('set','Picsart_26-05-28_16-28-24-642.jpg',this)"></div>
-                    <div class="dot" style="background: beige;" onclick="v('set','Picsart_beige.jpg',this)"></div>
-                    <div class="dot" style="background: navy;" onclick="v('set','Picsart_navy.jpg',this)"></div>
-                    <div class="dot" style="background: gray;" onclick="v('set','Picsart_gray.jpg',this)"></div>
-                </div>
-                <div class="model-name">طقم رجالي فاخر</div>
-                <div class="qty-control"><button class="btn-q" onclick="c('qset',-16)">-</button><span id="qset" class="q-val">16</span><button class="btn-q" onclick="c('qset',16)">+</button></div>
-                <button class="btn-add" onclick="a('طقم فاخر', 'qset')">إضافة للطلب</button>
-            </div>
+        <div class="color-dots">
+            <div class="dot active" style="background: #fff;" onclick="changeColor('01', 'n5-white.png.png', this)"></div>
+            <div class="dot" style="background: purple;" onclick="changeColor('01', 'n5-purple.png.png', this)"></div>
+            <div class="dot" style="background: #000;" onclick="changeColor('01', 'n5-black.png.png', this)"></div>
+            <div class="dot" style="background: gold;" onclick="changeColor('01', 't1-yellow.png', this)"></div>
         </div>
-    </div>
 
-    <div class="cart-bar" id="cartBar">
-        <div class="cart-container">
-            <div id="cartSummary" style="font-weight: 900; color: var(--gold); font-size: 1.2rem;">إجمالي: 0 قطعة</div>
-            <button class="btn-add" style="width: auto; padding: 10px 30px;" onclick="send()">إتمام الطلب (واتساب)</button>
+        <div class="model-name">تيشيرت موديل 01</div>
+
+        <div class="qty-control">
+            <button class="btn-q" onclick="updateQty('q-01', 16)">+</button>
+            <span id="q-01" class="q-val">16</span>
+            <button class="btn-q" onclick="updateQty('q-01', -16)">-</button>
         </div>
+
+        <button class="btn-add" onclick="alert('تمت إضافة ' + document.getElementById('q-01').innerText + ' قطعة من موديل 01')">إضافة للطلب</button>
     </div>
 
     <script>
-        let cart = [];
-        function openS(id, btn) {
-            let sections = document.getElementsByClassName('section-content');
-            for (let s of sections) { s.classList.remove('active'); }
-            let tabs = document.getElementsByClassName('tab-btn');
-            for (let t of tabs) { t.classList.remove('active'); }
-            document.getElementById(id).classList.add('active');
-            btn.classList.add('active');
+        // دالة تغيير اللون والصورة
+        function changeColor(id, imgPath, dotElement) {
+            document.getElementById('img-' + id).src = imgPath;
+            let dots = dotElement.parentElement.getElementsByClassName('dot');
+            for (let d of dots) { d.classList.remove('active'); }
+            dotElement.classList.add('active');
         }
-        function c(id, val) {
+
+        // دالة تغيير الكمية
+        function updateQty(id, val) {
             let el = document.getElementById(id);
             let current = parseInt(el.innerText);
-            if (current + val >= 16) { el.innerText = current + val; }
-        }
-        function v(id, imgPath, dotEl) {
-            document.getElementById('img-' + id).src = imgPath;
-            let siblings = dotEl.parentElement.getElementsByClassName('dot');
-            for (let s of siblings) { s.classList.remove('active'); }
-            dotEl.classList.add('active');
-        }
-        function a(name, qtyId) {
-            let q = parseInt(document.getElementById(qtyId).innerText);
-            let item = cart.find(i => i.name === name);
-            if (item) { item.qty += q; } else { cart.push({ name: name, qty: q }); }
-            let total = 0;
-            for (let i of cart) { total += i.qty; }
-            document.getElementById('cartBar').style.display = 'block';
-            document.getElementById('cartSummary').innerText = `إجمالي: ${total} قطعة (${total/16} شد)`;
-        }
-        function send() {
-            let msg = "طلب جملة جديد:\n" + cart.map(i => `• ${i.name}: ${i.qty} قطعة`).join('\n');
-            window.open(`https://wa.me/9665XXXXXXXX?text=${encodeURIComponent(msg)}`);
+            if (current + val >= 16) {
+                el.innerText = current + val;
+            }
         }
     </script>
 </body>
