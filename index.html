@@ -24,12 +24,11 @@
         .dot { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #333; cursor: pointer; }
         .dot.active { border-color: var(--gold); box-shadow: 0 0 5px var(--gold); }
         .model-name { font-weight: 700; margin-bottom: 15px; font-size: 1.1rem; }
-        .qty-control { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 15px; background: #151515; padding: 10px; border-radius: 12px; border: 1px solid #333; }
-        .btn-q { background: #252525; color: #fff; border: 1px solid var(--gold); width: 40px; height: 40px; border-radius: 10px; cursor: pointer; font-size: 1.5rem; line-height: 1; }
+        .qty-control { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 15px; background: #151515; padding: 10px; border-radius: 12px; }
+        .btn-q { background: #252525; color: #fff; border: 1px solid var(--gold); width: 40px; height: 40px; border-radius: 10px; cursor: pointer; font-size: 1.5rem; }
         .q-val { color: var(--gold); font-weight: 900; min-width: 40px; font-size: 1.2rem; }
-        .btn-add { background: linear-gradient(135deg, #D4AF37, #8A6D3B); color: #000; padding: 15px; border-radius: 12px; font-weight: 900; border: none; width: 100%; cursor: pointer; font-size: 1rem; }
+        .btn-add { background: linear-gradient(135deg, #D4AF37, #8A6D3B); color: #000; padding: 15px; border-radius: 12px; font-weight: 900; border: none; width: 100%; cursor: pointer; }
         .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10, 10, 10, 0.98); border-top: 2px solid var(--gold); padding: 20px; display: none; z-index: 1000; }
-        .cart-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         @media (min-width: 992px) { .grid { grid-template-columns: repeat(4, 1fr); } .img-box { height: 280px; } }
     </style>
 </head>
@@ -56,6 +55,7 @@
                 <div class="qty-control"><button class="btn-q" onclick="c('q01',-16)">-</button><span id="q01" class="q-val">16</span><button class="btn-q" onclick="c('q01',16)">+</button></div>
                 <button class="btn-add" onclick="a('تيشيرت موديل 01', 'q01')">إضافة للطلب</button>
             </div>
+
             <div class="card">
                 <div class="img-box"><img src="t2-purple.png.png" id="img-02" class="product-img"></div>
                 <div class="color-dots">
@@ -68,6 +68,7 @@
                 <div class="qty-control"><button class="btn-q" onclick="c('q02',-16)">-</button><span id="q02" class="q-val">16</span><button class="btn-q" onclick="c('q02',16)">+</button></div>
                 <button class="btn-add" onclick="a('تيشيرت موديل 02', 'q02')">إضافة للطلب</button>
             </div>
+
             <div class="card">
                 <div class="img-box"><img src="te3-beige.png.png" id="img-03" class="product-img"></div>
                 <div class="color-dots">
@@ -80,6 +81,7 @@
                 <div class="qty-control"><button class="btn-q" onclick="c('q03',-16)">-</button><span id="q03" class="q-val">16</span><button class="btn-q" onclick="c('q03',16)">+</button></div>
                 <button class="btn-add" onclick="a('تيشيرت موديل 03', 'q03')">إضافة للطلب</button>
             </div>
+
             <div class="card">
                 <div class="img-box"><img src="tr1-red.png.png" id="img-04" class="product-img"></div>
                 <div class="color-dots">
@@ -92,6 +94,7 @@
                 <div class="qty-control"><button class="btn-q" onclick="c('q04',-16)">-</button><span id="q04" class="q-val">16</span><button class="btn-q" onclick="c('q04',16)">+</button></div>
                 <button class="btn-add" onclick="a('تيشيرت موديل 04', 'q04')">إضافة للطلب</button>
             </div>
+
             <div class="card">
                 <div class="img-box"><img src="n5-white.png.png" id="img-05" class="product-img"></div>
                 <div class="color-dots">
@@ -123,8 +126,6 @@
             </div>
         </div>
     </div>
-    <div id="pants" class="section-content"><h3>قريباً.. قسم البنطلون والشورت</h3></div>
-    <div id="shirts" class="section-content"><h3>قريباً.. قسم القمصان</h3></div>
 
     <div class="cart-bar" id="cartBar">
         <div class="cart-container">
@@ -135,7 +136,6 @@
 
     <script>
         let cart = [];
-        // دالة التبديل بين الأقسام
         function openS(id, btn) {
             let sections = document.getElementsByClassName('section-content');
             for (let s of sections) { s.classList.remove('active'); }
@@ -144,20 +144,17 @@
             document.getElementById(id).classList.add('active');
             btn.classList.add('active');
         }
-        // دالة تغيير الكمية (+ و -)
         function c(id, val) {
             let el = document.getElementById(id);
             let current = parseInt(el.innerText);
             if (current + val >= 16) { el.innerText = current + val; }
         }
-        // دالة تغيير الصور والألوان
         function v(id, imgPath, dotEl) {
             document.getElementById('img-' + id).src = imgPath;
             let siblings = dotEl.parentElement.getElementsByClassName('dot');
             for (let s of siblings) { s.classList.remove('active'); }
             dotEl.classList.add('active');
         }
-        // دالة الإضافة للسلة
         function a(name, qtyId) {
             let q = parseInt(document.getElementById(qtyId).innerText);
             let item = cart.find(i => i.name === name);
@@ -167,7 +164,6 @@
             document.getElementById('cartBar').style.display = 'block';
             document.getElementById('cartSummary').innerText = `إجمالي: ${total} قطعة (${total/16} شد)`;
         }
-        // دالة إرسال الواتساب
         function send() {
             let msg = "طلب جملة جديد:\n" + cart.map(i => `• ${i.name}: ${i.qty} قطعة`).join('\n');
             window.open(`https://wa.me/9665XXXXXXXX?text=${encodeURIComponent(msg)}`);
