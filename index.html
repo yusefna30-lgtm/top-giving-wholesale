@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOP GIVING | Final Pro View</title>
+    <title>TOP GIVING | Elegant View</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #D4AF37; --black: #000; --card-bg: #0c0c0e; --accent: #1a1a1a; }
@@ -12,44 +12,45 @@
         .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; max-width: 1200px; margin: 0 auto; }
         @media (min-width: 992px) { .grid { grid-template-columns: repeat(4, 1fr); } }
 
-        .card { background: var(--card-bg); padding: 8px; border-radius: 15px; border: 1px solid var(--accent); transition: 0.3s; }
+        .card { background: var(--card-bg); padding: 10px; border-radius: 15px; border: 1px solid var(--accent); transition: 0.3s; }
         
-        /* تقليل مساحة الخلفية البيضاء لأقصى حد */
+        /* تقليص الإطار الأبيض ليكون "أصغر قليلاً" كما طلبت */
         .img-box { 
             width: 100%; 
-            height: 150px; /* تقليل الارتفاع جداً لضغط الخلفية */
+            height: 140px; /* تم التصغير من 150 إلى 140 */
             border-radius: 10px; 
             overflow: hidden; 
             background: #fff; 
-            margin-bottom: 8px; 
+            margin-bottom: 10px; 
             display: flex; 
             align-items: center; 
             justify-content: center;
             border: 1px solid transparent;
             transition: 0.4s;
         }
-        @media (min-width: 992px) { .img-box { height: 220px; } }
+        @media (min-width: 992px) { .img-box { height: 190px; } }
 
-        /* تكبير صورة المودل لتخرج من الحواف تقريباً */
+        /* موازنة حجم الموديل داخل الإطار الجديد */
         .product-img { 
-            width: 110%; /* تمديد العرض لملء الإطار */
-            height: 110%; /* تمديد الارتفاع */
-            object-fit: cover; /* جعل الصورة تملأ الإطار بالكامل (سيقوم بقص الهوامش البيضاء الزائدة من الصورة نفسها) */
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; /* العودة للـ contain لضمان عدم قص أطراف الموديل */
+            transform: scale(1.1); /* تكبير بسيط ومتناسق */
             transition: 0.5s ease-in-out; 
         }
 
         .card:hover .img-box { border-color: var(--gold); box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
         .card:hover .product-img { transform: scale(1.2); }
 
-        /* تصغير العناصر الأخرى لترك مساحة للصورة */
-        .color-dots { display: flex; justify-content: center; gap: 6px; margin-bottom: 8px; }
+        .color-dots { display: flex; justify-content: center; gap: 6px; margin-bottom: 10px; }
         .dot { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid #333; cursor: pointer; }
         .dot.active { border-color: var(--gold); box-shadow: 0 0 4px var(--gold); }
-        .model-name { font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; }
+        .model-name { font-size: 0.9rem; font-weight: 700; margin-bottom: 10px; }
         
-        .qty-control { display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 8px; background: #151515; padding: 5px; border-radius: 8px; }
-        .btn-q { background: #252525; color: #fff; border: 1px solid var(--gold); width: 30px; height: 30px; border-radius: 6px; cursor: pointer; font-weight: 900; }
-        .q-val { color: var(--gold); font-weight: 900; min-width: 25px; font-size: 0.9rem; }
+        .qty-control { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px; background: #151515; padding: 6px; border-radius: 8px; }
+        .btn-q { background: #252525; color: #fff; border: 1px solid var(--gold); width: 32px; height: 32px; border-radius: 6px; cursor: pointer; }
+        .q-val { color: var(--gold); font-weight: 900; min-width: 25px; }
+
         .btn-add { background: linear-gradient(135deg, #D4AF37, #8A6D3B); color: #000; padding: 10px; border-radius: 8px; font-weight: 900; border: none; width: 100%; cursor: pointer; font-size: 0.85rem; }
 
         .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(10, 10, 10, 0.98); border-top: 2px solid var(--gold); padding: 15px; display: none; z-index: 1000; }
@@ -67,7 +68,7 @@
                 <div class="dot" style="background: #000;" onclick="v('01', 'n5-black.png.png', this)"></div>
                 <div class="dot" style="background: #fff;" onclick="v('01', 'n5-white.png.png', this)"></div>
             </div>
-            <div class="model-name">موديل 01</div>
+            <div class="model-name">تيشيرت موديل 01</div>
             <div class="qty-control"><button class="btn-q" onclick="c('q-01', 16)">+</button><span id="q-01" class="q-val">16</span><button class="btn-q" onclick="c('q-01', -16)">-</button></div>
             <button class="btn-add" onclick="addToOrder('موديل 01', 'q-01')">إضافة</button>
         </div>
@@ -80,7 +81,7 @@
                 <div class="dot" style="background: blue;" onclick="v('02', 't1-blue.png', this)"></div>
                 <div class="dot" style="background: gold;" onclick="v('02', 't1-yellow.png', this)"></div>
             </div>
-            <div class="model-name">موديل 02</div>
+            <div class="model-name">تيشيرت موديل 02</div>
             <div class="qty-control"><button class="btn-q" onclick="c('q-02', 16)">+</button><span id="q-02" class="q-val">16</span><button class="btn-q" onclick="c('q-02', -16)">-</button></div>
             <button class="btn-add" onclick="addToOrder('موديل 02', 'q-02')">إضافة</button>
         </div>
@@ -93,7 +94,7 @@
                 <div class="dot" style="background: #fff;" onclick="v('03', 't2-white.png.png', this)"></div>
                 <div class="dot" style="background: gray;" onclick="v('03', 't2-grey.png.png', this)"></div>
             </div>
-            <div class="model-name">موديل 03</div>
+            <div class="model-name">تيشيرت موديل 03</div>
             <div class="qty-control"><button class="btn-q" onclick="c('q-03', 16)">+</button><span id="q-03" class="q-val">16</span><button class="btn-q" onclick="c('q-03', -16)">-</button></div>
             <button class="btn-add" onclick="addToOrder('موديل 03', 'q-03')">إضافة</button>
         </div>
@@ -131,10 +132,10 @@
             document.getElementById('cart-info').innerText = `${totalQty/16} شدة (${totalQty} قطعة)`;
         }
         function sendWhatsApp() {
-            let message = "📦 *طلب جملة من TOP GIVING* 📦\n\n";
+            let message = "📦 *طلب جملة جديد من TOP GIVING* 📦\n\n";
             order.forEach(item => { message += `• *${item.name}*: ${item.qty} قطعة ( ${item.qty/16} شدة )\n`; });
             let totalQty = order.reduce((sum, item) => sum + item.qty, 0);
-            message += `\n💰 *الإجمالي:* ${totalQty/16} شدة`;
+            message += `\n💰 *إجمالي الطلب:* ${totalQty/16} شدة`;
             window.open(`https://wa.me/966560564719?text=${encodeURIComponent(message)}`, '_blank');
         }
     </script>
