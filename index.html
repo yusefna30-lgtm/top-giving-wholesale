@@ -32,15 +32,17 @@
 </head>
 <body onload="filterProducts('tshirt')">
 
-    <div class="header">
-        <div class="brand-name">TOP GIVING</div>
-        <div class="nav-tabs">
-            <div class="tab active" id="tab-tshirt" onclick="filterProducts('tshirt')">تيشيرتات</div>
-            <div class="tab" id="tab-set" onclick="filterProducts('set')">أطقم صيفية</div>
-            <div class="tab" id="tab-pants" onclick="filterProducts('pants')">شورتات</div>
-        </div>
+<div class="header">
+    <div class="brand-name">
+        <img src="Picsart_26-01-26_08-41-16-2-removebg-preview.png" alt="TOP GIVING Logo" style="max-height: 100px; width: auto; display: block; margin: 0 auto 10px; filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.3));">
     </div>
-
+    
+    <div class="nav-tabs">
+        <div class="tab active" id="tab-tshirt" onclick="filterProducts('tshirt')">تيشيرتات</div>
+        <div class="tab" id="tab-set" onclick="filterProducts('set')">أطقم صيفية</div>
+        <div class="tab" id="tab-pants" onclick="filterProducts('pants')">شورتات</div>
+    </div>
+</div>
     <div class="grid">
         <div class="card tshirt show"><div class="img-box"><img src="n5-back.png.png" id="it1" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#eee" onclick="v('it1','n5-back.png.png',this)"></div><div class="dot" style="background:purple" onclick="v('it1','n5-purple.png.png',this)"></div><div class="dot" style="background:#000" onclick="v('it1','n5-black.png.png',this)"></div><div class="dot" style="background:#fff" onclick="v('it1','n5-white.png.png',this)"></div></div><div class="model-name">تيشيرت 01</div><div class="qty-control"><button class="btn-q" onclick="c('qt1',16)">+</button><span id="qt1">16</span><button class="btn-q" onclick="c('qt1',-16)">-</button></div><button class="btn-add" onclick="add('تيشيرت 01','qt1',this)">إضافة</button></div>
         
