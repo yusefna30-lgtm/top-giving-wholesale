@@ -10,23 +10,23 @@
         body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 130px; }
         .header { padding: 20px 10px; background: #000; border-bottom: 1px solid var(--accent); position: sticky; top: 0; z-index: 1000; }
         .brand-logo { max-height: 100px; width: auto; display: block; margin: 0 auto 15px; filter: drop-shadow(0 0 5px var(--gold)); }
-        .nav-tabs { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+        .nav-tabs { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
         .tab { background: #111; color: #fff; padding: 10px 20px; border-radius: 25px; border: 1px solid var(--accent); cursor: pointer; transition: 0.3s; font-size: 0.9rem; }
         .tab.active { background: var(--gold); color: #000; font-weight: bold; }
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 1200px; margin: 0 auto; padding: 0 12px; }
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 1200px; margin: 20px auto; padding: 0 12px; }
         @media (min-width: 992px) { .grid { grid-template-columns: repeat(4, 1fr); } }
         .card { display: none; background: var(--card-bg); padding: 15px; border-radius: 18px; border: 1px solid var(--accent); flex-direction: column; align-items: center; }
         .card.show { display: flex; }
         .img-box { width: 100%; height: 180px; border-radius: 12px; overflow: hidden; background: #fff; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; }
         .product-img { max-width: 90%; max-height: 90%; object-fit: contain; }
-        .color-dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 15px; min-height: 30px; }
+        .color-dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 15px; height: 30px; }
         .dot { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #333; cursor: pointer; }
         .dot.active { border-color: var(--gold); transform: scale(1.1); box-shadow: 0 0 5px var(--gold); }
         .model-name { font-size: 1rem; font-weight: 700; margin-bottom: 12px; }
         .qty-control { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px; background: #1a1a1a; padding: 8px; border-radius: 10px; width: 100%; }
         .btn-q { background: #252525; color: #fff; border: 1px solid var(--gold); width: 34px; height: 34px; border-radius: 8px; cursor: pointer; }
         .btn-add { background: linear-gradient(135deg, #D4AF37, #8A6D3B); color: #000; padding: 12px; border-radius: 10px; font-weight: 900; border: none; width: 100%; cursor: pointer; }
-        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.9); border-top: 2px solid var(--gold); padding: 15px; display: none; z-index: 1001; }
+        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.95); border-top: 2px solid var(--gold); padding: 15px; display: none; z-index: 1001; }
         .cart-flex { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
     </style>
 </head>
@@ -42,89 +42,33 @@
     </div>
 
     <div class="grid">
-        <div class="card tshirt show">
-            <div class="img-box"><img src="n5-back.png.png" id="t1-img" class="product-img"></div>
-            <div class="color-dots">
-                <div class="dot active" style="background:#000" onclick="v('t1-img','n5-back.png.png',this)"></div>
-                <div class="dot" style="background:purple" onclick="v('t1-img','n5-purple.png.png',this)"></div>
-                <div class="dot" style="background:#fff; border:1px solid #ccc" onclick="v('t1-img','n5-white.png.png',this)"></div>
-            </div>
-            <div class="model-name">تيشيرت 01</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('t1-q',16)">+</button><span id="t1-q">16</span><button class="btn-q" onclick="c('t1-q',-16)">-</button></div>
-            <button class="btn-add" onclick="add('تيشيرت 01','t1-q',this)">إضافة</button>
-        </div>
+        <div class="card tshirt show"><div class="img-box"><img src="n5-back.png.png" id="t1" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#000" onclick="v('t1','n5-back.png.png',this)"></div><div class="dot" style="background:purple" onclick="v('t1','n5-purple.png.png',this)"></div><div class="dot" style="background:#fff; border:1px solid #ccc" onclick="v('t1','n5-white.png.png',this)"></div></div><div class="model-name">تيشيرت 01</div><div class="qty-control"><button class="btn-q" onclick="c('q1',16)">+</button><span id="q1">16</span><button class="btn-q" onclick="c('q1',-16)">-</button></div><button class="btn-add" onclick="add('تيشيرت 01','q1',this)">إضافة</button></div>
+        
+        <div class="card tshirt show"><div class="img-box"><img src="t1-white.png" id="t2" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#fff; border:1px solid #ccc" onclick="v('t2','t1-white.png',this)"></div><div class="dot" style="background:#000" onclick="v('t2','t1-black.png',this)"></div><div class="dot" style="background:blue" onclick="v('t2','t1-blue.png',this)"></div><div class="dot" style="background:gold" onclick="v('t2','t1-yellow.png',this)"></div></div><div class="model-name">تيشيرت 02</div><div class="qty-control"><button class="btn-q" onclick="c('q2',16)">+</button><span id="q2">16</span><button class="btn-q" onclick="c('q2',-16)">-</button></div><button class="btn-add" onclick="add('تيشيرت 02','q2',this)">إضافة</button></div>
 
-        <div class="card tshirt show">
-            <div class="img-box"><img src="t1-white.png" id="t2-img" class="product-img"></div>
-            <div class="color-dots">
-                <div class="dot active" style="background:#fff; border:1px solid #ccc" onclick="v('t2-img','t1-white.png',this)"></div>
-                <div class="dot" style="background:#000" onclick="v('t2-img','t1-black.png',this)"></div>
-                <div class="dot" style="background:blue" onclick="v('t2-img','t1-blue.png',this)"></div>
-            </div>
-            <div class="model-name">تيشيرت 02</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('t2-q',16)">+</button><span id="t2-q">16</span><button class="btn-q" onclick="c('t2-q',-16)">-</button></div>
-            <button class="btn-add" onclick="add('تيشيرت 02','t2-q',this)">إضافة</button>
-        </div>
+        <div class="card tshirt show"><div class="img-box"><img src="t2-black.png.png" id="t3" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#000" onclick="v('t3','t2-black.png.png',this)"></div><div class="dot" style="background:purple" onclick="v('t3','t2-purple.png.png',this)"></div><div class="dot" style="background:#fff; border:1px solid #ccc" onclick="v('t3','t2-white.png.png',this)"></div><div class="dot" style="background:gray" onclick="v('t3','t2-grey.png.png',this)"></div></div><div class="model-name">تيشيرت 03</div><div class="qty-control"><button class="btn-q" onclick="c('q3',16)">+</button><span id="q3">16</span><button class="btn-q" onclick="c('q3',-16)">-</button></div><button class="btn-add" onclick="add('تيشيرت 03','q3',this)">إضافة</button></div>
 
-        <div class="card tshirt show">
-            <div class="img-box"><img src="t2-black.png.png" id="t3-img" class="product-img"></div>
-            <div class="color-dots">
-                <div class="dot active" style="background:#000" onclick="v('t3-img','t2-black.png.png',this)"></div>
-                <div class="dot" style="background:purple" onclick="v('t3-img','t2-purple.png.png',this)"></div>
-                <div class="dot" style="background:#fff; border:1px solid #ccc" onclick="v('t3-img','t2-white.png.png',this)"></div>
-                <div class="dot" style="background:gray" onclick="v('t3-img','t2-grey.png.png',this)"></div>
-            </div>
-            <div class="model-name">تيشيرت 03</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('t3-q',16)">+</button><span id="t3-q">16</span><button class="btn-q" onclick="c('t3-q',-16)">-</button></div>
-            <button class="btn-add" onclick="add('تيشيرت 03','t3-q',this)">إضافة</button>
-        </div>
+        <div class="card tshirt show"><div class="img-box"><img src="tr1-red.png.png" id="t4" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:red" onclick="v('t4','tr1-red.png.png',this)"></div><div class="dot" style="background:#000" onclick="v('t4','tr2-black.png.png',this)"></div><div class="dot" style="background:#d2b48c" onclick="v('t4','tr3-beige.png.png',this)"></div><div class="dot" style="background:#fff" onclick="v('t4','tr4-white.png.png',this)"></div></div><div class="model-name">تيشيرت 04</div><div class="qty-control"><button class="btn-q" onclick="c('q4',16)">+</button><span id="q4">16</span><button class="btn-q" onclick="c('q4',-16)">-</button></div><button class="btn-add" onclick="add('تيشيرت 04','q4',this)">إضافة</button></div>
 
-        <div class="card set">
-            <div class="img-box"><img src="s3-black.jpg" id="s3-img" class="product-img"></div>
-            <div class="color-dots">
-                <div class="dot active" style="background:#000" onclick="v('s3-img','s3-black.jpg',this)"></div>
-                <div class="dot" style="background:red" onclick="v('s3-img','s3-red.jpg',this)"></div>
-                <div class="dot" style="background:purple" onclick="v('s3-img','s3-purple.jpg',this)"></div>
-                <div class="dot" style="background:silver" onclick="v('s3-img','s3-grey.jpg',this)"></div>
-            </div>
-            <div class="model-name">طقم 03</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('s3-q',16)">+</button><span id="s3-q">16</span><button class="btn-q" onclick="c('s3-q',-16)">-</button></div>
-            <button class="btn-add" onclick="add('طقم 03','s3-q',this)">إضافة</button>
-        </div>
+        <div class="card tshirt show"><div class="img-box"><img src="te1-black.png.png" id="t5" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#000" onclick="v('t5','te1-black.png.png',this)"></div><div class="dot" style="background:blue" onclick="v('t5','te2-blue.png.png',this)"></div><div class="dot" style="background:#d2b48c" onclick="v('t5','te3-beige.png.png',this)"></div><div class="dot" style="background:#fff" onclick="v('t5','te4-white.png.png',this)"></div></div><div class="model-name">تيشيرت 05</div><div class="qty-control"><button class="btn-q" onclick="c('q5',16)">+</button><span id="q5">16</span><button class="btn-q" onclick="c('q5',-16)">-</button></div><button class="btn-add" onclick="add('تيشيرت 05','q5',this)">إضافة</button></div>
 
-        <div class="card set">
-            <div class="img-box"><img src="s4-black.jpg" id="s4-img" class="product-img"></div>
-            <div class="color-dots">
-                <div class="dot active" style="background:#000" onclick="v('s4-img','s4-black.jpg',this)"></div>
-                <div class="dot" style="background:green" onclick="v('s4-img','s4-green.jpg',this)"></div>
-                <div class="dot" style="background:beige" onclick="v('s4-img','s4-beige.jpg',this)"></div>
-                <div class="dot" style="background:#fff; border:1px solid #ccc" onclick="v('s4-img','s4-white.jpg',this)"></div>
-            </div>
-            <div class="model-name">طقم 04</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('s4-q',16)">+</button><span id="s4-q">16</span><button class="btn-q" onclick="c('s4-q',-16)">-</button></div>
-            <button class="btn-add" onclick="add('طقم 04','s4-q',this)">إضافة</button>
-        </div>
+        <div class="card set"><div class="img-box"><img src="s1-white.png.png" id="s1" class="product-img"></div><div class="model-name">طقم 01</div><div class="qty-control"><button class="btn-q" onclick="c('qs1',16)">+</button><span id="qs1">16</span><button class="btn-q" onclick="c('qs1',-16)">-</button></div><button class="btn-add" onclick="add('طقم 01','qs1',this)">إضافة</button></div>
+        <div class="card set"><div class="img-box"><img src="s2-black.jpg" id="s2" class="product-img"></div><div class="model-name">طقم 02</div><div class="qty-control"><button class="btn-q" onclick="c('qs2',16)">+</button><span id="qs2">16</span><button class="btn-q" onclick="c('qs2',-16)">-</button></div><button class="btn-add" onclick="add('طقم 02','qs2',this)">إضافة</button></div>
+        <div class="card set"><div class="img-box"><img src="s3-black.jpg" id="s3" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#000" onclick="v('s3','s3-black.jpg',this)"></div><div class="dot" style="background:red" onclick="v('s3','s3-red.jpg',this)"></div><div class="dot" style="background:purple" onclick="v('s3','s3-purple.jpg',this)"></div><div class="dot" style="background:silver" onclick="v('s3','s3-grey.jpg',this)"></div></div><div class="model-name">طقم 03</div><div class="qty-control"><button class="btn-q" onclick="c('qs3',16)">+</button><span id="qs3">16</span><button class="btn-q" onclick="c('qs3',-16)">-</button></div><button class="btn-add" onclick="add('طقم 03','qs3',this)">إضافة</button></div>
+        <div class="card set"><div class="img-box"><img src="s4-black.jpg" id="s4" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#000" onclick="v('s4','s4-black.jpg',this)"></div><div class="dot" style="background:green" onclick="v('s4','s4-green.jpg',this)"></div><div class="dot" style="background:beige" onclick="v('s4','s4-beige.jpg',this)"></div><div class="dot" style="background:#fff" onclick="v('s4','s4-white.jpg',this)"></div></div><div class="model-name">طقم 04</div><div class="qty-control"><button class="btn-q" onclick="c('qs4',16)">+</button><span id="qs4">16</span><button class="btn-q" onclick="c('qs4',-16)">-</button></div><button class="btn-add" onclick="add('طقم 04','qs4',this)">إضافة</button></div>
+        <div class="card set"><div class="img-box"><img src="s5-black.jpg" id="s5" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#000" onclick="v('s5','s5-black.jpg',this)"></div><div class="dot" style="background:gray" onclick="v('s5','s5-grey.jpg',this)"></div><div class="dot" style="background:beige" onclick="v('s5','s5-beige.jpg',this)"></div><div class="dot" style="background:#fff" onclick="v('s5','s5-white.jpg',this)"></div></div><div class="model-name">طقم 05</div><div class="qty-control"><button class="btn-q" onclick="c('qs5',16)">+</button><span id="qs5">16</span><button class="btn-q" onclick="c('qs5',-16)">-</button></div><button class="btn-add" onclick="add('طقم 05','qs5',this)">إضافة</button></div>
+        
+        <div class="card set"><div class="img-box"><img src="sea-black.png" id="se1" class="product-img"></div><div class="model-name">طقم Sea 01</div><div class="qty-control"><button class="btn-q" onclick="c('qse1',12)">+</button><span id="qse1">12</span><button class="btn-q" onclick="c('qse1',-12)">-</button></div><button class="btn-add" onclick="add('Sea 01','qse1',this)">إضافة</button></div>
+        <div class="card set"><div class="img-box"><img src="sea1-off-withe.png" id="se2" class="product-img"></div><div class="model-name">طقم Sea 02</div><div class="qty-control"><button class="btn-q" onclick="c('qse2',12)">+</button><span id="qse2">12</span><button class="btn-q" onclick="c('qse2',-12)">-</button></div><button class="btn-add" onclick="add('Sea 02','qse2',this)">إضافة</button></div>
+        <div class="card set"><div class="img-box"><img src="sea2-brown.png" id="se3" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#8b4513" onclick="v('se3','sea2-brown.png',this)"></div><div class="dot" style="background:#ffc0cb" onclick="v('se3','sea2-pink.png',this)"></div><div class="dot" style="background:#808080" onclick="v('se3','sea2-grey.png',this)"></div></div><div class="model-name">طقم Sea 03</div><div class="qty-control"><button class="btn-q" onclick="c('qse3',12)">+</button><span id="qse3">12</span><button class="btn-q" onclick="c('qse3',-12)">-</button></div><button class="btn-add" onclick="add('Sea 03','qse3',this)">إضافة</button></div>
 
-        <div class="card pants">
-            <div class="img-box"><img src="mps182-beige.png" id="sh1-img" class="product-img"></div>
-            <div class="color-dots">
-                <div class="dot active" style="background:#d2b48c" onclick="v('sh1-img','mps182-beige.png',this)"></div>
-                <div class="dot" style="background:#000" onclick="v('sh1-img','mps182-black.png',this)"></div>
-                <div class="dot" style="background:blue" onclick="v('sh1-img','mps182-blue.png',this)"></div>
-                <div class="dot" style="background:#fff; border:1px solid #ccc" onclick="v('sh1-img','mps182-white.png',this)"></div>
-            </div>
-            <div class="model-name">شورت 182</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('sh1-q',20)">+</button><span id="sh1-q">20</span><button class="btn-q" onclick="c('sh1-q',-20)">-</button></div>
-            <button class="btn-add" onclick="add('شورت 182','sh1-q',this)">إضافة</button>
-        </div>
+        <div class="card pants"><div class="img-box"><img src="mps182-beige.png" id="sh1" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#d2b48c" onclick="v('sh1','mps182-beige.png',this)"></div><div class="dot" style="background:#000" onclick="v('sh1','mps182-black.png',this)"></div><div class="dot" style="background:blue" onclick="v('sh1','mps182-blue.png',this)"></div><div class="dot" style="background:#fff" onclick="v('sh1','mps182-white.png',this)"></div></div><div class="model-name">شورت 182</div><div class="qty-control"><button class="btn-q" onclick="c('qsh1',20)">+</button><span id="qsh1">20</span><button class="btn-q" onclick="c('qsh1',-20)">-</button></div><button class="btn-add" onclick="add('شورت 182','qsh1',this)">إضافة</button></div>
+        <div class="card pants"><div class="img-box"><img src="mps185-grey.png" id="sh2" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#808080" onclick="v('sh2','mps185-grey.png',this)"></div><div class="dot" style="background:#000" onclick="v('sh2','mps185-black.png',this)"></div><div class="dot" style="background:#4b5320" onclick="v('sh2','mps185-green.png',this)"></div><div class="dot" style="background:#fff" onclick="v('sh2','mps185-white.png',this)"></div></div><div class="model-name">شورت 185</div><div class="qty-control"><button class="btn-q" onclick="c('qsh2',20)">+</button><span id="qsh2">20</span><button class="btn-q" onclick="c('qsh2',-20)">-</button></div><button class="btn-add" onclick="add('شورت 185','qsh2',this)">إضافة</button></div>
+        <div class="card pants"><div class="img-box"><img src="mps0033-heavenly.png" id="sh3" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#87CEEB" onclick="v('sh3','mps0033-heavenly.png',this)"></div><div class="dot" style="background:#000" onclick="v('sh3','mps0033-black.png',this)"></div><div class="dot" style="background:#fff" onclick="v('sh3','mps0033-white.png',this)"></div><div class="dot" style="background:#4b5320" onclick="v('sh3','mps0033-green.png',this)"></div></div><div class="model-name">شورت 0033</div><div class="qty-control"><button class="btn-q" onclick="c('qsh3',20)">+</button><span id="qsh3">20</span><button class="btn-q" onclick="c('qsh3',-20)">-</button></div><button class="btn-add" onclick="add('شورت 0033','qsh3',this)">إضافة</button></div>
+        <div class="card pants"><div class="img-box"><img src="mps176-white.png" id="sh4" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#fff" onclick="v('sh4','mps176-white.png',this)"></div><div class="dot" style="background:#000" onclick="v('sh4','mps176-black.png',this)"></div><div class="dot" style="background:#808080" onclick="v('sh4','mps176-grey.png',this)"></div><div class="dot" style="background:#8b4513" onclick="v('sh4','mps176-brown.png',this)"></div></div><div class="model-name">شورت 176</div><div class="qty-control"><button class="btn-q" onclick="c('qsh4',20)">+</button><span id="qsh4">20</span><button class="btn-q" onclick="c('qsh4',-20)">-</button></div><button class="btn-add" onclick="add('شورت 176','qsh4',this)">إضافة</button></div>
     </div>
 
-    <div class="cart-bar" id="cart-bar">
-        <div class="cart-flex">
-            <div id="cart-info" style="color:var(--gold); font-weight:bold;">الإجمالي: 0 حبة</div>
-            <button class="btn-add" style="width:auto; padding:10px 20px;" onclick="send()">إرسال ✅</button>
-        </div>
-    </div>
+    <div class="cart-bar" id="cart-bar"><div class="cart-flex"><div id="cart-info" style="color:var(--gold); font-weight:bold;">الإجمالي: 0 حبة</div><button class="btn-add" style="width:auto; padding:8px 20px;" onclick="send()">إرسال ✅</button></div></div>
 
     <script>
         function filterProducts(cat) {
@@ -135,7 +79,7 @@
         function v(id, path, el) { document.getElementById(id).src = path; let dots = el.parentElement.querySelectorAll('.dot'); dots.forEach(d => d.classList.remove('active')); el.classList.add('active'); }
         function c(id, val) { 
             let el = document.getElementById(id); let curr = parseInt(el.innerText); 
-            let min = (id.includes('sh')) ? 20 : 16;
+            let min = (id.includes('sh')) ? 20 : (id.includes('se') ? 12 : 16);
             if (curr + val >= min) el.innerText = curr + val; 
         }
         let order = [];
@@ -145,7 +89,7 @@
             document.getElementById('cart-bar').style.display = 'block';
             let total = order.reduce((sum, i) => sum + i.qty, 0);
             document.getElementById('cart-info').innerText = `الإجمالي: ${total} حبة`;
-            btn.innerText = "تمت الإضافة ✅"; setTimeout(() => btn.innerText = "إضافة", 1500);
+            btn.innerText = "تمت ✅"; setTimeout(() => btn.innerText = "إضافة", 1500);
         }
         function send() {
             let msg = "📦 *طلب جديد من TOP GIVING* 📦\n\n";
