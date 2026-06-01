@@ -50,6 +50,25 @@
         .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.95); border-top: 2px solid var(--gold); padding: 15px; display: none; z-index: 1001; }
         .cart-flex { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .btn-clear { background: #333; color: #fff; border: 1px solid #555; padding: 8px 15px; border-radius: 10px; cursor: pointer; font-family: 'Cairo'; }
+        /* كود زر العودة للأعلى */
+.back-to-top {
+    position: fixed;
+    bottom: 150px;
+    right: 20px;
+    background: #D4AF37;
+    color: #000;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: none; /* يظهر بالجافا سكريبت فقط */
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 998;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    transition: 0.3s;
+}
     </style>
 </head>
 <body onload="initApp()">
@@ -184,6 +203,21 @@
             order.forEach(i => { msg += `• *${i.name}*: ${i.qty} حبة\n`; }); 
             window.open(`https://wa.me/966560564719?text=${encodeURIComponent(msg)}`, '_blank'); 
         }
+        // دالة إظهار الزر عند التمرير وإخفائه عند الصعود
+window.onscroll = function() {
+    let btn = document.getElementById("btnTop");
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        btn.style.display = "flex";
+    } else {
+        btn.style.display = "none";
+    }
+};
+
+// دالة الصعود للأعلى بنعومة
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
     </script>
+<div id="btnTop" class="back-to-top" onclick="scrollToTop()">⬆️</div>
 </body>
 </html>
