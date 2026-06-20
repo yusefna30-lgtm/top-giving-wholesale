@@ -2,25 +2,25 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOP GIVING | المتجر الرسمي</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #D4AF37; --black: #000; --card-bg: #0c0c0e; --accent: #222; }
-        body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 100px; }
-        .header { padding: 20px 10px; background: #000; border-bottom: 2px solid var(--gold); position: sticky; top: 0; z-index: 1000; }
+        body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 50px; }
+        .header { padding: 20px; background: #000; border-bottom: 2px solid var(--gold); position: sticky; top: 0; z-index: 1000; }
         .nav-tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; }
-        .tab { background: #111; color: #fff; padding: 10px 20px; border-radius: 25px; border: 1px solid var(--accent); cursor: pointer; transition: 0.3s; font-size: 0.9rem; }
+        .tab { background: #111; color: #fff; padding: 10px 20px; border-radius: 25px; border: 1px solid var(--accent); cursor: pointer; transition: 0.3s; }
         .tab.active { background: var(--gold); color: #000; font-weight: bold; }
         .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 1000px; margin: 0 auto; padding: 15px; }
         .card { display: none; background: var(--card-bg); padding: 15px; border-radius: 20px; border: 1px solid var(--accent); flex-direction: column; align-items: center; }
         .card.show { display: flex; }
-        .img-box { width: 100%; height: 180px; position: relative; background: #fff; border-radius: 12px; margin-bottom: 12px; }
+        .img-box { width: 100%; height: 160px; position: relative; background: #fff; border-radius: 12px; margin-bottom: 10px; overflow: hidden; }
         .product-img { width: 100%; height: 100%; object-fit: contain; }
-        .zoom-icon { position: absolute; bottom: 8px; left: 8px; cursor: pointer; background: rgba(0,0,0,0.5); padding: 5px; border-radius: 5px; }
-        .btn-add { background: var(--gold); color: #000; padding: 10px; border-radius: 8px; font-weight: 900; border: none; width: 100%; cursor: pointer; margin-top: 10px; }
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; align-items: center; justify-content: center; }
-        .modal img { max-width: 90%; max-height: 80%; }
+        .zoom-icon { position: absolute; bottom: 5px; left: 5px; cursor: pointer; background: rgba(0,0,0,0.5); padding: 5px; border-radius: 5px; }
+        .dots { display: flex; gap: 8px; margin: 10px 0; }
+        .dot { width: 20px; height: 20px; border-radius: 50%; border: 2px solid #333; cursor: pointer; }
+        .btn-add { background: var(--gold); color: #000; padding: 10px; border-radius: 8px; font-weight: bold; border: none; width: 100%; cursor: pointer; }
+        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9); z-index: 2000; align-items: center; justify-content: center; }
     </style>
 </head>
 <body onload="f('tshirt')">
@@ -34,28 +34,17 @@
     </div>
 
     <div class="grid">
-        <div class="card tshirt show"><div class="img-box"><img src="n5-back.png.png" id="t1" class="product-img"><div class="zoom-icon" onclick="z('t1')">🔍</div></div><div>تيشيرت 01</div><button class="btn-add">إضافة</button></div>
-        <div class="card tshirt show"><div class="img-box"><img src="t1-white.png" id="t2" class="product-img"><div class="zoom-icon" onclick="z('t2')">🔍</div></div><div>تيشيرت 02</div><button class="btn-add">إضافة</button></div>
-        <div class="card tshirt show"><div class="img-box"><img src="t2-black.png.png" id="t3" class="product-img"><div class="zoom-icon" onclick="z('t3')">🔍</div></div><div>تيشيرت 03</div><button class="btn-add">إضافة</button></div>
-        <div class="card tshirt show"><div class="img-box"><img src="tr1-red.png.png" id="t4" class="product-img"><div class="zoom-icon" onclick="z('t4')">🔍</div></div><div>تيشيرت 04</div><button class="btn-add">إضافة</button></div>
-        <div class="card tshirt show"><div class="img-box"><img src="te1-black.png.png" id="t5" class="product-img"><div class="zoom-icon" onclick="z('t5')">🔍</div></div><div>تيشيرت 05</div><button class="btn-add">إضافة</button></div>
+        <div class="card tshirt show"><div class="img-box"><img src="n5-back.png.png" id="t1" class="product-img"><div class="zoom-icon" onclick="z('t1')">🔍</div></div><div class="dots"><div class="dot" style="background:beige" onclick="v('t1','n5-back.png.png')"></div><div class="dot" style="background:purple" onclick="v('t1','n5-purple.png.png')"></div></div><button class="btn-add" onclick="order('تيشيرت 01')">إضافة للطلب</button></div>
+        <div class="card tshirt show"><div class="img-box"><img src="t1-white.png" id="t2" class="product-img"><div class="zoom-icon" onclick="z('t2')">🔍</div></div><div class="dots"><div class="dot" style="background:#fff" onclick="v('t2','t1-white.png')"></div><div class="dot" style="background:#000" onclick="v('t2','t1-black.png')"></div></div><button class="btn-add" onclick="order('تيشيرت 02')">إضافة للطلب</button></div>
 
-        <div class="card set"><div class="img-box"><img src="s1-white.png.png" id="s1" class="product-img"><div class="zoom-icon" onclick="z('s1')">🔍</div></div><div>طقم 01</div><button class="btn-add">إضافة</button></div>
-        <div class="card set"><div class="img-box"><img src="s2-black.jpg" id="s2" class="product-img"><div class="zoom-icon" onclick="z('s2')">🔍</div></div><div>طقم 02</div><button class="btn-add">إضافة</button></div>
-        <div class="card set"><div class="img-box"><img src="s3-black.jpg" id="s3" class="product-img"><div class="zoom-icon" onclick="z('s3')">🔍</div></div><div>طقم 03</div><button class="btn-add">إضافة</button></div>
-        <div class="card set"><div class="img-box"><img src="s4-black.jpg" id="s4" class="product-img"><div class="zoom-icon" onclick="z('s4')">🔍</div></div><div>طقم 04</div><button class="btn-add">إضافة</button></div>
-        <div class="card set"><div class="img-box"><img src="s5-black.jpg" id="s5" class="product-img"><div class="zoom-icon" onclick="z('s5')">🔍</div></div><div>طقم 05</div><button class="btn-add">إضافة</button></div>
-        <div class="card set"><div class="img-box"><img src="sea-black.png" id="s6" class="product-img"><div class="zoom-icon" onclick="z('s6')">🔍</div></div><div>طقم Sea 01</div><button class="btn-add">إضافة</button></div>
-        <div class="card set"><div class="img-box"><img src="sea1-off-withe.png" id="s7" class="product-img"><div class="zoom-icon" onclick="z('s7')">🔍</div></div><div>طقم Sea 02</div><button class="btn-add">إضافة</button></div>
-        <div class="card set"><div class="img-box"><img src="sea2-brown.png" id="s8" class="product-img"><div class="zoom-icon" onclick="z('s8')">🔍</div></div><div>طقم Sea 03</div><button class="btn-add">إضافة</button></div>
+        <div class="card set"><div class="img-box"><img src="s1-white.png.png" id="s1" class="product-img"><div class="zoom-icon" onclick="z('s1')">🔍</div></div><div class="dots"><div class="dot" style="background:#fff" onclick="v('s1','s1-white.png.png')"></div><div class="dot" style="background:#000" onclick="v('s1','s1-black.png.png')"></div></div><button class="btn-add" onclick="order('طقم 01')">إضافة للطلب</button></div>
+        <div class="card set"><div class="img-box"><img src="s2-black.jpg" id="s2" class="product-img"><div class="zoom-icon" onclick="z('s2')">🔍</div></div><button class="btn-add" onclick="order('طقم 02')">إضافة للطلب</button></div>
 
-        <div class="card pants"><div class="img-box"><img src="mps182-beige.png" id="p1" class="product-img"><div class="zoom-icon" onclick="z('p1')">🔍</div></div><div>شورت 182</div><button class="btn-add">إضافة</button></div>
-        <div class="card pants"><div class="img-box"><img src="mps185-grey.png" id="p2" class="product-img"><div class="zoom-icon" onclick="z('p2')">🔍</div></div><div>شورت 185</div><button class="btn-add">إضافة</button></div>
-        <div class="card pants"><div class="img-box"><img src="mps0033-heavenly.png" id="p3" class="product-img"><div class="zoom-icon" onclick="z('p3')">🔍</div></div><div>شورت 0033</div><button class="btn-add">إضافة</button></div>
-        <div class="card pants"><div class="img-box"><img src="mps176-white.png" id="p4" class="product-img"><div class="zoom-icon" onclick="z('p4')">🔍</div></div><div>شورت 176</div><button class="btn-add">إضافة</button></div>
+        <div class="card pants"><div class="img-box"><img src="mps182-beige.png" id="p1" class="product-img"><div class="zoom-icon" onclick="z('p1')">🔍</div></div><div class="dots"><div class="dot" style="background:#d2b48c" onclick="v('p1','mps182-beige.png')"></div><div class="dot" style="background:#000" onclick="v('p1','mps182-black.png')"></div></div><button class="btn-add" onclick="order('شورت 182')">إضافة للطلب</button></div>
+        <div class="card pants"><div class="img-box"><img src="mps176-white.png" id="p2" class="product-img"><div class="zoom-icon" onclick="z('p2')">🔍</div></div><button class="btn-add" onclick="order('شورت 176')">إضافة للطلب</button></div>
     </div>
 
-    <div id="modal" class="modal" onclick="this.style.display='none'"><img id="imgFull"></div>
+    <div id="modal" class="modal" onclick="this.style.display='none'"><img id="imgFull" style="max-width:90%"></div>
 
     <script>
         function f(cat) {
@@ -63,7 +52,9 @@
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             document.getElementById('tab-' + cat).classList.add('active');
         }
+        function v(id, path) { document.getElementById(id).src = path; }
         function z(id) { document.getElementById('imgFull').src = document.getElementById(id).src; document.getElementById('modal').style.display = 'flex'; }
+        function order(name) { window.open('https://wa.me/9665650277788?text=مرحباً، أرغب في طلب: ' + name); }
     </script>
 </body>
 </html>
