@@ -14,20 +14,14 @@
         .tab { background: #111; color: #fff; padding: 10px 20px; border-radius: 50px; border: 1px solid var(--accent); cursor: pointer; transition: 0.3s; }
         .tab.active { background: var(--gold); color: #000; font-weight: bold; }
         .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; max-width: 1000px; margin: 0 auto; padding: 20px; }
-        .card { display: none; background: var(--card-bg); padding: 15px; border-radius: 20px; border: 1px solid var(--accent); flex-direction: column; align-items: center; transition: 0.3s; }
+        .card { display: none; background: var(--card-bg); padding: 15px; border-radius: 20px; border: 1px solid var(--accent); flex-direction: column; align-items: center; }
         .card.show { display: flex; }
-        .card:hover { border-color: var(--gold); }
         .img-box { width: 100%; height: 180px; border-radius: 12px; overflow: hidden; background: #fff; margin-bottom: 12px; position: relative; }
         .product-img { width: 100%; height: 100%; object-fit: contain; }
-        .zoom-icon { position: absolute; bottom: 8px; left: 8px; cursor: pointer; font-size: 1.2rem; }
-        .color-dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 15px; }
-        .dot { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #333; cursor: pointer; }
-        .dot.active { border-color: var(--gold); transform: scale(1.1); }
-        .btn-add { background: var(--gold); color: #000; padding: 12px; border-radius: 10px; font-weight: 900; border: none; width: 100%; cursor: pointer; }
-        .back-to-top { position: fixed; bottom: 100px; right: 20px; background: var(--gold); color: #000; width: 45px; height: 45px; border-radius: 50%; display: none; align-items: center; justify-content: center; cursor: pointer; z-index: 998; box-shadow: 0 0 10px var(--gold); }
+        .back-to-top { position: fixed; bottom: 100px; right: 20px; background: var(--gold); color: #000; width: 45px; height: 45px; border-radius: 50%; display: none; align-items: center; justify-content: center; cursor: pointer; z-index: 998; }
     </style>
 </head>
-<body onload="initApp()">
+<body onload="filterProducts('tshirt')">
 
     <div class="header">
         <img src="TOP GIVING logo.jpg" alt="TOP GIVING" class="brand-logo">
@@ -39,21 +33,29 @@
     </div>
 
     <div class="grid">
-        </div>
+        <div class="card tshirt show"><div class="img-box"><img src="n5-back.png.png" class="product-img"></div><div>تيشيرت 01</div></div>
+        <div class="card tshirt show"><div class="img-box"><img src="t1-white.png" class="product-img"></div><div>تيشيرت 02</div></div>
+        
+        <div class="card set"><div class="img-box"><img src="s1-white.png.png" class="product-img"></div><div>طقم 01</div></div>
+        <div class="card set"><div class="img-box"><img src="s2-black.jpg" class="product-img"></div><div>طقم 02</div></div>
+        
+        <div class="card pants"><div class="img-box"><img src="mps182-beige.png" class="product-img"></div><div>شورت 182</div></div>
+        <div class="card pants"><div class="img-box"><img src="mps185-grey.png" class="product-img"></div><div>شورت 185</div></div>
+    </div>
 
     <div id="back-to-top" class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">⬆️</div>
 
     <script>
         window.onscroll = function() {
-            let btn = document.getElementById("back-to-top");
-            btn.style.display = (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) ? "flex" : "none";
+            document.getElementById("back-to-top").style.display = (window.scrollY > 300) ? "flex" : "none";
         };
         function filterProducts(cat) {
-            document.querySelectorAll('.card').forEach(c => { c.classList.remove('show'); if(c.classList.contains(cat)) c.classList.add('show'); });
+            document.querySelectorAll('.card').forEach(c => { 
+                c.style.display = c.classList.contains(cat) ? 'flex' : 'none'; 
+            });
             document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
             document.getElementById('tab-' + cat).classList.add('active');
         }
-        function initApp() { filterProducts('tshirt'); }
     </script>
 </body>
 </html>
