@@ -1,12 +1,23 @@
 [
-  { "name": "تيشيرت 01", "cat": "تيشيرتات", "img": "n5-back.png.png", "colors": ["#000", "#fff", "purple", "gray"], "sizes": ["M", "L", "XL", "XXL"] },
-  { "name": "طقم 01", "cat": "أطقم", "img": "s1-white.png.png", "colors": ["gray", "blue", "red", "green"], "sizes": ["M", "L", "XL", "XXL"] },
-  { "name": "شورت 182", "cat": "شورتات", "img": "mps182-beige.png", "colors": ["#d2b48c", "#000", "blue", "#fff"], "sizes": ["M", "L", "XL", "XXL"] },
   { 
-    "name": "تيشيرت بوكس", 
+    "name": "تيشيرت بوكس المطور", 
     "cat": "تيشيرتات", 
-    "img": "tshert-boxy.png.png", 
-    "colors": ["#000", "#fff", "gray", "blue"], 
-    "sizes": ["M", "L", "XL", "XXL"] 
+    "img": "tshert-boxy-black.png",  <-- الصورة الافتراضية (التي تظهر أولاً)
+    "sizes": ["M", "L", "XL", "XXL"],
+    "colors_variant": [            <-- قائمة الألوان والصور الخاصة بها
+      { "color": "#000", "image_url": "tshert-boxy-black.png" },  <-- اللون الأسود وصورته
+      { "color": "#fff", "image_url": "tshert-boxy-white.png" },  <-- اللون الأبيض وصورته
+      { "color": "purple", "image_url": "tshert-boxy-purple.png" } <-- اللون البنفسجي وصورته
+    ]
+  },
+  { 
+    "name": "طقم 01 الملكي", 
+    "cat": "أطقم", 
+    "img": "s1-white.png.png",
+    "sizes": ["M", "L", "XL", "XXL"],
+    "colors_variant": [
+      { "color": "gray", "image_url": "s1-white.png.png" },
+      { "color": "blue", "image_url": "s1-blue.png" }
+    ]
   }
 ]
