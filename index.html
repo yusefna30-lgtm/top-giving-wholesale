@@ -1,140 +1,29 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <title>TOP GIVING - متجر الجملة الاحترافي</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
-
-    <style>
-        /* إعدادات المتجر الأساسية */
-        body { background: #000; color: #fff; font-family: 'Cairo', sans-serif; text-align: center; padding: 20px; margin: 0; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 40px; padding: 20px; }
-        
-        /* كارد المنتج - تأثير الهالة والزوم عند التمرير */
-        .card { background: #111; padding: 25px; border-radius: 20px; border: 1px solid #333; transition: 0.5s; overflow: hidden; position: relative; }
-        .card:hover { border-color: #D4AF37; box-shadow: 0 0 25px rgba(212, 175, 55, 0.4); transform: translateY(-10px); }
-        
-        /* حاوية الصورة الرئيسية - مجهزة لمعرض الصور */
-        .img-container { width: 100%; height: 250px; overflow: hidden; border-radius: 12px; margin-bottom: 20px; position: relative; cursor: pointer; }
-        .main-img { width: 100%; height: 100%; object-fit: contain; background: #fff; transition: 0.6s; }
-        .card:hover .main-img { transform: scale(1.15); }
-        
-        /* أيقونة عدسة الزوم الصغيرة فوق الصورة */
-        .zoom-icon { position: absolute; top: 10px; right: 10px; background: rgba(0,0,0,0.6); color: #fff; padding: 5px; border-radius: 50%; font-size: 14px; opacity: 0; transition: 0.3s; z-index: 2; }
-        .card:hover .zoom-icon { opacity: 1; }
-
-        /* الأزرار وتنسيق حقل الكمية */
-        .details-btn { background: #444; color: #fff; border: none; padding: 10px; border-radius: 8px; cursor: pointer; width: 100%; margin-bottom: 15px; font-weight: bold; }
-        .details-btn:hover { background: #555; }
-        
-        .pack-control { background: #222; padding: 15px; border-radius: 10px; margin-bottom: 15px; border: 1px solid #444; }
-        .qty-input { width: 70px; padding: 8px; text-align: center; background: #000; color: #D4AF37; border: 2px solid #D4AF37; border-radius: 5px; font-size: 16px; font-weight: bold; }
-        
-        .order-btn { background: #25D366; color: #000; padding: 15px; width: 100%; border: none; cursor: pointer; border-radius: 8px; font-weight: bold; font-size: 16px; transition: 0.3s; }
-        .order-btn:hover { background: #1ebd5a; box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3); }
-        
-        /* تنسيق النافذة المنبثقة (Modal) للتفاصيل */
-        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9); z-index: 2000; justify-content: center; align-items: center; }
-        .modal-content { background: #111; padding: 30px; border-radius: 15px; border: 2px solid #D4AF37; width: 85%; max-width: 450px; position: relative; }
-        .modal h2 { color: #D4AF37; margin-top: 0; }
-        .specs-list { text-align: right; list-style: none; padding: 0; }
-        .specs-list li { margin-bottom: 10px; font-size: 18px; }
-        .specs-list i { color: #D4AF37; margin-left: 10px; width: 20px; text-align: center; }
-        .close-modal { position: absolute; top: 10px; left: 10px; background: none; border: none; color: #fff; font-size: 20px; cursor: pointer; }
-    </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-
-    <h1 style="margin-bottom: 40px; color: #D4AF37;">TOP GIVING Wholesale</h1>
-
-    <div class="grid">
-        <div class="card">
-            
-            <div class="img-container">
-                <i class="fas fa-search-plus zoom-icon"></i>
-                <a href="shirt-blue.png" data-lightbox="product-1" data-title="تيشيرت بوكس - اللون الأزرق">
-                    <img src="shirt-blue.png" class="main-img" alt="تيشيرت بوكس أزرق">
-                </a>
-            </div>
-            
-            <div style="display:none;">
-                <a href="shirt-grey.png" data-lightbox="product-1" data-title="تيشيرت بوكس - اللون الرمادي"></a>
-                <a href="shirt-white.png" data-lightbox="product-1" data-title="تيشيرت بوكس - اللون الأبيض"></a>
-                <a href="shirt-black.png" data-lightbox="product-1" data-title="تيشيرت بوكس - اللون الأسود"></a>
-            </div>
-
-            <h3>تيشيرت بوكس</h3>
-            
-            <button class="details-btn" onclick="openDetails('الأزرق، الرمادي، الأبيض، الأسود', 'M, L, XL, XXL')">
-                <i class="fas fa-info-circle"></i> عرض التفاصيل
-            </button>
-            
-            <div class="pack-control">
-                <label style="display: block; margin-bottom: 10px; color: #aaa;">عدد الشدات (16 حبة/شدة)</label>
-                <input type="number" class="pack-qty" value="0" min="0">
-            </div>
-            
-            <button class="order-btn" onclick="sendOrder('تيشيرت بوكس', this.parentElement, 16)">
-                <i class="fab fa-whatsapp"></i> اطلب الشدة 🛒
-            </button>
-        </div>
-        
-        </div>
-
-    <div id="detailsModal" class="modal" onclick="closeDetailsModal()">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="close-modal" onclick="closeDetailsModal()"><i class="fas fa-times"></i></button>
-            <h2><i class="fas fa-clipboard-list"></i> تفاصيل الشدة</h2>
-            <hr style="border: 1px solid #444; margin: 15px 0;">
-            <ul class="specs-list">
-                <li><i class="fas fa-palette"></i> <strong>الألوان:</strong> <span id="modalColors"></span></li>
-                <li><i class="fas fa-ruler-combined"></i> <strong>المقاسات:</strong> <span id="modalSizes"></span></li>
-                <li><i class="fas fa-box"></i> <strong>المحتوى:</strong> شدة واحدة تحتوي على الألوان والمقاسات المذكورة.</li>
-            </ul>
-        </div>
+<div class="card">
+    <div class="img-container">
+        <i class="fas fa-search-plus zoom-icon"></i>
+        <a href="mps0033-black.png" data-lightbox="mps0033" data-title="اللون الأسود">
+            <img src="mps0033-black.png" class="main-img" alt="المنتج">
+        </a>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <div style="display:none;">
+        <a href="mps0033-green.png" data-lightbox="mps0033" data-title="اللون الأخضر"></a>
+        <a href="mps0033-heavenly.png" data-lightbox="mps0033" data-title="اللون السماوي"></a>
+        <a href="mps0033-white.png" data-lightbox="mps0033" data-title="اللون الأبيض"></a>
+    </div>
 
-    <script>
-        // إعدادات مكتبة Lightbox
-        lightbox.option({
-            'resizeDuration': 200, // سرعة حركة النافذة
-            'wrapAround': true,      // السماح بالتنقل الدائري (من آخر صورة للأولى)
-            'albumLabel': "صورة %1 من %2", // النص العربي للتنقل
-            'fadeDuration': 300      // سرعة التلاشي
-        });
+    <h3>اسم المنتج هنا (مثلاً: طقم 0033)</h3>
 
-        // وظائف النافذة المنبثقة للتفاصيل
-        function openDetails(colors, sizes) {
-            document.getElementById('modalColors').innerText = colors;
-            document.getElementById('modalSizes').innerText = sizes;
-            document.getElementById('detailsModal').style.display = 'flex';
-        }
+    <button class="details-btn" onclick="openDetails('الأسود، الأخضر، السماوي، الأبيض', 'M, L, XL, 2XL')">
+        <i class="fas fa-info-circle"></i> عرض التفاصيل
+    </button>
 
-        function closeDetailsModal() {
-            document.getElementById('detailsModal').style.display = 'none';
-        }
+    <div class="pack-control">
+        <label style="color: #aaa; font-size: 14px;">عدد الشدات:</label><br>
+        <input type="number" class="pack-qty" value="0" min="0">
+    </div>
 
-        // وظيفة إرسال الطلب عبر الواتساب بنظام الشدات
-        function sendOrder(productName, card, totalPerPack) {
-            let count = card.querySelector('.pack-qty').value;
-            if(count <= 0) { alert("يرجى تحديد عدد الشدات أولاً!"); return; }
-            
-            let totalItems = count * totalPerPack;
-            let msg = `طلب جديد: *${productName}*\n`;
-            msg += `--------------------------\n`;
-            msg += `• عدد الشدات: ${count} شدة\n`;
-            msg += `• إجمالي الحبات: ${totalItems} حبة\n`;
-            msg += `--------------------------\n`;
-            msg += `تذكير: الشدة تحتوي على الألوان والمقاسات المتنوعة.`;
-            
-            window.open("https://wa.me/966502777884?text=" + encodeURIComponent(msg));
-        }
-    </script>
-</body>
-</html>
+    <button class="order-btn" onclick="sendOrder('طقم 0033', this.parentElement, 16)">
+        <i class="fab fa-whatsapp"></i> اطلب الشدة 🛒
+    </button>
+</div>
