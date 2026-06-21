@@ -5,28 +5,52 @@
     <title>TOP GIVING</title>
     <style>
         body { background: #000; color: #fff; text-align: center; font-family: sans-serif; }
+        .tabs { margin: 20px; }
+        .tab-btn { background: #222; color: #fff; border: 1px solid #444; padding: 10px 20px; margin: 5px; cursor: pointer; border-radius: 5px; }
+        .tab-btn.active { background: #D4AF37; color: #000; font-weight: bold; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 20px; }
         .card { background: #111; padding: 15px; border-radius: 10px; border: 1px solid #333; }
         .img-box { width: 100%; height: 200px; object-fit: cover; }
-        .color-dot { display: inline-block; width: 20px; height: 20px; border-radius: 50%; margin: 5px; border: 1px solid #fff; cursor: pointer; }
+        .color-dot { display: inline-block; width: 20px; height: 20px; border-radius: 50%; margin: 5px; border: 1px solid #fff; }
     </style>
 </head>
 <body>
+
+    <div class="tabs" id="tabs"></div>
     <div class="grid" id="catalog"></div>
 
     <script>
+        let allProducts = [];
+
         fetch('products.json')
             .then(res => res.json())
             .then(data => {
-                const catalog = document.getElementById('catalog');
-                catalog.innerHTML = data.map(p => `
-                    <div class="card">
-                        <img src="${p.img}" class="img-box" alt="${p.name}">
-                        <h3>${p.name}</h3>
-                        <div>${p.colors.map(c => `<span class="color-dot" style="background:${c}"></span>`).join('')}</div>
-                    </div>
-                `).join('');
+                allProducts = data;
+                renderTabs();
+                renderCatalog('الكل');
             });
+
+        function renderTabs() {
+            const categories = ['الكل', ...new Set(allProducts.map(p => p.cat))];
+            document.getElementById('tabs').innerHTML = categories.map(cat => 
+                `<button class="tab-btn" onclick="filter('${cat}')">${cat}</button>`).join('');
+        }
+
+        function filter(cat) {
+            renderCatalog(cat);
+        }
+
+        function renderCatalog(cat) {
+            const container = document.getElementById('catalog');
+            const filtered = (cat === 'الكل') ? allProducts : allProducts.filter(p => p.cat === cat);
+            container.innerHTML = filtered.map(p => `
+                <div class="card">
+                    <img src="${p.img}" class="img-box">
+                    <h3>${p.name}</h3>
+                    <div>${p.colors.map(c => `<span class="color-dot" style="background:${c}"></span>`).join('')}</div>
+                </div>
+            `).join('');
+        }
     </script>
 </body>
 </html>
