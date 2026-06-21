@@ -1,59 +1,75 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <title>TOP GIVING | متجرنا</title>
-    <style>
-        body { font-family: 'Cairo', sans-serif; background: #000; color: #fff; text-align: center; }
-        .tabs { margin: 20px; }
-        .tab-btn { background: #333; color: #fff; border: 1px solid #555; padding: 10px 20px; margin: 5px; cursor: pointer; border-radius: 5px; }
-        .tab-btn.active { background: #D4AF37; color: #000; font-weight: bold; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; padding: 20px; }
-        .card { background: #111; padding: 15px; border-radius: 15px; border: 1px solid #333; }
-        .product-img { width: 100%; height: 160px; object-fit: contain; }
-        .color-dot { width: 22px; height: 22px; border-radius: 50%; display: inline-block; margin: 3px; border: 1px solid #fff; cursor: pointer; }
-        .size-btn { padding: 4px 8px; margin: 2px; background: #222; border: 1px solid #444; color: #fff; border-radius: 4px; font-size: 0.8rem; }
-    </style>
-</head>
-<body>
+<script>
+    let allData = [];
 
-    <div class="tabs" id="tabs"></div>
-    <div class="grid" id="catalog"></div>
-
-    <script>
-        let allData = [];
-        fetch('products.json').then(r => r.json()).then(data => {
+    // تحميل البيانات من ملف JSON
+    fetch('products.json')
+        .then(response => response.json())
+        .then(data => {
             allData = data;
-            createTabs();
-            showProducts('الكل');
+            createTabs(); // إنشاء الأقسام
+            showProducts('الكل'); // عرض جميع المنتجات أولاً
         });
 
-        function createTabs() {
-            const cats = ['الكل', ...new Set(allData.map(p => p.cat))];
-            document.getElementById('tabs').innerHTML = cats.map(c => 
-                `<button class="tab-btn" onclick="filter(this, '${c}')">${c}</button>`).join('');
-        }
+    // دالة لإنشاء أزرار الأقسام (التسوق حسب الفئة)
+    function createTabs() {
+        const tabsContainer = document.getElementById('tabs');
+        // الحصول على الأقسام الفريدة
+        const categories = ['الكل', ...new Set(allData.map(product => product.cat))];
+        
+        tabsContainer.innerHTML = categories.map(category => 
+            `<button class="tab-btn ${category === 'الكل' ? 'active' : ''}" 
+                     onclick="filterProducts(this, '${category}')">
+                ${category}
+            </button>`
+        ).join('');
+    }
 
-        function filter(btn, cat) {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            showProducts(cat);
-        }
+    // دالة لفلترة المنتجات حسب القسم
+    function filterProducts(button, category) {
+        // تحديث مظهر الأزرار النشطة
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        
+        showProducts(category); // عرض المنتجات المفلترة
+    }
 
-        function showProducts(cat) {
-            const container = document.getElementById('catalog');
-            const filtered = (cat === 'الكل') ? allData : allData.filter(p => p.cat === cat);
-            
-            container.innerHTML = filtered.map(p => `
-                <div class="card">
-                    <img src="${p.img}" class="product-img">
-                    <p style="margin:10px 0;"><b>${p.name}</b></p>
-                    <div>${p.colors.map(c => `<span class="color-dot" style="background:${c}"></span>`).join('')}</div>
-                    <div style="margin:10px 0;">${p.sizes.map(s => `<span class="size-btn">${s}</span>`).join('')}</div>
-                    <button style="width:100%; background:#D4AF37; border:none; padding:10px; border-radius:5px; cursor:pointer;">إضافة للسلة 🛒</button>
+    // الدالة الأساسية لعرض المنتجات
+    function showProducts(category) {
+        const catalogContainer = document.getElementById('catalog');
+        const filteredProducts = (category === 'الكل') ? allData : allData.filter(product => product.cat === category);
+        
+        catalogContainer.innerHTML = filteredProducts.map((product, index) => `
+            <div class="card">
+                <img src="${product.img}" id="product-img-${index}" class="product-img" alt="${product.name}">
+                
+                <p style="margin:10px 0;"><b>${product.name}</b></p>
+                
+                <div class="color-selector">
+                    ${product.colors_variant.map(variant => `
+                        <span class="color-dot" 
+                              style="background:${variant.color};" 
+                              title="اختر هذا اللون"
+                              onclick="changeProductImage('product-img-${index}', '${variant.image_url}')">
+                        </span>
+                    `).join('')}
                 </div>
-            `).join('');
+                
+                <div style="margin:10px 0;">
+                    ${product.sizes.map(size => `<span class="size-btn">${size}</span>`).join('')}
+                </div>
+                
+                <button class="order-btn" onclick="alert('سندمج الواتساب هنا قريباً لطلب: ${product.name}')">
+                    اطلب الآن 🛒
+                </button>
+            </div>
+        `).join('');
+    }
+
+    // دالة بسيطة تقوم بتغيير مصدر الصورة (src)
+    function changeProductImage(imgId, newImageUrl) {
+        const imgElement = document.getElementById(imgId);
+        if (imgElement) {
+            imgElement.src = newImageUrl;
         }
-    </script>
-</body>
-</html>
+    }
+</script>
