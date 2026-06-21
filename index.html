@@ -2,17 +2,17 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>TOP GIVING | الكتالوج المطور</title>
+    <title>TOP GIVING | المتجر المطور</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #D4AF37; --bg: #000; --card: #111; }
-        body { font-family: 'Cairo', sans-serif; background: var(--bg); color: #fff; margin: 0; padding-bottom: 120px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; padding: 20px; max-width: 1000px; margin: auto; }
+        body { font-family: 'Cairo', sans-serif; background: var(--bg); color: #fff; margin: 0; padding-bottom: 50px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; padding: 20px; max-width: 1200px; margin: auto; }
         .card { background: var(--card); padding: 15px; border-radius: 15px; border: 1px solid #333; text-align: center; }
-        .product-img { width: 100%; height: 180px; object-fit: contain; cursor: zoom-in; transition: 0.3s; }
+        .product-img { width: 100%; height: 160px; object-fit: contain; cursor: zoom-in; }
         .color-selector { display: flex; justify-content: center; gap: 8px; margin: 10px 0; }
-        .color-dot { width: 20px; height: 20px; border-radius: 50%; cursor: pointer; border: 2px solid #333; }
+        .color-dot { width: 22px; height: 22px; border-radius: 50%; cursor: pointer; border: 2px solid #555; }
         .btn-add { background: var(--gold); border: none; padding: 10px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; }
-        /* نافذة التكبير */
         #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 100; align-items: center; justify-content: center; }
         #modal img { max-width: 90%; max-height: 90%; }
     </style>
@@ -26,16 +26,12 @@
 </div>
 
 <script>
+    // قاعدة البيانات المحدثة بجميع المنتجات
     const products = [
-        { 
-            name: 'تيشيرت 01', 
-            cat: 'تيشيرتات', 
-            colors: [
-                { name: 'بيج', img: 'n5-back.png.png' },
-                { name: 'بنفسجي', img: 'n5-purple.png.png' },
-                { name: 'أسود', img: 'n5-black.png.png' }
-            ]
-        }
+        { name: 'تيشيرت 01', colors: [{img: 'n5-back.png.png', col: '#e1c699'}, {img: 'n5-purple.png.png', col: 'purple'}, {img: 'n5-white.png.png', col: '#fff'}, {img: 'n5-black.png.png', col: '#000'}] },
+        { name: 'طقم 01', colors: [{img: 's1-white.png.png', col: '#fff'}, {img: 's1-grey.png.png', col: 'gray'}, {img: 's1-blue.png.png', col: 'blue'}, {img: 's1-black.png.png', col: '#000'}] },
+        { name: 'شورت 182', colors: [{img: 'mps182-beige.png', col: '#d2b48c'}, {img: 'mps182-black.png', col: '#000'}, {img: 'mps182-blue.png', col: 'blue'}, {img: 'mps182-white.png', col: '#fff'}] }
+        // أضف بقية المنتجات هنا بنفس هذا النمط
     ];
 
     function renderCatalog() {
@@ -46,7 +42,7 @@
                     <img id="img-${idx}" src="${p.colors[0].img}" class="product-img" onclick="openZoom('img-${idx}')">
                     <p>${p.name}</p>
                     <div class="color-selector">
-                        ${p.colors.map(c => `<div class="color-dot" style="background:${c.name === 'أسود' ? '#000' : '#d4af37'}" onclick="changeColor('img-${idx}', '${c.img}')"></div>`).join('')}
+                        ${p.colors.map(c => `<div class="color-dot" style="background:${c.col}" onclick="changeColor('img-${idx}', '${c.img}')"></div>`).join('')}
                     </div>
                     <button class="btn-add">إضافة للطلب</button>
                 </div>
@@ -54,10 +50,7 @@
         });
     }
 
-    function changeColor(imgId, newSrc) {
-        document.getElementById(imgId).src = newSrc;
-    }
-
+    function changeColor(imgId, newSrc) { document.getElementById(imgId).src = newSrc; }
     function openZoom(imgId) {
         document.getElementById('full-img').src = document.getElementById(imgId).src;
         document.getElementById('modal').style.display = 'flex';
