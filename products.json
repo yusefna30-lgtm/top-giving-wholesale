@@ -4,7 +4,20 @@
     "cat": "تيشيرتات", 
     "img": "tshert-boxy.png.png", 
     "colors": ["#000", "#fff", "gray", "blue"], 
-    "sizes": ["M", "L", "XL", "XXL"],
-    "cat": "تيشيرتات"
+    "sizes": ["M", "L", "XL", "XXL"]
+  },
+  { 
+    "name": "طقم الصيف", 
+    "cat": "أطقم", 
+    "img": "s1-white.png.png", 
+    "colors": ["#000", "gray"], 
+    "sizes": ["M", "L", "XL", "XXL"]
+  },
+  { 
+    "name": "شورت كلاسيك", 
+    "cat": "شورتات", 
+    "img": "mps182-beige.png", 
+    "colors": ["#d2b48c", "#000"], 
+    "sizes": ["M", "L", "XL", "XXL"]
   }
 ]
