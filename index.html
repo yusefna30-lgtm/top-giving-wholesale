@@ -1,75 +1,32 @@
-<script>
-    let allData = [];
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>TOP GIVING</title>
+    <style>
+        body { background: #000; color: #fff; text-align: center; font-family: sans-serif; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; padding: 20px; }
+        .card { background: #111; padding: 15px; border-radius: 10px; border: 1px solid #333; }
+        img { width: 100%; height: auto; }
+    </style>
+</head>
+<body>
+    <div class="grid" id="catalog"></div>
 
-    // تحميل البيانات من ملف JSON
-    fetch('products.json')
-        .then(response => response.json())
-        .then(data => {
-            allData = data;
-            createTabs(); // إنشاء الأقسام
-            showProducts('الكل'); // عرض جميع المنتجات أولاً
-        });
-
-    // دالة لإنشاء أزرار الأقسام (التسوق حسب الفئة)
-    function createTabs() {
-        const tabsContainer = document.getElementById('tabs');
-        // الحصول على الأقسام الفريدة
-        const categories = ['الكل', ...new Set(allData.map(product => product.cat))];
-        
-        tabsContainer.innerHTML = categories.map(category => 
-            `<button class="tab-btn ${category === 'الكل' ? 'active' : ''}" 
-                     onclick="filterProducts(this, '${category}')">
-                ${category}
-            </button>`
-        ).join('');
-    }
-
-    // دالة لفلترة المنتجات حسب القسم
-    function filterProducts(button, category) {
-        // تحديث مظهر الأزرار النشطة
-        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-        
-        showProducts(category); // عرض المنتجات المفلترة
-    }
-
-    // الدالة الأساسية لعرض المنتجات
-    function showProducts(category) {
-        const catalogContainer = document.getElementById('catalog');
-        const filteredProducts = (category === 'الكل') ? allData : allData.filter(product => product.cat === category);
-        
-        catalogContainer.innerHTML = filteredProducts.map((product, index) => `
-            <div class="card">
-                <img src="${product.img}" id="product-img-${index}" class="product-img" alt="${product.name}">
-                
-                <p style="margin:10px 0;"><b>${product.name}</b></p>
-                
-                <div class="color-selector">
-                    ${product.colors_variant.map(variant => `
-                        <span class="color-dot" 
-                              style="background:${variant.color};" 
-                              title="اختر هذا اللون"
-                              onclick="changeProductImage('product-img-${index}', '${variant.image_url}')">
-                        </span>
-                    `).join('')}
-                </div>
-                
-                <div style="margin:10px 0;">
-                    ${product.sizes.map(size => `<span class="size-btn">${size}</span>`).join('')}
-                </div>
-                
-                <button class="order-btn" onclick="alert('سندمج الواتساب هنا قريباً لطلب: ${product.name}')">
-                    اطلب الآن 🛒
-                </button>
-            </div>
-        `).join('');
-    }
-
-    // دالة بسيطة تقوم بتغيير مصدر الصورة (src)
-    function changeProductImage(imgId, newImageUrl) {
-        const imgElement = document.getElementById(imgId);
-        if (imgElement) {
-            imgElement.src = newImageUrl;
-        }
-    }
-</script>
+    <script>
+        fetch('products.json')
+            .then(res => res.json())
+            .then(data => {
+                const catalog = document.getElementById('catalog');
+                catalog.innerHTML = data.map(p => `
+                    <div class="card">
+                        <img src="${p.img}" alt="${p.name}">
+                        <h3>${p.name}</h3>
+                        <p>${p.cat}</p>
+                    </div>
+                `).join('');
+            })
+            .catch(err => console.error("خطأ في تحميل البيانات:", err));
+    </script>
+</body>
+</html>
