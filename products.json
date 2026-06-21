@@ -3,14 +3,16 @@
     "name": "تيشيرت 01", 
     "cat": "تيشيرتات", 
     "img": "n5-back.png.png",
-    "colors": ["#000", "#fff", "purple"],
-    "details": "مقاسات: S, M, L, XL - قطن 100%"
+    "colors": ["#000", "#fff", "purple", "gray"],
+    "sizes": ["S", "M", "L", "XL"],
+    "details": "قطن 100% - جودة عالية"
   },
   { 
     "name": "طقم 01", 
     "cat": "أطقم", 
     "img": "s1-white.png.png",
-    "colors": ["gray", "blue"],
-    "details": "متوفر بمقاسات M, L, XL"
+    "colors": ["gray", "blue", "red", "green"],
+    "sizes": ["M", "L", "XL", "XXL"],
+    "details": "قماش صيفي مريح"
   }
 ]
