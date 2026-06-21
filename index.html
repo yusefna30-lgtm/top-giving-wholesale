@@ -2,97 +2,68 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOP GIVING | الكتالوج المطور</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #D4AF37; --bg: #000; --card: #111; }
-        body { font-family: 'Cairo', sans-serif; background: var(--bg); color: #fff; margin: 0; padding-bottom: 100px; }
-        .tabs { display: flex; justify-content: center; gap: 10px; padding: 20px; position: sticky; top: 0; background: #000; z-index: 10; }
-        .tab-btn { background: #222; color: #fff; padding: 10px 20px; border-radius: 20px; border: 1px solid var(--gold); cursor: pointer; transition: 0.3s; }
-        .tab-btn.active { background: var(--gold); color: #000; font-weight: bold; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; padding: 20px; max-width: 1200px; margin: auto; }
-        .card { background: var(--card); padding: 15px; border-radius: 12px; border: 1px solid #333; text-align: center; }
-        .product-img { width: 100%; height: 150px; object-fit: contain; margin-bottom: 10px; }
-        .btn-add { background: var(--gold); border: none; padding: 10px; width: 100%; border-radius: 8px; cursor: pointer; font-weight: bold; }
-        #cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #222; padding: 15px; text-align: center; border-top: 2px solid var(--gold); display: none; }
+        body { font-family: 'Cairo', sans-serif; background: var(--bg); color: #fff; margin: 0; padding-bottom: 120px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; padding: 20px; max-width: 1000px; margin: auto; }
+        .card { background: var(--card); padding: 15px; border-radius: 15px; border: 1px solid #333; text-align: center; }
+        .product-img { width: 100%; height: 180px; object-fit: contain; cursor: zoom-in; transition: 0.3s; }
+        .color-selector { display: flex; justify-content: center; gap: 8px; margin: 10px 0; }
+        .color-dot { width: 20px; height: 20px; border-radius: 50%; cursor: pointer; border: 2px solid #333; }
+        .btn-add { background: var(--gold); border: none; padding: 10px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        /* نافذة التكبير */
+        #modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 100; align-items: center; justify-content: center; }
+        #modal img { max-width: 90%; max-height: 90%; }
     </style>
 </head>
 <body>
 
-<div class="tabs" id="tabs-container"></div>
 <div class="grid" id="catalog"></div>
 
-<div id="cart-bar">
-    <h3 id="total-text"></h3>
-    <button onclick="sendOrder()" style="background:green; color:white; border:none; padding:10px 20px; border-radius:8px; cursor:pointer;">إرسال الطلب عبر واتساب 💬</button>
+<div id="modal" onclick="this.style.display='none'">
+    <img id="full-img" src="">
 </div>
 
 <script>
     const products = [
-        // التيشيرتات
-        { name: 'تيشيرت 01', cat: 'تيشيرتات', img: 'n5-back.png.png' },
-        { name: 'تيشيرت 02', cat: 'تيشيرتات', img: 't1-white.png' },
-        { name: 'تيشيرت 03', cat: 'تيشيرتات', img: 't2-black.png.png' },
-        { name: 'تيشيرت 04', cat: 'تيشيرتات', img: 'tr1-red.png.png' },
-        { name: 'تيشيرت 05', cat: 'تيشيرتات', img: 'te1-black.png.png' },
-        // الأطقم
-        { name: 'طقم 01', cat: 'أطقم', img: 's1-white.png.png' },
-        { name: 'طقم 02', cat: 'أطقم', img: 's2-black.jpg' },
-        { name: 'طقم 03', cat: 'أطقم', img: 's3-black.jpg' },
-        { name: 'طقم 04', cat: 'أطقم', img: 's4-black.jpg' },
-        { name: 'طقم 05', cat: 'أطقم', img: 's5-black.jpg' },
-        { name: 'طقم Sea 01', cat: 'أطقم', img: 'sea-black.png' },
-        { name: 'طقم Sea 02', cat: 'أطقم', img: 'sea1-off-withe.png' },
-        { name: 'طقم Sea 03', cat: 'أطقم', img: 'sea2-brown.png' },
-        // الشورتات
-        { name: 'شورت 182', cat: 'شورتات', img: 'mps182-beige.png' },
-        { name: 'شورت 185', cat: 'شورتات', img: 'mps185-grey.png' },
-        { name: 'شورت 0033', cat: 'شورتات', img: 'mps0033-heavenly.png' },
-        { name: 'شورت 176', cat: 'شورتات', img: 'mps176-white.png' }
+        { 
+            name: 'تيشيرت 01', 
+            cat: 'تيشيرتات', 
+            colors: [
+                { name: 'بيج', img: 'n5-back.png.png' },
+                { name: 'بنفسجي', img: 'n5-purple.png.png' },
+                { name: 'أسود', img: 'n5-black.png.png' }
+            ]
+        }
     ];
 
-    function renderTabs() {
-        const categories = ['الكل', 'تيشيرتات', 'أطقم', 'شورتات'];
-        const container = document.getElementById('tabs-container');
-        categories.forEach((cat, index) => {
-            container.innerHTML += `<button class="tab-btn ${index === 0 ? 'active' : ''}" onclick="filterProducts(this, '${cat}')">${cat}</button>`;
-        });
-    }
-
-    function filterProducts(btn, cat) {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        
+    function renderCatalog() {
         const container = document.getElementById('catalog');
-        container.innerHTML = '';
-        const filtered = (cat === 'الكل') ? products : products.filter(p => p.cat === cat);
-        
-        filtered.forEach(p => {
+        products.forEach((p, idx) => {
             container.innerHTML += `
                 <div class="card">
-                    <img src="${p.img}" class="product-img">
+                    <img id="img-${idx}" src="${p.colors[0].img}" class="product-img" onclick="openZoom('img-${idx}')">
                     <p>${p.name}</p>
-                    <button class="btn-add" onclick="addToCart('${p.name}')">إضافة للطلب</button>
+                    <div class="color-selector">
+                        ${p.colors.map(c => `<div class="color-dot" style="background:${c.name === 'أسود' ? '#000' : '#d4af37'}" onclick="changeColor('img-${idx}', '${c.img}')"></div>`).join('')}
+                    </div>
+                    <button class="btn-add">إضافة للطلب</button>
                 </div>
             `;
         });
     }
 
-    let cart = [];
-    function addToCart(name) {
-        cart.push(name);
-        document.getElementById('cart-bar').style.display = 'block';
-        document.getElementById('total-text').innerText = `تم اختيار ${cart.length} منتج`;
+    function changeColor(imgId, newSrc) {
+        document.getElementById(imgId).src = newSrc;
     }
 
-    function sendOrder() {
-        let msg = "📦 طلب جديد من TOP GIVING:\n" + cart.map((item, i) => `${i+1}- ${item}`).join("\n");
-        window.open(`https://wa.me/966560564719?text=${encodeURIComponent(msg)}`, '_blank');
+    function openZoom(imgId) {
+        document.getElementById('full-img').src = document.getElementById(imgId).src;
+        document.getElementById('modal').style.display = 'flex';
     }
 
-    renderTabs();
-    filterProducts(document.querySelector('.tab-btn'), 'الكل');
+    renderCatalog();
 </script>
 </body>
 </html>
