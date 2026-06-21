@@ -4,6 +4,7 @@
     "cat": "تيشيرتات", 
     "img": "tshert-boxy.png.png", 
     "colors": ["#000", "#fff", "gray", "blue"], 
-    "sizes": ["M", "L", "XL", "XXL"] 
+    "sizes": ["M", "L", "XL", "XXL"],
+    "cat": "تيشيرتات"
   }
 ]
