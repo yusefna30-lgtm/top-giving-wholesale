@@ -2,222 +2,88 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOP GIVING | المتجر الرسمي المطور</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>TOP GIVING | المتجر المطور</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #D4AF37; --black: #000; --card-bg: #0c0c0e; --accent: #1a1a1a; --beige: #f5f5dc; }
-        body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 180px; }
+        :root { --gold: #D4AF37; --bg: #000; --card: #111; }
+        body { font-family: 'Cairo', sans-serif; background: var(--bg); color: #fff; margin: 0; padding: 20px; }
         
-        .header { padding: 20px 10px; background: #000; border-bottom: 1px solid var(--accent); position: sticky; top: 0; z-index: 1000; }
-        .brand-logo { max-height: 100px; width: auto; display: block; margin: 0 auto 15px; filter: drop-shadow(0 0 5px var(--gold)); }
-        
-        .nav-tabs { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
-        .tab { background: #111; color: #fff; padding: 10px 20px; border-radius: 25px; border: 1px solid var(--accent); cursor: pointer; transition: 0.3s; font-size: 0.9rem; }
-        .tab.active { background: var(--gold); color: #000; font-weight: bold; }
-        
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 1200px; margin: 0 auto; padding: 0 12px; }
-        @media (min-width: 992px) { .grid { grid-template-columns: repeat(4, 1fr); } }
-        
-        .card { display: none; background: var(--card-bg); padding: 15px; border-radius: 18px; border: 1px solid var(--accent); flex-direction: column; align-items: center; position: relative; }
-        .card.show { display: flex; }
-        
-        .img-box { width: 100%; height: 180px; border-radius: 12px; overflow: hidden; background: #fff; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; position: relative; }
-        .product-img { max-width: 90%; max-height: 90%; object-fit: contain; }
+        /* تصميم الأقسام */
+        .tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+        .tab-btn { background: #222; color: #fff; padding: 10px 20px; border-radius: 20px; border: 1px solid var(--gold); cursor: pointer; }
+        .tab-btn.active { background: var(--gold); color: #000; font-weight: bold; }
 
-        /* زر التكبير النظيف والموقع المناسب */
-        .zoom-icon { position: absolute; bottom: 8px; left: 8px; cursor: pointer; z-index: 10; font-size: 1.2rem; opacity: 0.7; transition: 0.3s; filter: drop-shadow(0 0 2px rgba(0,0,0,0.5)); }
-        .zoom-icon:hover { opacity: 1; transform: scale(1.1); }
-
-        .color-dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 15px; height: 30px; align-items: center; }
-        .dot { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #333; cursor: pointer; }
-        .dot.active { border-color: var(--gold); transform: scale(1.1); box-shadow: 0 0 5px var(--gold); }
-        
-        .model-name { font-size: 1rem; font-weight: 700; margin-bottom: 12px; height: 40px; display: flex; align-items: center; justify-content: center; }
-        .qty-control { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px; background: #1a1a1a; padding: 8px; border-radius: 10px; width: 100%; }
-        .btn-q { background: #252525; color: #fff; border: 1px solid var(--gold); width: 34px; height: 34px; border-radius: 8px; cursor: pointer; }
-        .btn-add { background: linear-gradient(135deg, #D4AF37, #8A6D3B); color: #000; padding: 12px; border-radius: 10px; font-weight: 900; border: none; width: 100%; cursor: pointer; transition: 0.3s; }
-
-        /* نافذة المعاينة الموزونة */
-        .modal { display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); align-items: center; justify-content: center; }
-        #imgFull { max-width: 80%; max-height: 60%; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.6); object-fit: contain; background: #fff; }
-
-        /* حقول بيانات العميل */
-        .customer-inputs { display: none; background: #111; padding: 15px; border-top: 1px solid var(--accent); position: fixed; bottom: 85px; left: 0; right: 0; z-index: 999; }
-        .input-group { max-width: 1200px; margin: 0 auto; display: flex; gap: 10px; }
-        .input-group input { flex: 1; padding: 12px; border-radius: 8px; border: 1px solid #333; background: #000; color: #fff; font-family: 'Cairo'; outline: none; }
-
-        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.95); border-top: 2px solid var(--gold); padding: 15px; display: none; z-index: 1001; }
-        .cart-flex { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .btn-clear { background: #333; color: #fff; border: 1px solid #555; padding: 8px 15px; border-radius: 10px; cursor: pointer; font-family: 'Cairo'; }
-        /* كود زر العودة للأعلى */
-.back-to-top {
-    position: fixed;
-    bottom: 150px;
-    right: 20px;
-    background: #D4AF37;
-    color: #000;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    display: none; /* يظهر بالجافا سكريبت فقط */
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    cursor: pointer;
-    z-index: 998;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    transition: 0.3s;
-}
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; max-width: 1200px; margin: auto; }
+        .card { background: var(--card); padding: 15px; border-radius: 12px; border: 1px solid #333; text-align: center; }
+        .product-img { width: 100%; height: 150px; object-fit: contain; margin-bottom: 10px; }
+        .btn-add { background: var(--gold); border: none; padding: 8px; width: 100%; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        #cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #222; padding: 15px; text-align: center; border-top: 2px solid var(--gold); display: none; }
     </style>
 </head>
-<body onload="initApp()">
+<body>
 
-    <div class="header">
-        <img src="TOP GIVING logo.jpg" alt="TOP GIVING" class="brand-logo">
-        <div class="nav-tabs">
-            <div class="tab active" id="tab-tshirt" onclick="filterProducts('tshirt')">تيشيرتات</div>
-            <div class="tab" id="tab-set" onclick="filterProducts('set')">أطقم صيفية</div>
-            <div class="tab" id="tab-pants" onclick="filterProducts('pants')">شورتات</div>
-        </div>
-    </div>
+<div class="tabs" id="tabs-container"></div>
+<div class="grid" id="catalog"></div>
 
-    <div class="grid">
-        <div class="card tshirt show"><div class="img-box"><span class="zoom-icon" onclick="openZoom('it01')">🔍</span><img src="n5-back.png.png" id="it01" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:var(--beige);" onclick="v('it01','n5-back.png.png',this)"></div><div class="dot" style="background:purple" onclick="v('it01','n5-purple.png.png',this)"></div><div class="dot" style="background:#fff; border:1px solid #ccc" onclick="v('it01','n5-white.png.png',this)"></div><div class="dot" style="background:black;" onclick="v('it01','n5-black.png.png',this)"></div></div><div class="model-name">تيشيرت 01</div><div class="qty-control"><button class="btn-q" onclick="c('qt01',16)">+</button><span id="qt01">16</span><button class="btn-q" onclick="c('qt01',-16)">-</button></div><button class="btn-add" onclick="add('تيشيرت 01','qt01',this)">إضافة للطلب</button></div>
+<div id="cart-bar">
+    <h3 id="total-text"></h3>
+    <button onclick="sendOrder()" style="background:green; color:white; border:none; padding:10px 20px; border-radius:8px;">إرسال الطلب عبر واتساب 💬</button>
+</div>
 
-        <div class="card tshirt show"><div class="img-box"><span class="zoom-icon" onclick="openZoom('it02')">🔍</span><img src="t1-white.png" id="it02" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#fff;" onclick="v('it02','t1-white.png',this)"></div><div class="dot" style="background:#000" onclick="v('it02','t1-black.png',this)"></div><div class="dot" style="background:blue" onclick="v('it02','t1-blue.png',this)"></div><div class="dot" style="background:yellow" onclick="v('it02','t1-yellow.png',this)"></div></div><div class="model-name">تيشيرت 02</div><div class="qty-control"><button class="btn-q" onclick="c('qt02',16)">+</button><span id="qt02">16</span><button class="btn-q" onclick="c('qt02',-16)">-</button></div><button class="btn-add" onclick="add('تيشيرت 02','qt02',this)">إضافة</button></div>
+<script>
+    const products = [
+        { name: 'تيشيرت 01', cat: 'تيشيرتات', img: 'n5-back.png.png' },
+        { name: 'تيشيرت 02', cat: 'تيشيرتات', img: 't1-white.png' },
+        { name: 'طقم 01', cat: 'أطقم', img: 's1-white.png.png' },
+        { name: 'طقم 02', cat: 'أطقم', img: 's2-black.jpg' },
+        { name: 'شورت 182', cat: 'شورتات', img: 'mps182-beige.png' }
+        // أضف أي منتج جديد هنا مع تحديد الـ cat الخاصة به
+    ];
 
-        <div class="card tshirt show"><div class="img-box"><span class="zoom-icon" onclick="openZoom('it03')">🔍</span><img src="t2-black.png.png" id="it03" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#000" onclick="v('it03','t2-black.png.png',this)"></div><div class="dot" style="background:purple" onclick="v('it03','t2-purple.png.png',this)"></div><div class="dot" style="background:#fff;" onclick="v('it03','t2-white.png.png',this)"></div><div class="dot" style="background:gray" onclick="v('it03','t2-grey.png.png',this)"></div></div><div class="model-name">تيشيرت 03</div><div class="qty-control"><button class="btn-q" onclick="c('qt03',16)">+</button><span id="qt03">16</span><button class="btn-q" onclick="c('qt03',-16)">-</button></div><button class="btn-add" onclick="add('تيشيرت 03','qt03',this)">إضافة</button></div>
-
-        <div class="card tshirt show"><div class="img-box"><span class="zoom-icon" onclick="openZoom('it04')">🔍</span><img src="tr1-red.png.png" id="it04" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:red" onclick="v('it04','tr1-red.png.png',this)"></div><div class="dot" style="background:#000" onclick="v('it04','tr2-black.png.png',this)"></div><div class="dot" style="background:beige" onclick="v('it04','tr3-beige.png.png',this)"></div><div class="dot" style="background:#fff;" onclick="v('it04','tr4-white.png.png',this)"></div></div><div class="model-name">تيشيرت 04</div><div class="qty-control"><button class="btn-q" onclick="c('qt04',16)">+</button><span id="qt04">16</span><button class="btn-q" onclick="c('qt04',-16)">-</button></div><button class="btn-add" onclick="add('تيشيرت 04','qt04',this)">إضافة</button></div>
-
-        <div class="card tshirt show"><div class="img-box"><span class="zoom-icon" onclick="openZoom('it05')">🔍</span><img src="te1-black.png.png" id="it05" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#000" onclick="v('it05','te1-black.png.png',this)"></div><div class="dot" style="background:blue" onclick="v('it05','te2-blue.png.png',this)"></div><div class="dot" style="background:beige" onclick="v('it05','te3-beige.png.png',this)"></div><div class="dot" style="background:#fff;" onclick="v('it05','te4-white.png.png',this)"></div></div><div class="model-name">تيشيرت 05</div><div class="qty-control"><button class="btn-q" onclick="c('qt05',16)">+</button><span id="qt05">16</span><button class="btn-q" onclick="c('qt05',-16)">-</button></div><button class="btn-add" onclick="add('تيشيرت 05','qt05',this)">إضافة</button></div>
-
-        <div class="card set"><div class="img-box"><span class="zoom-icon" onclick="openZoom('is01')">🔍</span><img src="s1-white.png.png" id="is01" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#fff;" onclick="v('is01','s1-white.png.png',this)"></div><div class="dot" style="background:gray" onclick="v('is01','s1-grey.png.png',this)"></div><div class="dot" style="background:blue" onclick="v('is01','s1-blue.png.png',this)"></div><div class="dot" style="background:#000" onclick="v('is01','s1-black.png.png',this)"></div></div><div class="model-name">طقم 01</div><div class="qty-control"><button class="btn-q" onclick="c('qs01',16)">+</button><span id="qs01">16</span><button class="btn-q" onclick="c('qs01',-16)">-</button></div><button class="btn-add" onclick="add('طقم 01','qs01',this)">إضافة</button></div>
-
-        <div class="card set"><div class="img-box"><span class="zoom-icon" onclick="openZoom('is02')">🔍</span><img src="s2-black.jpg" id="is02" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#000" onclick="v('is02','s2-black.jpg',this)"></div><div class="dot" style="background:blue" onclick="v('is02','s2-blue.jpg',this)"></div><div class="dot" style="background:gray" onclick="v('is02','s2-grey.jpg',this)"></div><div class="dot" style="background:#fff;" onclick="v('is02','s2-white.jpg',this)"></div></div><div class="model-name">طقم 02</div><div class="qty-control"><button class="btn-q" onclick="c('qs02',16)">+</button><span id="qs02">16</span><button class="btn-q" onclick="c('qs02',-16)">-</button></div><button class="btn-add" onclick="add('طقم 02','qs02',this)">إضافة</button></div>
-
-        <div class="card set"><div class="img-box"><span class="zoom-icon" onclick="openZoom('is03')">🔍</span><img src="s3-black.jpg" id="is03" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#000" onclick="v('is03','s3-black.jpg',this)"></div><div class="dot" style="background:red" onclick="v('is03','s3-red.jpg',this)"></div><div class="dot" style="background:purple" onclick="v('is03','s3-purple.jpg',this)"></div><div class="dot" style="background:silver" onclick="v('is03','s3-grey.jpg',this)"></div></div><div class="model-name">طقم 03</div><div class="qty-control"><button class="btn-q" onclick="c('qs03',16)">+</button><span id="qs03">16</span><button class="btn-q" onclick="c('qs03',-16)">-</button></div><button class="btn-add" onclick="add('طقم 03','qs03',this)">إضافة</button></div>
-
-        <div class="card set"><div class="img-box"><span class="zoom-icon" onclick="openZoom('is04')">🔍</span><img src="s4-black.jpg" id="is04" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#000" onclick="v('is04','s4-black.jpg',this)"></div><div class="dot" style="background:green" onclick="v('is04','s4-green.jpg',this)"></div><div class="dot" style="background:beige" onclick="v('is04','s4-beige.jpg',this)"></div><div class="dot" style="background:#fff;" onclick="v('is04','s4-white.jpg',this)"></div></div><div class="model-name">طقم 04</div><div class="qty-control"><button class="btn-q" onclick="c('qs04',16)">+</button><span id="qs04">16</span><button class="btn-q" onclick="c('qs04',-16)">-</button></div><button class="btn-add" onclick="add('طقم 04','qs04',this)">إضافة</button></div>
-
-        <div class="card set"><div class="img-box"><span class="zoom-icon" onclick="openZoom('is05')">🔍</span><img src="s5-black.jpg" id="is05" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#000" onclick="v('is05','s5-black.jpg',this)"></div><div class="dot" style="background:gray" onclick="v('is05','s5-grey.jpg',this)"></div><div class="dot" style="background:beige" onclick="v('is05','s5-beige.jpg',this)"></div><div class="dot" style="background:#fff;" onclick="v('is05','s5-white.jpg',this)"></div></div><div class="model-name">طقم 05</div><div class="qty-control"><button class="btn-q" onclick="c('qs05',16)">+</button><span id="qs05">16</span><button class="btn-q" onclick="c('qs05',-16)">-</button></div><button class="btn-add" onclick="add('طقم 05','qs05',this)">إضافة</button></div>
-
-        <div class="card set"><div class="img-box"><span class="zoom-icon" onclick="openZoom('isea01')">🔍</span><img src="sea-black.png" id="isea01" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#000" onclick="v('isea01','sea-black.png',this)"></div><div class="dot" style="background:red" onclick="v('isea01','sea-red.png',this)"></div><div class="dot" style="background:navy" onclick="v('isea01','sea-navy.png',this)"></div></div><div class="model-name">طقم Sea 01</div><div class="qty-control"><button class="btn-q" onclick="c('qsea01',12)">+</button><span id="qsea01">12</span><button class="btn-q" onclick="c('qsea01',-12)">-</button></div><button class="btn-add" onclick="add('Sea 01','qsea01',this)">إضافة</button></div>
-
-        <div class="card set"><div class="img-box"><span class="zoom-icon" onclick="openZoom('isea02')">🔍</span><img src="sea1-off-withe.png" id="isea02" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#f5f5f5;" onclick="v('isea02','sea1-off-withe.png',this)"></div><div class="dot" style="background:#000" onclick="v('isea02','sea1-black.png',this)"></div><div class="dot" style="background:navy" onclick="v('isea02','sea1-navy.png',this)"></div></div><div class="model-name">طقم Sea 02</div><div class="qty-control"><button class="btn-q" onclick="c('qsea02',12)">+</button><span id="qsea02">12</span><button class="btn-q" onclick="c('qsea02',-12)">-</button></div><button class="btn-add" onclick="add('Sea 02','qsea02',this)">إضافة</button></div>
-
-        <div class="card set"><div class="img-box"><span class="zoom-icon" onclick="openZoom('isea03')">🔍</span><img src="sea2-brown.png" id="isea03" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#8b4513" onclick="v('isea03','sea2-brown.png',this)"></div><div class="dot" style="background:#ffc0cb" onclick="v('isea03','sea2-pink.png',this)"></div><div class="dot" style="background:#808080" onclick="v('isea03','sea2-grey.png',this)"></div></div><div class="model-name">طقم Sea 03</div><div class="qty-control"><button class="btn-q" onclick="c('qsea03',12)">+</button><span id="qsea03">12</span><button class="btn-q" onclick="c('qsea03',-12)">-</button></div><button class="btn-add" onclick="add('Sea 03','qsea03',this)">إضافة</button></div>
-
-        <div class="card pants"><div class="img-box"><span class="zoom-icon" onclick="openZoom('ish01')">🔍</span><img src="mps182-beige.png" id="ish01" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#d2b48c" onclick="v('ish01','mps182-beige.png',this)"></div><div class="dot" style="background:#000" onclick="v('ish01','mps182-black.png',this)"></div><div class="dot" style="background:blue" onclick="v('ish01','mps182-blue.png',this)"></div><div class="dot" style="background:#fff;" onclick="v('ish01','mps182-white.png',this)"></div></div><div class="model-name">شورت 182</div><div class="qty-control"><button class="btn-q" onclick="c('qsh01',20)">+</button><span id="qsh01">20</span><button class="btn-q" onclick="c('qsh01',-20)">-</button></div><button class="btn-add" onclick="add('شورت 182','qsh01',this)">إضافة</button></div>
-
-        <div class="card pants"><div class="img-box"><span class="zoom-icon" onclick="openZoom('ish02')">🔍</span><img src="mps185-grey.png" id="ish02" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#808080" onclick="v('ish02','mps185-grey.png',this)"></div><div class="dot" style="background:#000" onclick="v('ish02','mps185-black.png',this)"></div><div class="dot" style="background:green" onclick="v('ish02','mps185-green.png',this)"></div><div class="dot" style="background:#fff;" onclick="v('ish02','mps185-white.png',this)"></div></div><div class="model-name">شورت 185</div><div class="qty-control"><button class="btn-q" onclick="c('qsh02',20)">+</button><span id="qsh02">20</span><button class="btn-q" onclick="c('qsh02',-20)">-</button></div><button class="btn-add" onclick="add('شورت 185','qsh02',this)">إضافة</button></div>
-
-        <div class="card pants"><div class="img-box"><span class="zoom-icon" onclick="openZoom('ish03')">🔍</span><img src="mps0033-heavenly.png" id="ish03" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#87CEEB" onclick="v('ish03','mps0033-heavenly.png',this)"></div><div class="dot" style="background:#000" onclick="v('ish03','mps0033-black.png',this)"></div><div class="dot" style="background:#fff;" onclick="v('ish03','mps0033-white.png',this)"></div><div class="dot" style="background:green" onclick="v('ish03','mps0033-green.png',this)"></div></div><div class="model-name">شورت 0033</div><div class="qty-control"><button class="btn-q" onclick="c('qsh03',20)">+</button><span id="qsh03">20</span><button class="btn-q" onclick="c('qsh03',-20)">-</button></div><button class="btn-add" onclick="add('شورت 0033','qsh03',this)">إضافة</button></div>
-
-        <div class="card pants"><div class="img-box"><span class="zoom-icon" onclick="openZoom('ish04')">🔍</span><img src="mps176-white.png" id="ish04" class="product-img"></div><div class="color-dots"><div class="dot active" style="background:#fff;" onclick="v('ish04','mps176-white.png',this)"></div><div class="dot" style="background:#000" onclick="v('ish04','mps176-black.png',this)"></div><div class="dot" style="background:gray" onclick="v('ish04','mps176-grey.png',this)"></div><div class="dot" style="background:brown" onclick="v('ish04','mps176-brown.png',this)"></div></div><div class="model-name">شورت 176</div><div class="qty-control"><button class="btn-q" onclick="c('qsh04',20)">+</button><span id="qsh04">20</span><button class="btn-q" onclick="c('qsh04',-20)">-</button></div><button class="btn-add" onclick="add('شورت 176','qsh04',this)">إضافة</button></div>
-    </div>
-
-    <div id="imageModal" class="modal" onclick="this.style.display='none'">
-        <img id="imgFull" src="">
-    </div>
-
-    <div id="customer-data" class="customer-inputs">
-        <div class="input-group">
-            <input type="text" id="cust-name" placeholder="اسمك الكريم">
-            <input type="text" id="cust-city" placeholder="المدينة">
-        </div>
-    </div>
-
-    <div class="cart-bar" id="cart-bar">
-        <div class="cart-flex">
-            <div id="cart-info" style="color:var(--gold); font-weight:bold;">الإجمالي: 0 حبة</div>
-            <div style="display:flex; gap:10px;">
-                <button class="btn-clear" onclick="clearCart()">تصفير 🗑️</button>
-                <button class="btn-add" style="width:auto; padding:8px 20px;" onclick="send()">إرسال ✅</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        let order = [];
-        function initApp() {
-            const saved = localStorage.getItem('topGivingOrder');
-            if(saved) {
-                order = JSON.parse(saved);
-                if(order.length > 0) {
-                    document.getElementById('cart-bar').style.display = 'block';
-                    document.getElementById('customer-data').style.display = 'block';
-                    updateTotal();
-                }
-            }
-            filterProducts('tshirt');
-        }
-        function filterProducts(cat) {
-            document.querySelectorAll('.card').forEach(c => { 
-                c.classList.remove('show'); 
-                if(c.classList.contains(cat)) c.classList.add('show'); 
-            });
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            document.getElementById('tab-' + cat).classList.add('active');
-        }
-        function v(id, path, el) { 
-            let img = document.getElementById(id); 
-            if(img) img.src = path; 
-            let dots = el.parentElement.querySelectorAll('.dot'); 
-            dots.forEach(d => d.classList.remove('active')); 
-            el.classList.add('active'); 
-        }
-        function openZoom(imgId) {
-            document.getElementById("imgFull").src = document.getElementById(imgId).src;
-            document.getElementById("imageModal").style.display = "flex";
-        }
-        function c(id, val) { 
-            let el = document.getElementById(id); 
-            let curr = parseInt(el.innerText); 
-            let min = (id.includes('qsh')) ? 20 : (id.includes('qsea') ? 12 : 16); 
-            if (curr + val >= min) el.innerText = curr + val; 
-        }
-        function add(name, qtyId, btn) { 
-            let qty = parseInt(document.getElementById(qtyId).innerText); 
-            order.push({ name: name, qty: qty }); 
-            document.getElementById('cart-bar').style.display = 'block';
-            document.getElementById('customer-data').style.display = 'block';
-            updateTotal();
-            localStorage.setItem('topGivingOrder', JSON.stringify(order));
-            btn.innerText = "تمت ✅"; 
-            setTimeout(() => btn.innerText = "إضافة", 1500); 
-        }
-        function updateTotal() { 
-            let total = order.reduce((sum, i) => sum + i.qty, 0); 
-            document.getElementById('cart-info').innerText = `الإجمالي: ${total} حبة`; 
-        }
-        function clearCart() { 
-            if(confirm("تصفير السلة؟")) { order = []; localStorage.removeItem('topGivingOrder'); document.getElementById('cart-bar').style.display = 'none'; document.getElementById('customer-data').style.display = 'none'; }
-        }
-        function send() { 
-            let n = document.getElementById('cust-name').value.trim();
-            let c = document.getElementById('cust-city').value.trim();
-            if(!n || !c) { alert("أدخل الاسم والمدينة لإكمال الطلب"); return; }
-            let msg = `📦 *طلب جديد من TOP GIVING*\n👤 العميل: ${n}\n📍 المدينة: ${c}\n----------\n`;
-            order.forEach(i => { msg += `• *${i.name}*: ${i.qty} حبة\n`; }); 
-            window.open(`https://wa.me/966560564719?text=${encodeURIComponent(msg)}`, '_blank'); 
-        }
-        // دالة إظهار الزر عند التمرير وإخفائه عند الصعود
-window.onscroll = function() {
-    let btn = document.getElementById("btnTop");
-    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-        btn.style.display = "flex";
-    } else {
-        btn.style.display = "none";
+    function renderCatalog(filter = 'الكل') {
+        const container = document.getElementById('catalog');
+        container.innerHTML = '';
+        const filtered = (filter === 'الكل') ? products : products.filter(p => p.cat === filter);
+        
+        filtered.forEach(p => {
+            container.innerHTML += `
+                <div class="card">
+                    <img src="${p.img}" class="product-img">
+                    <p>${p.name}</p>
+                    <button class="btn-add" onclick="addToCart('${p.name}')">إضافة للطلب</button>
+                </div>
+            `;
+        });
     }
-};
 
-// دالة الصعود للأعلى بنعومة
-function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-}
-    </script>
-<div id="btnTop" class="back-to-top" onclick="scrollToTop()">⬆️</div>
+    function renderTabs() {
+        const categories = ['الكل', 'تيشيرتات', 'أطقم', 'شورتات'];
+        const container = document.getElementById('tabs-container');
+        categories.forEach(cat => {
+            container.innerHTML += `<button class="tab-btn" onclick="setActive(this, '${cat}')">${cat}</button>`;
+        });
+    }
+
+    function setActive(el, cat) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        el.classList.add('active');
+        renderCatalog(cat);
+    }
+
+    let cart = [];
+    function addToCart(name) {
+        cart.push(name);
+        document.getElementById('cart-bar').style.display = 'block';
+        document.getElementById('total-text').innerText = `تم اختيار ${cart.length} منتج`;
+    }
+
+    function sendOrder() {
+        let msg = "📦 طلب من TOP GIVING:\n" + cart.join("\n");
+        window.open(`https://wa.me/966560564719?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    renderTabs();
+    renderCatalog();
+</script>
 </body>
 </html>
