@@ -2,67 +2,34 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>TOP GIVING - الجملة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
     <style>
-        body { background: #000; color: #fff; font-family: sans-serif; text-align: center; padding: 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; padding: 20px; }
-        
-        /* الكارد وتأثير الزوم والهالة */
-        .card { background: #111; padding: 15px; border-radius: 15px; border: 1px solid #333; transition: 0.4s; }
-        .img-container { width: 100%; height: 200px; border-radius: 10px; overflow: hidden; margin-bottom: 10px; }
-        .img-box { width: 100%; height: 100%; object-fit: contain; background: #fff; transition: 0.5s; cursor: pointer; }
-        
-        /* تأثير عند مرور الماوس */
-        .card:hover { border-color: #D4AF37; box-shadow: 0 0 15px #D4AF37; transform: translateY(-5px); }
-        .card:hover .img-box { transform: scale(1.15); }
-
-        .details-btn { background: #444; color: #fff; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; margin: 5px; }
-        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.85); z-index: 1000; justify-content: center; align-items: center; }
-        .modal-content { background: #111; padding: 25px; border-radius: 15px; border: 1px solid #D4AF37; width: 80%; max-width: 300px; }
-        
-        .pack-control { margin-top: 15px; padding: 10px; background: #222; border-radius: 8px; }
-        .qty-input { width: 60px; padding: 5px; text-align: center; background: #000; color: #D4AF37; border: 1px solid #D4AF37; }
-        .order-btn { background: #25D366; color: #000; padding: 10px; width: 100%; border: none; cursor: pointer; margin-top: 10px; font-weight: bold; }
+        /* إضافة الهالة والزوم للكارد */
+        .card { width: 280px; background: #111; padding: 15px; border-radius: 15px; border: 1px solid #333; transition: 0.4s; }
+        .card:hover { border-color: #D4AF37; box-shadow: 0 0 20px #D4AF37; transform: translateY(-10px); }
+        .img-box { width: 100%; height: 220px; object-fit: contain; background: #fff; border-radius: 10px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <div class="grid">
-        <div class="card">
-            <div class="img-container">
-                <img src="shirt.png" class="img-box">
-            </div>
-            <h3>تيشيرت بوكس</h3>
-            <button class="details-btn" onclick="openDetails('أزرق، رمادي، أبيض، أسود', 'M, L, XL, 2XL')">عرض التفاصيل 📋</button>
-            <div class="pack-control">
-                عدد الشدات: <input type="number" class="pack-qty" value="0" min="0">
-            </div>
-            <button class="order-btn" onclick="sendOrder('تيشيرت بوكس', this.parentElement, 16)">طلب الشدة 🛒</button>
-        </div>
+    <div class="card">
+        <a href="shirt-blue.png" data-lightbox="product-1" data-title="اللون الأزرق">
+            <img src="shirt-blue.png" class="img-box">
+        </a>
+        
+        <a href="shirt-grey.png" data-lightbox="product-1" data-title="اللون الرمادي" style="display:none;"></a>
+        <a href="shirt-white.png" data-lightbox="product-1" data-title="اللون الأبيض" style="display:none;"></a>
+        
+        <h3>تيشيرت بوكس</h3>
+        <button onclick="openDetails()">عرض التفاصيل 📋</button>
     </div>
 
-    <div id="detailsModal" class="modal" onclick="this.style.display='none'">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <h3 id="modalName">التفاصيل</h3>
-            <p>الألوان: <span id="modalColors"></span></p>
-            <p>المقاسات: <span id="modalSizes"></span></p>
-            <button class="details-btn" onclick="document.getElementById('detailsModal').style.display='none'">إغلاق</button>
-        </div>
-    </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
     <script>
-        function openDetails(colors, sizes) {
-            document.getElementById('modalColors').innerText = colors;
-            document.getElementById('modalSizes').innerText = sizes;
-            document.getElementById('detailsModal').style.display = 'flex';
-        }
-
-        function sendOrder(name, card, totalPerPack) {
-            let count = card.querySelector('.pack-qty').value;
-            if(count <= 0) { alert("حدد عدد الشدات!"); return; }
-            let msg = `طلب جديد: *${name}*\nالكمية: ${count} شدة (${count * totalPerPack} حبة).`;
-            window.open("https://wa.me/966502777884?text=" + encodeURIComponent(msg));
-        }
+        // إعدادات المكتبة
+        lightbox.option({ 'resizeDuration': 200, 'wrapAround': true });
+        
+        function openDetails() { alert("هنا تظهر بيانات المقاسات والألوان"); }
     </script>
 </body>
 </html>
