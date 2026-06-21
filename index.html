@@ -2,21 +2,19 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>TOP GIVING | المتجر المطور</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOP GIVING | الكتالوج المطور</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #D4AF37; --bg: #000; --card: #111; }
-        body { font-family: 'Cairo', sans-serif; background: var(--bg); color: #fff; margin: 0; padding: 20px; }
-        
-        /* تصميم الأقسام */
-        .tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
-        .tab-btn { background: #222; color: #fff; padding: 10px 20px; border-radius: 20px; border: 1px solid var(--gold); cursor: pointer; }
+        body { font-family: 'Cairo', sans-serif; background: var(--bg); color: #fff; margin: 0; padding-bottom: 100px; }
+        .tabs { display: flex; justify-content: center; gap: 10px; padding: 20px; position: sticky; top: 0; background: #000; z-index: 10; }
+        .tab-btn { background: #222; color: #fff; padding: 10px 20px; border-radius: 20px; border: 1px solid var(--gold); cursor: pointer; transition: 0.3s; }
         .tab-btn.active { background: var(--gold); color: #000; font-weight: bold; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; max-width: 1200px; margin: auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 15px; padding: 20px; max-width: 1200px; margin: auto; }
         .card { background: var(--card); padding: 15px; border-radius: 12px; border: 1px solid #333; text-align: center; }
         .product-img { width: 100%; height: 150px; object-fit: contain; margin-bottom: 10px; }
-        .btn-add { background: var(--gold); border: none; padding: 8px; width: 100%; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .btn-add { background: var(--gold); border: none; padding: 10px; width: 100%; border-radius: 8px; cursor: pointer; font-weight: bold; }
         #cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #222; padding: 15px; text-align: center; border-top: 2px solid var(--gold); display: none; }
     </style>
 </head>
@@ -27,23 +25,48 @@
 
 <div id="cart-bar">
     <h3 id="total-text"></h3>
-    <button onclick="sendOrder()" style="background:green; color:white; border:none; padding:10px 20px; border-radius:8px;">إرسال الطلب عبر واتساب 💬</button>
+    <button onclick="sendOrder()" style="background:green; color:white; border:none; padding:10px 20px; border-radius:8px; cursor:pointer;">إرسال الطلب عبر واتساب 💬</button>
 </div>
 
 <script>
     const products = [
+        // التيشيرتات
         { name: 'تيشيرت 01', cat: 'تيشيرتات', img: 'n5-back.png.png' },
         { name: 'تيشيرت 02', cat: 'تيشيرتات', img: 't1-white.png' },
+        { name: 'تيشيرت 03', cat: 'تيشيرتات', img: 't2-black.png.png' },
+        { name: 'تيشيرت 04', cat: 'تيشيرتات', img: 'tr1-red.png.png' },
+        { name: 'تيشيرت 05', cat: 'تيشيرتات', img: 'te1-black.png.png' },
+        // الأطقم
         { name: 'طقم 01', cat: 'أطقم', img: 's1-white.png.png' },
         { name: 'طقم 02', cat: 'أطقم', img: 's2-black.jpg' },
-        { name: 'شورت 182', cat: 'شورتات', img: 'mps182-beige.png' }
-        // أضف أي منتج جديد هنا مع تحديد الـ cat الخاصة به
+        { name: 'طقم 03', cat: 'أطقم', img: 's3-black.jpg' },
+        { name: 'طقم 04', cat: 'أطقم', img: 's4-black.jpg' },
+        { name: 'طقم 05', cat: 'أطقم', img: 's5-black.jpg' },
+        { name: 'طقم Sea 01', cat: 'أطقم', img: 'sea-black.png' },
+        { name: 'طقم Sea 02', cat: 'أطقم', img: 'sea1-off-withe.png' },
+        { name: 'طقم Sea 03', cat: 'أطقم', img: 'sea2-brown.png' },
+        // الشورتات
+        { name: 'شورت 182', cat: 'شورتات', img: 'mps182-beige.png' },
+        { name: 'شورت 185', cat: 'شورتات', img: 'mps185-grey.png' },
+        { name: 'شورت 0033', cat: 'شورتات', img: 'mps0033-heavenly.png' },
+        { name: 'شورت 176', cat: 'شورتات', img: 'mps176-white.png' }
     ];
 
-    function renderCatalog(filter = 'الكل') {
+    function renderTabs() {
+        const categories = ['الكل', 'تيشيرتات', 'أطقم', 'شورتات'];
+        const container = document.getElementById('tabs-container');
+        categories.forEach((cat, index) => {
+            container.innerHTML += `<button class="tab-btn ${index === 0 ? 'active' : ''}" onclick="filterProducts(this, '${cat}')">${cat}</button>`;
+        });
+    }
+
+    function filterProducts(btn, cat) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
         const container = document.getElementById('catalog');
         container.innerHTML = '';
-        const filtered = (filter === 'الكل') ? products : products.filter(p => p.cat === filter);
+        const filtered = (cat === 'الكل') ? products : products.filter(p => p.cat === cat);
         
         filtered.forEach(p => {
             container.innerHTML += `
@@ -56,20 +79,6 @@
         });
     }
 
-    function renderTabs() {
-        const categories = ['الكل', 'تيشيرتات', 'أطقم', 'شورتات'];
-        const container = document.getElementById('tabs-container');
-        categories.forEach(cat => {
-            container.innerHTML += `<button class="tab-btn" onclick="setActive(this, '${cat}')">${cat}</button>`;
-        });
-    }
-
-    function setActive(el, cat) {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        el.classList.add('active');
-        renderCatalog(cat);
-    }
-
     let cart = [];
     function addToCart(name) {
         cart.push(name);
@@ -78,12 +87,12 @@
     }
 
     function sendOrder() {
-        let msg = "📦 طلب من TOP GIVING:\n" + cart.join("\n");
+        let msg = "📦 طلب جديد من TOP GIVING:\n" + cart.map((item, i) => `${i+1}- ${item}`).join("\n");
         window.open(`https://wa.me/966560564719?text=${encodeURIComponent(msg)}`, '_blank');
     }
 
     renderTabs();
-    renderCatalog();
+    filterProducts(document.querySelector('.tab-btn'), 'الكل');
 </script>
 </body>
 </html>
