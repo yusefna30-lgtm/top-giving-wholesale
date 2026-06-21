@@ -2,79 +2,50 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>TOP GIVING</title>
+    <title>TOP GIVING - متجر الجملة</title>
     <style>
-        body { background: #000; color: #fff; text-align: center; font-family: sans-serif; padding: 20px; }
-        .logo { width: 150px; margin-bottom: 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; padding: 20px; }
-        .card { background: #111; padding: 15px; border-radius: 10px; border: 1px solid #333; }
-        .img-box { width: 100%; height: 250px; object-fit: cover; border-radius: 5px; cursor: zoom-in; }
+        body { background: #000; color: #fff; font-family: sans-serif; text-align: center; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: #111; padding: 15px; border-radius: 15px; border: 1px solid #333; }
+        .img-box { width: 100%; height: 250px; object-fit: contain; background: #fff; border-radius: 10px; margin-bottom: 10px; }
         
-        /* تنسيق نظام المقاسات الجديد */
-        .size-container { display: flex; justify-content: center; flex-wrap: wrap; margin: 10px 0; gap: 5px; }
-        .size-input-wrapper { display: flex; flex-direction: column; align-items: center; width: 40px; }
-        .qty-input { width: 35px; background: #000; color: #D4AF37; border: 1px solid #444; text-align: center; border-radius: 4px; padding: 3px 0; font-size: 12px; }
-        .size-label { font-size: 10px; color: #aaa; margin-bottom: 2px; }
-
-        .order-btn { background: #25D366; color: #fff; border: none; padding: 12px; width: 100%; margin-top: 15px; cursor: pointer; border-radius: 5px; font-weight: bold; }
+        /* أزرار الألوان والمقاسات (للعرض فقط) */
+        .specs-container { margin-bottom: 15px; }
+        .btn-mini { border: 1px solid #555; padding: 3px 8px; font-size: 10px; color: #aaa; margin: 2px; border-radius: 3px; cursor: default; }
+        
+        /* حقل الشدات */
+        .pack-control { background: #222; padding: 10px; border-radius: 8px; margin-top: 10px; }
+        .qty-input { width: 50px; padding: 5px; text-align: center; background: #000; color: #D4AF37; border: 1px solid #D4AF37; }
+        .order-btn { background: #25D366; color: #000; padding: 12px; width: 100%; border: none; cursor: pointer; border-radius: 5px; font-weight: bold; margin-top: 10px; }
     </style>
 </head>
 <body>
 
-    <img src="logo.png" class="logo">
-    <h1>TOP GIVING</h1>
-    <div id="catalog" class="grid"></div>
+    <div class="grid">
+        <div class="card">
+            <img src="shirt.png" class="img-box">
+            <h3>تيشيرت بوكس</h3>
+            
+            <div class="specs-container">
+                <div>الألوان: <span class="btn-mini">أزرق</span> <span class="btn-mini">رمادي</span> <span class="btn-mini">أبيض</span> <span class="btn-mini">أسود</span></div>
+                <div>المقاسات: <span class="btn-mini">M</span> <span class="btn-mini">L</span> <span class="btn-mini">XL</span> <span class="btn-mini">2XL</span></div>
+            </div>
 
-    <div id="zoomModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:1000; justify-content:center; align-items:center;" onclick="this.style.display='none'">
-        <img id="zoomImg" src="" style="max-width: 90%; max-height: 80%;">
+            <div class="pack-control">
+                عدد الشدات (16 حبة/شدة): <br>
+                <input type="number" class="pack-qty" value="0" min="0">
+            </div>
+            <button class="order-btn" onclick="sendOrder(this.parentElement, 16)">اطلب عبر واتساب 🛒</button>
+        </div>
     </div>
 
     <script>
-        // جلب البيانات من ملف JSON
-        fetch('products.json')
-            .then(res => res.json())
-            .then(data => {
-                document.getElementById('catalog').innerHTML = data.map(p => `
-                    <div class="card">
-                        <img src="${p.img}" class="img-box" onclick="zoomImage('${p.img}')">
-                        <h3>${p.name}</h3>
-                        <div class="size-container">
-                            ${p.sizes.map(s => `
-                                <div class="size-input-wrapper">
-                                    <span class="size-label">${s}</span>
-                                    <input type="number" class="qty-input" data-size="${s}" value="0" min="0">
-                                </div>
-                            `).join('')}
-                        </div>
-                        <button class="order-btn" onclick="openWhatsApp('${p.name}', this.parentElement)">اطلب عبر واتساب 🛒</button>
-                    </div>
-                `).join('');
-            });
-
-        function zoomImage(src) {
-            document.getElementById('zoomImg').src = src;
-            document.getElementById('zoomModal').style.display = 'flex';
-        }
-
-        function openWhatsApp(name, cardElement) {
-            let msg = `طلب جديد: *${name}*\n------------------\n`;
-            let inputs = cardElement.querySelectorAll('.qty-input');
-            let total = 0;
+        function sendOrder(card, totalPerPack) {
+            let name = card.querySelector('h3').innerText;
+            let count = card.querySelector('.pack-qty').value;
+            if(count <= 0) { alert("حدد عدد الشدات!"); return; }
             
-            inputs.forEach(input => {
-                let qty = parseInt(input.value);
-                if (qty > 0) {
-                    msg += `• مقاس ${input.dataset.size}: ${qty} حبة\n`;
-                    total += qty;
-                }
-            });
-
-            if (total === 0) {
-                alert("يرجى تحديد الكمية للمقاسات المطلوبة أولاً");
-                return;
-            }
-            
-            msg += `\nإجمالي القطع: ${total}`;
+            let msg = `طلب جديد: *${name}*\nالكمية: ${count} شدة (${count * totalPerPack} حبة).\nتذكير: الشدة تحتوي على 4 ألوان و 4 مقاسات.`;
             window.open("https://wa.me/966502777884?text=" + encodeURIComponent(msg));
         }
     </script>
