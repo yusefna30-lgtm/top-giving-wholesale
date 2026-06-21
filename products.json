@@ -1,19 +1,16 @@
 [
-  { "name": "تيشيرت 01", "cat": "تيشيرتات", "img": "n5-back.png.png" },
-  { "name": "تيشيرت 02", "cat": "تيشيرتات", "img": "t1-white.png" },
-  { "name": "تيشيرت 03", "cat": "تيشيرتات", "img": "t2-black.png.png" },
-  { "name": "تيشيرت 04", "cat": "تيشيرتات", "img": "tr1-red.png.png" },
-  { "name": "تيشيرت 05", "cat": "تيشيرتات", "img": "te1-black.png.png" },
-  { "name": "طقم 01", "cat": "أطقم", "img": "s1-white.png.png" },
-  { "name": "طقم 02", "cat": "أطقم", "img": "s2-black.jpg" },
-  { "name": "طقم 03", "cat": "أطقم", "img": "s3-black.jpg" },
-  { "name": "طقم 04", "cat": "أطقم", "img": "s4-black.jpg" },
-  { "name": "طقم 05", "cat": "أطقم", "img": "s5-black.jpg" },
-  { "name": "طقم Sea 01", "cat": "أطقم", "img": "sea-black.png" },
-  { "name": "طقم Sea 02", "cat": "أطقم", "img": "sea1-off-withe.png" },
-  { "name": "طقم Sea 03", "cat": "أطقم", "img": "sea2-brown.png" },
-  { "name": "شورت 182", "cat": "شورتات", "img": "mps182-beige.png" },
-  { "name": "شورت 185", "cat": "شورتات", "img": "mps185-grey.png" },
-  { "name": "شورت 0033", "cat": "شورتات", "img": "mps0033-heavenly.png" },
-  { "name": "شورت 176", "cat": "شورتات", "img": "mps176-white.png" }
+  { 
+    "name": "تيشيرت 01", 
+    "cat": "تيشيرتات", 
+    "img": "n5-back.png.png",
+    "colors": ["#000", "#fff", "purple"],
+    "details": "مقاسات: S, M, L, XL - قطن 100%"
+  },
+  { 
+    "name": "طقم 01", 
+    "cat": "أطقم", 
+    "img": "s1-white.png.png",
+    "colors": ["gray", "blue"],
+    "details": "متوفر بمقاسات M, L, XL"
+  }
 ]
