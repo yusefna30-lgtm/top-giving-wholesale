@@ -1,23 +1,9 @@
 [
   { 
-    "name": "تيشيرت بوكس المطور", 
+    "name": "تيشيرت بوكس", 
     "cat": "تيشيرتات", 
-    "img": "tshert-boxy-black.png",  <-- الصورة الافتراضية (التي تظهر أولاً)
-    "sizes": ["M", "L", "XL", "XXL"],
-    "colors_variant": [            <-- قائمة الألوان والصور الخاصة بها
-      { "color": "#000", "image_url": "tshert-boxy-black.png" },  <-- اللون الأسود وصورته
-      { "color": "#fff", "image_url": "tshert-boxy-white.png" },  <-- اللون الأبيض وصورته
-      { "color": "purple", "image_url": "tshert-boxy-purple.png" } <-- اللون البنفسجي وصورته
-    ]
-  },
-  { 
-    "name": "طقم 01 الملكي", 
-    "cat": "أطقم", 
-    "img": "s1-white.png.png",
-    "sizes": ["M", "L", "XL", "XXL"],
-    "colors_variant": [
-      { "color": "gray", "image_url": "s1-white.png.png" },
-      { "color": "blue", "image_url": "s1-blue.png" }
-    ]
+    "img": "tshert-boxy.png.png", 
+    "colors": ["#000", "#fff", "gray", "blue"], 
+    "sizes": ["M", "L", "XL", "XXL"] 
   }
 ]
