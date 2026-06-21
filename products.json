@@ -1,19 +1,5 @@
 [
-  { "name": "تيشيرت 01", "cat": "تيشيرتات", "img": "n5-back.png.png", "colors": ["#d2b48c", "purple", "#fff", "#000"], "sizes": ["S", "M", "L", "XL"] },
-  { "name": "تيشيرت 02", "cat": "تيشيرتات", "img": "t1-white.png", "colors": ["#fff", "#000", "blue", "yellow"], "sizes": ["S", "M", "L", "XL"] },
-  { "name": "تيشيرت 03", "cat": "تيشيرتات", "img": "t2-black.png.png", "colors": ["#000", "purple", "#fff", "gray"], "sizes": ["S", "M", "L", "XL"] },
-  { "name": "تيشيرت 04", "cat": "تيشيرتات", "img": "tr1-red.png.png", "colors": ["red", "#000", "#f5f5dc", "#fff"], "sizes": ["S", "M", "L", "XL"] },
-  { "name": "تيشيرت 05", "cat": "تيشيرتات", "img": "te1-black.png.png", "colors": ["#000", "blue", "#f5f5dc", "#fff"], "sizes": ["S", "M", "L", "XL"] },
-  { "name": "طقم 01", "cat": "أطقم", "img": "s1-white.png.png", "colors": ["#fff", "gray", "blue", "#000"], "sizes": ["M", "L", "XL", "XXL"] },
-  { "name": "طقم 02", "cat": "أطقم", "img": "s2-black.jpg", "colors": ["#000", "blue", "gray", "#fff"], "sizes": ["M", "L", "XL", "XXL"] },
-  { "name": "طقم 03", "cat": "أطقم", "img": "s3-black.jpg", "colors": ["#000", "red", "purple", "silver"], "sizes": ["M", "L", "XL", "XXL"] },
-  { "name": "طقم 04", "cat": "أطقم", "img": "s4-black.jpg", "colors": ["#000", "green", "#f5f5dc", "#fff"], "sizes": ["M", "L", "XL", "XXL"] },
-  { "name": "طقم 05", "cat": "أطقم", "img": "s5-black.jpg", "colors": ["#000", "gray", "#f5f5dc", "#fff"], "sizes": ["M", "L", "XL", "XXL"] },
-  { "name": "طقم Sea 01", "cat": "أطقم", "img": "sea-black.png", "colors": ["#000", "red", "navy", "#fff"], "sizes": ["M", "L", "XL", "XXL"] },
-  { "name": "طقم Sea 02", "cat": "أطقم", "img": "sea1-off-withe.png", "colors": ["#f5f5f5", "#000", "navy", "gray"], "sizes": ["M", "L", "XL", "XXL"] },
-  { "name": "طقم Sea 03", "cat": "أطقم", "img": "sea2-brown.png", "colors": ["#8b4513", "#ffc0cb", "#808080", "#fff"], "sizes": ["M", "L", "XL", "XXL"] },
-  { "name": "شورت 182", "cat": "شورتات", "img": "mps182-beige.png", "colors": ["#d2b48c", "#000", "blue", "#fff"], "sizes": ["30", "32", "34", "36"] },
-  { "name": "شورت 185", "cat": "شورتات", "img": "mps185-grey.png", "colors": ["#808080", "#000", "green", "#fff"], "sizes": ["30", "32", "34", "36"] },
-  { "name": "شورت 0033", "cat": "شورتات", "img": "mps0033-heavenly.png", "colors": ["#87ceeb", "#000", "#fff", "green"], "sizes": ["30", "32", "34", "36"] },
-  { "name": "شورت 176", "cat": "شورتات", "img": "mps176-white.png", "colors": ["#fff", "#000", "gray", "brown"], "sizes": ["30", "32", "34", "36"] }
+  { "name": "تيشيرت 01", "cat": "تيشيرتات", "img": "n5-back.png.png", "colors": ["#000", "#fff", "purple", "gray"], "sizes": ["M", "L", "XL", "XXL"] },
+  { "name": "طقم 01", "cat": "أطقم", "img": "s1-white.png.png", "colors": ["gray", "blue", "red", "green"], "sizes": ["M", "L", "XL", "XXL"] },
+  { "name": "شورت 182", "cat": "شورتات", "img": "mps182-beige.png", "colors": ["#d2b48c", "#000", "blue", "#fff"], "sizes": ["M", "L", "XL", "XXL"] }
 ]
