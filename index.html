@@ -6,37 +6,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
     <style>
         body { background: #000; color: #fff; font-family: 'Cairo', sans-serif; padding: 20px; margin: 0; }
-        
-        /* 1. الشعار */
         .logo-box { text-align: center; margin-bottom: 30px; }
         .logo-box img { max-width: 200px; border-radius: 10px; border: 2px solid #D4AF37; }
-
-        /* 2. شريط التنقل */
-        .nav { position: sticky; top: 0; z-index: 1000; background: #000; padding: 15px; text-align: center; border-bottom: 2px solid #D4AF37; margin-bottom: 40px; }
-        .nav a { color: #D4AF37; margin: 0 15px; text-decoration: none; font-weight: bold; font-size: 18px; }
-
-        /* 3. الهالة والبطاقات */
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; margin-bottom: 60px; }
+        .nav { position: sticky; top: 0; z-index: 1000; background: #000; padding: 15px; text-align: center; border-bottom: 2px solid #D4AF37; }
+        .nav a { color: #D4AF37; margin: 0 15px; text-decoration: none; font-weight: bold; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
         .card { background: #111; padding: 20px; border-radius: 15px; border: 1px solid #333; text-align: center; transition: 0.4s; }
         .card:hover { border-color: #D4AF37; box-shadow: 0 0 20px rgba(212, 175, 55, 0.5); transform: translateY(-10px); }
         .main-img { width: 100%; height: 220px; object-fit: contain; background: #fff; border-radius: 10px; cursor: pointer; }
-
-        /* 4. الأزرار المتناسقة */
-        .btn-custom { width: 100%; padding: 12px; margin: 8px 0; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; font-size: 15px; transition: 0.3s; }
+        .btn-custom { width: 100%; padding: 12px; margin: 8px 0; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; transition: 0.3s; }
         .details-btn { background: rgba(212, 175, 55, 0.1); border: 1px solid #D4AF37; color: #D4AF37; }
-        .details-btn:hover { background: #D4AF37; color: #000; }
         .order-btn { background: #25D366; color: #000; }
-        .order-btn:hover { background: #128c7e; color: #fff; }
-        
-        section { padding-top: 80px; }
+        .pack-qty { width: 100%; padding: 10px; margin: 5px 0; background: #222; color: #fff; border: 1px solid #444; border-radius: 8px; text-align: center; }
+        section { padding-top: 100px; }
         h2 { color: #D4AF37; border-bottom: 2px solid #D4AF37; display: inline-block; padding-bottom: 10px; }
     </style>
 </head>
 <body>
 
-    <div class="logo-box">
-        <img src="TOP GIVING logo.jpg" alt="Logo">
-    </div>
+    <div class="logo-box"><img src="TOP GIVING logo.jpg" alt="Logo"></div>
 
     <nav class="nav">
         <a href="#tshirts">تيشرتات</a>
@@ -50,7 +38,8 @@
             <div class="card">
                 <a href="mps0033-black.png" data-lightbox="t1"><img src="mps0033-black.png" class="main-img"></a>
                 <h3>تيشيرت بوكس</h3>
-                <button class="btn-custom details-btn">📋 عرض التفاصيل</button>
+                <button class="btn-custom details-btn" onclick="alert('تفاصيل: 16 حبة بالشدة، ألوان متنوعة')">📋 عرض التفاصيل</button>
+                <input type="number" class="pack-qty" placeholder="عدد الشدات">
                 <button class="btn-custom order-btn" onclick="window.open('https://wa.me/966502777884')">اطلب الشدة 🛒</button>
             </div>
         </div>
@@ -62,7 +51,21 @@
             <div class="card">
                 <a href="mps176-black.png" data-lightbox="p1"><img src="mps176-black.png" class="main-img"></a>
                 <h3>بنطال كلاسيك</h3>
-                <button class="btn-custom details-btn">📋 عرض التفاصيل</button>
+                <button class="btn-custom details-btn" onclick="alert('تفاصيل: 12 حبة بالشدة، مقاسات متنوعة')">📋 عرض التفاصيل</button>
+                <input type="number" class="pack-qty" placeholder="عدد الشدات">
+                <button class="btn-custom order-btn" onclick="window.open('https://wa.me/966502777884')">اطلب الشدة 🛒</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="sets">
+        <h2>قسم الأطقم</h2>
+        <div class="grid">
+            <div class="card">
+                <a href="mps182-blue.png" data-lightbox="s1"><img src="mps182-blue.png" class="main-img"></a>
+                <h3>طقم صيفي</h3>
+                <button class="btn-custom details-btn" onclick="alert('تفاصيل: 16 حبة بالشدة')">📋 عرض التفاصيل</button>
+                <input type="number" class="pack-qty" placeholder="عدد الشدات">
                 <button class="btn-custom order-btn" onclick="window.open('https://wa.me/966502777884')">اطلب الشدة 🛒</button>
             </div>
         </div>
