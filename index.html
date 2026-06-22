@@ -2,21 +2,28 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>TOP GIVING</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+    <title>TOP GIVING | متجر الجملة</title>
     <style>
-        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 0; }
-        .logo-box { text-align: center; padding: 20px; }
+        body { background: #000; color: #fff; font-family: 'Cairo', sans-serif; margin: 0; padding: 0; text-align: center; }
+        .logo-box { padding: 20px; }
         .logo-box img { max-width: 200px; border-radius: 10px; border: 2px solid #D4AF37; }
         
-        /* القائمة في الوسط */
-        .nav { position: sticky; top: 0; z-index: 1000; background: #000; padding: 15px; text-align: center; border-bottom: 2px solid #D4AF37; display: flex; justify-content: center; gap: 20px; }
+        .nav { background: #000; padding: 15px; border-bottom: 2px solid #D4AF37; display: flex; justify-content: center; gap: 20px; }
         .nav a { color: #D4AF37; text-decoration: none; font-weight: bold; font-size: 18px; }
         
-        .section-title { color: #D4AF37; border-bottom: 2px solid #D4AF37; display: inline-block; padding: 10px; margin-right: 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; padding: 20px; }
-        .card { background: #111; padding: 20px; border-radius: 15px; border: 1px solid #333; text-align: center; }
-        .main-img { width: 100%; height: 220px; object-fit: contain; background: #fff; border-radius: 10px; cursor: pointer; }
+        section { padding: 40px 20px; }
+        .section-title { color: #D4AF37; border-bottom: 2px solid #D4AF37; display: inline-block; padding-bottom: 5px; margin-bottom: 20px; }
+        
+        .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        .card { background: #111; padding: 15px; border-radius: 15px; border: 1px solid #333; width: 250px; }
+        .main-img { width: 100%; height: 200px; object-fit: contain; background: #fff; border-radius: 10px; cursor: pointer; }
+        
+        .btn-custom { width: 100%; padding: 10px; margin: 5px 0; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; }
+        .btn-details { background: rgba(212, 175, 55, 0.1); border: 1px solid #D4AF37; color: #D4AF37; }
+        .btn-order { background: #25D366; color: #000; }
+        
+        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:2000; justify-content:center; align-items:center; }
+        .modal-content { background:#111; padding:20px; border-radius:15px; border:1px solid #D4AF37; max-width: 300px; }
     </style>
 </head>
 <body>
@@ -35,19 +42,25 @@
             <div class="card">
                 <img src="mps0033-black.png" class="main-img">
                 <h3>تيشيرت بوكس</h3>
+                <button class="btn-custom btn-details" onclick="showModal('ألوان: أسود، أخضر، سماوي، أبيض', 'مقاسات: M, L, XL, 2XL')">📋 عرض التفاصيل</button>
+                <button class="btn-custom btn-order" onclick="window.open('https://wa.me/966502777884')">اطلب الشدة 🛒</button>
             </div>
-        </div>
+            </div>
     </section>
 
-    <section id="pants">
-        <h2 class="section-title">قسم البناطيل</h2>
-        <div class="grid">
-            <div class="card">
-                <img src="mps176-black.png" class="main-img">
-                <h3>بنطال كلاسيك</h3>
-            </div>
+    <div id="modal" class="modal" onclick="this.style.display='none'">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <h2 style="color:#D4AF37">تفاصيل المنتج</h2>
+            <p id="modal-text" style="line-height: 2;"></p>
+            <button class="btn-custom btn-details" onclick="document.getElementById('modal').style.display='none'">إغلاق</button>
         </div>
-    </section>
+    </div>
 
+    <script>
+        function showModal(colors, sizes) {
+            document.getElementById('modal-text').innerHTML = "<b>" + colors + "</b><br><b>" + sizes + "</b>";
+            document.getElementById('modal').style.display = 'flex';
+        }
+    </script>
 </body>
 </html>
