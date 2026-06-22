@@ -9,9 +9,16 @@
         .nav { text-align: center; margin-bottom: 40px; padding: 20px; background: #111; border-radius: 10px; border: 1px solid #333; }
         .nav a { color: #D4AF37; margin: 0 15px; text-decoration: none; font-weight: bold; font-size: 18px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; margin-bottom: 50px; }
-        .card { background: #111; padding: 20px; border-radius: 15px; border: 1px solid #333; text-align: center; }
-        .main-img { width: 100%; height: 220px; object-fit: contain; background: #fff; border-radius: 10px; cursor: pointer; }
-        .order-btn { background: #25D366; color: #000; padding: 10px; width: 100%; border: none; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        
+        /* تأثير الكارد والهالة */
+        .card { background: #111; padding: 20px; border-radius: 15px; border: 1px solid #333; text-align: center; transition: 0.4s; }
+        .card:hover { border-color: #D4AF37; box-shadow: 0 0 20px rgba(212, 175, 55, 0.5); transform: translateY(-10px); }
+        
+        .main-img { width: 100%; height: 220px; object-fit: contain; background: #fff; border-radius: 10px; cursor: pointer; transition: 0.5s; }
+        .card:hover .main-img { transform: scale(1.05); }
+        
+        .details-btn { background: #444; color: #fff; border: none; padding: 10px; width: 100%; margin: 10px 0; cursor: pointer; border-radius: 5px; }
+        .order-btn { background: #25D366; color: #000; padding: 12px; width: 100%; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; }
         h2 { border-bottom: 2px solid #D4AF37; display: inline-block; padding-bottom: 10px; margin-bottom: 30px; }
     </style>
 </head>
@@ -27,40 +34,36 @@
         <h2>قسم التيشرتات</h2>
         <div class="grid">
             <div class="card">
-                <a href="mps0033-black.png" data-lightbox="tshirt1"><img src="mps0033-black.png" class="main-img"></a>
+                <a href="mps0033-black.png" data-lightbox="mps0033" data-title="تيشيرت بوكس">
+                    <img src="mps0033-black.png" class="main-img">
+                </a>
+                <div style="display:none;">
+                    <a href="mps0033-white.png" data-lightbox="mps0033"></a>
+                    <a href="mps0033-green.png" data-lightbox="mps0033"></a>
+                </div>
                 <h3>تيشيرت بوكس</h3>
-                <input type="number" class="pack-qty" value="0" placeholder="عدد الشدات" style="width:100%; padding:8px;">
+                <button class="details-btn" onclick="openDetails('4 ألوان', 'M, L, XL, XXL')">📋 عرض التفاصيل</button>
+                <input type="number" class="pack-qty" value="0" placeholder="عدد الشدات" style="width:100%; padding:8px; border-radius:5px;">
                 <button class="order-btn" onclick="sendOrder('تيشيرت بوكس', this.parentElement, 16)">اطلب الشدة 🛒</button>
             </div>
         </div>
     </section>
 
-    <section id="pants">
-        <h2>قسم البناطيل</h2>
-        <div class="grid">
-            <div class="card">
-                <a href="mps176-black.png" data-lightbox="pants1"><img src="mps176-black.png" class="main-img"></a>
-                <h3>بنطال كلاسيك</h3>
-                <input type="number" class="pack-qty" value="0" placeholder="عدد الشدات" style="width:100%; padding:8px;">
-                <button class="order-btn" onclick="sendOrder('بنطال كلاسيك', this.parentElement, 12)">اطلب الشدة 🛒</button>
-            </div>
+    <div id="detailsModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:9999; justify-content:center; align-items:center;" onclick="this.style.display='none'">
+        <div style="background:#111; padding:30px; border-radius:15px; border:1px solid #D4AF37; text-align:center; width:80%; max-width:300px;" onclick="event.stopPropagation()">
+            <h2 style="color:#D4AF37;">تفاصيل الشدة</h2>
+            <p id="modalText" style="margin: 20px 0;"></p>
+            <button onclick="document.getElementById('detailsModal').style.display='none'" style="padding:10px 20px; cursor:pointer;">إغلاق</button>
         </div>
-    </section>
+    </div>
 
-    <section id="sets">
-        <h2>قسم الأطقم</h2>
-        <div class="grid">
-            <div class="card">
-                <a href="mps182-blue.png" data-lightbox="set1"><img src="mps182-blue.png" class="main-img"></a>
-                <h3>طقم صيفي</h3>
-                <input type="number" class="pack-qty" value="0" placeholder="عدد الشدات" style="width:100%; padding:8px;">
-                <button class="order-btn" onclick="sendOrder('طقم صيفي', this.parentElement, 16)">اطلب الشدة 🛒</button>
-            </div>
-        </div>
-    </section>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <script>
+        function openDetails(colors, sizes) {
+            document.getElementById('modalText').innerText = "الألوان المتاحة: " + colors + "\nالمقاسات: " + sizes;
+            document.getElementById('detailsModal').style.display = 'flex';
+        }
         function sendOrder(name, card, total) {
             let count = card.querySelector('.pack-qty').value;
             if(count <= 0) { alert("حدد عدد الشدات!"); return; }
