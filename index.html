@@ -8,27 +8,18 @@
         body { background: #000; color: #fff; font-family: 'Cairo', sans-serif; margin: 0; padding: 20px; }
         .logo-box { text-align: center; margin-bottom: 30px; }
         .logo-box img { max-width: 200px; border-radius: 10px; border: 2px solid #D4AF37; }
-        
-        /* التنقل */
         .nav { position: sticky; top: 0; z-index: 1000; background: #000; padding: 15px; text-align: center; border-bottom: 2px solid #D4AF37; margin-bottom: 40px; }
         .nav a { color: #D4AF37; margin: 0 15px; text-decoration: none; font-weight: bold; }
-
-        /* الكارد والهالة */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; margin-bottom: 60px; }
         .card { background: #111; padding: 20px; border-radius: 15px; border: 1px solid #333; text-align: center; transition: 0.4s; }
         .card:hover { border-color: #D4AF37; box-shadow: 0 0 20px rgba(212, 175, 55, 0.5); transform: translateY(-5px); }
         .main-img { width: 100%; height: 220px; object-fit: contain; background: #fff; border-radius: 10px; cursor: pointer; }
-
-        /* الأزرار موحدة */
         .btn-custom { width: 100%; padding: 12px; margin: 6px 0; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; display: block; box-sizing: border-box; }
         .btn-details { background: rgba(212, 175, 55, 0.1); border: 1px solid #D4AF37; color: #D4AF37; }
         .btn-order { background: #25D366; color: #000; }
         .pack-input { width: 100%; padding: 12px; margin: 6px 0; background: #222; border: 1px solid #444; color: #fff; border-radius: 8px; text-align: center; box-sizing: border-box; }
-        
         section { padding-top: 100px; }
         h2 { color: #D4AF37; border-bottom: 2px solid #D4AF37; display: inline-block; padding-bottom: 10px; }
-        
-        /* نافذة التفاصيل */
         .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:2000; justify-content:center; align-items:center; }
         .modal-content { background:#111; padding:30px; border-radius:15px; border:1px solid #D4AF37; text-align:center; max-width: 300px; }
     </style>
@@ -49,7 +40,33 @@
             <div class="card">
                 <a href="mps0033-black.png" data-lightbox="t1"><img src="mps0033-black.png" class="main-img"></a>
                 <h3>تيشيرت بوكس</h3>
-                <button class="btn-custom btn-details" onclick="showModal('أحمر، أسود، أبيض، كحلي', 'M, L, XL, XXL')">📋 عرض التفاصيل</button>
+                <button class="btn-custom btn-details" onclick="showModal('4 ألوان', 'M, L, XL, XXL')">📋 عرض التفاصيل</button>
+                <input type="number" class="pack-input" placeholder="عدد الشدات">
+                <button class="btn-custom btn-order" onclick="window.open('https://wa.me/966502777884')">اطلب الشدة 🛒</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="pants">
+        <h2>قسم البناطيل</h2>
+        <div class="grid">
+            <div class="card">
+                <a href="mps176-black.png" data-lightbox="p1"><img src="mps176-black.png" class="main-img"></a>
+                <h3>بنطال كلاسيك</h3>
+                <button class="btn-custom btn-details" onclick="showModal('3 ألوان', 'M, L, XL')">📋 عرض التفاصيل</button>
+                <input type="number" class="pack-input" placeholder="عدد الشدات">
+                <button class="btn-custom btn-order" onclick="window.open('https://wa.me/966502777884')">اطلب الشدة 🛒</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="sets">
+        <h2>قسم الأطقم</h2>
+        <div class="grid">
+            <div class="card">
+                <a href="mps182-blue.png" data-lightbox="s1"><img src="mps182-blue.png" class="main-img"></a>
+                <h3>طقم صيفي</h3>
+                <button class="btn-custom btn-details" onclick="showModal('4 ألوان', 'M, L, XL')">📋 عرض التفاصيل</button>
                 <input type="number" class="pack-input" placeholder="عدد الشدات">
                 <button class="btn-custom btn-order" onclick="window.open('https://wa.me/966502777884')">اطلب الشدة 🛒</button>
             </div>
