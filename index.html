@@ -1,29 +1,47 @@
-<div class="card">
-    <div class="img-container">
-        <i class="fas fa-search-plus zoom-icon"></i>
-        <a href="mps0033-black.png" data-lightbox="mps0033" data-title="اللون الأسود">
-            <img src="mps0033-black.png" class="main-img" alt="المنتج">
-        </a>
-    </div>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>TOP GIVING | متجر الجملة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+    <style>
+        body { background: #000; color: #fff; font-family: 'Cairo', sans-serif; padding: 20px; }
+        .nav { text-align: center; margin-bottom: 40px; padding: 20px; background: #111; border-radius: 10px; }
+        .nav a { color: #D4AF37; margin: 0 15px; text-decoration: none; font-weight: bold; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+        .card { background: #111; padding: 20px; border-radius: 15px; border: 1px solid #333; }
+        .main-img { width: 100%; height: 220px; object-fit: contain; background: #fff; border-radius: 10px; }
+        .details-btn { background: #444; color: #fff; border: none; padding: 10px; width: 100%; margin: 10px 0; cursor: pointer; }
+        .order-btn { background: #25D366; color: #000; padding: 10px; width: 100%; border: none; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
 
-    <div style="display:none;">
-        <a href="mps0033-green.png" data-lightbox="mps0033" data-title="اللون الأخضر"></a>
-        <a href="mps0033-heavenly.png" data-lightbox="mps0033" data-title="اللون السماوي"></a>
-        <a href="mps0033-white.png" data-lightbox="mps0033" data-title="اللون الأبيض"></a>
-    </div>
+    <nav class="nav">
+        <a href="#tshirts">قسم التيشرتات</a>
+        <a href="#pants">قسم البناطيل</a>
+        <a href="#sets">قسم الأطقم</a>
+    </nav>
 
-    <h3>اسم المنتج هنا (مثلاً: طقم 0033)</h3>
+    <section id="tshirts">
+        <h2 style="color: #D4AF37;">تيشرتات</h2>
+        <div class="grid">
+            <div class="card">
+                <a href="mps0033-black.png" data-lightbox="tshirt1"><img src="mps0033-black.png" class="main-img"></a>
+                <h3>منتج التيشرت</h3>
+                <button class="details-btn">التفاصيل</button>
+                <input type="number" class="pack-qty" value="0" placeholder="عدد الشدات">
+                <button class="order-btn" onclick="sendOrder('تيشرت', this.parentElement, 16)">اطلب الآن</button>
+            </div>
+        </div>
+    </section>
 
-    <button class="details-btn" onclick="openDetails('الأسود، الأخضر، السماوي، الأبيض', 'M, L, XL, 2XL')">
-        <i class="fas fa-info-circle"></i> عرض التفاصيل
-    </button>
-
-    <div class="pack-control">
-        <label style="color: #aaa; font-size: 14px;">عدد الشدات:</label><br>
-        <input type="number" class="pack-qty" value="0" min="0">
-    </div>
-
-    <button class="order-btn" onclick="sendOrder('طقم 0033', this.parentElement, 16)">
-        <i class="fab fa-whatsapp"></i> اطلب الشدة 🛒
-    </button>
-</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox-plus-jquery.min.js"></script>
+    <script>
+        function sendOrder(name, card, total) {
+            let count = card.querySelector('.pack-qty').value;
+            window.open(`https://wa.me/966502777884?text=${encodeURIComponent('طلب: ' + name + ' | ' + count + ' شدة')}`);
+        }
+    </script>
+</body>
+</html>
