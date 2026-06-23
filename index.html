@@ -4,34 +4,34 @@
     <meta charset="UTF-8">
     <title>TOP GIVING | المتجر الرسمي</title>
     <style>
-        body { font-family: sans-serif; background: #000; color: #fff; text-align: center; margin: 0; padding-bottom: 100px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; padding: 15px; }
-        .card { background: #0c0c0e; padding: 15px; border-radius: 15px; border: 1px solid #1a1a1a; }
-        .product-img { width: 100%; height: 180px; object-fit: contain; }
-        .btn-add { background: #D4AF37; color: #000; padding: 10px; border-radius: 5px; border: none; width: 100%; cursor: pointer; font-weight: bold; }
+        body { font-family: 'Cairo', sans-serif; background: #000; color: #fff; text-align: center; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 20px; }
+        .card { background: #0c0c0e; padding: 15px; border-radius: 18px; border: 1px solid #1a1a1a; }
+        .product-img { width: 100%; height: 200px; object-fit: contain; }
+        .dot { width: 22px; height: 22px; border-radius: 50%; display: inline-block; margin: 5px; cursor: pointer; border: 1px solid #333; }
+        .btn-add { background: #D4AF37; color: #000; padding: 12px; border-radius: 10px; border: none; width: 100%; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
 
-<div id="product-grid" class="grid"></div>
+<div class="grid" id="product-grid"></div>
 
 <script>
-// المصفوفة التي تحتوي على المنتجات (تم إضافة التيشيرت الجديد في الأسفل)
+// هنا أعدت لك المصفوفة بالتفاصيل
 const products = [
-    { id: "it01", name: "تيشيرت 01", images: ["n5-back.png.png"] },
-    { id: "is01", name: "طقم 01", images: ["s1-white.png.png"] },
-    { id: "boxy01", name: "تيشيرت Boxy", images: ["boxy1.png"] } 
+    { id: "it01", name: "تيشيرت 01", minQty: 16, colors: ["#fff", "#000"], images: ["n5-back.png.png", "n5-white.png.png"] },
+    { id: "boxy01", name: "تيشيرت Boxy", minQty: 16, colors: ["#fff", "#000"], images: ["boxy1.png", "boxy2.png"] }
 ];
 
-// دالة لبناء المتجر
 function buildStore() {
     const grid = document.getElementById('product-grid');
     products.forEach(p => {
         let card = document.createElement('div');
         card.className = 'card';
         card.innerHTML = `
-            <img src="${p.images[0]}" class="product-img">
-            <p>${p.name}</p>
+            <img src="${p.images[0]}" id="img-${p.id}" class="product-img">
+            <div>${p.colors.map((c, i) => `<span class="dot" style="background:${c}" onclick="document.getElementById('img-${p.id}').src='${p.images[i]}'"></span>`).join('')}</div>
+            <h3>${p.name}</h3>
             <button class="btn-add" onclick="window.open('https://wa.me/966560564719?text=أريد طلب ${p.name}')">طلب عبر الواتساب</button>
         `;
         grid.appendChild(card);
