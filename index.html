@@ -25,28 +25,41 @@
             object-fit: contain;
         }
 
-        /* العدسة المكبرة على طرف الصورة (الدائرة الكبيرة) */
-        .zoom-preview-lens {
+        /* أيقونة العدسة المكبرة الثابتة في الزاوية */
+        .zoom-icon {
             position: absolute;
-            top: 10px;    /* موضعها من الأعلى */
-            right: 10px;  /* موضعها من اليمين (على الطرف) */
-            width: 80px;  /* حجم الدائرة */
-            height: 80px;
-            border-radius: 50%;
-            background-repeat: no-repeat;
-            display: none; /* مخفية افتراضياً */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* هالة خفيفة */
-            background-color: white; /* خلفية لتبرز الصورة */
-            z-index: 10; /* فوق كل شيء */
+            top: 15px;    /* موضعها من الأعلى */
+            right: 15px;  /* موضعها من اليمين (على الطرف) */
+            width: 35px;  /* حجم الأيقونة */
+            height: 35px;
+            background-color: rgba(255, 255, 255, 0.8); /* خلفية بيضاء شبه شفافة */
+            border-radius: 50%; /* شكل دائري */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #333;
+            cursor: pointer;
+            z-index: 5; /* فوق الصورة */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            transition: 0.3s;
         }
         
-        /* تظهر العدسة الكبيرة عند التحويم فوق حاوية الصورة */
-        .img-container:hover .zoom-preview-lens {
-            display: block; 
+        .zoom-icon:hover {
+            background-color: #D4AF37; /* تتلون بالذهبي عند التحويم */
+            transform: scale(1.1);
+        }
+
+        /* رمز العدسة (يمكن استبداله بأيقونة SVG للحصول على مظهر أفضل) */
+        .zoom-icon::after {
+            content: "\26B2"; /* رمز Unicode لعدسة مكبرة */
+            font-size: 20px;
+            color: #333;
         }
 
         /* تنسيق باقي العناصر */
-        .dot { width: 25px; height: 25px; border-radius: 50%; display: inline-block; margin: 5px; cursor: pointer; border: 2px solid #555; }
+        .dot { width: 25px; height: 25px; border-radius: 50%; display: inline-block; margin: 5px; cursor: pointer; border: 2px solid #555; transition: 0.2s; }
+        .dot.active { border-color: #D4AF37; box-shadow: 0 0 5px #D4AF37; } /* تلوين اللون النشط */
+        
         .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
         .btn { padding: 12px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; transition: 0.3s; }
         .btn-wa { background: #25D366; color: #fff; }
@@ -73,12 +86,12 @@ products.forEach(p => {
     let card = document.createElement('div');
     card.className = 'card';
     card.innerHTML = `
-        <div class="img-container" id="container-${p.id}">
+        <div class="img-container">
             <img src="${p.images[0]}" id="img-${p.id}" class="product-img">
-            <div id="lens-${p.id}" class="zoom-preview-lens"></div>
+            <div id="zoom-icon-${p.id}" class="zoom-icon"></div>
         </div>
         
-        <div>${p.colors.map((c, i) => `<span class="dot" style="background:${c}" onclick="document.getElementById('img-${p.id}').src='${p.images[i]}'; updateZoom('${p.id}');"></span>`).join('')}</div>
+        <div id="dots-${p.id}">${p.colors.map((c, i) => `<span class="dot ${i === 0 ? 'active' : ''}" style="background:${c}" onclick="changeColor('${p.id}', ${i})"></span>`).join('')}</div>
         
         <h3>${p.name}</h3>
         
@@ -88,38 +101,29 @@ products.forEach(p => {
         </div>
     `;
     grid.appendChild(card);
-    
-    // تفعيل تأثير الزوم لكل منتج
-    initZoom(p.id);
 });
 
-// دالة لتفعيل تأثير الزوم (العدسة على الطرف)
-function initZoom(productId) {
+// دالة لتغيير اللون وتحديث الأيقونة
+function changeColor(productId, colorIndex) {
+    const product = products.find(p => p.id === productId);
     const img = document.getElementById(`img-${productId}`);
-    const lens = document.getElementById(`lens-${productId}`);
-    const container = document.getElementById(`container-${productId}`);
-    
-    // ضبط الصورة الخلفية للعدسة (نفس صورة المنتج ولكن مكبرة)
-    lens.style.backgroundImage = `url('${img.src}')`;
-    
-    // حساب حجم التكبير (الافتراضي 3x)
-    const zoomLevel = 3; 
-    
-    container.addEventListener("mousemove", (e) => {
-        const { left, top, width, height } = img.getBoundingClientRect();
-        const x = (e.clientX - left) / width;
-        const y = (e.clientY - top) / height;
-        
-        lens.style.backgroundPosition = `-${x * (width * zoomLevel - lens.offsetWidth)}px -${y * (height * zoomLevel - lens.offsetHeight)}px`;
-        lens.style.backgroundSize = `${width * zoomLevel}px ${height * zoomLevel}px`;
-    });
-}
+    const dots = document.getElementById(`dots-${productId}`).querySelectorAll('.dot');
+    const zoomIcon = document.getElementById(`zoom-icon-${productId}`);
 
-// دالة لتحديث الصورة في العدسة عند تغيير اللون
-function updateZoom(productId) {
-    setTimeout(() => { // انتظار بسيط لتحديث الصورة
-        initZoom(productId);
-    }, 50);
+    // تحديث الصورة
+    img.src = product.images[colorIndex];
+
+    // تحديث اللون النشط (Active Dot)
+    dots.forEach((dot, index) => {
+        if (index === colorIndex) {
+            dot.classList.add('active');
+        } else {
+            dot.classList.remove('active');
+        }
+    });
+
+    // يمكنك هنا إضافة كود لتغيير وظيفة الأيقونة إذا أردت،
+    // مثلاً جعلها تفتح معرض صور مكبر للون الجديد.
 }
 </script>
 </body>
