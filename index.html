@@ -18,11 +18,15 @@
         .card { display: none; background: var(--card-bg); padding: 15px; border-radius: 18px; border: 1px solid var(--accent); flex-direction: column; align-items: center; position: relative; }
         .card.show { display: flex; }
         
-        /* تصميم منطقة الصورة والأسهم الجديد */
+        /* تعديل تصميم الإطار وحجم الصورة لتملأ الفراغ بالكامل */
         .slider-container { display: flex; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 15px; background: #fff; border-radius: 12px; overflow: hidden; height: 180px; position: relative; }
-        .arrow-btn { background: rgba(0, 0, 0, 0.6); color: var(--gold); border: none; font-size: 1.8rem; width: 35px; height: 100%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 5; transition: 0.2s; font-weight: bold; }
-        .arrow-btn:hover { background: rgba(0, 0, 0, 0.8); }
-        .product-img { max-width: 85%; max-height: 85%; object-fit: contain; transition: 0.3s; }
+        .arrow-btn { background: rgba(0, 0, 0, 0.5); color: var(--gold); border: none; font-size: 1.8rem; width: 35px; height: 100%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 5; transition: 0.2s; font-weight: bold; position: absolute; top: 0; }
+        .arrow-btn.prev { left: 0; }
+        .arrow-btn.next { right: 0; }
+        .arrow-btn:hover { background: rgba(0, 0, 0, 0.7); }
+        
+        /* تم تعديل العرض والارتفاع لـ 100% واستخدام cover لملء كامل الإطار الأبيض وبحجم كبير */
+        .product-img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
         
         .model-name { font-size: 1rem; font-weight: 700; margin-bottom: 12px; height: 40px; display: flex; align-items: center; justify-content: center; }
         .qty-control { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px; background: #1a1a1a; padding: 8px; border-radius: 10px; width: 100%; box-sizing: border-box; }
@@ -48,9 +52,9 @@
         <!-- تيشيرتات -->
         <div class="card tshirt show" data-images='["n5-back.png.png", "n5-purple.png.png", "n5-white.png.png", "n5-black.png.png"]' data-index="0">
             <div class="slider-container">
-                <button class="arrow-btn" onclick="prevImg(this)">‹</button>
+                <button class="arrow-btn prev" onclick="prevImg(this)">‹</button>
                 <img src="n5-back.png.png" class="product-img">
-                <button class="arrow-btn" onclick="nextImg(this)">›</button>
+                <button class="arrow-btn next" onclick="nextImg(this)">›</button>
             </div>
             <div class="model-name">تيشيرت 01</div>
             <div class="qty-control"><button class="btn-q" onclick="c('qt01',16)">+</button><span id="qt01">16</span><button class="btn-q" onclick="c('qt01',-16)">-</button></div>
@@ -59,9 +63,9 @@
 
         <div class="card tshirt show" data-images='["t1-white.png", "t1-black.png", "t1-blue.png", "t1-yellow.png"]' data-index="0">
             <div class="slider-container">
-                <button class="arrow-btn" onclick="prevImg(this)">‹</button>
+                <button class="arrow-btn prev" onclick="prevImg(this)">‹</button>
                 <img src="t1-white.png" class="product-img">
-                <button class="arrow-btn" onclick="nextImg(this)">›</button>
+                <button class="arrow-btn next" onclick="nextImg(this)">›</button>
             </div>
             <div class="model-name">تيشيرت 02</div>
             <div class="qty-control"><button class="btn-q" onclick="c('qt02',16)">+</button><span id="qt02">16</span><button class="btn-q" onclick="c('qt02',-16)">-</button></div>
@@ -70,9 +74,9 @@
 
         <div class="card tshirt show" data-images='["t2-black.png.png", "t2-purple.png.png", "t2-white.png.png", "t2-grey.png.png"]' data-index="0">
             <div class="slider-container">
-                <button class="arrow-btn" onclick="prevImg(this)">‹</button>
+                <button class="arrow-btn prev" onclick="prevImg(this)">‹</button>
                 <img src="t2-black.png.png" class="product-img">
-                <button class="arrow-btn" onclick="nextImg(this)">›</button>
+                <button class="arrow-btn next" onclick="nextImg(this)">›</button>
             </div>
             <div class="model-name">تيشيرت 03</div>
             <div class="qty-control"><button class="btn-q" onclick="c('qt03',16)">+</button><span id="qt03">16</span><button class="btn-q" onclick="c('qt03',-16)">-</button></div>
@@ -81,9 +85,9 @@
 
         <div class="card tshirt show" data-images='["tr1-red.png.png", "tr2-black.png.png", "tr3-beige.png.png", "tr4-white.png.png"]' data-index="0">
             <div class="slider-container">
-                <button class="arrow-btn" onclick="prevImg(this)">‹</button>
+                <button class="arrow-btn prev" onclick="prevImg(this)">‹</button>
                 <img src="tr1-red.png.png" class="product-img">
-                <button class="arrow-btn" onclick="nextImg(this)">›</button>
+                <button class="arrow-btn next" onclick="nextImg(this)">›</button>
             </div>
             <div class="model-name">تيشيرت 04</div>
             <div class="qty-control"><button class="btn-q" onclick="c('qt04',16)">+</button><span id="qt04">16</span><button class="btn-q" onclick="c('qt04',-16)">-</button></div>
@@ -92,9 +96,9 @@
 
         <div class="card tshirt show" data-images='["te1-black.png.png", "te2-blue.png.png", "te3-beige.png.png", "te4-white.png.png"]' data-index="0">
             <div class="slider-container">
-                <button class="arrow-btn" onclick="prevImg(this)">‹</button>
+                <button class="arrow-btn prev" onclick="prevImg(this)">‹</button>
                 <img src="te1-black.png.png" class="product-img">
-                <button class="arrow-btn" onclick="nextImg(this)">›</button>
+                <button class="arrow-btn next" onclick="nextImg(this)">›</button>
             </div>
             <div class="model-name">تيشيرت 05</div>
             <div class="qty-control"><button class="btn-q" onclick="c('qt05',16)">+</button><span id="qt05">16</span><button class="btn-q" onclick="c('qt05',-16)">-</button></div>
@@ -104,9 +108,9 @@
         <!-- أطقم صيفية -->
         <div class="card set" data-images='["s1-white.png.png", "s1-grey.png.png", "s1-blue.png.png", "s1-black.png.png"]' data-index="0">
             <div class="slider-container">
-                <button class="arrow-btn" onclick="prevImg(this)">‹</button>
+                <button class="arrow-btn prev" onclick="prevImg(this)">‹</button>
                 <img src="s1-white.png.png" class="product-img">
-                <button class="arrow-btn" onclick="nextImg(this)">›</button>
+                <button class="arrow-btn next" onclick="nextImg(this)">›</button>
             </div>
             <div class="model-name">طقم 01</div>
             <div class="qty-control"><button class="btn-q" onclick="c('qs01',16)">+</button><span id="qs01">16</span><button class="btn-q" onclick="c('qs01',-16)">-</button></div>
@@ -115,9 +119,9 @@
 
         <div class="card set" data-images='["s2-black.jpg", "s2-blue.jpg", "s2-grey.jpg", "s2-white.jpg"]' data-index="0">
             <div class="slider-container">
-                <button class="arrow-btn" onclick="prevImg(this)">‹</button>
+                <button class="arrow-btn prev" onclick="prevImg(this)">‹</button>
                 <img src="s2-black.jpg" class="product-img">
-                <button class="arrow-btn" onclick="nextImg(this)">›</button>
+                <button class="arrow-btn next" onclick="nextImg(this)">›</button>
             </div>
             <div class="model-name">طقم 02</div>
             <div class="qty-control"><button class="btn-q" onclick="c('qs02',16)">+</button><span id="qs02">16</span><button class="btn-q" onclick="c('qs02',-16)">-</button></div>
@@ -126,9 +130,9 @@
 
         <div class="card set" data-images='["s3-black.jpg", "s3-red.jpg", "s3-purple.jpg", "s3-grey.jpg"]' data-index="0">
             <div class="slider-container">
-                <button class="arrow-btn" onclick="prevImg(this)">‹</button>
+                <button class="arrow-btn prev" onclick="prevImg(this)">‹</button>
                 <img src="s3-black.jpg" class="product-img">
-                <button class="arrow-btn" onclick="nextImg(this)">›</button>
+                <button class="arrow-btn next" onclick="nextImg(this)">›</button>
             </div>
             <div class="model-name">طقم 03</div>
             <div class="qty-control"><button class="btn-q" onclick="c('qs03',16)">+</button><span id="qs03">16</span><button class="btn-q" onclick="c('qs03',-16)">-</button></div>
@@ -137,9 +141,9 @@
 
         <div class="card set" data-images='["s4-black.jpg", "s4-green.jpg", "s4-beige.jpg", "s4-white.jpg"]' data-index="0">
             <div class="slider-container">
-                <button class="arrow-btn" onclick="prevImg(this)">‹</button>
+                <button class="arrow-btn prev" onclick="prevImg(this)">‹</button>
                 <img src="s4-black.jpg" class="product-img">
-                <button class="arrow-btn" onclick="nextImg(this)">›</button>
+                <button class="arrow-btn next" onclick="nextImg(this)">›</button>
             </div>
             <div class="model-name">طقم 04</div>
             <div class="qty-control"><button class="btn-q" onclick="c('qs04',16)">+</button><span id="qs04">16</span><button class="btn-q" onclick="c('qs04',-16)">-</button></div>
@@ -148,9 +152,9 @@
 
         <div class="card set" data-images='["s5-black.jpg", "s5-grey.jpg", "s5-beige.jpg", "s5-white.jpg"]' data-index="0">
             <div class="slider-container">
-                <button class="arrow-btn" onclick="prevImg(this)">‹</button>
+                <button class="arrow-btn prev" onclick="prevImg(this)">‹</button>
                 <img src="s5-black.jpg" class="product-img">
-                <button class="arrow-btn" onclick="nextImg(this)">›</button>
+                <button class="arrow-btn next" onclick="nextImg(this)">›</button>
             </div>
             <div class="model-name">طقم 05</div>
             <div class="qty-control"><button class="btn-q" onclick="c('qs05',16)">+</button><span id="qs05">16</span><button class="btn-q" onclick="c('qs05',-16)">-</button></div>
@@ -159,9 +163,9 @@
 
         <div class="card set" data-images='["sea-black.png", "sea-red.png", "sea-navy.png"]' data-index="0">
             <div class="slider-container">
-                <button class="arrow-btn" onclick="prevImg(this)">‹</button>
+                <button class="arrow-btn prev" onclick="prevImg(this)">‹</button>
                 <img src="sea-black.png" class="product-img">
-                <button class="arrow-btn" onclick="nextImg(this)">›</button>
+                <button class="arrow-btn next" onclick="nextImg(this)">›</button>
             </div>
             <div class="model-name">طقم Sea 01</div>
             <div class="qty-control"><button class="btn-q" onclick="c('qsea01',12)">+</button><span id="qsea01">12</span><button class="btn-q" onclick="c('qsea01',-12)">-</button></div>
@@ -170,9 +174,9 @@
 
         <div class="card set" data-images='["sea1-off-withe.png", "sea1-black.png", "sea1-navy.png"]' data-index="0">
             <div class="slider-container">
-                <button class="arrow-btn" onclick="prevImg(this)">‹</button>
+                <button class="arrow-btn prev" onclick="prevImg(this)">‹</button>
                 <img src="sea1-off-withe.png" class="product-img">
-                <button class="arrow-btn" onclick="nextImg(this)">›</button>
+                <button class="arrow-btn next" onclick="nextImg(this)">›</button>
             </div>
             <div class="model-name">طقم Sea 02</div>
             <div class="qty-control"><button class="btn-q" onclick="c('qsea02',12)">+</button><span id="qsea02">12</span><button class="btn-q" onclick="c('qsea02',-12)">-</button></div>
@@ -181,9 +185,9 @@
 
         <div class="card set" data-images='["sea2-brown.png", "sea2-pink.png", "sea2-grey.png"]' data-index="0">
             <div class="slider-container">
-                <button class="arrow-btn" onclick="prevImg(this)">‹</button>
+                <button class="arrow-btn prev" onclick="prevImg(this)">‹</button>
                 <img src="sea2-brown.png" class="product-img">
-                <button class="arrow-btn" onclick="nextImg(this)">›</button>
+                <button class="arrow-btn next" onclick="nextImg(this)">›</button>
             </div>
             <div class="model-name">طقم Sea 03</div>
             <div class="qty-control"><button class="btn-q" onclick="c('qsea03',12)">+</button><span id="qsea03">12</span><button class="btn-q" onclick="c('qsea03',-12)">-</button></div>
@@ -193,9 +197,9 @@
         <!-- شورتات -->
         <div class="card pants" data-images='["mps182-beige.png", "mps182-black.png", "mps182-blue.png", "mps182-white.png"]' data-index="0">
             <div class="slider-container">
-                <button class="arrow-btn" onclick="prevImg(this)">‹</button>
+                <button class="arrow-btn prev" onclick="prevImg(this)">‹</button>
                 <img src="mps182-beige.png" class="product-img">
-                <button class="arrow-btn" onclick="nextImg(this)">›</button>
+                <button class="arrow-btn next" onclick="nextImg(this)">›</button>
             </div>
             <div class="model-name">شورت 182</div>
             <div class="qty-control"><button class="btn-q" onclick="c('qsh01',20)">+</button><span id="qsh01">20</span><button class="btn-q" onclick="c('qsh01',-20)">-</button></div>
@@ -204,9 +208,9 @@
 
         <div class="card pants" data-images='["mps185-grey.png", "mps185-black.png", "mps185-green.png", "mps185-white.png"]' data-index="0">
             <div class="slider-container">
-                <button class="arrow-btn" onclick="prevImg(this)">‹</button>
+                <button class="arrow-btn prev" onclick="prevImg(this)">‹</button>
                 <img src="mps185-grey.png" class="product-img">
-                <button class="arrow-btn" onclick="nextImg(this)">›</button>
+                <button class="arrow-btn next" onclick="nextImg(this)">›</button>
             </div>
             <div class="model-name">شورت 185</div>
             <div class="qty-control"><button class="btn-q" onclick="c('qsh02',20)">+</button><span id="qsh02">20</span><button class="btn-q" onclick="c('qsh02',-20)">-</button></div>
@@ -215,9 +219,9 @@
 
         <div class="card pants" data-images='["mps0033-heavenly.png", "mps0033-black.png", "mps0033-white.png", "mps0033-green.png"]' data-index="0">
             <div class="slider-container">
-                <button class="arrow-btn" onclick="prevImg(this)">‹</button>
+                <button class="arrow-btn prev" onclick="prevImg(this)">‹</button>
                 <img src="mps0033-heavenly.png" class="product-img">
-                <button class="arrow-btn" onclick="nextImg(this)">›</button>
+                <button class="arrow-btn next" onclick="nextImg(this)">›</button>
             </div>
             <div class="model-name">شورت 0033</div>
             <div class="qty-control"><button class="btn-q" onclick="c('qsh03',20)">+</button><span id="qsh03">20</span><button class="btn-q" onclick="c('qsh03',-20)">-</button></div>
@@ -226,9 +230,9 @@
 
         <div class="card pants" data-images='["mps176-white.png", "mps176-black.png", "mps176-grey.png", "mps176-brown.png"]' data-index="0">
             <div class="slider-container">
-                <button class="arrow-btn" onclick="prevImg(this)">‹</button>
+                <button class="arrow-btn prev" onclick="prevImg(this)">‹</button>
                 <img src="mps176-white.png" class="product-img">
-                <button class="arrow-btn" onclick="nextImg(this)">›</button>
+                <button class="arrow-btn next" onclick="nextImg(this)">›</button>
             </div>
             <div class="model-name">شورت 176</div>
             <div class="qty-control"><button class="btn-q" onclick="c('qsh04',20)">+</button><span id="qsh04">20</span><button class="btn-q" onclick="c('qsh04',-20)">-</button></div>
@@ -253,7 +257,6 @@
             document.getElementById('tab-' + cat).classList.add('active');
         }
 
-        // دوال التحكم بالأسهم الجديدة للتنقل بين الألوان
         function updateSlider(card) {
             let images = JSON.parse(card.getAttribute('data-images'));
             let index = parseInt(card.getAttribute('data-index'));
@@ -292,7 +295,7 @@
             let card = btn.closest('.card');
             let images = JSON.parse(card.getAttribute('data-images'));
             let index = parseInt(card.getAttribute('data-index'));
-            let currentImage = images[index]; // اسم الصورة الحالية المفتوحة
+            let currentImage = images[index];
 
             order.push({ name: name, qty: qty, imgFile: currentImage }); 
             document.getElementById('cart-bar').style.display = 'block'; 
