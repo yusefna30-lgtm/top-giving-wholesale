@@ -6,13 +6,18 @@
     <style>
         body { font-family: sans-serif; background: #000; color: #fff; text-align: center; margin: 0; padding: 20px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .card { background: #0c0c0e; padding: 20px; border-radius: 20px; border: 2px solid #333; transition: 0.3s; }
-        .card:hover { border-color: #D4AF37; box-shadow: 0 0 15px #D4AF37; }
-        .product-img { width: 100%; height: 300px; object-fit: contain; cursor: zoom-in; transition: transform 0.3s; }
-        .product-img:hover { transform: scale(1.05); }
+        .card { background: #0c0c0e; padding: 20px; border-radius: 20px; border: 2px solid #333; }
+        
+        /* تحسين حجم الصورة والزوم */
+        .img-container { position: relative; width: 100%; height: 300px; overflow: hidden; cursor: crosshair; }
+        .product-img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.2s; }
+        .img-container:hover .product-img { transform: scale(1.5); }
+        
         .dot { width: 25px; height: 25px; border-radius: 50%; display: inline-block; margin: 5px; cursor: pointer; border: 2px solid #555; }
-        .btn-group { display: flex; gap: 10px; margin-top: 15px; }
-        .btn { padding: 10px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; flex: 1; }
+        
+        /* ترتيب الأزرار تحت بعض */
+        .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+        .btn { padding: 12px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; }
         .btn-wa { background: #25D366; color: #fff; }
         .btn-cart { background: #D4AF37; color: #000; }
     </style>
@@ -33,12 +38,14 @@ products.forEach(p => {
     let card = document.createElement('div');
     card.className = 'card';
     card.innerHTML = `
-        <img src="${p.images[0]}" id="img-${p.id}" class="product-img">
+        <div class="img-container">
+            <img src="${p.images[0]}" id="img-${p.id}" class="product-img">
+        </div>
         <div>${p.colors.map((c, i) => `<span class="dot" style="background:${c}" onclick="document.getElementById('img-${p.id}').src='${p.images[i]}'"></span>`).join('')}</div>
         <h3>${p.name}</h3>
         <div class="btn-group">
-            <button class="btn btn-cart" onclick="alert('تمت الإضافة للسلة')">السلة</button>
-            <button class="btn btn-wa" onclick="window.open('https://wa.me/966560564719?text=أريد طلب ${p.name}')">واتساب</button>
+            <button class="btn btn-cart" onclick="alert('تمت الإضافة للسلة')">إضافة للسلة</button>
+            <button class="btn btn-wa" onclick="window.open('https://wa.me/966560564719?text=أريد طلب ${p.name}')">طلب عبر الواتساب</button>
         </div>
     `;
     grid.appendChild(card);
