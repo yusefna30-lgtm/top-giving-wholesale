@@ -2,41 +2,51 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOP GIVING</title>
     <style>
-        body { background: #000; color: #fff; text-align: center; font-family: sans-serif; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; padding: 20px; }
+        body { background: #000; color: #fff; text-align: center; font-family: sans-serif; margin: 0; padding: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
         
-        /* هذا هو السر: الحاوية يجب أن تكون relative لكي نضع الأيقونة داخلها */
+        /* الحاوية التي تضمن بقاء الصورة والأيقونة متناسقين */
         .card-img-wrapper {
             position: relative;
             width: 100%;
-            height: 300px;
+            height: 250px;
             overflow: hidden;
             border-radius: 15px;
+            background: #111;
         }
         
         .product-img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain; /* يضمن عدم قص الصورة */
             transition: transform 0.3s;
         }
 
-        /* الأيقونة داخل الحاوية */
+        /* تنسيق أيقونة العدسة في الزاوية */
         .zoom-icon {
             position: absolute;
             top: 10px;
             right: 10px;
-            background: rgba(0,0,0,0.5);
-            padding: 8px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
             border: 1px solid #fff;
             z-index: 10;
         }
+        
+        .card-img-wrapper:hover .product-img { transform: scale(1.05); }
 
-        .card-img-wrapper:hover .product-img { transform: scale(1.1); }
+        .card { background: #111; padding: 15px; border-radius: 20px; border: 1px solid #333; }
+        .btn-wa { background: #D4AF37; color: #000; padding: 10px; border-radius: 8px; border: none; width: 100%; cursor: pointer; font-weight: bold; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -44,17 +54,22 @@
 <div class="grid" id="product-grid"></div>
 
 <script>
-const products = [{ id: "1", name: "تيشيرت Boxy", img: "b1.png" }];
+const products = [
+    { id: "1", name: "تيشيرت Boxy", img: "b1.png" },
+    { id: "2", name: "طقم 01", img: "s1-white.png.png" },
+    { id: "3", name: "تيشيرت 01", img: "n5-back.png.png" }
+];
 
 const grid = document.getElementById('product-grid');
 products.forEach(p => {
     grid.innerHTML += `
-        <div style="background:#111; padding:20px; border-radius:20px;">
+        <div class="card">
             <div class="card-img-wrapper">
                 <img src="${p.img}" class="product-img">
-                <div class="zoom-icon" onclick="alert('فتحت العدسة!')">🔍</div>
+                <div class="zoom-icon" onclick="window.open('${p.img}')">🔍</div>
             </div>
             <h3>${p.name}</h3>
+            <button class="btn-wa" onclick="window.open('https://wa.me/966560564719')">طلب عبر الواتساب</button>
         </div>
     `;
 });
