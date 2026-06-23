@@ -4,22 +4,52 @@
     <meta charset="UTF-8">
     <title>TOP GIVING | المتجر الرسمي</title>
     <style>
+        /* التنسيق الأساسي للموقع */
         body { font-family: sans-serif; background: #000; color: #fff; text-align: center; margin: 0; padding: 20px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
         .card { background: #0c0c0e; padding: 20px; border-radius: 20px; border: 2px solid #333; }
+
+        /* حاوية الصورة لتأثير العدسة (هنا السر!) */
+        .img-zoom-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
         
-        /* تحسين حجم الصورة والزوم */
-        .img-container { position: relative; width: 100%; height: 300px; overflow: hidden; cursor: crosshair; }
-        .product-img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.2s; }
-        .img-container:hover .product-img { transform: scale(1.5); }
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* العدسة المكبرة (تظهر فقط عند تمرير الفأرة) */
+        .img-zoom-lens {
+            position: absolute;
+            border: 1px solid #D4AF37; /* لون ذهبي للعدسة */
+            width: 80px; /* حجم العدسة */
+            height: 80px;
+            cursor: none;
+            border-radius: 50%; /* شكل دائري */
+            background-repeat: no-repeat;
+            display: none; /* مخفية افتراضياً */
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5); /* هالة خفيفة */
+        }
         
+        .img-zoom-container:hover .img-zoom-lens {
+            display: block; /* تظهر عند التحويم */
+        }
+
+        /* تنسيق باقي العناصر */
         .dot { width: 25px; height: 25px; border-radius: 50%; display: inline-block; margin: 5px; cursor: pointer; border: 2px solid #555; }
-        
-        /* ترتيب الأزرار تحت بعض */
         .btn-group { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
-        .btn { padding: 12px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; }
+        .btn { padding: 12px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; transition: 0.3s; }
         .btn-wa { background: #25D366; color: #fff; }
+        .btn-wa:hover { background: #1ebe58; }
         .btn-cart { background: #D4AF37; color: #000; }
+        .btn-cart:hover { background: #eac560; }
     </style>
 </head>
 <body>
@@ -28,28 +58,72 @@
 <div class="grid" id="product-grid"></div>
 
 <script>
+// قائمة المنتجات (يمكنك تعديلها وإضافة منتجات جديدة هنا بسهولة)
 const products = [
     { id: "p1", name: "تيشيرت Boxy", colors: ["#fff", "#000"], images: ["b1.png", "b2.png"] },
     { id: "p2", name: "طقم 01", colors: ["#eee", "#555"], images: ["s1-white.png.png", "s1-grey.png.png"] }
 ];
 
 const grid = document.getElementById('product-grid');
+
 products.forEach(p => {
     let card = document.createElement('div');
     card.className = 'card';
     card.innerHTML = `
-        <div class="img-container">
+        <div class="img-zoom-container" id="container-${p.id}">
             <img src="${p.images[0]}" id="img-${p.id}" class="product-img">
+            <div id="lens-${p.id}" class="img-zoom-lens"></div>
         </div>
-        <div>${p.colors.map((c, i) => `<span class="dot" style="background:${c}" onclick="document.getElementById('img-${p.id}').src='${p.images[i]}'"></span>`).join('')}</div>
+        
+        <div>${p.colors.map((c, i) => `<span class="dot" style="background:${c}" onclick="document.getElementById('img-${p.id}').src='${p.images[i]}'; updateZoom('${p.id}');"></span>`).join('')}</div>
+        
         <h3>${p.name}</h3>
+        
         <div class="btn-group">
             <button class="btn btn-cart" onclick="alert('تمت الإضافة للسلة')">إضافة للسلة</button>
             <button class="btn btn-wa" onclick="window.open('https://wa.me/966560564719?text=أريد طلب ${p.name}')">طلب عبر الواتساب</button>
         </div>
     `;
     grid.appendChild(card);
+    
+    // تفعيل تأثير الزوم لكل منتج
+    initZoom(p.id);
 });
+
+// دالة لتفعيل تأثير الزوم (العدسة)
+function initZoom(productId) {
+    const img = document.getElementById(`img-${productId}`);
+    const lens = document.getElementById(`lens-${productId}`);
+    
+    // ضبط الصورة الخلفية للعدسة (نفس صورة المنتج ولكن مكبرة)
+    lens.style.backgroundImage = `url('${img.src}')`;
+    
+    // حساب حجم التكبير (الافتراضي 3x)
+    const zoomLevel = 3; 
+    
+    img.addEventListener("mousemove", (e) => {
+        const { left, top, width, height } = img.getBoundingClientRect();
+        const x = (e.clientX - left) / width;
+        const y = (e.clientY - top) / height;
+        
+        lens.style.backgroundPosition = `-${x * (width * zoomLevel - lens.offsetWidth)}px -${y * (height * zoomLevel - lens.offsetHeight)}px`;
+        lens.style.backgroundSize = `${width * zoomLevel}px ${height * zoomLevel}px`;
+        
+        // تحريك العدسة لموقع الفأرة
+        const lensLeft = (x * width) - (lens.offsetWidth / 2);
+        const lensTop = (y * height) - (lens.offsetHeight / 2);
+        
+        lens.style.left = `${lensLeft}px`;
+        lens.style.top = `${lensTop}px`;
+    });
+}
+
+// دالة لتحديث الصورة في العدسة عند تغيير اللون
+function updateZoom(productId) {
+    setTimeout(() => { // انتظار بسيط لتحديث الصورة
+        initZoom(productId);
+    }, 50);
+}
 </script>
 </body>
 </html>
