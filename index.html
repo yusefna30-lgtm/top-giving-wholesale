@@ -5,35 +5,44 @@
     <title>TOP GIVING | المتجر الرسمي</title>
     <style>
         body { font-family: sans-serif; background: #000; color: #fff; text-align: center; margin: 0; padding: 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        .card { background: #1a1a1a; padding: 20px; border-radius: 20px; border: 1px solid #D4AF37; }
-        .product-img { width: 100%; height: 250px; object-fit: contain; margin-bottom: 15px; }
-        .btn-add { background: #D4AF37; color: #000; padding: 12px; border-radius: 10px; border: none; width: 100%; font-weight: bold; cursor: pointer; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .card { background: #0c0c0e; padding: 20px; border-radius: 20px; border: 2px solid #333; transition: 0.3s; }
+        .card:hover { border-color: #D4AF37; box-shadow: 0 0 15px #D4AF37; }
+        .product-img { width: 100%; height: 300px; object-fit: contain; cursor: zoom-in; transition: transform 0.3s; }
+        .product-img:hover { transform: scale(1.05); }
+        .dot { width: 25px; height: 25px; border-radius: 50%; display: inline-block; margin: 5px; cursor: pointer; border: 2px solid #555; }
+        .btn-group { display: flex; gap: 10px; margin-top: 15px; }
+        .btn { padding: 10px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; flex: 1; }
+        .btn-wa { background: #25D366; color: #fff; }
+        .btn-cart { background: #D4AF37; color: #000; }
     </style>
 </head>
 <body>
 
-    <h1>متجر TOP GIVING</h1>
-    <div class="grid" id="product-list"></div>
+<h1>المجموعة الجديدة - TOP GIVING</h1>
+<div class="grid" id="product-grid"></div>
 
-    <script>
-        // هنا يمكنك إضافة كل منتجاتك بسهولة
-        const products = [
-            { name: "تيشيرت Boxy", img: "b1.png" },
-            { name: "طقم 01", img: "s1-white.png.png" } 
-            // أضف أي منتج جديد هنا بنفس الطريقة
-        ];
+<script>
+const products = [
+    { id: "p1", name: "تيشيرت Boxy", colors: ["#fff", "#000"], images: ["b1.png", "b2.png"] },
+    { id: "p2", name: "طقم 01", colors: ["#eee", "#555"], images: ["s1-white.png.png", "s1-grey.png.png"] }
+];
 
-        const list = document.getElementById('product-list');
-        products.forEach(p => {
-            list.innerHTML += `
-                <div class="card">
-                    <img src="${p.img}" class="product-img">
-                    <h3>${p.name}</h3>
-                    <button class="btn-add" onclick="window.open('https://wa.me/966560564719')">طلب عبر الواتساب</button>
-                </div>
-            `;
-        });
-    </script>
+const grid = document.getElementById('product-grid');
+products.forEach(p => {
+    let card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+        <img src="${p.images[0]}" id="img-${p.id}" class="product-img">
+        <div>${p.colors.map((c, i) => `<span class="dot" style="background:${c}" onclick="document.getElementById('img-${p.id}').src='${p.images[i]}'"></span>`).join('')}</div>
+        <h3>${p.name}</h3>
+        <div class="btn-group">
+            <button class="btn btn-cart" onclick="alert('تمت الإضافة للسلة')">السلة</button>
+            <button class="btn btn-wa" onclick="window.open('https://wa.me/966560564719?text=أريد طلب ${p.name}')">واتساب</button>
+        </div>
+    `;
+    grid.appendChild(card);
+});
+</script>
 </body>
 </html>
