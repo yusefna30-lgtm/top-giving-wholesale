@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOP GIVING | المتجر الرسمي</title>
     <style>
-        /* التنسيقات العامة الفخمة للموقع */
         body {
             background-color: #000000;
             color: #ffffff;
@@ -53,18 +52,15 @@
             box-shadow: 0 0 15px rgba(191, 160, 48, 0.4);
         }
 
-        /* شبكة المنتجات */
         .grid {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 30px;
             padding: 40px 20px;
             max-width: 1200px;
             margin: 0 auto;
-            justify-content: center;
         }
 
-        /* كارت المنتج */
         .card {
             background-color: #0a0a0a;
             border: 1px solid #151515;
@@ -73,69 +69,29 @@
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.7);
             transition: all 0.3s;
-            position: relative;
-            width: 280px;
         }
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(191, 160, 48, 0.15);
             border-color: #bfa030;
-        }
-
-        /* حاوي السلايدر والصورة */
-        .slider-container {
-            position: relative;
-            width: 100%;
-            height: 340px;
-            overflow: hidden;
-            border-radius: 12px;
-            background-color: #050505;
+            box-shadow: 0 15px 35px rgba(191, 160, 48, 0.15);
         }
 
         .product-img {
             width: 100%;
-            height: 100%;
+            height: 340px;
             object-fit: cover;
-            object-position: center;
+            border-radius: 12px;
+            background-color: #050505;
         }
-
-        /* أزرار الأسهم للتنقل بين الألوان */
-        .arrow-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.75);
-            color: #bfa030;
-            border: 1px solid #222222;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 24px;
-            z-index: 5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-        }
-
-        .arrow-btn:hover {
-            background: #bfa030;
-            color: #000000;
-        }
-
-        .arrow-btn.prev { left: 12px; }
-        .arrow-btn.next { right: 12px; }
 
         .model-name {
-            font-size: 18px;
-            margin: 18px 0 12px 0;
+            font-size: 16px;
+            margin: 15px 0 10px 0;
             font-weight: 600;
             color: #ffffff;
         }
 
-        /* التحكم بالكميات جملة */
         .qty-control {
             display: flex;
             justify-content: center;
@@ -160,7 +116,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s;
         }
 
         .btn-q:hover {
@@ -175,7 +130,6 @@
             color: #bfa030;
         }
 
-        /* زر إضافة للطلب */
         .btn-add {
             background-color: transparent;
             color: #bfa030;
@@ -194,54 +148,21 @@
             color: #000000;
         }
 
-        /* تحسينات شاشات الجوال */
         @media (max-width: 768px) {
             .grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
                 gap: 12px;
                 padding: 15px 10px;
             }
-            .card {
-                padding: 10px;
-                border-radius: 12px;
-                width: calc(50% - 6px);
-                min-width: 150px;
-            }
-            .slider-container { 
-                height: 195px;
-            }
-            .model-name { 
-                font-size: 14px; 
-                margin: 10px 0 6px 0;
-            }
-            .qty-control {
-                gap: 10px;
-                padding: 6px;
-                margin-bottom: 10px;
-            }
-            .btn-q {
-                width: 26px;
-                height: 26px;
-                font-size: 14px;
-            }
-            .qty-num {
-                font-size: 13px;
-                min-width: 20px;
-            }
-            .btn-add { 
-                padding: 8px; 
-                font-size: 12px; 
-                border-radius: 8px;
-            }
-            .arrow-btn {
-                width: 28px;
-                height: 28px;
-                font-size: 16px;
-            }
-            .arrow-btn.prev { left: 6px; }
-            .arrow-btn.next { right: 6px; }
+            .card { padding: 10px; border-radius: 12px; }
+            .product-img { height: 195px; }
+            .model-name { font-size: 13px; margin: 10px 0 6px 0; }
+            .qty-control { gap: 10px; padding: 6px; }
+            .btn-q { width: 26px; height: 26px; font-size: 14px; }
+            .qty-num { font-size: 13px; }
+            .btn-add { padding: 8px; font-size: 12px; }
         }
 
-        /* شريط السلة السفلي */
         .cart-navbar {
             position: fixed;
             bottom: 0;
@@ -254,21 +175,12 @@
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            box-shadow: 0 -10px 35px rgba(0,0,0,0.9);
             transform: translateY(120px);
-            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: transform 0.4s ease;
         }
 
         .cart-navbar.active {
             transform: translateY(0);
-        }
-
-        .cart-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 15px;
-            color: #cccccc;
         }
 
         .badge {
@@ -286,16 +198,7 @@
             padding: 12px 24px;
             border-radius: 10px;
             font-weight: bold;
-            font-size: 14px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
-        }
-
-        .btn-send-cart:hover {
-            background-color: #dfba3c;
         }
     </style>
 </head>
@@ -312,70 +215,107 @@
 
     <div class="grid">
 
-        <div class="card" data-images='["smile-white.png", "smile-olive.png", "smile-black.png", "smile-beige.png"]' data-index="0">
-            <div class="slider-container">
-                <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
-                <img src="smile-white.png" class="product-img">
-                <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
-            </div>
-            <div class="model-name">تيشيرت SMILE (متعدد الألوان)</div>
+        <div class="card">
+            <img src="smile-white.png" class="product-img">
+            <div class="model-name">تيشيرت SMILE أبيض</div>
             <div class="qty-control">
-                <button class="btn-q" onclick="c('qt_smile_all', 16)">+</button>
-                <span id="qt_smile_all" class="qty-num">16</span>
-                <button class="btn-q" onclick="c('qt_smile_all', -16)">-</button>
+                <button class="btn-q" onclick="c('qt_sm_w', 16)">+</button>
+                <span id="qt_sm_w" class="qty-num">16</span>
+                <button class="btn-q" onclick="c('qt_sm_w', -16)">-</button>
             </div>
-            <button class="btn-add" onclick="addToCart('تيشيرت SMILE ألوان مختلطة','qt_smile_all')">إضافة للطلب</button>
+            <button class="btn-add" onclick="addToCart('SMILE أبيض','qt_sm_w')">إضافة للطلب</button>
         </div>
 
-        <div class="card" data-images='["Picsart_26-06-24_10-00-55-685.jpg", "Picsart_26-06-24_10-01-17-884.jpg", "Picsart_26-06-24_10-01-39-351.jpg", "Picsart_26-06-24_10-02-02-733.jpg"]' data-index="0">
-            <div class="slider-container">
-                <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
-                <img src="Picsart_26-06-24_10-00-55-685.jpg" class="product-img">
-                <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
-            </div>
-            <div class="model-name">كينز بولو | KENZ POLO</div>
+        <div class="card">
+            <img src="smile-black.png" class="product-img">
+            <div class="model-name">تيشيرت SMILE أسود</div>
             <div class="qty-control">
-                <button class="btn-q" onclick="c('qt_kenz_polo', 16)">+</button>
-                <span id="qt_kenz_polo" class="qty-num">16</span>
-                <button class="btn-q" onclick="c('qt_kenz_polo', -16)">-</button>
+                <button class="btn-q" onclick="c('qt_sm_b', 16)">+</button>
+                <span id="qt_sm_b" class="qty-num">16</span>
+                <button class="btn-q" onclick="c('qt_sm_b', -16)">-</button>
             </div>
-            <button class="btn-add" onclick="addToCart('كينز بولو KENZ POLO ألوان مختلطة','qt_kenz_polo')">إضافة للطلب</button>
+            <button class="btn-add" onclick="addToCart('SMILE أسود','qt_sm_b')">إضافة للطلب</button>
+        </div>
+
+        <div class="card">
+            <img src="smile-olive.png" class="product-img">
+            <div class="model-name">تيشيرت SMILE زيتي</div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt_sm_o', 16)">+</button>
+                <span id="qt_sm_o" class="qty-num">16</span>
+                <button class="btn-q" onclick="c('qt_sm_o', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="addToCart('SMILE زيتي','qt_sm_o')">إضافة للطلب</button>
+        </div>
+
+        <div class="card">
+            <img src="smile-beige.png" class="product-img">
+            <div class="model-name">تيشيرت SMILE بيج</div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt_sm_bg', 16)">+</button>
+                <span id="qt_sm_bg" class="qty-num">16</span>
+                <button class="btn-q" onclick="c('qt_sm_bg', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="addToCart('SMILE بيج','qt_sm_bg')">إضافة للطلب</button>
+        </div>
+
+
+        <div class="card">
+            <img src="Picsart_26-06-24_10-00-55-685.jpg" class="product-img">
+            <div class="model-name">كينز بولو | أزرق ملكي</div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt_kp_bl', 16)">+</button>
+                <span id="qt_kp_bl" class="qty-num">16</span>
+                <button class="btn-q" onclick="c('qt_kp_bl', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="addToCart('كينز بولو أزرق','qt_kp_bl')">إضافة للطلب</button>
+        </div>
+
+        <div class="card">
+            <img src="Picsart_26-06-24_10-01-17-884.jpg" class="product-img">
+            <div class="model-name">كينز بولو | رمادي فاتح</div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt_kp_gr', 16)">+</button>
+                <span id="qt_kp_gr" class="qty-num">16</span>
+                <button class="btn-q" onclick="c('qt_kp_gr', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="addToCart('كينز بولو رمادي','qt_kp_gr')">إضافة للطلب</button>
+        </div>
+
+        <div class="card">
+            <img src="Picsart_26-06-24_10-01-39-351.jpg" class="product-img">
+            <div class="model-name">كينز بولو | كحلي غامق</div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt_kp_nv', 16)">+</button>
+                <span id="qt_kp_nv" class="qty-num">16</span>
+                <button class="btn-q" onclick="c('qt_kp_nv', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="addToCart('كينز بولو كحلي','qt_kp_nv')">إضافة للطلب</button>
+        </div>
+
+        <div class="card">
+            <img src="Picsart_26-06-24_10-02-02-733.jpg" class="product-img">
+            <div class="model-name">كينز بولو | زيتي/رمادي مخضر</div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt_kp_sg', 16)">+</button>
+                <span id="qt_kp_sg" class="qty-num">16</span>
+                <button class="btn-q" onclick="c('qt_kp_sg', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="addToCart('كينز بولو زيتي','qt_kp_sg')">إضافة للطلب</button>
         </div>
 
     </div>
 
     <div id="cart-navbar" class="cart-navbar">
-        <div class="cart-info">
+        <div style="font-size: 15px; color: #cccccc;">
             <span>الموديلات المضافة:</span>
             <span id="cart-count" class="badge">0</span>
         </div>
-        <button class="btn-send-cart" onclick="sendOrderWhatsApp()">
-            إرسال الطلب بالكامل 📲
-        </button>
+        <button class="btn-send-cart" onclick="sendOrderWhatsApp()">إرسال الطلب بالكامل 📲</button>
     </div>
 
     <script>
         let cart = {};
-
-        function prevImg(btn) {
-            const card = btn.closest('.card');
-            const images = JSON.parse(card.getAttribute('data-images'));
-            let index = parseInt(card.getAttribute('data-index'));
-            
-            index = (index === 0) ? images.length - 1 : index - 1;
-            card.setAttribute('data-index', index);
-            card.querySelector('.product-img').src = images[index];
-        }
-
-        function nextImg(btn) {
-            const card = btn.closest('.card');
-            const images = JSON.parse(card.getAttribute('data-images'));
-            let index = parseInt(card.getAttribute('data-index'));
-            
-            index = (index === images.length - 1) ? 0 : index + 1;
-            card.setAttribute('data-index', index);
-            card.querySelector('.product-img').src = images[index];
-        }
 
         function c(id, amount) {
             const span = document.getElementById(id);
@@ -395,25 +335,21 @@
             if(modelsCount > 0) {
                 document.getElementById('cart-navbar').classList.add('active');
             }
-            alert(`تم إضافة ${qty} حبة من (${name}) إلى السلة بنجاح!`);
+            alert(`تم إضافة ${qty} حبة من (${name}) إلى الطلب.`);
         }
 
         function sendOrderWhatsApp() {
             if (Object.keys(cart).length === 0) return;
-
             const phoneNumber = "966560564719"; 
-            let message = `مرحباً براند TOP GIVING، أرغب في تأكيد طلبية جديدة:\n\n`;
+            let message = `مرحباً براند TOP GIVING، أرغب في تأكيد طلبية جملة:\n\n`;
             let totalItems = 0;
 
             for (const [name, qty] of Object.entries(cart)) {
-                message += `📦 *المنتج:* ${name}\n🔢 *الكمية:* ${qty} حبة\n-------------------------\n`;
+                message += `📦 *المنتج:* ${name} -> *الكمية:* ${qty} حبة\n`;
                 totalItems += qty;
             }
-
-            message += `\n📊 *إجمالي القطع المطلوبة:* ${totalItems} حبة`;
-            
-            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappURL, '_blank');
+            message += `\n📊 *إجمالي القطع:* ${totalItems} حبة`;
+            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
         }
     </script>
 </body>
