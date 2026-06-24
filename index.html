@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOP GIVING | المتجر الرسمي</title>
     <style>
+        /* التنسيقات العامة للموقع */
         body {
             background-color: #000000;
             color: #ffffff;
@@ -52,6 +53,7 @@
             box-shadow: 0 0 15px rgba(191, 160, 48, 0.4);
         }
 
+        /* شبكة المنتجات الأصلية المستقرة */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -61,7 +63,7 @@
             margin: 0 auto;
         }
 
-        .card {
+        .product-item {
             background-color: #0a0a0a;
             border: 1px solid #151515;
             border-radius: 16px;
@@ -71,13 +73,13 @@
             transition: all 0.3s;
         }
 
-        .card:hover {
+        .product-item:hover {
             transform: translateY(-5px);
             border-color: #bfa030;
             box-shadow: 0 15px 35px rgba(191, 160, 48, 0.15);
         }
 
-        .product-img {
+        .product-item img {
             width: 100%;
             height: 340px;
             object-fit: cover;
@@ -85,11 +87,21 @@
             background-color: #050505;
         }
 
-        .model-name {
+        .product-info {
+            padding-top: 15px;
+        }
+
+        .product-title {
             font-size: 16px;
-            margin: 15px 0 10px 0;
+            margin: 10px 0;
             font-weight: 600;
             color: #ffffff;
+        }
+
+        .product-price {
+            color: #bfa030;
+            font-weight: bold;
+            margin-bottom: 15px;
         }
 
         .qty-control {
@@ -130,20 +142,20 @@
             color: #bfa030;
         }
 
-        .btn-add {
+        .btn-primary {
+            display: block;
             background-color: transparent;
             color: #bfa030;
             border: 1px solid #bfa030;
             padding: 12px;
-            width: 100%;
+            text-decoration: none;
             border-radius: 10px;
             font-weight: bold;
             font-size: 14px;
-            cursor: pointer;
             transition: all 0.3s;
         }
 
-        .btn-add:hover {
+        .btn-primary:hover {
             background-color: #bfa030;
             color: #000000;
         }
@@ -154,15 +166,16 @@
                 gap: 12px;
                 padding: 15px 10px;
             }
-            .card { padding: 10px; border-radius: 12px; }
-            .product-img { height: 195px; }
-            .model-name { font-size: 13px; margin: 10px 0 6px 0; }
+            .product-item { padding: 10px; border-radius: 12px; }
+            .product-item img { height: 195px; }
+            .product-title { font-size: 13px; }
             .qty-control { gap: 10px; padding: 6px; }
             .btn-q { width: 26px; height: 26px; font-size: 14px; }
             .qty-num { font-size: 13px; }
-            .btn-add { padding: 8px; font-size: 12px; }
+            .btn-primary { padding: 8px; font-size: 12px; }
         }
 
+        /* شريط السلة السفلي المرتبط بالـ WhatsApp */
         .cart-navbar {
             position: fixed;
             bottom: 0;
@@ -199,6 +212,7 @@
             border-radius: 10px;
             font-weight: bold;
             cursor: pointer;
+            font-size: 14px;
         }
     </style>
 </head>
@@ -215,93 +229,117 @@
 
     <div class="grid">
 
-        <div class="card">
-            <img src="smile-white.png" class="product-img">
-            <div class="model-name">تيشيرت SMILE أبيض</div>
-            <div class="qty-control">
-                <button class="btn-q" onclick="c('qt_sm_w', 16)">+</button>
-                <span id="qt_sm_w" class="qty-num">16</span>
-                <button class="btn-q" onclick="c('qt_sm_w', -16)">-</button>
+        <div class="product-item">
+            <img src="Picsart_26-06-24_10-05-55-069.jpg" alt="TSH-WHITE-SMILE">
+            <div class="product-info">
+                <h4 class="product-title">تيشيرت أبيض مطبوع SMILE</h4>
+                <p class="product-price">100 ريال</p>
+                <div class="qty-control">
+                    <button class="btn-q" onclick="c('qt_smile_w', 16)">+</button>
+                    <span id="qt_smile_w" class="qty-num">16</span>
+                    <button class="btn-q" onclick="c('qt_smile_w', -16)">-</button>
+                </div>
+                <a href="#" class="btn btn-primary" onclick="addToCart('SMILE أبيض','qt_smile_w'); event.preventDefault();">إضافة للطلب</a>
             </div>
-            <button class="btn-add" onclick="addToCart('SMILE أبيض','qt_sm_w')">إضافة للطلب</button>
         </div>
 
-        <div class="card">
-            <img src="smile-black.png" class="product-img">
-            <div class="model-name">تيشيرت SMILE أسود</div>
-            <div class="qty-control">
-                <button class="btn-q" onclick="c('qt_sm_b', 16)">+</button>
-                <span id="qt_sm_b" class="qty-num">16</span>
-                <button class="btn-q" onclick="c('qt_sm_b', -16)">-</button>
+        <div class="product-item">
+            <img src="smile-black.png" alt="TSH-BLACK-SMILE">
+            <div class="product-info">
+                <h4 class="product-title">تيشيرت أسود مطبوع SMILE</h4>
+                <p class="product-price">100 ريال</p>
+                <div class="qty-control">
+                    <button class="btn-q" onclick="c('qt_smile_b', 16)">+</button>
+                    <span id="qt_smile_b" class="qty-num">16</span>
+                    <button class="btn-q" onclick="c('qt_smile_b', -16)">-</button>
+                </div>
+                <a href="#" class="btn btn-primary" onclick="addToCart('SMILE أسود','qt_smile_b'); event.preventDefault();">إضافة للطلب</a>
             </div>
-            <button class="btn-add" onclick="addToCart('SMILE أسود','qt_sm_b')">إضافة للطلب</button>
         </div>
 
-        <div class="card">
-            <img src="smile-olive.png" class="product-img">
-            <div class="model-name">تيشيرت SMILE زيتي</div>
-            <div class="qty-control">
-                <button class="btn-q" onclick="c('qt_sm_o', 16)">+</button>
-                <span id="qt_sm_o" class="qty-num">16</span>
-                <button class="btn-q" onclick="c('qt_sm_o', -16)">-</button>
+        <div class="product-item">
+            <img src="Picsart_26-06-24_10-04-31-049.jpg" alt="TSH-OLIVE-SMILE">
+            <div class="product-info">
+                <h4 class="product-title">تيشيرت زيتي مطبوع SMILE</h4>
+                <p class="product-price">100 ريال</p>
+                <div class="qty-control">
+                    <button class="btn-q" onclick="c('qt_smile_o', 16)">+</button>
+                    <span id="qt_smile_o" class="qty-num">16</span>
+                    <button class="btn-q" onclick="c('qt_smile_o', -16)">-</button>
+                </div>
+                <a href="#" class="btn btn-primary" onclick="addToCart('SMILE زيتي','qt_smile_o'); event.preventDefault();">إضافة للطلب</a>
             </div>
-            <button class="btn-add" onclick="addToCart('SMILE زيتي','qt_sm_o')">إضافة للطلب</button>
         </div>
 
-        <div class="card">
-            <img src="smile-beige.png" class="product-img">
-            <div class="model-name">تيشيرت SMILE بيج</div>
-            <div class="qty-control">
-                <button class="btn-q" onclick="c('qt_sm_bg', 16)">+</button>
-                <span id="qt_sm_bg" class="qty-num">16</span>
-                <button class="btn-q" onclick="c('qt_sm_bg', -16)">-</button>
+        <div class="product-item">
+            <img src="Picsart_26-06-24_10-05-27-956.jpg" alt="TSH-BEIGE-SMILE">
+            <div class="product-info">
+                <h4 class="product-title">تيشيرت بيج مطبوع SMILE</h4>
+                <p class="product-price">100 ريال</p>
+                <div class="qty-control">
+                    <button class="btn-q" onclick="c('qt_smile_bg', 16)">+</button>
+                    <span id="qt_smile_bg" class="qty-num">16</span>
+                    <button class="btn-q" onclick="c('qt_smile_bg', -16)">-</button>
+                </div>
+                <a href="#" class="btn btn-primary" onclick="addToCart('SMILE بيج','qt_smile_bg'); event.preventDefault();">إضافة للطلب</a>
             </div>
-            <button class="btn-add" onclick="addToCart('SMILE بيج','qt_sm_bg')">إضافة للطلب</button>
         </div>
 
 
-        <div class="card">
-            <img src="Picsart_26-06-24_10-00-55-685.jpg" class="product-img">
-            <div class="model-name">كينز بولو | أزرق ملكي</div>
-            <div class="qty-control">
-                <button class="btn-q" onclick="c('qt_kp_bl', 16)">+</button>
-                <span id="qt_kp_bl" class="qty-num">16</span>
-                <button class="btn-q" onclick="c('qt_kp_bl', -16)">-</button>
+        <div class="product-item">
+            <img src="Picsart_26-06-24_10-00-55-685.jpg" alt="KENZ-BLUE">
+            <div class="product-info">
+                <h4 class="product-title">كينز بولو | أزرق ملكي</h4>
+                <p class="product-price">100 ريال</p>
+                <div class="qty-control">
+                    <button class="btn-q" onclick="c('qt_kenz_bl', 16)">+</button>
+                    <span id="qt_kenz_bl" class="qty-num">16</span>
+                    <button class="btn-q" onclick="c('qt_kenz_bl', -16)">-</button>
+                </div>
+                <a href="#" class="btn btn-primary" onclick="addToCart('كينز بولو أزرق','qt_kenz_bl'); event.preventDefault();">إضافة للطلب</a>
             </div>
-            <button class="btn-add" onclick="addToCart('كينز بولو أزرق','qt_kp_bl')">إضافة للطلب</button>
         </div>
 
-        <div class="card">
-            <img src="Picsart_26-06-24_10-01-17-884.jpg" class="product-img">
-            <div class="model-name">كينز بولو | رمادي فاتح</div>
-            <div class="qty-control">
-                <button class="btn-q" onclick="c('qt_kp_gr', 16)">+</button>
-                <span id="qt_kp_gr" class="qty-num">16</span>
-                <button class="btn-q" onclick="c('qt_kp_gr', -16)">-</button>
+        <div class="product-item">
+            <img src="Picsart_26-06-24_10-01-17-884.jpg" alt="KENZ-GREY">
+            <div class="product-info">
+                <h4 class="product-title">كينز بولو | رمادي فاتح</h4>
+                <p class="product-price">100 ريال</p>
+                <div class="qty-control">
+                    <button class="btn-q" onclick="c('qt_kenz_gr', 16)">+</button>
+                    <span id="qt_kenz_gr" class="qty-num">16</span>
+                    <button class="btn-q" onclick="c('qt_kenz_gr', -16)">-</button>
+                </div>
+                <a href="#" class="btn btn-primary" onclick="addToCart('كينز بولو رمادي','qt_kenz_gr'); event.preventDefault();">إضافة للطلب</a>
             </div>
-            <button class="btn-add" onclick="addToCart('كينز بولو رمادي','qt_kp_gr')">إضافة للطلب</button>
         </div>
 
-        <div class="card">
-            <img src="Picsart_26-06-24_10-01-39-351.jpg" class="product-img">
-            <div class="model-name">كينز بولو | كحلي غامق</div>
-            <div class="qty-control">
-                <button class="btn-q" onclick="c('qt_kp_nv', 16)">+</button>
-                <span id="qt_kp_nv" class="qty-num">16</span>
-                <button class="btn-q" onclick="c('qt_kp_nv', -16)">-</button>
+        <div class="product-item">
+            <img src="Picsart_26-06-24_10-01-39-351.jpg" alt="KENZ-NAVY">
+            <div class="product-info">
+                <h4 class="product-title">كينز بولو | كحلي غامق</h4>
+                <p class="product-price">100 ريال</p>
+                <div class="qty-control">
+                    <button class="btn-q" onclick="c('qt_kenz_nv', 16)">+</button>
+                    <span id="qt_kenz_nv" class="qty-num">16</span>
+                    <button class="btn-q" onclick="c('qt_kenz_nv', -16)">-</button>
+                </div>
+                <a href="#" class="btn btn-primary" onclick="addToCart('كينز بولو كحلي','qt_kenz_nv'); event.preventDefault();">إضافة للطلب</a>
             </div>
-            <button class="btn-add" onclick="addToCart('كينز بولو كحلي','qt_kp_nv')">إضافة للطلب</button>
         </div>
 
-        <div class="card">
-            <img src="Picsart_26-06-24_10-02-02-733.jpg" class="product-img">
-            <div class="model-name">كينز بولو | زيتي/رمادي مخضر</div>
-            <div class="qty-control">
-                <button class="btn-q" onclick="c('qt_kp_sg', 16)">+</button>
-                <span id="qt_kp_sg" class="qty-num">16</span>
-                <button class="btn-q" onclick="c('qt_kp_sg', -16)">-</button>
+        <div class="product-item">
+            <img src="Picsart_26-06-24_10-02-02-733.jpg" alt="KENZ-GREEN">
+            <div class="product-info">
+                <h4 class="product-title">كينز بولو | زيتي مخضر</h4>
+                <p class="product-price">100 ريال</p>
+                <div class="qty-control">
+                    <button class="btn-q" onclick="c('qt_kenz_og', 16)">+</button>
+                    <span id="qt_kenz_og" class="qty-num">16</span>
+                    <button class="btn-q" onclick="c('qt_kenz_og', -16)">-</button>
+                </div>
+                <a href="#" class="btn btn-primary" onclick="addToCart('كينز بولو زيتي','qt_kenz_og'); event.preventDefault();">إضافة للطلب</a>
             </div>
-            <button class="btn-add" onclick="addToCart('كينز بولو زيتي','qt_kp_sg')">إضافة للطلب</button>
         </div>
 
     </div>
@@ -311,20 +349,22 @@
             <span>الموديلات المضافة:</span>
             <span id="cart-count" class="badge">0</span>
         </div>
-        <button class="btn-send-cart" onclick="sendOrderWhatsApp()">إرسال الطلب بالكامل 📲</button>
+        <button class="btn-send-cart" onclick="sendOrderWhatsApp()">إرسال الطلب بالكامل عبر الواتساب 📲</button>
     </div>
 
     <script>
         let cart = {};
 
+        // دالة التحكم في عداد الكميات للطلب بالجملة
         function c(id, amount) {
             const span = document.getElementById(id);
             let current = parseInt(span.innerText);
             current += amount;
-            if (current < 16) current = 16; 
+            if (current < 16) current = 16; // الحد الأدنى للربطة جملة
             span.innerText = current;
         }
 
+        // دالة إضافة الموديل إلى السلة
         function addToCart(name, id) {
             const qty = parseInt(document.getElementById(id).innerText);
             cart[name] = qty;
@@ -335,20 +375,21 @@
             if(modelsCount > 0) {
                 document.getElementById('cart-navbar').classList.add('active');
             }
-            alert(`تم إضافة ${qty} حبة من (${name}) إلى الطلب.`);
+            alert(`تم إضافة ${qty} حبة من (${name}) بنجاح.`);
         }
 
+        // دالة تحضير الرسالة وإرسالها إلى واتساب المتجر الرسمي للبراند
         function sendOrderWhatsApp() {
             if (Object.keys(cart).length === 0) return;
             const phoneNumber = "966560564719"; 
-            let message = `مرحباً براند TOP GIVING، أرغب في تأكيد طلبية جملة:\n\n`;
+            let message = `مرحباً براند TOP GIVING، أرغب في تأكيد طلبية جملة جديدة:\n\n`;
             let totalItems = 0;
 
             for (const [name, qty] of Object.entries(cart)) {
-                message += `📦 *المنتج:* ${name} -> *الكمية:* ${qty} حبة\n`;
+                message += `📦 *المنتج:* ${name}\n🔢 *الكمية:* ${qty} حبة\n-------------------------\n`;
                 totalItems += qty;
             }
-            message += `\n📊 *إجمالي القطع:* ${totalItems} حبة`;
+            message += `\n📊 *إجمالي القطع المطلوبة:* ${totalItems} حبة`;
             window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
         }
     </script>
