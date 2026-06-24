@@ -12,7 +12,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            padding-bottom: 120px; /* مساحة بالأسفل لضمان عدم تغطية السلة للمنتجات */
+            padding-bottom: 120px;
         }
 
         .header {
@@ -42,7 +42,7 @@
             color: #aaaaaa;
             cursor: pointer;
             font-size: 14px;
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: all 0.3s;
         }
 
         .tab.active, .tab:hover {
@@ -63,7 +63,7 @@
             margin: 0 auto;
         }
 
-        /* كارت المنتج المطور */
+        /* كارت المنتج */
         .card {
             background-color: #0a0a0a;
             border: 1px solid #151515;
@@ -71,17 +71,12 @@
             padding: 18px;
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: all 0.3s;
             position: relative;
-            display: none; /* يظهر عبر السكربت بالأسفل */
-        }
-
-        .card.show {
-            display: block !important;
         }
 
         .card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-5px);
             box-shadow: 0 15px 35px rgba(191, 160, 48, 0.15);
             border-color: #bfa030;
         }
@@ -102,14 +97,9 @@
             height: 100%;
             object-fit: cover;
             object-position: center;
-            transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        .card:hover .product-img {
-            transform: scale(1.04);
-        }
-
-        /* أزرار الأسهم الفخمة داخل السلايدر */
+        /* أزرار الأسهم داخل السلايدر */
         .arrow-btn {
             position: absolute;
             top: 50%;
@@ -132,7 +122,6 @@
         .arrow-btn:hover {
             background: #bfa030;
             color: #000000;
-            border-color: #bfa030;
         }
 
         .arrow-btn.prev { left: 12px; }
@@ -143,10 +132,9 @@
             margin: 18px 0 12px 0;
             font-weight: 600;
             color: #ffffff;
-            letter-spacing: 0.5px;
         }
 
-        /* التحكم بالكميات (الباك) */
+        /* التحكم بالكميات */
         .qty-control {
             display: flex;
             justify-content: center;
@@ -177,7 +165,6 @@
         .btn-q:hover {
             border-color: #bfa030;
             color: #bfa030;
-            background-color: rgba(191, 160, 48, 0.05);
         }
 
         .qty-num {
@@ -187,7 +174,7 @@
             color: #bfa030;
         }
 
-        /* زر إضافة للطلب الأساسي */
+        /* زر إضافة للطلب */
         .btn-add {
             background-color: transparent;
             color: #bfa030;
@@ -204,42 +191,21 @@
         .btn-add:hover {
             background-color: #bfa030;
             color: #000000;
-            box-shadow: 0 5px 15px rgba(191, 160, 48, 0.2);
         }
 
-        /* 📱 تحسينات متكاملة لشاشات الجوال 📱 */
+        /* 📱 تحسينات شاشات الجوال */
         @media (max-width: 768px) {
             .grid {
                 grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
                 gap: 15px;
                 padding: 20px 12px;
             }
-            .slider-container {
-                height: 205px;
-            }
-            .model-name {
-                font-size: 15px;
-                margin: 12px 0 8px 0;
-            }
-            .qty-control {
-                gap: 12px;
-                padding: 6px;
-            }
-            .btn-q {
-                width: 28px;
-                height: 28px;
-                font-size: 16px;
-            }
-            .qty-num {
-                font-size: 14px;
-            }
-            .btn-add {
-                padding: 10px;
-                font-size: 13px;
-            }
+            .slider-container { height: 205px; }
+            .model-name { font-size: 15px; }
+            .btn-add { padding: 10px; font-size: 13px; }
         }
 
-        /* 🛒 تصميم السلة السفلي الفخم والمطور 🛒 */
+        /* 🛒 شريط السلة السفلي الفخم */
         .cart-navbar {
             position: fixed;
             bottom: 0;
@@ -253,12 +219,12 @@
             align-items: center;
             z-index: 1000;
             box-shadow: 0 -10px 35px rgba(0,0,0,0.9);
-            transform: translateY(100px); /* مخفية في البداية وتظهر عند الإضافة */
-            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transform: translateY(100px);
+            transition: transform 0.4s ease;
         }
 
         .cart-navbar.active {
-            transform: translateY(0); /* تظهر بسلاسة عند إضافة منتج */
+            transform: translateY(0);
         }
 
         .cart-info {
@@ -275,8 +241,6 @@
             padding: 3px 10px;
             border-radius: 12px;
             font-weight: bold;
-            font-size: 13px;
-            box-shadow: 0 0 10px rgba(191, 160, 48, 0.3);
         }
 
         .btn-send-cart {
@@ -292,16 +256,13 @@
             align-items: center;
             gap: 8px;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(191, 160, 48, 0.2);
         }
 
         .btn-send-cart:hover {
             background-color: #dfba3c;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(191, 160, 48, 0.4);
         }
 
-        /* 🔍 نافذة زوم وتكبير الصور (LightBox السينمائي) 🔍 */
+        /* 🔍 نافذة زوم وتكبير الصور */
         .lightbox {
             display: none;
             position: fixed;
@@ -313,13 +274,10 @@
             background-color: rgba(0, 0, 0, 0.96);
             justify-content: center;
             align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
         }
 
         .lightbox.show {
             display: flex;
-            opacity: 1;
         }
 
         .lightbox-img {
@@ -327,13 +285,6 @@
             max-height: 82%;
             object-fit: contain;
             border-radius: 8px;
-            box-shadow: 0 0 40px rgba(191, 160, 48, 0.2);
-            transform: scale(0.95);
-            transition: transform 0.3s ease;
-        }
-
-        .lightbox.show .lightbox-img {
-            transform: scale(1);
         }
 
         .close-lightbox {
@@ -342,13 +293,7 @@
             right: 30px;
             color: #ffffff;
             font-size: 38px;
-            font-weight: 300;
             cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .close-lightbox:hover {
-            color: #bfa030;
         }
     </style>
 </head>
@@ -357,15 +302,15 @@
     <div class="header">
         <img src="TOP GIVING logo.jpg" alt="TOP GIVING" class="brand-logo">
         <div class="nav-tabs">
-            <div id="tab-tshirt" class="tab active" onclick="filterProducts('tshirt')">تيشيرتات</div>
-            <div id="tab-set" class="tab" onclick="filterProducts('set')">أطقم صيفية</div>
-            <div id="tab-pants" class="tab" onclick="filterProducts('pants')">شورتات</div>
+            <div class="tab active">تيشيرتات</div>
+            <div class="tab">أطقم صيفية</div>
+            <div class="tab">شورتات</div>
         </div>
     </div>
 
     <div class="grid">
 
-        <div class="card tshirt" data-images='["boxy-fashion1.png.png", "boxy-fashion2.png.png", "boxy-fashion3.png.png", "boxy-fashion4.png.png"]' data-index="0">
+        <div class="card" data-images='["boxy-fashion1.png.png", "boxy-fashion2.png.png", "boxy-fashion3.png.png", "boxy-fashion4.png.png"]' data-index="0">
             <div class="slider-container" onclick="openLightbox(this)">
                 <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
                 <img src="boxy-fashion1.png.png" class="product-img">
@@ -380,7 +325,7 @@
             <button class="btn-add" onclick="addToCart('تيشرت بوكس','qt07'); event.stopPropagation();">إضافة للطلب</button>
         </div>
 
-        <div class="card tshirt" data-images='["n5-back.png.png", "n5-purple.png.png", "n5-white.png.png", "n5-black.png.png"]' data-index="0">
+        <div class="card" data-images='["n5-back.png.png", "n5-purple.png.png", "n5-white.png.png", "n5-black.png.png"]' data-index="0">
             <div class="slider-container" onclick="openLightbox(this)">
                 <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
                 <img src="n5-back.png.png" class="product-img">
@@ -395,7 +340,7 @@
             <button class="btn-add" onclick="addToCart('تيشيرت 01','qt01'); event.stopPropagation();">إضافة للطلب</button>
         </div>
 
-        <div class="card tshirt" data-images='["boxy-fashion2.png.png"]' data-index="0">
+        <div class="card" data-images='["boxy-fashion2.png.png"]' data-index="0">
             <div class="slider-container" onclick="openLightbox(this)">
                 <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
                 <img src="boxy-fashion2.png.png" class="product-img">
@@ -410,7 +355,7 @@
             <button class="btn-add" onclick="addToCart('تيشيرت 02','qt02'); event.stopPropagation();">إضافة للطلب</button>
         </div>
 
-        <div class="card tshirt" data-images='["boxy-fashion1.png.png"]' data-index="0">
+        <div class="card" data-images='["boxy-fashion1.png.png"]' data-index="0">
             <div class="slider-container" onclick="openLightbox(this)">
                 <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
                 <img src="boxy-fashion1.png.png" class="product-img">
@@ -444,28 +389,6 @@
 
     <script>
         let cart = {};
-
-        function filterProducts(category) {
-            const cards = document.querySelectorAll('.card');
-            const tabs = document.querySelectorAll('.tab');
-            
-            tabs.forEach(tab => tab.classList.remove('active'));
-            
-            if (window.event && window.event.target && window.event.target.classList.contains('tab')) {
-                window.event.target.classList.add('active');
-            } else {
-                const activeTab = document.getElementById(`tab-${category}`);
-                if (activeTab) activeTab.classList.add('active');
-            }
-
-            cards.forEach(card => {
-                if (card.classList.contains(category)) {
-                    card.classList.add('show');
-                } else {
-                    card.classList.remove('show');
-                }
-            });
-        }
 
         function prevImg(btn) {
             const card = btn.closest('.card');
@@ -529,19 +452,12 @@
         function openLightbox(container) {
             const imgUrl = container.querySelector('.product-img').src;
             document.getElementById('lightbox-img').src = imgUrl;
-            
-            const lightbox = document.getElementById('lightbox');
-            lightbox.classList.add('show');
+            document.getElementById('lightbox').classList.add('show');
         }
 
         function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.classList.remove('show');
+            document.getElementById('lightbox').classList.remove('show');
         }
-
-        window.onload = function() {
-            filterProducts('tshirt');
-        };
     </script>
 </body>
 </html>
