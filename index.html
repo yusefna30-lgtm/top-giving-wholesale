@@ -272,6 +272,22 @@
             <button class="btn-add" onclick="addToCart('كينز بولو KENZ POLO موديل 08076', 'qt_kenz', 'kenzSlider')">إضافة للطلب</button>
         </div>
 
+        <div class="card">
+            <div class="slider-container">
+                <button class="arrow-btn prev" onclick="changeSlide('trendySlider', -1)">‹</button>
+                <img id="trendySlider" src="tshirt-trendy4.jpg" class="product-img" data-images='["tshirt-trendy1.jpg", "tshirt-trendy2.jpg", "tshirt-trendy3.jpg", "tshirt-trendy4.jpg"]' data-index="3">
+                <button class="arrow-btn next" onclick="changeSlide('trendySlider', 1)">›</button>
+            </div>
+            <div class="model-name">تيشيرت TRENDY</div>
+            <div class="product-model-number">موديل: 08093</div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt_trendy', 16)">+</button>
+                <span id="qt_trendy" class="qty-num">16</span>
+                <button class="btn-q" onclick="c('qt_trendy', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="addToCart('تيشيرت TRENDY موديل 08093', 'qt_trendy', 'trendySlider')">إضافة للطلب</button>
+        </div>
+
     </div>
 
     <div id="cart-navbar" class="cart-navbar">
