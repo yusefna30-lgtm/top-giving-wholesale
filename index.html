@@ -85,7 +85,7 @@
         .slider-container {
             position: relative;
             width: 100%;
-            height: 280px; /* الارتفاع على الشاشات الكبيرة */
+            height: 280px;
             overflow: hidden;
             border-radius: 10px;
             background-color: #000000;
@@ -103,18 +103,18 @@
             transform: scale(1.05);
         }
 
-        /* 📱 تعديل سحري خاص بالجوال لتصغير حجم الصور وتناسقها 📱 */
+        /* 📱 تعديل خاص بالجوال لتصغير حجم الصور وتناسقها 📱 */
         @media (max-width: 768px) {
             .grid {
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* جعل الشبكة مرنة ومناسبة للجوال */
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
                 gap: 15px;
                 padding: 20px 10px;
             }
             .slider-container {
-                height: 200px; /* تم تصغير الارتفاع هنا ليكون متناسقاً جداً في الجوال */
+                height: 200px;
             }
             .model-name {
-                font-size: 15px; /* تصغير اسم المنتج قليلاً ليناسب الجوال */
+                font-size: 15px;
                 margin: 10px 0;
             }
             .btn-add {
@@ -244,7 +244,7 @@
                 <span id="qt01">16</span>
                 <button class="btn-q" onclick="c('qt01', -16)">-</button>
             </div>
-            <button class="btn-add" onclick="add('01 تيشيرت','qt01',this)">إضافة للطلب</button>
+            <button class="btn-add" onclick="add('تيشيرت 01','qt01',this)">إضافة للطلب</button>
         </div>
 
         <div class="card tshirt show" data-images='["boxy-fashion2.png.png"]' data-index="0">
@@ -259,7 +259,7 @@
                 <span id="qt02">16</span>
                 <button class="btn-q" onclick="c('qt02', -16)">-</button>
             </div>
-            <button class="btn-add" onclick="add('02 تيشيرت','qt02',this)">إضافة</button>
+            <button class="btn-add" onclick="add('تيشيرت 02','qt02',this)">إضافة للطلب</button>
         </div>
 
         <div class="card tshirt show" data-images='["boxy-fashion1.png.png"]' data-index="0">
@@ -274,7 +274,7 @@
                 <span id="qt03">16</span>
                 <button class="btn-q" onclick="c('qt03', -16)">-</button>
             </div>
-            <button class="btn-add" onclick="add('03 تيشيرت','qt03',this)">إضافة</button>
+            <button class="btn-add" onclick="add('تيشيرت 03','qt03',this)">إضافة للطلب</button>
         </div>
 
     </div>
@@ -324,9 +324,18 @@
             span.innerText = current;
         }
 
+        // 🌟 دالة الواتساب المحدثة برقمك الخاص 🌟
         function add(name, id, btn) {
             const qty = document.getElementById(id).innerText;
-            alert(`تم إضافة ${qty} حبة من ${name} إلى طلبك!`);
+            const phoneNumber = "966560564719"; 
+            
+            const message = `مرحباً براند TOP GIVING، أرغب في طلب المنتج التالي:\n\n` +
+                            `📦 المنتج: ${name}\n` +
+                            `🔢 الكمية: ${qty} حبة\n\n` +
+                            `يرجى تأكيد الطلب وتزويدي بالتفاصيل.`;
+            
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappURL, '_blank');
         }
     </script>
 </body>
