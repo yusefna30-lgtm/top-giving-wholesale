@@ -73,7 +73,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.7);
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
             position: relative;
-            display: none; /* يختفي افتراضياً ويظهر عبر السكربت بالأسفل */
+            display: none; /* يظهر عبر السكربت بالأسفل */
         }
 
         .card.show {
@@ -451,9 +451,8 @@
             
             tabs.forEach(tab => tab.classList.remove('active'));
             
-            // ربط تحديد التاب النشط بشكل آمن
-            if (event && event.target && event.target.classList.contains('tab')) {
-                event.target.classList.add('active');
+            if (window.event && window.event.target && window.event.target.classList.contains('tab')) {
+                window.event.target.classList.add('active');
             } else {
                 const activeTab = document.getElementById(`tab-${category}`);
                 if (activeTab) activeTab.classList.add('active');
@@ -530,15 +529,16 @@
         function openLightbox(container) {
             const imgUrl = container.querySelector('.product-img').src;
             document.getElementById('lightbox-img').src = imgUrl;
-            document.getElementById('lightbox').classLike = "lightbox";
-            document.getElementById('lightbox').classList.add('show');
+            
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.add('show');
         }
 
         function closeLightbox() {
-            document.getElementById('lightbox').classList.remove('show');
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('show');
         }
 
-        // 🌟 السطر السحري: لتشغيل وعرض قسم التيشيرتات تلقائياً فور فتح الموقع 🌟
         window.onload = function() {
             filterProducts('tshirt');
         };
