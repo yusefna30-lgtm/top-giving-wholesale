@@ -290,6 +290,23 @@
 </div>
         </div>
 
+        <div class="card">
+    <div class="slider-container">
+        <button class="arrow-btn prev" onclick="changeSlide('gravitySlider', -1)">‹</button>
+        <img id="gravitySlider" src="tshirt-gravity1.jpg" class="product-img" 
+             data-images='["tshirt-gravity1.jpg", "tshirt-gravity4.jpg"]' 
+             data-index="0">
+        <button class="arrow-btn next" onclick="changeSlide('gravitySlider', 1)">›</button>
+    </div>
+    <div class="model-name">تيشيرت GRAVITY</div>
+    <div class="product-model-number">موديل: 08094</div>
+    <div class="qty-control">
+        <button class="btn-q" onclick="c('qt_gravity', 16)">+</button>
+        <span id="qt_gravity" class="qty-num">16</span>
+        <button class="btn-q" onclick="c('qt_gravity', -16)">-</button>
+    </div>
+    <button class="btn-add" onclick="addToCart('تيشيرت GRAVITY موديل 08094', 'qt_gravity', 'gravitySlider')">إضافة للطلب</button>
+</div>
     </div>
 
     <div id="cart-navbar" class="cart-navbar">
