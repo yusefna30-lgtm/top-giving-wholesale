@@ -12,7 +12,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            padding-bottom: 140px; /* مساحة إضافية بالأسفل لراحة التصفح مع السلة */
+            padding-bottom: 140px;
         }
 
         .header {
@@ -85,7 +85,7 @@
         .slider-container {
             position: relative;
             width: 100%;
-            height: 320px; /* مقاس متناسق جداً للكمبيوتر */
+            height: 320px;
             overflow: hidden;
             border-radius: 12px;
             background-color: #050505;
@@ -193,10 +193,10 @@
             color: #000000;
         }
 
-        /* 📱 تحسينات مخصصة بالكامل لشاشات الجوال 📱 */
+        /* 📱 تحسينات مخصصة بالكامل لشاشات الجوال */
         @media (max-width: 768px) {
             .grid {
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* تصغير عرض الكروت */
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
                 gap: 12px;
                 padding: 15px 10px;
             }
@@ -205,7 +205,7 @@
                 border-radius: 12px;
             }
             .slider-container { 
-                height: 190px; /* تصغير مثالي وذكي لحجم الصور على الجوال */
+                height: 190px;
             }
             .model-name { 
                 font-size: 14px; 
@@ -239,7 +239,7 @@
             .arrow-btn.next { right: 6px; }
         }
 
-        /* 🛒 شريط السلة السفلي الفخم (مخفي تلقائياً عند التصفير) */
+        /* 🛒 شريط السلة السفلي الفخم */
         .cart-navbar {
             position: fixed;
             bottom: 0;
@@ -253,12 +253,12 @@
             align-items: center;
             z-index: 1000;
             box-shadow: 0 -10px 35px rgba(0,0,0,0.9);
-            transform: translateY(120px); /* يبدأ خارج الشاشة تماماً ليكون مخفياً */
+            transform: translateY(120px);
             transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
         .cart-navbar.active {
-            transform: translateY(0); /* يرتفع ويظهر عند الإضافة بنجاح */
+            transform: translateY(0);
         }
 
         .cart-info {
@@ -297,13 +297,8 @@
         }
 
         @media (max-width: 480px) {
-            .cart-navbar {
-                padding: 12px 15px;
-            }
-            .btn-send-cart {
-                padding: 10px 16px;
-                font-size: 13px;
-            }
+            .cart-navbar { padding: 12px 15px; }
+            .btn-send-cart { padding: 10px 16px; font-size: 13px; }
         }
 
         /* 🔍 نافذة زوم وتكبير الصور */
@@ -354,64 +349,64 @@
 
     <div class="grid">
 
-        <div class="card" data-images='["boxy-fashion1.png.png", "boxy-fashion2.png.png", "boxy-fashion3.png.png", "boxy-fashion4.png.png"]' data-index="0">
+        <div class="card" data-images='["TSH-WHITE-SMILE.PNG"]' data-index="0">
             <div class="slider-container" onclick="openLightbox(this)">
                 <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
-                <img src="boxy-fashion1.png.png" class="product-img">
+                <img src="TSH-WHITE-SMILE.PNG" class="product-img">
                 <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
             </div>
-            <div class="model-name">تيشرت بوكس</div>
+            <div class="model-name">تيشيرت SMILE أبيض</div>
             <div class="qty-control">
-                <button class="btn-q" onclick="c('qt07', 16); event.stopPropagation();">+</button>
-                <span id="qt07" class="qty-num">16</span>
-                <button class="btn-q" onclick="c('qt07', -16); event.stopPropagation();">-</button>
+                <button class="btn-q" onclick="c('qt_smile_w', 16); event.stopPropagation();">+</button>
+                <span id="qt_smile_w" class="qty-num">16</span>
+                <button class="btn-q" onclick="c('qt_smile_w', -16); event.stopPropagation();">-</button>
             </div>
-            <button class="btn-add" onclick="addToCart('تيشرت بوكس','qt07'); event.stopPropagation();">إضافة للطلب</button>
+            <button class="btn-add" onclick="addToCart('تيشيرت SMILE أبيض','qt_smile_w'); event.stopPropagation();">إضافة للطلب</button>
         </div>
 
-        <div class="card" data-images='["n5-back.png.png", "n5-purple.png.png", "n5-white.png.png", "n5-black.png.png"]' data-index="0">
+        <div class="card" data-images='["TSH-BLACK-SMILE.PNG"]' data-index="0">
             <div class="slider-container" onclick="openLightbox(this)">
                 <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
-                <img src="n5-back.png.png" class="product-img">
+                <img src="TSH-BLACK-SMILE.PNG" class="product-img">
                 <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
             </div>
-            <div class="model-name">تيشيرت 01</div>
+            <div class="model-name">تيشيرت SMILE أسود</div>
             <div class="qty-control">
-                <button class="btn-q" onclick="c('qt01', 16); event.stopPropagation();">+</button>
-                <span id="qt01" class="qty-num">16</span>
-                <button class="btn-q" onclick="c('qt01', -16); event.stopPropagation();">-</button>
+                <button class="btn-q" onclick="c('qt_smile_bl', 16); event.stopPropagation();">+</button>
+                <span id="qt_smile_bl" class="qty-num">16</span>
+                <button class="btn-q" onclick="c('qt_smile_bl', -16); event.stopPropagation();">-</button>
             </div>
-            <button class="btn-add" onclick="addToCart('تيشيرت 01','qt01'); event.stopPropagation();">إضافة للطلب</button>
+            <button class="btn-add" onclick="addToCart('تيشيرت SMILE أسود','qt_smile_bl'); event.stopPropagation();">إضافة للطلب</button>
         </div>
 
-        <div class="card" data-images='["boxy-fashion2.png.png"]' data-index="0">
+        <div class="card" data-images='["Picsart_26-06-24_10-04-31-049.jpg"]' data-index="0">
             <div class="slider-container" onclick="openLightbox(this)">
                 <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
-                <img src="boxy-fashion2.png.png" class="product-img">
+                <img src="Picsart_26-06-24_10-04-31-049.jpg" class="product-img">
                 <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
             </div>
-            <div class="model-name">تيشيرت 02</div>
+            <div class="model-name">تيشيرت SMILE زيتي</div>
             <div class="qty-control">
-                <button class="btn-q" onclick="c('qt02', 16); event.stopPropagation();">+</button>
-                <span id="qt02" class="qty-num">16</span>
-                <button class="btn-q" onclick="c('qt02', -16); event.stopPropagation();">-</button>
+                <button class="btn-q" onclick="c('qt_smile_o', 16); event.stopPropagation();">+</button>
+                <span id="qt_smile_o" class="qty-num">16</span>
+                <button class="btn-q" onclick="c('qt_smile_o', -16); event.stopPropagation();">-</button>
             </div>
-            <button class="btn-add" onclick="addToCart('تيشيرت 02','qt02'); event.stopPropagation();">إضافة للطلب</button>
+            <button class="btn-add" onclick="addToCart('تيشيرت SMILE زيتي','qt_smile_o'); event.stopPropagation();">إضافة للطلب</button>
         </div>
 
-        <div class="card" data-images='["boxy-fashion1.png.png"]' data-index="0">
+        <div class="card" data-images='["Picsart_26-06-24_10-05-27-956.jpg"]' data-index="0">
             <div class="slider-container" onclick="openLightbox(this)">
                 <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
-                <img src="boxy-fashion1.png.png" class="product-img">
+                <img src="Picsart_26-06-24_10-05-27-956.jpg" class="product-img">
                 <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
             </div>
-            <div class="model-name">تيشيرت 03</div>
+            <div class="model-name">تيشيرت SMILE بيج</div>
             <div class="qty-control">
-                <button class="btn-q" onclick="c('qt03', 16); event.stopPropagation();">+</button>
-                <span id="qt03" class="qty-num">16</span>
-                <button class="btn-q" onclick="c('qt03', -16); event.stopPropagation();">-</button>
+                <button class="btn-q" onclick="c('qt_smile_b', 16); event.stopPropagation();">+</button>
+                <span id="qt_smile_b" class="qty-num">16</span>
+                <button class="btn-q" onclick="c('qt_smile_b', -16); event.stopPropagation();">-</button>
             </div>
-            <button class="btn-add" onclick="addToCart('تيشيرت 03','qt03'); event.stopPropagation();">إضافة للطلب</button>
+            <button class="btn-add" onclick="addToCart('تيشيرت SMILE بيج','qt_smile_b'); event.stopPropagation();">إضافة للطلب</button>
         </div>
 
     </div>
@@ -432,7 +427,6 @@
     </div>
 
     <script>
-        // تصفير السلة بالكامل عند تحميل الصفحة واختفائها التلقائي
         let cart = {};
 
         function prevImg(btn) {
@@ -470,7 +464,6 @@
             const modelsCount = Object.keys(cart).length;
             document.getElementById('cart-count').innerText = modelsCount;
             
-            // إظهار السلة فقط عند إضافة منتج حقيقي
             if(modelsCount > 0) {
                 document.getElementById('cart-navbar').classList.add('active');
             }
