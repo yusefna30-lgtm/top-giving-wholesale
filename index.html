@@ -243,7 +243,7 @@
         <div class="card">
             <div class="slider-container">
                 <button class="arrow-btn prev" onclick="changeSlide('smileSlider', -1)">‹</button>
-                <img id="smileSlider" src="smile-white.png" class="product-img" data-images='["smile-white.png", "smile-black.png", "smile-olive.png", "smile-beige.png"]' data-index="0" onerror="handleImageError(this)">
+                <img id="smileSlider" src="smile-white.png" class="product-img" data-images='["smile-white.png", "smile-black.png", "smile-olive.png", "smile-beige.png"]' data-index="0">
                 <button class="arrow-btn next" onclick="changeSlide('smileSlider', 1)">›</button>
             </div>
             <div class="model-name">تيشيرت SMILE</div>
@@ -259,7 +259,7 @@
         <div class="card">
             <div class="slider-container">
                 <button class="arrow-btn prev" onclick="changeSlide('kenzSlider', -1)">‹</button>
-                <img id="kenzSlider" src="kenz-blue.png" class="product-img" data-images='["kenz-blue.png", "kenz-black.png", "kenz-grey.png", "kenz-sage.png"]' data-index="0" onerror="handleImageError(this)">
+                <img id="kenzSlider" src="kenz-blue.png" class="product-img" data-images='["kenz-blue.png", "kenz-black.png", "kenz-grey.png", "kenz-sage.png"]' data-index="0">
                 <button class="arrow-btn next" onclick="changeSlide('kenzSlider', 1)">›</button>
             </div>
             <div class="model-name">كينز بولو | KENZ POLO</div>
@@ -275,7 +275,7 @@
         <div class="card">
             <div class="slider-container">
                 <button class="arrow-btn prev" onclick="changeSlide('trendySlider', -1)">‹</button>
-                <img id="trendySlider" src="tshirt-trendy1.png" class="product-img" data-images='["tshirt-trendy1.png", "tshirt-trendy2.png", "tshirt-trendy3.jpg", "tshirt-trendy4.jpg"]' data-index="0" onerror="handleImageError(this)">
+                <img id="trendySlider" src="tshirt-trendy3.jpg" class="product-img" data-images='["tshirt-trendy3.jpg", "tshirt-trendy4.jpg"]' data-index="0">
                 <button class="arrow-btn next" onclick="changeSlide('trendySlider', 1)">›</button>
             </div>
             <div class="model-name">تيشيرت TRENDY</div>
@@ -301,25 +301,10 @@
     <script>
         let cart = {};
 
-        // دالة ذكية لإصلاح الصور المكسورة تلقائياً وتجربة الامتداد البديل
-        function handleImageError(img) {
-            if (!img.dataset.triedAlternative) {
-                img.dataset.triedAlternative = "true";
-                if (img.src.endsWith('.png')) {
-                    img.src = img.src.replace('.png', '.jpg');
-                } else if (img.src.endsWith('.jpg')) {
-                    img.src = img.src.replace('.jpg', '.png');
-                }
-            }
-        }
-
         function changeSlide(sliderId, direction) {
             const imgElement = document.getElementById(sliderId);
             const images = JSON.parse(imgElement.getAttribute('data-images'));
             let currentIndex = parseInt(imgElement.getAttribute('data-index'));
-
-            // تصفير محاولة الإصلاح عند الانتقال لصورة جديدة
-            delete imgElement.dataset.triedAlternative;
 
             currentIndex += direction;
 
