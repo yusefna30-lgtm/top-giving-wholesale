@@ -299,22 +299,22 @@
     <script>
         let cart = {};
 
-        function changeSlide(sliderId, direction) {
-            const imgElement = document.getElementById(sliderId);
-            const images = JSON.parse(imgElement.getAttribute('data-images'));
-            let currentIndex = parseInt(imgElement.getAttribute('data-index'));
+     function changeSlide(sliderId, direction) {
+        const imgElement = document.getElementById(sliderId);
+        const images = JSON.parse(imgElement.getAttribute('data-images'));
+        let currentIndex = parseInt(imgElement.getAttribute('data-index'));
 
-            currentIndex += direction;
+        currentIndex += direction;
 
-            if (currentIndex >= images.length) {
-                currentIndex = 0;
-            } else if (currentIndex < 0) {
-                currentIndex = images.length - 1;
-            }
-
-            imgElement.setAttribute('data-index', currentIndex);
-            imgElement.src = images[currentIndex];
+        if (currentIndex >= images.length) {
+            currentIndex = 0;
+        } else if (currentIndex < 0) {
+            currentIndex = images.length - 1;
         }
+
+        imgElement.setAttribute('data-index', currentIndex);
+        imgElement.src = images[currentIndex];
+    }
 
         function c(id, amount) {
             const span = document.getElementById(id);
