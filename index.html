@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOP GIVING | المتجر الرسمي</title>
     <style>
-        /* التنسيقات العامة الفخمة للموقع */
+        /* التنسيقات العامة للموقع */
         body {
             background-color: #000000;
             color: #ffffff;
@@ -89,7 +89,6 @@
             overflow: hidden;
             border-radius: 12px;
             background-color: #050505;
-            cursor: zoom-in;
         }
 
         .product-img {
@@ -99,7 +98,7 @@
             object-position: center;
         }
 
-        /* أزرار الأسهم داخل السلايدر */
+        /* أزرار الأسهم للتنقل بين الألوان */
         .arrow-btn {
             position: absolute;
             top: 50%;
@@ -134,7 +133,7 @@
             color: #ffffff;
         }
 
-        /* التحكم بالكميات */
+        /* التحكم بالكميات جملة */
         .qty-control {
             display: flex;
             justify-content: center;
@@ -193,7 +192,7 @@
             color: #000000;
         }
 
-        /* تحسينات الشاشات الصغيرة (الجوال) */
+        /* تحسينات شاشات الجوال */
         @media (max-width: 768px) {
             .grid {
                 grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -295,45 +294,6 @@
         .btn-send-cart:hover {
             background-color: #dfba3c;
         }
-
-        @media (max-width: 480px) {
-            .cart-navbar { padding: 12px 15px; }
-            .btn-send-cart { padding: 10px 16px; font-size: 13px; }
-        }
-
-        /* نافذة زوم وتكبير الصور */
-        .lightbox {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.96);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .lightbox.show {
-            display: flex;
-        }
-
-        .lightbox-img {
-            max-width: 92%;
-            max-height: 82%;
-            object-fit: contain;
-            border-radius: 8px;
-        }
-
-        .close-lightbox {
-            position: absolute;
-            top: 25px;
-            right: 30px;
-            color: #ffffff;
-            font-size: 38px;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
@@ -350,18 +310,18 @@
     <div class="grid">
 
         <div class="card" data-images='["Picsart_26-06-24_10-05-55-069.jpg", "Picsart_26-06-24_10-04-31-049.jpg", "Picsart_26-06-24_10-05-27-956.jpg", "TSH-BLACK-SMILE.PNG"]' data-index="0">
-            <div class="slider-container" onclick="openLightbox(this)">
-                <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
-                <img src="Picsart_26-06-24_10-05-55-069.jpg" class="product-img">
-                <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
+            <div class="slider-container">
+                <button class="arrow-btn prev" onclick="prevImg(this)">‹</button>
+                <img src="Picsart_26-06-24_10-05-55-069.jpg" class="product-img" id="main-prod-img">
+                <button class="arrow-btn next" onclick="nextImg(this)">›</button>
             </div>
             <div class="model-name">تيشيرت SMILE (متعدد الألوان)</div>
             <div class="qty-control">
-                <button class="btn-q" onclick="c('qt_smile_all', 16); event.stopPropagation();">+</button>
+                <button class="btn-q" onclick="c('qt_smile_all', 16)">+</button>
                 <span id="qt_smile_all" class="qty-num">16</span>
-                <button class="btn-q" onclick="c('qt_smile_all', -16); event.stopPropagation();">-</button>
+                <button class="btn-q" onclick="c('qt_smile_all', -16)">-</button>
             </div>
-            <button class="btn-add" onclick="addToCart('تيشيرت SMILE أولوان مختلطة','qt_smile_all'); event.stopPropagation();">إضافة للطلب</button>
+            <button class="btn-add" onclick="addToCart('تيشيرت SMILE ألوان مختلطة','qt_smile_all')">إضافة للطلب</button>
         </div>
 
     </div>
@@ -374,11 +334,6 @@
         <button class="btn-send-cart" onclick="sendOrderWhatsApp()">
             إرسال الطلب بالكامل 📲
         </button>
-    </div>
-
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
-        <img id="lightbox-img" class="lightbox-img" src="" alt="Zoomed Product">
     </div>
 
     <script>
@@ -441,16 +396,6 @@
             
             const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(whatsappURL, '_blank');
-        }
-
-        function openLightbox(container) {
-            const imgUrl = container.querySelector('.product-img').src;
-            document.getElementById('lightbox-img').src = imgUrl;
-            document.getElementById('lightbox').classList.add('show');
-        }
-
-        function closeLightbox() {
-            document.getElementById('lightbox').classList.remove('show');
         }
     </script>
 </body>
