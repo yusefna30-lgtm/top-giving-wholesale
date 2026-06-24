@@ -55,12 +55,13 @@
 
         /* شبكة المنتجات */
         .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
             gap: 30px;
             padding: 40px 20px;
             max-width: 1200px;
             margin: 0 auto;
+            justify-content: center;
         }
 
         /* كارت المنتج */
@@ -73,6 +74,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.7);
             transition: all 0.3s;
             position: relative;
+            width: 280px;
         }
 
         .card:hover {
@@ -195,13 +197,14 @@
         /* تحسينات شاشات الجوال */
         @media (max-width: 768px) {
             .grid {
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
                 gap: 12px;
                 padding: 15px 10px;
             }
             .card {
                 padding: 10px;
                 border-radius: 12px;
+                width: calc(50% - 6px);
+                min-width: 150px;
             }
             .slider-container { 
                 height: 195px;
@@ -311,9 +314,9 @@
 
         <div class="card" data-images='["smile-white.png", "smile-olive.png", "smile-black.png", "smile-beige.png"]' data-index="0">
             <div class="slider-container">
-                <button class="arrow-btn prev" onclick="prevImg(btn); event.stopPropagation();">‹</button>
+                <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
                 <img src="smile-white.png" class="product-img">
-                <button class="arrow-btn next" onclick="nextImg(btn); event.stopPropagation();">›</button>
+                <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
             </div>
             <div class="model-name">تيشيرت SMILE (متعدد الألوان)</div>
             <div class="qty-control">
@@ -324,10 +327,10 @@
             <button class="btn-add" onclick="addToCart('تيشيرت SMILE ألوان مختلطة','qt_smile_all')">إضافة للطلب</button>
         </div>
 
-        <div class="card" data-images='["kenz-navy.png", "kenz-grey.png", "kenz-sage.png", "kenz-blue.png"]' data-index="0">
+        <div class="card" data-images='["Picsart_26-06-24_10-00-55-685.jpg", "Picsart_26-06-24_10-01-17-884.jpg", "Picsart_26-06-24_10-01-39-351.jpg", "Picsart_26-06-24_10-02-02-733.jpg"]' data-index="0">
             <div class="slider-container">
                 <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
-                <img src="kenz-navy.png" class="product-img">
+                <img src="Picsart_26-06-24_10-00-55-685.jpg" class="product-img">
                 <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
             </div>
             <div class="model-name">كينز بولو | KENZ POLO</div>
