@@ -4,74 +4,214 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOP GIVING | المتجر الرسمي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #D4AF37; --gold-bright: #FFD700; --black: #000; --card-bg: #0c0c0e; --accent: #1a1a1a; }
-        body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 130px; }
-        .header { padding: 20px 10px; background: #000; border-bottom: 1px solid var(--accent); position: sticky; top: 0; z-index: 1000; }
-        .brand-logo { max-height: 100px; width: auto; display: block; margin: 0 auto 15px; filter: drop-shadow(0 0 5px var(--gold)); }
-        .nav-tabs { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
-        .tab { background: #111; color: #fff; padding: 10px 20px; border-radius: 25px; border: 1px solid var(--accent); cursor: pointer; transition: 0.3s; font-size: 0.9rem; }
-        .tab.active { background: var(--gold); color: #000; font-weight: bold; }
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 1200px; margin: 0 auto; padding: 0 12px; }
-        @media (min-width: 992px) { .grid { grid-template-columns: repeat(4, 1fr); } }
-        .card { display: none; background: var(--card-bg); padding: 15px; border-radius: 18px; border: 1px solid var(--accent); flex-direction: column; align-items: center; position: relative; }
-        .card.show { display: flex; }
-        
-        /* تصميم الإطار مع تأثير الانتقال الهادئ */
-        .slider-container { display: flex; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 15px; background: #fff; border-radius: 12px; overflow: hidden; height: 180px; position: relative; transition: all 0.3s ease-in-out; border: 1px solid transparent; }
-        
-        /* زيادة قوة سطوع الهالة الذهبية على الحواف عند تمرير الماوس */
-        .card:hover .slider-container { 
-            border-color: var(--gold-bright);
-            box-shadow: 0 0 12px 3px var(--gold), 0 0 25px 6px rgba(212, 175, 55, 0.5);
-        }
-        .card:hover .product-img { 
-            transform: scale(1.15); 
+        /* التنسيقات العامة للموقع */
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
-        .arrow-btn { background: rgba(0, 0, 0, 0.5); color: var(--gold); border: none; font-size: 1.8rem; width: 35px; height: 100%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 5; transition: 0.2s; font-weight: bold; position: absolute; top: 0; }
-        .arrow-btn.prev { left: 0; }
-        .arrow-btn.next { right: 0; }
-        .arrow-btn:hover { background: rgba(0, 0, 0, 0.7); color: var(--gold-bright); }
-        
-        .product-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-        
-        .model-name { font-size: 1rem; font-weight: 700; margin-bottom: 12px; height: 40px; display: flex; align-items: center; justify-content: center; }
-        .qty-control { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px; background: #1a1a1a; padding: 8px; border-radius: 10px; width: 100%; box-sizing: border-box; }
-        .btn-q { background: #252525; color: #fff; border: 1px solid var(--gold); width: 34px; height: 34px; border-radius: 8px; cursor: pointer; }
-        .btn-add { background: linear-gradient(135deg, #D4AF37, #8A6D3B); color: #000; padding: 12px; border-radius: 10px; font-weight: 900; border: none; width: 100%; cursor: pointer; }
-        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.95); border-top: 2px solid var(--gold); padding: 15px; display: none; z-index: 1001; }
-        .cart-flex { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .btn-clear { background: #333; color: #fff; border: 1px solid #555; padding: 8px 15px; border-radius: 10px; cursor: pointer; font-family: 'Cairo'; }
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #000000;
+            border-bottom: 1px solid #222;
+        }
+
+        .brand-logo {
+            max-width: 150px;
+            height: auto;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            background-color: #111;
+            border: 1px solid #333;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active, .tab:hover {
+            background-color: #d4af37;
+            color: #000;
+            font-weight: bold;
+        }
+
+        /* شبكة المنتجات */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* كارت المنتج */
+        .card {
+            background-color: #111111;
+            border: 1px solid #222222;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            display: none;
+        }
+
+        .card.show {
+            display: block;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px #d4af37;
+            border-color: #d4af37;
+        }
+
+        /* 🌟 التعديل السحري لإصلاح الأطراف البيضاء والرمادية وصور المنتجات 🌟 */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 280px; /* يمكنك زيادة أو تقليل الارتفاع حسب الرغبة */
+            overflow: hidden;
+            border-radius: 10px;
+            background-color: #000000; /* خلفية سوداء للمنتج */
+        }
+
+        .product-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* يقص الأطراف الزائدة ويملأ الصندوق بالكامل بشكل متناسق */
+            object-position: center;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .product-img {
+            transform: scale(1.05); /* تأثير زوم فخم عند تمرير الماوس */
+        }
+
+        /* أزرار الأسهم داخل السلايدر */
+        .arrow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: #d4af37;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .arrow-btn:hover {
+            background: #d4af37;
+            color: #000;
+        }
+
+        .arrow-btn.prev { left: 10px; }
+        .arrow-btn.next { right: 10px; }
+
+        .model-name {
+            font-size: 18px;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+
+        /* التحكم بالكميات وأزرار الإضافة */
+        .qty-control {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            background-color: #0a0a0a;
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid #222;
+        }
+
+        .btn-q {
+            background: none;
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .btn-q:hover {
+            background-color: #d4af37;
+            color: #000;
+        }
+
+        .btn-add {
+            background-color: #d4af37;
+            color: #000;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn-add:hover {
+            background-color: #bfa030;
+        }
     </style>
 </head>
-<body onload="filterProducts('tshirt')">
+<body>
 
     <div class="header">
         <img src="TOP GIVING logo.jpg" alt="TOP GIVING" class="brand-logo">
         <div class="nav-tabs">
-            <div class="tab active" id="tab-tshirt" onclick="filterProducts('tshirt')">تيشيرتات</div>
-            <div class="tab" id="tab-set" onclick="filterProducts('set')">أطقم صيفية</div>
-            <div class="tab" id="tab-pants" onclick="filterProducts('pants')">شورتات</div>
+            <div class="tab active" onclick="filterProducts('tshirt')">تيشيرتات</div>
+            <div class="tab" onclick="filterProducts('set')">أطقم صيفية</div>
+            <div class="tab" onclick="filterProducts('pants')">شورتات</div>
         </div>
     </div>
 
     <div class="grid">
-        <!-- تيشيرتات -->
-        
-<div class="card tshirt show" data-images='["boxy-fashion1.png.png", "boxy-fashion2.png.png", "boxy-fashion3.png.png", "boxy-fashion4.png.png"]' data-index="0">
-    <div class="slider-container">
-        <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
-        <img src="boxy-fashion1.png.png" class="product-img"> <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
-    </div>
-    <div class="model-name">تيشرت بوكس</div>
-    <div class="qty-control">
-        <button class="btn-q" onclick="c('qt07', 16)">+</button>
-        <span id="qt07">16</span> <button class="btn-q" onclick="c('qt07', -16)">-</button>
-    </div>
-    <button class="btn-add" onclick="add('تيشرت بوكس','qt07',this)">إضافة للطلب</button> </div>
-        
+
+        <div class="card tshirt show" data-images='["boxy-fashion1.png.png", "boxy-fashion2.png.png", "boxy-fashion3.png.png", "boxy-fashion4.png.png"]' data-index="0">
+            <div class="slider-container">
+                <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
+                <img src="boxy-fashion1.png.png" class="product-img">
+                <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
+            </div>
+            <div class="model-name">تيشرت بوكس</div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt07', 16)">+</button>
+                <span id="qt07">16</span>
+                <button class="btn-q" onclick="c('qt07', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('تيشرت بوكس','qt07',this)">إضافة للطلب</button>
+        </div>
+
         <div class="card tshirt show" data-images='["n5-back.png.png", "n5-purple.png.png", "n5-white.png.png", "n5-black.png.png"]' data-index="0">
             <div class="slider-container">
                 <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
@@ -79,271 +219,95 @@
                 <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
             </div>
             <div class="model-name">تيشيرت 01</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('qt01',16)">+</button><span id="qt01">16</span><button class="btn-q" onclick="c('qt01',-16)">-</button></div>
-            <button class="btn-add" onclick="add('تيشيرت 01','qt01',this)">إضافة للطلب</button>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt01', 16)">+</button>
+                <span id="qt01">16</span>
+                <button class="btn-q" onclick="c('qt01', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('01 تيشيرت','qt01',this)">إضافة للطلب</button>
         </div>
 
-        <div class="card tshirt show" data-images='["t1-white.png", "t1-black.png", "t1-blue.png", "t1-yellow.png"]' data-index="0">
+        <div class="card tshirt show" data-images='["boxy-fashion2.png.png"]' data-index="0">
             <div class="slider-container">
                 <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
-                <img src="t1-white.png" class="product-img">
+                <img src="boxy-fashion2.png.png" class="product-img">
                 <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
             </div>
             <div class="model-name">تيشيرت 02</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('qt02',16)">+</button><span id="qt02">16</span><button class="btn-q" onclick="c('qt02',-16)">-</button></div>
-            <button class="btn-add" onclick="add('تيشيرت 02','qt02',this)">إضافة</button>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt02', 16)">+</button>
+                <span id="qt02">16</span>
+                <button class="btn-q" onclick="c('qt02', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('02 تيشيرت','qt02',this)">إضافة</button>
         </div>
 
-        <div class="card tshirt show" data-images='["t2-black.png.png", "t2-purple.png.png", "t2-white.png.png", "t2-grey.png.png"]' data-index="0">
+        <div class="card tshirt show" data-images='["boxy-fashion1.png.png"]' data-index="0">
             <div class="slider-container">
                 <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
-                <img src="t2-black.png.png" class="product-img">
+                <img src="boxy-fashion1.png.png" class="product-img">
                 <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
             </div>
             <div class="model-name">تيشيرت 03</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('qt03',16)">+</button><span id="qt03">16</span><button class="btn-q" onclick="c('qt03',-16)">-</button></div>
-            <button class="btn-add" onclick="add('تيشيرت 03','qt03',this)">إضافة</button>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt03', 16)">+</button>
+                <span id="qt03">16</span>
+                <button class="btn-q" onclick="c('qt03', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('03 تيشيرت','qt03',this)">إضافة</button>
         </div>
 
-        <div class="card tshirt show" data-images='["tr1-red.png.png", "tr2-black.png.png", "tr3-beige.png.png", "tr4-white.png.png"]' data-index="0">
-            <div class="slider-container">
-                <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
-                <img src="tr1-red.png.png" class="product-img">
-                <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
-            </div>
-            <div class="model-name">تيشيرت 04</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('qt04',16)">+</button><span id="qt04">16</span><button class="btn-q" onclick="c('qt04',-16)">-</button></div>
-            <button class="btn-add" onclick="add('تيشيرت 04','qt04',this)">إضافة</button>
-        </div>
-
-        <div class="card tshirt show" data-images='["te1-black.png.png", "te2-blue.png.png", "te3-beige.png.png", "te4-white.png.png"]' data-index="0">
-            <div class="slider-container">
-                <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
-                <img src="te1-black.png.png" class="product-img">
-                <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
-            </div>
-            <div class="model-name">تيشيرت 05</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('qt05',16)">+</button><span id="qt05">16</span><button class="btn-q" onclick="c('qt05',-16)">-</button></div>
-            <button class="btn-add" onclick="add('تيشيرت 05','qt05',this)">إضافة</button>
-        </div>
-
-        <!-- أطقم صيفية -->
-        <div class="card set" data-images='["s1-white.png.png", "s1-grey.png.png", "s1-blue.png.png", "s1-black.png.png"]' data-index="0">
-            <div class="slider-container">
-                <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
-                <img src="s1-white.png.png" class="product-img">
-                <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
-            </div>
-            <div class="model-name">طقم 01</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('qs01',16)">+</button><span id="qs01">16</span><button class="btn-q" onclick="c('qs01',-16)">-</button></div>
-            <button class="btn-add" onclick="add('طقم 01','qs01',this)">إضافة</button>
-        </div>
-
-        <div class="card set" data-images='["s2-black.jpg", "s2-blue.jpg", "s2-grey.jpg", "s2-white.jpg"]' data-index="0">
-            <div class="slider-container">
-                <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
-                <img src="s2-black.jpg" class="product-img">
-                <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
-            </div>
-            <div class="model-name">طقم 02</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('qs02',16)">+</button><span id="qs02">16</span><button class="btn-q" onclick="c('qs02',-16)">-</button></div>
-            <button class="btn-add" onclick="add('طقم 02','qs02',this)">إضافة</button>
-        </div>
-
-        <div class="card set" data-images='["s3-black.jpg", "s3-red.jpg", "s3-purple.jpg", "s3-grey.jpg"]' data-index="0">
-            <div class="slider-container">
-                <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
-                <img src="s3-black.jpg" class="product-img">
-                <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
-            </div>
-            <div class="model-name">طقم 03</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('qs03',16)">+</button><span id="qs03">16</span><button class="btn-q" onclick="c('qs03',-16)">-</button></div>
-            <button class="btn-add" onclick="add('طقم 03','qs03',this)">إضافة</button>
-        </div>
-
-        <div class="card set" data-images='["s4-black.jpg", "s4-green.jpg", "s4-beige.jpg", "s4-white.jpg"]' data-index="0">
-            <div class="slider-container">
-                <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
-                <img src="s4-black.jpg" class="product-img">
-                <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
-            </div>
-            <div class="model-name">طقم 04</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('qs04',16)">+</button><span id="qs04">16</span><button class="btn-q" onclick="c('qs04',-16)">-</button></div>
-            <button class="btn-add" onclick="add('طقم 04','qs04',this)">إضافة</button>
-        </div>
-
-        <div class="card set" data-images='["s5-black.jpg", "s5-grey.jpg", "s5-beige.jpg", "s5-white.jpg"]' data-index="0">
-            <div class="slider-container">
-                <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
-                <img src="s5-black.jpg" class="product-img">
-                <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
-            </div>
-            <div class="model-name">طقم 05</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('qs05',16)">+</button><span id="qs05">16</span><button class="btn-q" onclick="c('qs05',-16)">-</button></div>
-            <button class="btn-add" onclick="add('طقم 05','qs05',this)">إضافة</button>
-        </div>
-
-        <div class="card set" data-images='["sea-black.png", "sea-red.png", "sea-navy.png"]' data-index="0">
-            <div class="slider-container">
-                <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
-                <img src="sea-black.png" class="product-img">
-                <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
-            </div>
-            <div class="model-name">طقم Sea 01</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('qsea01',12)">+</button><span id="qsea01">12</span><button class="btn-q" onclick="c('qsea01',-12)">-</button></div>
-            <button class="btn-add" onclick="add('Sea 01','qsea01',this)">إضافة</button>
-        </div>
-
-        <div class="card set" data-images='["sea1-off-withe.png", "sea1-black.png", "sea1-navy.png"]' data-index="0">
-            <div class="slider-container">
-                <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
-                <img src="sea1-off-withe.png" class="product-img">
-                <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
-            </div>
-            <div class="model-name">طقم Sea 02</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('qsea02',12)">+</button><span id="qsea02">12</span><button class="btn-q" onclick="c('qsea02',-12)">-</button></div>
-            <button class="btn-add" onclick="add('Sea 02','qsea02',this)">إضافة</button>
-        </div>
-
-        <div class="card set" data-images='["sea2-brown.png", "sea2-pink.png", "sea2-grey.png"]' data-index="0">
-            <div class="slider-container">
-                <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
-                <img src="sea2-brown.png" class="product-img">
-                <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
-            </div>
-            <div class="model-name">طقم Sea 03</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('qsea03',12)">+</button><span id="qsea03">12</span><button class="btn-q" onclick="c('qsea03',-12)">-</button></div>
-            <button class="btn-add" onclick="add('Sea 03','qsea03',this)">إضافة</button>
-        </div>
-
-        <!-- شورتات -->
-        <div class="card pants" data-images='["mps182-beige.png", "mps182-black.png", "mps182-blue.png", "mps182-white.png"]' data-index="0">
-            <div class="slider-container">
-                <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
-                <img src="mps182-beige.png" class="product-img">
-                <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
-            </div>
-            <div class="model-name">شورت 182</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('qsh01',20)">+</button><span id="qsh01">20</span><button class="btn-q" onclick="c('qsh01',-20)">-</button></div>
-            <button class="btn-add" onclick="add('شورت 182','qsh01',this)">إضافة</button>
-        </div>
-
-        <div class="card pants" data-images='["mps185-grey.png", "mps185-black.png", "mps185-green.png", "mps185-white.png"]' data-index="0">
-            <div class="slider-container">
-                <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
-                <img src="mps185-grey.png" class="product-img">
-                <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
-            </div>
-            <div class="model-name">شورت 185</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('qsh02',20)">+</button><span id="qsh02">20</span><button class="btn-q" onclick="c('qsh02',-20)">-</button></div>
-            <button class="btn-add" onclick="add('شورت 185','qsh02',this)">إضافة</button>
-        </div>
-
-        <div class="card pants" data-images='["mps0033-heavenly.png", "mps0033-black.png", "mps0033-white.png", "mps0033-green.png"]' data-index="0">
-            <div class="slider-container">
-                <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
-                <img src="mps0033-heavenly.png" class="product-img">
-                <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
-            </div>
-            <div class="model-name">شورت 0033</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('qsh03',20)">+</button><span id="qsh03">20</span><button class="btn-q" onclick="c('qsh03',-20)">-</button></div>
-            <button class="btn-add" onclick="add('شورت 0033','qsh03',this)">إضافة</button>
-        </div>
-
-        <div class="card pants" data-images='["mps176-white.png", "mps176-black.png", "mps176-grey.png", "mps176-brown.png"]' data-index="0">
-            <div class="slider-container">
-                <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
-                <img src="mps176-white.png" class="product-img">
-                <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
-            </div>
-            <div class="model-name">شورت 176</div>
-            <div class="qty-control"><button class="btn-q" onclick="c('qsh04',20)">+</button><span id="qsh04">20</span><button class="btn-q" onclick="c('qsh04',-20)">-</button></div>
-            <button class="btn-add" onclick="add('شورت 176','qsh04',this)">إضافة</button>
-        </div>
-    </div>
-
-    <div class="cart-bar" id="cart-bar">
-        <div class="cart-flex">
-            <div id="cart-info" style="color:var(--gold); font-weight:bold;">الإجمالي: 0 حبة</div>
-            <div style="display:flex; gap:10px;">
-                <button class="btn-clear" onclick="clearCart()">تصفير السلة 🗑️</button>
-                <button class="btn-add" style="width:auto; padding:8px 20px;" onclick="send()">إرسال ✅</button>
-            </div>
-        </div>
     </div>
 
     <script>
-        function filterProducts(cat) {
-            document.querySelectorAll('.card').forEach(c => { c.classList.remove('show'); if(c.classList.contains(cat)) c.classList.add('show'); });
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            document.getElementById('tab-' + cat).classList.add('active');
+        function filterProducts(category) {
+            const cards = document.querySelectorAll('.card');
+            const tabs = document.querySelectorAll('.tab');
+            
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+
+            cards.forEach(card => {
+                if (card.classList.contains(category)) {
+                    card.classList.add('show');
+                } else {
+                    card.classList.remove('show');
+                }
+            });
         }
 
-        function updateSlider(card) {
-            let images = JSON.parse(card.getAttribute('data-images'));
+        function prevImg(btn) {
+            const card = btn.closest('.card');
+            const images = JSON.parse(card.getAttribute('data-images'));
             let index = parseInt(card.getAttribute('data-index'));
+            
+            index = (index === 0) ? images.length - 1 : index - 1;
+            card.setAttribute('data-index', index);
             card.querySelector('.product-img').src = images[index];
         }
 
         function nextImg(btn) {
-            let card = btn.closest('.card');
-            let images = JSON.parse(card.getAttribute('data-images'));
+            const card = btn.closest('.card');
+            const images = JSON.parse(card.getAttribute('data-images'));
             let index = parseInt(card.getAttribute('data-index'));
-            index = (index + 1) % images.length;
+            
+            index = (index === images.length - 1) ? 0 : index + 1;
             card.setAttribute('data-index', index);
-            updateSlider(card);
+            card.querySelector('.product-img').src = images[index];
         }
 
-        function prevImg(btn) {
-            let card = btn.closest('.card');
-            let images = JSON.parse(card.getAttribute('data-images'));
-            let index = parseInt(card.getAttribute('data-index'));
-            index = (index - 1 + images.length) % images.length;
-            card.setAttribute('data-index', index);
-            updateSlider(card);
+        function c(id, amount) {
+            const span = document.getElementById(id);
+            let current = parseInt(span.innerText);
+            current += amount;
+            if (current < 16) current = 16; /* الحد الأدنى للطلب */
+            span.innerText = current;
         }
-        
-        function c(id, val) { 
-            let el = document.getElementById(id); 
-            if(!el) return; 
-            let curr = parseInt(el.innerText); 
-            let min = (id.includes('qsh')) ? 20 : (id.includes('qsea') ? 12 : 16); 
-            if (curr + val >= min) el.innerText = curr + val; 
-        }
-        
-        let order = [];
-        function add(name, qtyId, btn) { 
-            let qty = parseInt(document.getElementById(qtyId).innerText); 
-            let card = btn.closest('.card');
-            let images = JSON.parse(card.getAttribute('data-images'));
-            let index = parseInt(card.getAttribute('data-index'));
-            let currentImage = images[index];
 
-            order.push({ name: name, qty: qty, imgFile: currentImage }); 
-            document.getElementById('cart-bar').style.display = 'block'; 
-            updateTotal(); 
-            btn.innerText = "تمت ✅"; 
-            setTimeout(() => btn.innerText = btn.id === "it01" ? "إضافة للطلب" : "إضافة", 1500); 
-        }
-        
-        function updateTotal() { 
-            let total = order.reduce((sum, i) => sum + i.qty, 0); 
-            document.getElementById('cart-info').innerText = `الإجمالي: ${total} حبة`; 
-        }
-        
-        function clearCart() { 
-            order = []; 
-            document.getElementById('cart-bar').style.display = 'none'; 
-            document.getElementById('cart-info').innerText = `الإجمالي: 0 حبة`;
-        }
-        
-        function send() { 
-            if(order.length === 0) return; 
-            let msg = "📦 *طلب جديد من TOP GIVING* 📦\n\n"; 
-            order.forEach(i => { 
-                msg += `• *${i.name}* (الصورة: ${i.imgFile}): ${i.qty} حبة\n`; 
-            }); 
-            window.open(`https://wa.me/966560564719?text=${encodeURIComponent(msg)}`, '_blank'); 
+        function add(name, id, btn) {
+            const qty = document.getElementById(id).innerText;
+            alert(`تم إضافة ${qty} حبة من ${name} إلى طلبك!`);
+            /* هنا يربط الكود مع الواتساب الخاص بك لاحقاً */
         }
     </script>
 </body>
