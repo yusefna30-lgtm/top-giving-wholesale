@@ -63,7 +63,7 @@
             margin: 0 auto;
         }
 
-        /* كارت المنتج المطور للبيع بالجملة */
+        /* كارت المنتج */
         .card {
             background-color: #0a0a0a;
             border: 1px solid #151515;
@@ -72,6 +72,7 @@
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.7);
             transition: all 0.3s;
+            position: relative;
         }
 
         .card:hover {
@@ -80,7 +81,9 @@
             border-color: #bfa030;
         }
 
-        .img-container {
+        /* حاوي السلايدر والصورة */
+        .slider-container {
+            position: relative;
             width: 100%;
             height: 340px;
             overflow: hidden;
@@ -95,6 +98,34 @@
             object-position: center;
         }
 
+        /* أزرار الأسهم للتنقل بين الألوان */
+        .arrow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.75);
+            color: #bfa030;
+            border: 1px solid #222222;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            z-index: 5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .arrow-btn:hover {
+            background: #bfa030;
+            color: #000000;
+        }
+
+        .arrow-btn.prev { left: 12px; }
+        .arrow-btn.next { right: 12px; }
+
         .model-name {
             font-size: 18px;
             margin: 18px 0 12px 0;
@@ -102,7 +133,7 @@
             color: #ffffff;
         }
 
-        /* التحكم بالكميات جملة وبحد أدنى 16 حبة */
+        /* التحكم بالكميات جملة */
         .qty-control {
             display: flex;
             justify-content: center;
@@ -142,6 +173,7 @@
             color: #bfa030;
         }
 
+        /* زر إضافة للطلب */
         .btn-add {
             background-color: transparent;
             color: #bfa030;
@@ -171,7 +203,7 @@
                 padding: 10px;
                 border-radius: 12px;
             }
-            .img-container { 
+            .slider-container { 
                 height: 195px;
             }
             .model-name { 
@@ -197,9 +229,16 @@
                 font-size: 12px; 
                 border-radius: 8px;
             }
+            .arrow-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 16px;
+            }
+            .arrow-btn.prev { left: 6px; }
+            .arrow-btn.next { right: 6px; }
         }
 
-        /* شريط السلة السفلي المباشر للواتساب */
+        /* شريط السلة السفلي */
         .cart-navbar {
             position: fixed;
             bottom: 0;
@@ -270,78 +309,61 @@
 
     <div class="grid">
 
-        <div class="card">
-            <div class="img-container">
-                <img src="smile-white.png" class="product-img" alt="تيشيرت SMILE أبيض">
+        <div class="card" data-images='["smile-white.png", "smile-olive.png", "smile-black.png", "smile-beige.png"]' data-index="0">
+            <div class="slider-container">
+                <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
+                <img src="smile-white.png" class="product-img">
+                <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
             </div>
-            <div class="model-name">تيشيرت SMILE أبيض</div>
+            <div class="model-name">تيشيرت SMILE (متعدد الألوان)</div>
             <div class="qty-control">
-                <button class="btn-q" onclick="c('qt_white', 16)">+</button>
-                <span id="qt_white" class="qty-num">16</span>
-                <button class="btn-q" onclick="c('qt_white', -16)">-</button>
+                <button class="btn-q" onclick="c('qt_smile_all', 16)">+</button>
+                <span id="qt_smile_all" class="qty-num">16</span>
+                <button class="btn-q" onclick="c('qt_smile_all', -16)">-</button>
             </div>
-            <button class="btn-add" onclick="addToCart('تيشيرت SMILE - أبيض', 'qt_white')">إضافة للطلب</button>
-        </div>
-
-        <div class="card">
-            <div class="img-container">
-                <img src="smile-olive.png" class="product-img" alt="تيشيرت SMILE زيتي">
-            </div>
-            <div class="model-name">تيشيرت SMILE زيتي</div>
-            <div class="qty-control">
-                <button class="btn-q" onclick="c('qt_olive', 16)">+</button>
-                <span id="qt_olive" class="qty-num">16</span>
-                <button class="btn-q" onclick="c('qt_olive', -16)">-</button>
-            </div>
-            <button class="btn-add" onclick="addToCart('تيشيرت SMILE - زيتي', 'qt_olive')">إضافة للطلب</button>
-        </div>
-
-        <div class="card">
-            <div class="img-container">
-                <img src="smile-black.png" class="product-img" alt="تيشيرت SMILE أسود">
-            </div>
-            <div class="model-name">تيشيرت SMILE أسود</div>
-            <div class="qty-control">
-                <button class="btn-q" onclick="c('qt_black', 16)">+</button>
-                <span id="qt_black" class="qty-num">16</span>
-                <button class="btn-q" onclick="c('qt_black', -16)">-</button>
-            </div>
-            <button class="btn-add" onclick="addToCart('تيشيرت SMILE - أسود', 'qt_black')">إضافة للطلب</button>
-        </div>
-
-        <div class="card">
-            <div class="img-container">
-                <img src="smile-beige.png" class="product-img" alt="تيشيرت SMILE بيج">
-            </div>
-            <div class="model-name">تيشيرت SMILE بيج</div>
-            <div class="qty-control">
-                <button class="btn-q" onclick="c('qt_beige', 16)">+</button>
-                <span id="qt_beige" class="qty-num">16</span>
-                <button class="btn-q" onclick="c('qt_beige', -16)">-</button>
-            </div>
-            <button class="btn-add" onclick="addToCart('تيشيرت SMILE - بيج', 'qt_beige')">إضافة للطلب</button>
+            <button class="btn-add" onclick="addToCart('تيشيرت SMILE ألوان مختلطة','qt_smile_all')">إضافة للطلب</button>
         </div>
 
     </div>
 
     <div id="cart-navbar" class="cart-navbar">
         <div class="cart-info">
-            <span>الموديلات المضافة للطلب الحالي:</span>
+            <span>الموديلات المضافة:</span>
             <span id="cart-count" class="badge">0</span>
         </div>
         <button class="btn-send-cart" onclick="sendOrderWhatsApp()">
-            إرسال الطلب بالكامل للبراند 📲
+            إرسال الطلب بالكامل 📲
         </button>
     </div>
 
     <script>
         let cart = {};
 
+        function prevImg(btn) {
+            const card = btn.closest('.card');
+            const images = JSON.parse(card.getAttribute('data-images'));
+            let index = parseInt(card.getAttribute('data-index'));
+            
+            index = (index === 0) ? images.length - 1 : index - 1;
+            card.setAttribute('data-index', index);
+            card.querySelector('.product-img').src = images[index];
+        }
+
+        function nextImg(btn) {
+            const card = btn.closest('.card');
+            const images = JSON.parse(card.getAttribute('data-images'));
+            let index = parseInt(card.getAttribute('data-index'));
+            
+            index = (index === images.length - 1) ? 0 : index + 1;
+            card.setAttribute('data-index', index);
+            card.querySelector('.product-img').src = images[index];
+        }
+
         function c(id, amount) {
             const span = document.getElementById(id);
             let current = parseInt(span.innerText);
             current += amount;
-            if (current < 16) current = 16; // لضمان عدم النزول عن الحد الأدنى للربطة
+            if (current < 16) current = 16; 
             span.innerText = current;
         }
 
@@ -355,22 +377,22 @@
             if(modelsCount > 0) {
                 document.getElementById('cart-navbar').classList.add('active');
             }
-            alert(`تم إضافة ربطة (${name}) بمجموع ${qty} قطعة إلى سلتك!`);
+            alert(`تم إضافة ${qty} حبة من (${name}) إلى السلة بنجاح!`);
         }
 
         function sendOrderWhatsApp() {
             if (Object.keys(cart).length === 0) return;
 
             const phoneNumber = "966560564719"; 
-            let message = `مرحباً براند TOP GIVING، أود تأكيد طلبية جملة جديدة:\n\n`;
+            let message = `مرحباً براند TOP GIVING، أرغب في تأكيد طلبية جديدة:\n\n`;
             let totalItems = 0;
 
             for (const [name, qty] of Object.entries(cart)) {
-                message += `📦 *المنتج:* ${name}\n🔢 *الكمية المطلوبة:* ${qty} قطع\n-------------------------\n`;
+                message += `📦 *المنتج:* ${name}\n🔢 *الكمية:* ${qty} حبة\n-------------------------\n`;
                 totalItems += qty;
             }
 
-            message += `\n📊 *إجمالي قطع الطلبية كاملة:* ${totalItems} حبة`;
+            message += `\n📊 *إجمالي القطع المطلوبة:* ${totalItems} حبة`;
             
             const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(whatsappURL, '_blank');
