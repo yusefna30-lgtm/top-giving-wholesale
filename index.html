@@ -12,6 +12,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
+            padding-bottom: 100px; /* مساحة بالأسفل لكي لا تغطي السلة المنتجات */
         }
 
         .header {
@@ -89,6 +90,7 @@
             overflow: hidden;
             border-radius: 10px;
             background-color: #000000;
+            cursor: zoom-in; /* تلميح للزبون بإمكانية التكبير */
         }
 
         .product-img {
@@ -202,6 +204,99 @@
         .btn-add:hover {
             background-color: #bfa030;
         }
+
+        /* 🛒 تنسيقات سلة المشتريات الثابتة في الأسفل 🛒 */
+        .cart-navbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #111111;
+            border-top: 2px solid #d4af37;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 -5px 25px rgba(0,0,0,0.8);
+        }
+
+        .cart-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+        }
+
+        .cart-icon {
+            font-size: 24px;
+            color: #d4af37;
+        }
+
+        .badge {
+            background-color: #d4af37;
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .btn-send-cart {
+            background-color: #25d366; /* لون الواتساب الأخضر الفخم */
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background 0.3s;
+        }
+
+        .btn-send-cart:hover {
+            background-color: #20ba5a;
+        }
+
+        /* 🔍 نافذة تكبير الصور (Zoom LightBox) 🔍 */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 80%;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-lightbox:hover {
+            color: #d4af37;
+        }
     </style>
 </head>
 <body>
@@ -218,7 +313,7 @@
     <div class="grid">
 
         <div class="card tshirt show" data-images='["boxy-fashion1.png.png", "boxy-fashion2.png.png", "boxy-fashion3.png.png", "boxy-fashion4.png.png"]' data-index="0">
-            <div class="slider-container">
+            <div class="slider-container" onclick="openLightbox(this)">
                 <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
                 <img src="boxy-fashion1.png.png" class="product-img">
                 <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
@@ -229,11 +324,11 @@
                 <span id="qt07">16</span>
                 <button class="btn-q" onclick="c('qt07', -16)">-</button>
             </div>
-            <button class="btn-add" onclick="add('تيشرت بوكس','qt07',this)">إضافة للطلب</button>
+            <button class="btn-add" onclick="addToCart('تيشرت بوكس','qt07')">إضافة للطلب</button>
         </div>
 
         <div class="card tshirt show" data-images='["n5-back.png.png", "n5-purple.png.png", "n5-white.png.png", "n5-black.png.png"]' data-index="0">
-            <div class="slider-container">
+            <div class="slider-container" onclick="openLightbox(this)">
                 <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
                 <img src="n5-back.png.png" class="product-img">
                 <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
@@ -244,11 +339,11 @@
                 <span id="qt01">16</span>
                 <button class="btn-q" onclick="c('qt01', -16)">-</button>
             </div>
-            <button class="btn-add" onclick="add('تيشيرت 01','qt01',this)">إضافة للطلب</button>
+            <button class="btn-add" onclick="addToCart('تيشيرت 01','qt01')">إضافة للطلب</button>
         </div>
 
         <div class="card tshirt show" data-images='["boxy-fashion2.png.png"]' data-index="0">
-            <div class="slider-container">
+            <div class="slider-container" onclick="openLightbox(this)">
                 <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
                 <img src="boxy-fashion2.png.png" class="product-img">
                 <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
@@ -259,11 +354,11 @@
                 <span id="qt02">16</span>
                 <button class="btn-q" onclick="c('qt02', -16)">-</button>
             </div>
-            <button class="btn-add" onclick="add('تيشيرت 02','qt02',this)">إضافة للطلب</button>
+            <button class="btn-add" onclick="addToCart('تيشيرت 02','qt02')">إضافة للطلب</button>
         </div>
 
         <div class="card tshirt show" data-images='["boxy-fashion1.png.png"]' data-index="0">
-            <div class="slider-container">
+            <div class="slider-container" onclick="openLightbox(this)">
                 <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
                 <img src="boxy-fashion1.png.png" class="product-img">
                 <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
@@ -274,12 +369,31 @@
                 <span id="qt03">16</span>
                 <button class="btn-q" onclick="c('qt03', -16)">-</button>
             </div>
-            <button class="btn-add" onclick="add('تيشيرت 03','qt03',this)">إضافة للطلب</button>
+            <button class="btn-add" onclick="addToCart('تيشيرت 03','qt03')">إضافة للطلب</button>
         </div>
 
     </div>
 
+    <div class="cart-navbar">
+        <div class="cart-info">
+            <span class="cart-icon">🛒</span>
+            <span>عدد الموديلات في السلة:</span>
+            <span id="cart-count" class="badge">0</span>
+        </div>
+        <button class="btn-send-cart" onclick="sendOrderWhatsApp()">
+            <span>إرسال الطلب عبر الواتساب</span>📲
+        </button>
+    </div>
+
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" class="lightbox-img" src="" alt="Zoomed Product">
+    </div>
+
     <script>
+        // مصفوفة لتخزين عناصر السلة
+        let cart = {};
+
         function filterProducts(category) {
             const cards = document.querySelectorAll('.card');
             const tabs = document.querySelectorAll('.tab');
@@ -324,19 +438,34 @@
             span.innerText = current;
         }
 
-        // 🌟 دالة الواتساب المحدثة برقمك الخاص 🌟
-        function add(name, id, btn) {
-            const qty = document.getElementById(id).innerText;
-            const phoneNumber = "966560564719"; 
+        // 🛒 نظام إضافة المنتجات وتحديث السلة 🛒
+        function addToCart(name, id) {
+            const qty = parseInt(document.getElementById(id).innerText);
             
-            const message = `مرحباً براند TOP GIVING، أرغب في طلب المنتج التالي:\n\n` +
-                            `📦 المنتج: ${name}\n` +
-                            `🔢 الكمية: ${qty} حبة\n\n` +
-                            `يرجى تأكيد الطلب وتزويدي بالتفاصيل.`;
+            // إضافة المنتج أو تحديث الكمية إذا كان موجوداً مسبقاً
+            cart[name] = qty;
             
-            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-            window.open(whatsappURL, '_blank');
+            // تحديث العدد في الشريط السفلي بناءً على عدد الأنواع المضافة
+            document.getElementById('cart-count').innerText = Object.keys(cart).length;
+            
+            alert(`تم إضافة ${qty} حبة من (${name}) إلى السلة بنجاح!`);
         }
-    </script>
-</body>
-</html>
+
+        // 📲 إرسال كافة محتويات السلة بالواتساب دفعة واحدة 📲
+        function sendOrderWhatsApp() {
+            if (Object.keys(cart).length === 0) {
+                alert("السلة فارغة حالياً. يرجى إضافة منتجات أولاً!");
+                return;
+            }
+
+            const phoneNumber = "966560564719"; 
+            let message = `مرحباً براند TOP GIVING، أرغب في تقديم طلبية جديدة:\n\n`;
+            let totalItems = 0;
+
+            // كشف بجميع المنتجات المضافة في السلة
+            for (const [name, qty] of Object.entries(cart)) {
+                message += `📦 *المنتج:* ${name}\n🔢 *الكمية:* ${qty} حبة\n-------------------------\n`;
+                totalItems += qty;
+            }
+
+            message += `\n📊 *إجمالي القطع المضافة
