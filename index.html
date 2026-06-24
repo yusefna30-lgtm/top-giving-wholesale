@@ -311,9 +311,9 @@
 
         <div class="card" data-images='["smile-white.png", "smile-olive.png", "smile-black.png", "smile-beige.png"]' data-index="0">
             <div class="slider-container">
-                <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
+                <button class="arrow-btn prev" onclick="prevImg(btn); event.stopPropagation();">‹</button>
                 <img src="smile-white.png" class="product-img">
-                <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
+                <button class="arrow-btn next" onclick="nextImg(btn); event.stopPropagation();">›</button>
             </div>
             <div class="model-name">تيشيرت SMILE (متعدد الألوان)</div>
             <div class="qty-control">
@@ -322,6 +322,21 @@
                 <button class="btn-q" onclick="c('qt_smile_all', -16)">-</button>
             </div>
             <button class="btn-add" onclick="addToCart('تيشيرت SMILE ألوان مختلطة','qt_smile_all')">إضافة للطلب</button>
+        </div>
+
+        <div class="card" data-images='["kenz-navy.png", "kenz-grey.png", "kenz-sage.png", "kenz-blue.png"]' data-index="0">
+            <div class="slider-container">
+                <button class="arrow-btn prev" onclick="prevImg(this); event.stopPropagation();">‹</button>
+                <img src="kenz-navy.png" class="product-img">
+                <button class="arrow-btn next" onclick="nextImg(this); event.stopPropagation();">›</button>
+            </div>
+            <div class="model-name">كينز بولو | KENZ POLO</div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt_kenz_polo', 16)">+</button>
+                <span id="qt_kenz_polo" class="qty-num">16</span>
+                <button class="btn-q" onclick="c('qt_kenz_polo', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="addToCart('كينز بولو KENZ POLO ألوان مختلطة','qt_kenz_polo')">إضافة للطلب</button>
         </div>
 
     </div>
