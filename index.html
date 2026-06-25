@@ -5,23 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOP GIVING | المتجر الرسمي</title>
     <style>
-        body { background-color: #000; color: #fff; font-family: sans-serif; margin: 0; padding-bottom: 150px; }
+        body { background-color: #000; color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; padding-bottom: 150px; }
         .header { text-align: center; padding: 20px; border-bottom: 1px solid #222; }
         .nav-tabs { display: flex; justify-content: center; gap: 8px; margin-top: 15px; }
         .tab { padding: 8px 12px; background: #111; border: 1px solid #333; border-radius: 20px; cursor: pointer; color: #aaa; font-size: 13px; }
         .tab.active { background: #bfa030; color: #000; font-weight: bold; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
+        .tab-content { display: none; } .tab-content.active { display: block; }
         .grid { display: grid; grid-template-columns: 1fr; gap: 20px; padding: 15px; max-width: 600px; margin: auto; }
         .card { background: #0a0a0a; border: 1px solid #151515; border-radius: 15px; padding: 15px; text-align: center; }
-        /* تكبير الصور لتناسب الجوال */
-        .slider-container { position: relative; height: 350px; overflow: hidden; border-radius: 10px; margin-bottom: 15px; }
+        .slider-container { position: relative; height: 350px; overflow: hidden; border-radius: 10px; margin-bottom: 10px; }
         .product-img { width: 100%; height: 100%; object-fit: cover; }
-        .arrow-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: #bfa030; border: none; width: 40px; height: 40px; font-size: 24px; cursor: pointer; }
+        .arrow-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: #bfa030; border: none; width: 45px; height: 45px; font-size: 24px; cursor: pointer; }
+        .model-num { color: #bfa030; font-size: 14px; margin-top: 5px; font-weight: bold; }
         .qty-control { display: flex; justify-content: center; align-items: center; gap: 20px; margin: 15px 0; }
-        .btn-q { background: #222; border: 1px solid #444; color: #fff; width: 40px; height: 40px; border-radius: 8px; cursor: pointer; font-size: 20px; }
+        .btn-q { background: #222; border: 1px solid #444; color: #fff; width: 40px; height: 40px; border-radius: 8px; cursor: pointer; }
         .btn-add { background: #bfa030; color: #000; border: none; padding: 12px; width: 100%; border-radius: 8px; cursor: pointer; font-weight: bold; }
-        .cart-navbar { position: fixed; bottom: 0; width: 100%; background: #111; padding: 15px; box-sizing: border-box; display: none; }
+        .cart-navbar { position: fixed; bottom: 0; width: 100%; background: #111; padding: 15px; box-sizing: border-box; display: none; text-align: center; }
     </style>
 </head>
 <body>
@@ -31,25 +30,23 @@
     <div class="nav-tabs">
         <div class="tab active" onclick="show(this, 'tshirts')">تيشيرتات</div>
         <div class="tab" onclick="show(this, 'sets')">أطقم</div>
-        <div class="tab" onclick="show(this, 'shorts')">شورتات</div>
+        <div class="tab" onclick="show(this, 'shorts')">شورتات/بناطيل</div>
     </div>
 </div>
 
 <div id="tshirts" class="tab-content active"><div class="grid">
-    <div class="card">
-        <div class="slider-container">
-            <button class="arrow-btn" style="left:0" onclick="slide('s1',-1)">‹</button>
-            <img id="s1" src="smile-white.png" class="product-img" data-images='["smile-white.png", "smile-black.png", "smile-olive.png", "smile-beige.png"]' data-index="0">
-            <button class="arrow-btn" style="right:0" onclick="slide('s1',1)">›</button>
-        </div>
-        <p>تيشيرت SMILE</p>
-        <div class="qty-control">
-            <button class="btn-q" onclick="changeQty('qt1', 1)">+</button>
-            <span id="qt1">16</span>
-            <button class="btn-q" onclick="changeQty('qt1', -1)">-</button>
-        </div>
-        <button class="btn-add" onclick="add('SMILE', 'qt1')">إضافة للطلب</button>
-    </div>
+    <script>const products = [
+        {id:'s1', name:'تيشيرت SMILE', model:'08047', imgs:['smile-white.png','smile-black.png','smile-olive.png','smile-beige.png'], qty:16},
+        {id:'s2', name:'كينز بولو', model:'08076', imgs:['kenz-blue.png','kenz-black.png','kenz-grey.png','kenz-sage.png'], qty:16},
+        {id:'s3', name:'تيشيرت TRENDY', model:'08093', imgs:['trendy1.jpg','trendy2.jpg','trendy3.jpg','trendy4.jpg'], qty:16},
+        {id:'s4', name:'تيشيرت GRAVITY', model:'08094', imgs:['tshirt-gravity1.jpg','tshirt-gravity2.jpg','tshirt-gravity3.jpg','tshirt-gravity4.jpg'], qty:16},
+        {id:'s5', name:'طقم بحر', model:'SEA', imgs:['sea-black.png','sea-navy.png','sea-red.png'], qty:12},
+        {id:'s6', name:'شورت MPS0033', model:'0033', imgs:['mps0033-black.png','mps0033-green.png','mps0033-heavenly.png','mps0033-white.png'], qty:20},
+        {id:'s7', name:'بنطلون MPS176', model:'0176', imgs:['mps176-black.png','mps176-brown.png','mps176-grey.png','mps176-white.png'], qty:16}
+    ];
+    products.forEach(p => {
+        document.write(`<div class="card"><div class="slider-container"><button class="arrow-btn" style="left:0" onclick="slide('${p.id}',-1)">‹</button><img id="${p.id}" src="${p.imgs[0]}" class="product-img" data-images='${JSON.stringify(p.imgs)}' data-index="0"><button class="arrow-btn" style="right:0" onclick="slide('${p.id}',1)">›</button></div><div>${p.name}</div><div class="model-num">موديل: ${p.model}</div><div class="qty-control"><button class="btn-q" onclick="changeQty('${p.id}_q', 1, ${p.qty})">+</button><span id="${p.id}_q">${p.qty}</span><button class="btn-q" onclick="changeQty('${p.id}_q', -1, ${p.qty})">-</button></div><button class="btn-add" onclick="add('${p.name}')">إضافة</button></div>`);
+    });</script>
 </div></div>
 
 <div id="cart" class="cart-navbar"><button class="btn-add" onclick="send()">إرسال الطلب للواتساب 📲</button></div>
@@ -59,27 +56,18 @@
     function show(el, id) {
         document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.getElementById(id).classList.add('active');
-        el.classList.add('active');
+        document.getElementById(id).classList.add('active'); el.classList.add('active');
     }
     function slide(id, dir) {
-        const img = document.getElementById(id);
-        const imgs = JSON.parse(img.dataset.images);
+        const img = document.getElementById(id); const imgs = JSON.parse(img.dataset.images);
         let idx = (parseInt(img.dataset.index) + dir + imgs.length) % imgs.length;
-        img.dataset.index = idx;
-        img.src = imgs[idx];
+        img.dataset.index = idx; img.src = imgs[idx];
     }
-    function changeQty(id, dir) {
-        let span = document.getElementById(id);
-        let val = parseInt(span.innerText) + (dir * 4); // الزيادة والنقصان
-        if(val < 4) val = 4;
-        span.innerText = val;
+    function changeQty(id, dir, base) {
+        let span = document.getElementById(id); let val = parseInt(span.innerText) + (dir * base);
+        if(val < base) val = base; span.innerText = val;
     }
-    function add(name, qtyId) {
-        cart[name] = document.getElementById(qtyId).innerText;
-        document.getElementById('cart').style.display = 'block';
-        alert("تم إضافة " + name);
-    }
+    function add(name) { cart[name] = true; document.getElementById('cart').style.display = 'block'; alert("تم إضافة " + name); }
     function send() { window.open('https://wa.me/966560564719?text=' + encodeURIComponent(JSON.stringify(cart))); }
 </script>
 </body>
