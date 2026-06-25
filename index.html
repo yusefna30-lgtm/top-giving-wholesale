@@ -5,48 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body { background-color: #000; color: #fff; font-family: sans-serif; text-align: center; margin: 0; padding-bottom: 70px; }
-        .nav-tabs { display: flex; justify-content: center; gap: 5px; padding: 10px; background: #111; position: sticky; top: 0; z-index: 50; }
-        .tab { padding: 6px 10px; background: #222; cursor: pointer; border-radius: 4px; font-size: 13px; transition: 0.3s; }
+        
+        /* شريط التنقل - يدعم الآن التمرير الأفقي إذا كثرت الأقسام */
+        .nav-tabs { 
+            display: flex; 
+            justify-content: flex-start; 
+            gap: 5px; 
+            padding: 10px; 
+            background: #111; 
+            position: sticky; 
+            top: 0; 
+            z-index: 50; 
+            overflow-x: auto; /* يسمح بالتمرير لليمين واليسار في الجوال */
+            white-space: nowrap;
+        }
+        .nav-tabs::-webkit-scrollbar { display: none; } /* إخفاء شريط التمرير لشكل أجمل */
+
+        .tab { padding: 8px 12px; background: #222; cursor: pointer; border-radius: 4px; font-size: 12px; transition: 0.3s; display: inline-block; }
         .tab.active { background: #bfa030; color: #000; font-weight: bold; }
+        
         .page { display: none; padding: 10px; }
         .page.active { display: block; }
         
-        /* كروت صغيرة ومدمجة - تعديل لإضافة الهالة */
+        /* تأثير الهالة المضيئة للكرت */
         .card { 
             background: #0a0a0a; 
             border: 1px solid #222; 
             padding: 8px; 
             border-radius: 10px; 
-            width: 150px; 
+            width: 145px; 
             display: inline-block; 
             margin: 5px; 
             vertical-align: top; 
-            transition: 0.4s; /* تأثير سلس */
+            transition: 0.4s; 
         }
-        
-        /* تأثير الهالة المضيئة عند تمرير الماوس على الكرت */
         .card:hover { 
             border-color: #bfa030; 
             box-shadow: 0 0 15px rgba(191,160,48,0.5); 
         }
         
-        /* تعديل لإضافة الزوم */
-        .img-box { height: 180px; overflow: hidden; border-radius: 8px; background: #000; position: relative; }
-        .product-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; /* تأثير زوم سلس */ }
-        
-        /* تأثير الزوم عند تمرير الماوس على الصورة */
+        /* تأثير الزوم للصورة */
+        .img-box { height: 160px; overflow: hidden; border-radius: 8px; background: #000; position: relative; }
+        .product-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
         .img-box:hover .product-img { transform: scale(1.1); }
         
-        h3 { font-size: 13px; margin: 5px 0; }
-        .model { color: #bfa030; font-size: 11px; margin-bottom: 5px; }
+        h3 { font-size: 12px; margin: 5px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .model { color: #bfa030; font-size: 10px; margin-bottom: 5px; }
         
         .qty-box { display: flex; justify-content: center; align-items: center; gap: 5px; margin-bottom: 8px; }
         .btn-qty { background: #333; border: none; color: #fff; width: 25px; height: 25px; border-radius: 3px; font-size: 14px; cursor: pointer; }
-        .qty-val { font-size: 14px; font-weight: bold; width: 30px; color: #bfa030; }
+        .qty-val { font-size: 13px; font-weight: bold; width: 30px; color: #bfa030; }
         
-        .btn-add { background: #bfa030; border: none; padding: 6px; width: 100%; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; }
+        .btn-add { background: #bfa030; border: none; padding: 6px; width: 100%; border-radius: 4px; font-size: 11px; font-weight: bold; cursor: pointer; }
         
-        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #111; padding: 8px; display: flex; justify-content: space-around; z-index: 100; }
+        /* بار السلة السفلي */
+        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #111; padding: 10px; display: flex; justify-content: space-around; z-index: 100; border-top: 1px solid #333; }
         .cart-btn { padding: 8px 15px; border-radius: 4px; border: none; font-size: 12px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
@@ -56,6 +69,8 @@
     <div class="tab active" onclick="go('tshirt-page', this)">تيشيرتات</div>
     <div class="tab" onclick="go('set-page', this)">أطقم</div>
     <div class="tab" onclick="go('short-page', this)">شورتات</div>
+    <div class="tab" onclick="go('pants-page', this)">بناطيل</div>
+    <div class="tab" onclick="go('shirt-page', this)">قمصان</div>
 </div>
 
 <div id="tshirt-page" class="page active">
@@ -72,8 +87,61 @@
     </div>
 </div>
 
-<div id="set-page" class="page"></div>
-<div id="short-page" class="page"></div>
+<div id="set-page" class="page">
+    <div class="card">
+        <div class="img-box"><img src="set-image.png" class="product-img"></div>
+        <h3>طقم مودرن</h3>
+        <div class="model">موديل: 09001</div>
+        <div class="qty-box" data-step="12">
+            <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+            <span class="qty-val">12</span>
+            <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+        </div>
+        <button class="btn-add" onclick="addToCart('طقم مودرن - 09001', this)">إضافة</button>
+    </div>
+</div>
+
+<div id="short-page" class="page">
+    <div class="card">
+        <div class="img-box"><img src="short-image.png" class="product-img"></div>
+        <h3>شورت رياضي</h3>
+        <div class="model">موديل: 07005</div>
+        <div class="qty-box" data-step="20">
+            <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+            <span class="qty-val">20</span>
+            <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+        </div>
+        <button class="btn-add" onclick="addToCart('شورت رياضي - 07005', this)">إضافة</button>
+    </div>
+</div>
+
+<div id="pants-page" class="page">
+    <div class="card">
+        <div class="img-box"><img src="pants-image.png" class="product-img"></div>
+        <h3>بنطلون جينز</h3>
+        <div class="model">موديل: 06002</div>
+        <div class="qty-box" data-step="12">
+            <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+            <span class="qty-val">12</span>
+            <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+        </div>
+        <button class="btn-add" onclick="addToCart('بنطلون جينز - 06002', this)">إضافة</button>
+    </div>
+</div>
+
+<div id="shirt-page" class="page">
+    <div class="card">
+        <div class="img-box"><img src="shirt-image.png" class="product-img"></div>
+        <h3>قميص رسمي</h3>
+        <div class="model">موديل: 05008</div>
+        <div class="qty-box" data-step="16">
+            <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
+            <span class="qty-val">16</span>
+            <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
+        </div>
+        <button class="btn-add" onclick="addToCart('قميص رسمي - 05008', this)">إضافة</button>
+    </div>
+</div>
 
 <div class="cart-bar">
     <button class="cart-btn" style="background:#bfa030;" onclick="sendOrder()">إرسال الطلب 📲</button>
@@ -88,6 +156,8 @@
         document.getElementById(pageId).classList.add('active');
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
         el.classList.add('active');
+        // تمرير تلقائي للتبويب ليظهر في المنتصف عند الضغط عليه في الجوال
+        el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     }
 
     function changeQty(btn, dir) {
