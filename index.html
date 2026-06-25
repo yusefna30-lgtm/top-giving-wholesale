@@ -17,13 +17,12 @@
         .img-box:hover .product-img.active { transform: scale(1.1); }
         .product-img.active { display: block; }
         
-        /* التحكم بالكمية */
         .qty-box { display: flex; justify-content: center; align-items: center; gap: 15px; margin: 15px 0; }
-        .btn-qty { background: #333; border: none; color: #fff; width: 35px; height: 35px; border-radius: 5px; cursor: pointer; font-size: 20px; }
-        .qty-val { font-size: 20px; font-weight: bold; min-width: 40px; }
+        .btn-qty { background: #333; border: none; color: #fff; width: 40px; height: 40px; border-radius: 5px; cursor: pointer; font-size: 20px; }
+        .qty-val { font-size: 20px; font-weight: bold; min-width: 50px; color: #bfa030; }
         
         .btn-add { background: #bfa030; border: none; padding: 10px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; }
-        .cart-bar { position: fixed; bottom: 0; width: 100%; background: #000; padding: 10px; border-top: 1px solid #333; display: flex; justify-content: center; gap: 10px; z-index: 10; }
+        .cart-bar { position: fixed; bottom: 0; width: 100%; background: #000; padding: 15px; border-top: 1px solid #333; display: flex; justify-content: center; gap: 10px; z-index: 10; }
     </style>
 </head>
 <body>
@@ -41,9 +40,9 @@
         <h3>تيشيرت SMILE</h3>
         <p style="color:#bfa030">موديل: 08047</p>
         
-        <div class="qty-box">
+        <div class="qty-box" data-step="16">
             <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
-            <span class="qty-val">1</span>
+            <span class="qty-val">16</span>
             <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
         </div>
         
@@ -57,7 +56,7 @@
 </div>
 
 <script>
-    let cart = {}; // نستخدم كائن (Object) لحفظ الموديل وكميته
+    let cart = {};
 
     function go(pageId, el) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
@@ -66,22 +65,22 @@
         el.classList.add('active');
     }
 
-    function changeQty(btn, val) {
-        let span = btn.parentElement.querySelector('.qty-val');
-        let count = parseInt(span.innerText) + val;
-        if(count >= 1) span.innerText = count;
+    function changeQty(btn, dir) {
+        let parent = btn.parentElement;
+        let step = parseInt(parent.getAttribute('data-step')); // جلب قيمة الشدة من الكرت
+        let span = parent.querySelector('.qty-val');
+        let current = parseInt(span.innerText);
+        let newVal = current + (dir * step);
+        if(newVal >= step) span.innerText = newVal;
     }
 
     function addToCart(item, btn) {
         let qty = btn.parentElement.querySelector('.qty-val').innerText;
-        cart[item] = qty; // حفظ الموديل وكميته
+        cart[item] = qty;
         alert("تمت إضافة: " + item + " (" + qty + " قطعة)");
     }
 
-    function clearCart() {
-        cart = {};
-        alert("تم تفريغ السلة");
-    }
+    function clearCart() { cart = {}; alert("تم تفريغ السلة"); }
 
     function sendOrder() {
         if(Object.keys(cart).length === 0) { alert("السلة فارغة!"); return; }
