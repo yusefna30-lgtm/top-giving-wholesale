@@ -2,70 +2,63 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body { background-color: #000; color: #fff; font-family: sans-serif; text-align: center; margin: 0; padding-bottom: 120px; }
-        .nav-tabs { display: flex; justify-content: center; gap: 10px; padding: 20px; flex-wrap: wrap; }
-        .tab { padding: 10px 15px; background: #222; cursor: pointer; border-radius: 5px; color: #aaa; transition: 0.3s; }
+        body { background-color: #000; color: #fff; font-family: sans-serif; text-align: center; margin: 0; padding-bottom: 80px; }
+        .nav-tabs { display: flex; justify-content: center; gap: 5px; padding: 15px; flex-wrap: wrap; }
+        .tab { padding: 8px 12px; background: #222; cursor: pointer; border-radius: 5px; font-size: 14px; }
         .tab.active { background: #bfa030; color: #000; font-weight: bold; }
-        .page { display: none; padding: 20px; }
+        .page { display: none; padding: 10px; }
         .page.active { display: block; }
         
-        /* تصميم الكرت مع الهالة والزوم */
-        .card { background: #0a0a0a; border: 1px solid #333; padding: 15px; border-radius: 15px; width: 280px; margin: 10px auto; transition: 0.4s; }
-        .card:hover { border-color: #bfa030; box-shadow: 0 0 20px rgba(191,160,48,0.5); }
-        .img-box { position: relative; height: 300px; overflow: hidden; border-radius: 10px; }
-        .product-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-        .img-box:hover .product-img { transform: scale(1.1); }
+        /* ضبط الكرت للجوال */
+        .card { background: #0a0a0a; border: 1px solid #333; padding: 10px; border-radius: 15px; width: 90%; max-width: 320px; margin: 15px auto; transition: 0.4s; }
+        .card:hover { border-color: #bfa030; box-shadow: 0 0 15px rgba(191,160,48,0.3); }
         
-        .qty-box { display: flex; justify-content: center; align-items: center; gap: 15px; margin: 15px 0; }
-        .btn-qty { background: #333; border: none; color: #fff; width: 40px; height: 40px; border-radius: 5px; cursor: pointer; font-size: 20px; }
-        .qty-val { font-size: 20px; font-weight: bold; min-width: 50px; color: #bfa030; }
+        /* ضبط الصورة */
+        .img-box { position: relative; height: 250px; overflow: hidden; border-radius: 10px; background: #111; }
+        .product-img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.5s ease; }
+        .img-box:hover .product-img { transform: scale(1.05); }
         
-        .btn-add { background: #bfa030; border: none; padding: 10px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .cart-bar { position: fixed; bottom: 0; width: 100%; background: #000; padding: 15px; border-top: 1px solid #333; display: flex; justify-content: center; gap: 10px; z-index: 10; }
+        .qty-box { display: flex; justify-content: center; align-items: center; gap: 15px; margin: 10px 0; }
+        .btn-qty { background: #333; border: none; color: #fff; width: 35px; height: 35px; border-radius: 5px; cursor: pointer; }
+        .qty-val { font-size: 18px; font-weight: bold; min-width: 40px; color: #bfa030; }
+        
+        .btn-add { background: #bfa030; border: none; padding: 12px; width: 100%; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        
+        /* تثبيت زر السلة بوضوح */
+        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.9); padding: 10px; border-top: 1px solid #bfa030; display: flex; justify-content: space-around; z-index: 100; }
+        .cart-btn { padding: 10px 20px; border-radius: 5px; border: none; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
 
 <div class="nav-tabs">
-    <div class="tab active" onclick="go('tshirt-page', this)">التيشيرتات</div>
-    <div class="tab" onclick="go('set-page', this)">الأطقم</div>
-    <div class="tab" onclick="go('short-page', this)">شورتات/بناطيل</div>
+    <div class="tab active" onclick="go('tshirt-page', this)">تيشيرتات</div>
+    <div class="tab" onclick="go('set-page', this)">أطقم</div>
+    <div class="tab" onclick="go('short-page', this)">شورتات</div>
 </div>
 
 <div id="tshirt-page" class="page active">
     <div class="card">
         <div class="img-box"><img src="smile-white.png" class="product-img"></div>
-        <h3>تيشيرت SMILE</h3>
-        <p style="color:#bfa030">موديل: 08047</p>
+        <h3 style="font-size:16px; margin:10px 0;">تيشيرت SMILE</h3>
+        <p style="color:#bfa030; font-size:14px;">موديل: 08047</p>
         <div class="qty-box" data-step="16">
             <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
             <span class="qty-val">16</span>
             <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
         </div>
-        <button class="btn-add" onclick="addToCart('تيشيرت SMILE - 08047', this)">إضافة للطلب</button>
+        <button class="btn-add" onclick="addToCart('تيشيرت SMILE', this)">إضافة للطلب</button>
     </div>
 </div>
 
 <div id="set-page" class="page"></div>
-
-<div id="short-page" class="page">
-    <div class="card">
-        <div class="img-box"><img src="short.png" class="product-img"></div>
-        <h3>شورت رياضي</h3>
-        <p style="color:#bfa030">موديل: S-01</p>
-        <div class="qty-box" data-step="12">
-            <button class="btn-qty" onclick="changeQty(this, 1)">+</button>
-            <span class="qty-val">12</span>
-            <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
-        </div>
-        <button class="btn-add" onclick="addToCart('شورت رياضي - S-01', this)">إضافة للطلب</button>
-    </div>
-</div>
+<div id="short-page" class="page"></div>
 
 <div class="cart-bar">
-    <button class="btn-add" style="width:auto;" onclick="sendOrder()">إرسال الطلب 📲</button>
-    <button class="btn-add" style="width:auto; background:#444;" onclick="clearCart()">تفريغ السلة 🗑️</button>
+    <button class="cart-btn" style="background:#bfa030;" onclick="sendOrder()">إرسال الطلب 📲</button>
+    <button class="cart-btn" style="background:#444; color:#fff;" onclick="clearCart()">تفريغ 🗑️</button>
 </div>
 
 <script>
@@ -86,13 +79,13 @@
     function addToCart(item, btn) {
         let qty = btn.parentElement.querySelector('.qty-val').innerText;
         cart[item] = qty;
-        alert("تمت إضافة: " + item + " - الكمية: " + qty);
+        alert("تمت الإضافة: " + item + " - " + qty + " حبة");
     }
-    function clearCart() { cart = {}; alert("تم تفريغ السلة"); }
+    function clearCart() { cart = {}; alert("تم التفريغ"); }
     function sendOrder() {
         if(Object.keys(cart).length === 0) { alert("السلة فارغة!"); return; }
-        let msg = "طلب جملة:\n";
-        for(let item in cart) { msg += item + ": " + cart[item] + " قطعة\n"; }
+        let msg = "طلبية جملة:\n";
+        for(let item in cart) { msg += item + ": " + cart[item] + "\n"; }
         window.open('https://wa.me/966560564719?text=' + encodeURIComponent(msg));
     }
 </script>
