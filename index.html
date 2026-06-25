@@ -8,10 +8,9 @@
         .nav-tabs { display: flex; gap: 5px; padding: 10px; background: #111; overflow-x: auto; white-space: nowrap; position: sticky; top: 0; z-index: 50; }
         .tab { padding: 8px 12px; background: #222; cursor: pointer; border-radius: 5px; font-size: 12px; }
         .tab.active { background: #bfa030; color: #000; font-weight: bold; }
-      .page { 
-        display: none; 
-        padding: 10px; 
-        display: grid; 
+     .page { display: none; padding: 10px; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .page.active { display: grid; }
+    .card { background: #0a0a0a; border: 1px solid #222; padding: 10px; border-radius: 12px; width: 100%; box-sizing: border-box; } 
         grid-template-columns: repeat(auto-fill, minmax(145px, 1fr)); 
         gap: 10px; 
     }
