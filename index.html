@@ -6,13 +6,12 @@
     <title>TOP GIVING</title>
     <style>
         body { background-color: #000; color: #fff; font-family: sans-serif; margin: 0; padding-bottom: 50px; }
-        .nav-tabs { display: flex; justify-content: center; gap: 10px; padding: 20px; }
+        .nav-tabs { display: flex; justify-content: center; gap: 10px; padding: 20px; flex-wrap: wrap; }
         .tab { padding: 8px 15px; background: #1a1a1a; border: 1px solid #333; cursor: pointer; border-radius: 5px; color: #888; }
         .tab.active { background: #bfa030; color: #000; font-weight: bold; border-color: #bfa030; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
         
-        /* تصميم الكرت مطابق للصورة */
         .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 20px; }
         .card { background: #0a0a0a; border-radius: 15px; padding: 15px; width: 300px; text-align: center; border: 1px solid #1a1a1a; }
         .img-box { position: relative; height: 350px; overflow: hidden; border-radius: 10px; }
@@ -30,6 +29,7 @@
 <div class="nav-tabs">
     <div class="tab active" onclick="show('tshirts', this)">التيشيرتات</div>
     <div class="tab" onclick="show('sets', this)">الأطقم</div>
+    <div class="tab" onclick="show('shorts', this)">شورتات/بناطيل</div>
 </div>
 
 <div id="tshirts" class="tab-content active">
@@ -51,6 +51,22 @@
 <div id="sets" class="tab-content">
     <div class="grid">
         </div>
+</div>
+
+<div id="shorts" class="tab-content">
+    <div class="grid">
+        <div class="card">
+            <div class="img-box">
+                <button class="btn-arrow" style="left:0" onclick="move(this, -1)">‹</button>
+                <img src="mps0033-black.png" class="product-img active">
+                <img src="mps0033-green.png" class="product-img">
+                <button class="btn-arrow" style="right:0" onclick="move(this, 1)">›</button>
+            </div>
+            <div class="title">شورت MPS0033</div>
+            <div class="model">موديل: 0033</div>
+            <button class="btn-add">إضافة للطلب</button>
+        </div>
+    </div>
 </div>
 
 <script>
