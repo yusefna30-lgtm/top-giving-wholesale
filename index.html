@@ -5,192 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOP GIVING | المتجر الرسمي</title>
     <style>
-        body { background-color: #000; color: #fff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; padding-bottom: 160px; }
-        .header { text-align: center; padding: 25px 15px; background-color: #000; border-bottom: 1px solid #1a1a1a; }
-        .grid { display: grid; grid-template-columns: 1fr; gap: 20px; padding: 15px; max-width: 500px; margin: 0 auto; }
-        .card { background-color: #0a0a0a; border: 1px solid #151515; border-radius: 16px; padding: 18px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.7); }
-
-        /* تنسيق المنزلق (Slider) ليعمل بشكل صحيح */
-        .slider-container { position: relative; width: 100%; height: 350px; border-radius: 12px; overflow: hidden; background-color: #050505; }
-        .product-img { width: 100%; height: 100%; object-fit: cover; display: none; /* نخفي كل الصور */ }
-        .product-img.active { display: block; /* نظهر الصورة النشطة فقط */ }
-        .arrow-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0, 0, 0, 0.6); color: #bfa030; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 24px; font-weight: bold; z-index: 10; display: flex; align-items: center; justify-content: center; }
-        .arrow-btn.prev { left: 8px; } .arrow-btn.next { right: 8px; }
-
-        .model-name { font-size: 16px; margin: 12px 0 8px 0; font-weight: 600; color: #ffffff; }
-        .product-model-number { color: #bfa030; font-weight: bold; margin-bottom: 12px; font-size: 14px; }
-        .qty-control { display: flex; justify-content: center; align-items: center; gap: 20px; margin-bottom: 12px; background-color: #020202; padding: 10px; border-radius: 10px; border: 1px solid #111111; }
-        .btn-q { background: none; border: 1px solid #333333; color: #ffffff; width: 35px; height: 35px; border-radius: 6px; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; }
-        .qty-num { font-size: 16px; font-weight: bold; min-width: 30px; color: #bfa030; }
-        .btn-add { background-color: transparent; color: #bfa030; border: 1px solid #bfa030; padding: 12px; width: 100%; border-radius: 10px; font-weight: bold; font-size: 14px; cursor: pointer; transition: all 0.3s; }
-        .btn-add:hover { background-color: #bfa030; color: #000000; }
-        .cart-navbar { position: fixed; bottom: 0; left: 0; right: 0; background-color: #050505; border-top: 1px solid #222222; padding: 15px 25px; display: flex; justify-content: center; align-items: center; z-index: 1000; }
+        body { background-color: #000; color: #fff; font-family: sans-serif; margin: 0; padding-bottom: 100px; }
+        .header { text-align: center; padding: 25px; border-bottom: 1px solid #1a1a1a; }
+        .nav-tabs { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+        .tab { padding: 8px 20px; background: #0a0a0a; border: 1px solid #222; border-radius: 20px; cursor: pointer; color: #aaa; }
+        .tab.active { background: #bfa030; color: #000; font-weight: bold; border-color: #bfa030; box-shadow: 0 0 10px rgba(191,160,48,0.5); }
+        .tab-content { display: none; } .tab-content.active { display: block; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; padding: 20px; max-width: 1200px; margin: auto; }
+        .card { background: #0a0a0a; border: 1px solid #151515; border-radius: 16px; padding: 15px; text-align: center; transition: 0.3s; }
+        .card:hover { border-color: #bfa030; box-shadow: 0 0 15px rgba(191,160,48,0.3); }
+        .slider-container { position: relative; height: 300px; overflow: hidden; border-radius: 12px; }
+        .product-img { width: 100%; height: 100%; object-fit: cover; display: none; }
+        .product-img.active { display: block; }
+        .arrow-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: #bfa030; border: none; width: 40px; height: 40px; cursor: pointer; z-index: 5; }
+        .btn-add { background: transparent; color: #bfa030; border: 1px solid #bfa030; padding: 10px; width: 100%; border-radius: 8px; cursor: pointer; }
+        .btn-add:hover { background: #bfa030; color: #000; }
+        .qty-control { display: flex; justify-content: center; align-items: center; gap: 15px; margin: 10px 0; }
+        .btn-q { background: #222; border: 1px solid #444; color: #fff; width: 30px; height: 30px; border-radius: 5px; cursor: pointer; }
+        .cart-bar { position: fixed; bottom: 0; width: 100%; background: #050505; padding: 15px; border-top: 1px solid #333; text-align: center; display: none; }
     </style>
 </head>
 <body>
 
 <div class="header">
-    <img src="TOP GIVING logo.jpg" alt="TOP GIVING" style="max-width: 160px; height: auto;">
-</div>
-
-<div class="grid">
-    <div class="card">
-        <div class="slider-container">
-            <button class="arrow-btn prev" onclick="changeSlide(this, -1)">‹</button>
-            <img src="smile-white.png" class="product-img active" alt="Smile 1">
-            <img src="smile-black.png" class="product-img" alt="Smile 2">
-            <img src="smile-olive.png" class="product-img" alt="Smile 3">
-            <img src="smile-beige.png" class="product-img" alt="Smile 4">
-            <button class="arrow-btn next" onclick="changeSlide(this, 1)">›</button>
-        </div>
-        <div class="model-name">تيشيرت SMILE</div>
-        <div class="product-model-number">موديل: 08047</div>
-        <div class="qty-control">
-            <button class="btn-q" onclick="c('qt_smile', 16)">+</button>
-            <span id="qt_smile" class="qty-num">16</span>
-            <button class="btn-q" onclick="c('qt_smile', -16)">-</button>
-        </div>
-        <button class="btn-add" onclick="addToCart('تيشيرت SMILE - 08047', 'qt_smile', this)">إضافة للطلب</button>
-    </div>
-
-    <div class="card">
-        <div class="slider-container">
-            <button class="arrow-btn prev" onclick="changeSlide(this, -1)">‹</button>
-            <img src="kenz-blue.png" class="product-img active" alt="Kenz 1">
-            <img src="kenz-black.png" class="product-img" alt="Kenz 2">
-            <img src="kenz-grey.png" class="product-img" alt="Kenz 3">
-            <img src="kenz-sage.png" class="product-img" alt="Kenz 4">
-            <button class="arrow-btn next" onclick="changeSlide(this, 1)">›</button>
-        </div>
-        <div class="model-name">كينز بولو | KENZ POLO</div>
-        <div class="product-model-number">موديل: 08076</div>
-        <div class="qty-control">
-            <button class="btn-q" onclick="c('qt_kenz', 16)">+</button>
-            <span id="qt_kenz" class="qty-num">16</span>
-            <button class="btn-q" onclick="c('qt_kenz', -16)">-</button>
-        </div>
-        <button class="btn-add" onclick="addToCart('كينز بولو - 08076', 'qt_kenz', this)">إضافة للطلب</button>
-    </div>
-
-    <div class="card">
-        <div class="slider-container">
-            <button class="arrow-btn prev" onclick="changeSlide(this, -1)">‹</button>
-            <img src="mps0033-black.png" class="product-img active" alt="Short 1">
-            <img src="mps0033-green.png" class="product-img" alt="Short 2">
-            <img src="mps0033-heavenly.png" class="product-img" alt="Short 3">
-            <img src="mps0033-white.png" class="product-img" alt="Short 4">
-            <button class="arrow-btn next" onclick="changeSlide(this, 1)">›</button>
-        </div>
-        <div class="model-name">شورت MPS0033</div>
-        <div class="product-model-number">موديل: 0033</div>
-        <div class="qty-control">
-            <button class="btn-q" onclick="c('qt_short', 20)">+</button>
-            <span id="qt_short" class="qty-num">20</span>
-            <button class="btn-q" onclick="c('qt_short', -20)">-</button>
-        </div>
-        <button class="btn-add" onclick="addToCart('شورت MPS0033 - 0033', 'qt_short', this)">إضافة للطلب</button>
-    </div>
-
-    <div class="card">
-        <div class="slider-container">
-            <button class="arrow-btn prev" onclick="changeSlide(this, -1)">‹</button>
-            <img src="mps176-black.png" class="product-img active" alt="Pants 1">
-            <img src="mps176-brown.png" class="product-img" alt="Pants 2">
-            <img src="mps176-grey.png" class="product-img" alt="Pants 3">
-            <img src="mps176-white.png" class="product-img" alt="Pants 4">
-            <button class="arrow-btn next" onclick="changeSlide(this, 1)">›</button>
-        </div>
-        <div class="model-name">بنطلون MPS176</div>
-        <div class="product-model-number">موديل: 0176</div>
-        <div class="qty-control">
-            <button class="btn-q" onclick="c('qt_pants176', 16)">+</button>
-            <span id="qt_pants176" class="qty-num">16</span>
-            <button class="btn-q" onclick="c('qt_pants176', -16)">-</button>
-        </div>
-        <button class="btn-add" onclick="addToCart('بنطلون MPS176 - 0176', 'qt_pants176', this)">إضافة للطلب</button>
-    </div>
-
-    <div class="card">
-        <div class="slider-container">
-            <button class="arrow-btn prev" onclick="changeSlide(this, -1)">‹</button>
-            <img src="sea-black.png" class="product-img active" alt="Sea 1">
-            <img src="sea-navy.png" class="product-img" alt="Sea 2">
-            <img src="sea-red.png" class="product-img" alt="Sea 3">
-            <button class="arrow-btn next" onclick="changeSlide(this, 1)">›</button>
-        </div>
-        <div class="model-name">طقم بحر</div>
-        <div class="product-model-number">موديل: SEA</div>
-        <div class="qty-control">
-            <button class="btn-q" onclick="c('qt_sea', 12)">+</button>
-            <span id="qt_sea" class="qty-num">12</span>
-            <button class="btn-q" onclick="c('qt_sea', -12)">-</button>
-        </div>
-        <button class="btn-add" onclick="addToCart('طقم بحر - SEA', 'qt_sea', this)">إضافة للطلب</button>
+    <img src="TOP GIVING logo.jpg" style="max-width: 150px;">
+    <div class="nav-tabs">
+        <div class="tab active" onclick="show(this, 'tshirts')">تيشيرتات</div>
+        <div class="tab" onclick="show(this, 'sets')">أطقم</div>
+        <div class="tab" onclick="show(this, 'shorts')">شورتات/بناطيل</div>
     </div>
 </div>
 
-<div class="cart-navbar">
-    <button class="btn-add" style="background-color: #bfa030; color: #000; border: none; padding: 12px 24px; max-width: 300px;" onclick="sendOrderWhatsApp()">إرسال الطلب بالكامل 📲</button>
-</div>
+<div id="tshirts" class="tab-content active"><div class="grid">
+    <div class="card">
+        <div class="slider-container">
+            <button class="arrow-btn" style="left:0" onclick="slide(this,-1)">‹</button>
+            <img src="smile-white.png" class="product-img active"><img src="smile-black.png" class="product-img"><img src="smile-olive.png" class="product-img"><img src="smile-beige.png" class="product-img">
+            <button class="arrow-btn" style="right:0" onclick="slide(this,1)">›</button>
+        </div>
+        <p>تيشيرت SMILE</p><div style="color:#bfa030">موديل: 08047</div>
+        <div class="qty-control"><button class="btn-q" onclick="c(this, 16)">+</button><span class="qty">16</span><button class="btn-q" onclick="c(this, -16)">-</button></div>
+        <button class="btn-add" onclick="alert('تمت الإضافة')">إضافة للطلب</button>
+    </div>
+</div></div>
+
+<div class="cart-bar" id="cart"><button class="btn-add" style="max-width:300px" onclick="window.open('https://wa.me/966560564719')">إرسال الطلب للواتساب 📲</button></div>
 
 <script>
-    let cart = {};
-
-    function changeSlide(button, direction) {
-        const container = button.closest('.slider-container');
-        const images = container.getElementsByClassName('product-img');
-        let currentIndex = -1;
-
-        // البحث عن الصورة النشطة حالياً
-        for (let i = 0; i < images.length; i++) {
-            if (images[i].classList.contains('active')) {
-                currentIndex = i;
-                break;
-            }
-        }
-
-        if (currentIndex === -1) return; // لضمان وجود صورة نشطة
-
-        // إزالة الفئة 'active' من الصورة الحالية
-        images[currentIndex].classList.remove('active');
-
-        // حساب الفهرس الجديد
-        let nextIndex = currentIndex + direction;
-        if (nextIndex >= images.length) nextIndex = 0;
-        if (nextIndex < 0) nextIndex = images.length - 1;
-
-        // إضافة الفئة 'active' للصورة الجديدة
-        images[nextIndex].classList.add('active');
+    function show(el, id) {
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.getElementById(id).classList.add('active'); el.classList.add('active');
     }
-
-    function c(id, amount) {
-        const span = document.getElementById(id);
-        let currentQty = parseInt(span.innerText);
-        currentQty += amount;
-        // الحد الأدنى هو الكمية الأساسية (مثلاً 16 أو 20 أو 12)
-        if (currentQty < Math.abs(amount)) currentQty = Math.abs(amount);
-        span.innerText = currentQty;
+    function slide(btn, dir) {
+        const cont = btn.parentElement; const imgs = cont.querySelectorAll('.product-img');
+        let active = cont.querySelector('.product-img.active');
+        let idx = Array.from(imgs).indexOf(active);
+        active.classList.remove('active');
+        idx = (idx + dir + imgs.length) % imgs.length;
+        imgs[idx].classList.add('active');
     }
-
-    function addToCart(name, qtyId, button) {
-        const qty = parseInt(document.getElementById(qtyId).innerText);
-        const container = button.closest('.card').querySelector('.slider-container');
-        const activeImg = container.querySelector('.product-img.active');
-        const activeImgName = activeImg.getAttribute('src');
-
-        const detailedName = `${name} (${activeImgName})`;
-        cart[detailedName] = qty;
-        alert(`تم إضافة ${qty} حبة من ${name} (اللون الحالي)`);
-    }
-
-    function sendOrderWhatsApp() {
-        if (Object.keys(cart).length === 0) return;
-        const phoneNumber = "966560564719"; 
-        let message = `مرحباً براند TOP GIVING، أرغب في تأكيد طلبية جملة:\n\n`;
-        for (const [name, qty] of Object.entries(cart)) {
-            message += `📦 *المنتج:* ${name} -> *الكمية:* ${qty} حبة\n`;
-        }
-        window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+    function c(btn, val) {
+        let span = btn.parentElement.querySelector('.qty');
+        let n = parseInt(span.innerText) + val;
+        if(n >= Math.abs(val)) span.innerText = n;
+        document.getElementById('cart').style.display = 'block';
     }
 </script>
 </body>
