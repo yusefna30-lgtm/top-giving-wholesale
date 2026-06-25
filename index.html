@@ -11,7 +11,6 @@
         .page { display: none; padding: 10px; }
         .page.active { display: block; }
         
-        /* كروت صغيرة ومدمجة */
         .card { background: #0a0a0a; border: 1px solid #222; padding: 8px; border-radius: 10px; width: 150px; display: inline-block; margin: 5px; vertical-align: top; }
         .img-box { height: 180px; overflow: hidden; border-radius: 8px; background: #000; }
         .product-img { width: 100%; height: 100%; object-fit: cover; }
@@ -20,13 +19,13 @@
         .model { color: #bfa030; font-size: 11px; margin-bottom: 5px; }
         
         .qty-box { display: flex; justify-content: center; align-items: center; gap: 5px; margin-bottom: 8px; }
-        .btn-qty { background: #333; border: none; color: #fff; width: 25px; height: 25px; border-radius: 3px; font-size: 14px; }
+        .btn-qty { background: #333; border: none; color: #fff; width: 25px; height: 25px; border-radius: 3px; font-size: 14px; cursor: pointer; }
         .qty-val { font-size: 14px; font-weight: bold; width: 30px; color: #bfa030; }
         
-        .btn-add { background: #bfa030; border: none; padding: 6px; width: 100%; border-radius: 4px; font-size: 12px; font-weight: bold; }
+        .btn-add { background: #bfa030; border: none; padding: 6px; width: 100%; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; }
         
         .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #111; padding: 8px; display: flex; justify-content: space-around; z-index: 100; }
-        .cart-btn { padding: 8px 15px; border-radius: 4px; border: none; font-size: 12px; font-weight: bold; }
+        .cart-btn { padding: 8px 15px; border-radius: 4px; border: none; font-size: 12px; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -47,7 +46,7 @@
             <span class="qty-val">16</span>
             <button class="btn-qty" onclick="changeQty(this, -1)">-</button>
         </div>
-        <button class="btn-add" onclick="addToCart('تيشيرت SMILE', this)">إضافة</button>
+        <button class="btn-add" onclick="addToCart('تيشيرت SMILE - 08047', this)">إضافة</button>
     </div>
 </div>
 
@@ -60,12 +59,15 @@
 </div>
 
 <script>
+    let cart = {};
+
     function go(pageId, el) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         document.getElementById(pageId).classList.add('active');
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
         el.classList.add('active');
     }
+
     function changeQty(btn, dir) {
         let parent = btn.parentElement;
         let step = parseInt(parent.getAttribute('data-step'));
@@ -73,7 +75,24 @@
         let newVal = parseInt(span.innerText) + (dir * step);
         if(newVal >= step) span.innerText = newVal;
     }
-    // ... باقي السكريبت كما هو ...
+
+    function addToCart(item, btn) {
+        let qty = btn.parentElement.querySelector('.qty-val').innerText;
+        cart[item] = qty;
+        alert("تمت إضافة " + qty + " قطعة من: " + item);
+    }
+
+    function clearCart() {
+        cart = {};
+        alert("تم تفريغ السلة");
+    }
+
+    function sendOrder() {
+        if(Object.keys(cart).length === 0) { alert("السلة فارغة!"); return; }
+        let msg = "طلب جملة جديد:\n";
+        for(let item in cart) { msg += "- " + item + ": " + cart[item] + " قطعة\n"; }
+        window.open('https://wa.me/966560564719?text=' + encodeURIComponent(msg));
+    }
 </script>
 </body>
 </html>
