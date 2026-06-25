@@ -308,6 +308,61 @@ data-images='["tshirt-gravity1.jpg", "tshirt-gravity2.jpg", "tshirt-gravity3.jpg
 </div>
     </div>
 
+  <div class="card">
+    <div class="slider-container">
+        <button class="arrow-btn prev" onclick="changeSlide('shortSlider', -1)">‹</button>
+        <img id="shortSlider" src="mps0033-black.png" class="product-img" 
+             data-images='["mps0033-black.png", "mps0033-green.png", "mps0033-heavenly.png", "mps0033-white.png"]' 
+             data-index="0">
+        <button class="arrow-btn next" onclick="changeSlide('shortSlider', 1)">›</button>
+    </div>
+    <div class="model-name">شورت MPS0033</div>
+    <div class="product-model-number">موديل: 0033</div>
+    <div class="qty-control">
+        <button class="btn-q" onclick="c('qt_short', 20)">+</button>
+        <span id="qt_short" class="qty-num">20</span>
+        <button class="btn-q" onclick="c('qt_short', -20)">-</button>
+    </div>
+    <button class="btn-add" onclick="addToCart('شورت MPS0033 موديل 0033', 'qt_short', 'shortSlider')">إضافة للطلب</button>
+</div>
+
+    <div class="card">
+    <div class="slider-container">
+        <button class="arrow-btn prev" onclick="changeSlide('pants176Slider', -1)">‹</button>
+        <img id="pants176Slider" src="mps176-black.png" class="product-img" 
+             data-images='["mps176-black.png", "mps176-brown.png", "mps176-grey.png", "mps176-white.png"]' 
+             data-index="0">
+        <button class="arrow-btn next" onclick="changeSlide('pants176Slider', 1)">›</button>
+    </div>
+    <div class="model-name">بنطلون MPS176</div>
+    <div class="product-model-number">موديل: 0176</div>
+    <div class="qty-control">
+        <button class="btn-q" onclick="c('qt_pants176', 16)">+</button>
+        <span id="qt_pants176" class="qty-num">16</span>
+        <button class="btn-q" onclick="c('qt_pants176', -16)">-</button>
+    </div>
+    <button class="btn-add" onclick="addToCart('بنطلون MPS176 موديل 0176', 'qt_pants176', 'pants176Slider')">إضافة للطلب</button>
+</div>
+
+ <div class="card">
+    <div class="slider-container">
+        <button class="arrow-btn prev" onclick="changeSlide('seaSlider', -1)">‹</button>
+        <img id="seaSlider" src="sea-black.png" class="product-img" 
+             data-images='["sea-black.png", "sea-navy.png", "sea-red.png"]' 
+             data-index="0">
+        <button class="arrow-btn next" onclick="changeSlide('seaSlider', 1)">›</button>
+    </div>
+    <div class="model-name">طقم بحر</div>
+    <div class="product-model-number">موديل: SEA</div>
+    <div class="qty-control">
+        <button class="btn-q" onclick="c('qt_sea', 12)">+</button>
+        <span id="qt_sea" class="qty-num">12</span>
+        <button class="btn-q" onclick="c('qt_sea', -12)">-</button>
+    </div>
+    <button class="btn-add" onclick="addToCart('طقم بحر موديل SEA', 'qt_sea', 'seaSlider')">إضافة للطلب</button>
+</div>
+
+    
     <div id="cart-navbar" class="cart-navbar">
         <div style="font-size: 15px; color: #cccccc;">
             <span>الموديلات المضافة:</span>
