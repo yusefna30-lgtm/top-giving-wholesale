@@ -3,47 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <style>
-        body { background-color: #000; color: #fff; font-family: sans-serif; text-align: center; }
+        body { background-color: #000; color: #fff; font-family: sans-serif; text-align: center; margin: 0; padding-bottom: 50px; }
         .nav-tabs { display: flex; justify-content: center; gap: 10px; padding: 20px; }
-        .tab { padding: 10px 15px; background: #222; cursor: pointer; border-radius: 5px; }
+        .tab { padding: 10px 15px; background: #222; cursor: pointer; border-radius: 5px; color: #aaa; }
         .tab.active { background: #bfa030; color: #000; font-weight: bold; }
-        
-        /* إخفاء وإظهار الأقسام بشكل مؤكد */
         .page { display: none; padding: 20px; }
         .page.active { display: block; }
         
-        .card { background: #0a0a0a; border: 1px solid #333; padding: 15px; border-radius: 15px; width: 280px; margin: 10px auto; }
+        /* تصميم الكرت مع الهالة والزوم */
+        .card { 
+            background: #0a0a0a; 
+            border: 1px solid #333; 
+            padding: 15px; 
+            border-radius: 15px; 
+            width: 280px; 
+            margin: 10px auto; 
+            transition: 0.4s; 
+        }
+        /* تأثير الهالة عند تمرير الماوس على الكرت */
+        .card:hover { 
+            border-color: #bfa030; 
+            box-shadow: 0 0 20px rgba(191,160,48,0.5); 
+        }
+        
+        .img-box { 
+            position: relative; 
+            height: 300px; 
+            overflow: hidden; 
+            border-radius: 10px; 
+        }
+        /* تأثير الزوم على الصورة */
+        .product-img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            display: none; 
+            transition: transform 0.5s ease; 
+        }
+        .img-box:hover .product-img.active { 
+            transform: scale(1.1); 
+        }
+        
+        .product-img.active { display: block; }
+        .btn-arrow { position: absolute; top: 50%; background: rgba(0,0,0,0.5); color: #bfa030; border: none; padding: 10px; cursor: pointer; z-index: 2; }
+        .btn-add { background: #bfa030; border: none; padding: 10px; width: 100%; border-radius: 5px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .model { color: #bfa030; font-weight: bold; margin: 5px 0; }
     </style>
 </head>
 <body>
 
 <div class="nav-tabs">
-    <div class="tab active" onclick="go('tshirt-page')">التيشيرتات</div>
-    <div class="tab" onclick="go('set-page')">الأطقم</div>
-    <div class="tab" onclick="go('short-page')">الشورتات</div>
+    <div class="tab active" onclick="go('tshirt-page', this)">التيشيرتات</div>
+    <div class="tab" onclick="go('set-page', this)">الأطقم</div>
+    <div class="tab" onclick="go('short-page', this)">الشورتات</div>
 </div>
 
 <div id="tshirt-page" class="page active">
-    <div class="card">تيشيرت SMILE - قسم التيشيرتات</div>
+    <div class="card">
+        <div class="img-box">
+            <button class="btn-arrow" style="left:0" onclick="move(this, -1)">‹</button>
+            <img src="smile-white.png" class="product-img active">
+            <img src="smile-black.png" class="product-img">
+            <button class="btn-arrow" style="right:0" onclick="move(this, 1)">›</button>
+        </div>
+        <h3 style="margin:10px 0;">تيشيرت SMILE</h3>
+        <div class="model">موديل: 08047</div>
+        <button class="btn-add">إضافة للطلب</button>
+    </div>
 </div>
 
-<div id="set-page" class="page">
-    <div class="card">طقم بحر - قسم الأطقم</div>
-</div>
-
-<div id="short-page" class="page">
-    <div class="card">شورت MPS0033 - قسم الشورتات</div>
-</div>
+<div id="set-page" class="page"></div>
+<div id="short-page" class="page"></div>
 
 <script>
-    function go(pageId) {
-        // إخفاء كل الصفحات
+    function go(pageId, el) {
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        // إظهار الصفحة المطلوبة فقط
         document.getElementById(pageId).classList.add('active');
-        // تبديل ألوان الأزرار
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        event.target.classList.add('active');
+        el.classList.add('active');
+    }
+    function move(btn, dir) {
+        const box = btn.parentElement;
+        const imgs = box.querySelectorAll('.product-img');
+        let active = box.querySelector('.product-img.active');
+        let i = Array.from(imgs).indexOf(active);
+        active.classList.remove('active');
+        i = (i + dir + imgs.length) % imgs.length;
+        imgs[i].classList.add('active');
     }
 </script>
 </body>
