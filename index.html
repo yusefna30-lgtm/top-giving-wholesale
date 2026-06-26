@@ -3,35 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <style>
-        /* الهالة (Shadow/Glow) - ستكون حول البطاقات */
+        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; padding: 20px; }
+        
+        /* تأثير الهالة (Glow/Shadow) */
         .card { 
-            background: #0c0c0e; 
-            border: 1px solid #1a1a1a; 
-            transition: 0.4s; 
-            box-shadow: 0 0 10px rgba(212,175,55,0.1); 
+            background: #111; border: 1px solid #333; padding: 20px; text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 10px rgba(212,175,55,0.2); 
         }
-        /* الزووم (Zoom effect) */
-        .card:hover { 
-            transform: scale(1.05); 
-            box-shadow: 0 0 20px rgba(212,175,55,0.4); 
-        }
-        /* الأقسام (Tabs) - تصميمها الأساسي */
-        .tab-btn { padding: 10px 20px; cursor: pointer; border: 1px solid #D4AF37; }
-        .tab-btn.active { background: #D4AF37; }
+        
+        /* تأثير الزووم (Zoom) */
+        .card:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(212,175,55,0.6); }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+        .img-box { height: 250px; display: flex; align-items: center; justify-content: center; overflow: hidden; background: transparent; }
+        img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        
+        /* الأقسام (Tabs) */
+        .nav-tabs { display: flex; gap: 10px; margin-bottom: 20px; justify-content: center; }
+        .tab-btn { padding: 10px 20px; background: #222; border: 1px solid #D4AF37; color: #fff; cursor: pointer; }
+        .tab-btn.active { background: #D4AF37; color: #000; }
     </style>
 </head>
 <body>
 
-    <div id="tabs"></div>
-    <div id="grid"></div>
+    <div class="nav-tabs" id="nav-tabs"></div>
+    <div class="grid" id="grid"></div>
 
     <script>
-        // سنضع هنا مصفوفة المنتجات (البيانات)
-        const products = [
-            { name: 'تيشيرت سمايل', category: 'tshirt', img: 'smile-beige.png' },
-            { name: 'طقم بحري', category: 'sets', img: 'sea2-brown.png' }
-        ];
-        // سنضيف كود بناء الأقسام والمنتجات هنا في الخطوة التالية
+        // سنضيف البيانات هنا في الخطوة التالية
+        console.log("الهيكل يعمل بنجاح");
     </script>
 </body>
 </html>
