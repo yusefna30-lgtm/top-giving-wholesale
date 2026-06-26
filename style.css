@@ -1,20 +1,19 @@
-/* هذا الكود يحدد طول الصندوق بـ 200 بكسل فقط، مهما كانت الصورة */
-.img-box-fixed {
-    width: 100%;
-    height: 250px; /* طول ثابت لجميع المنتجات */
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f8f8f8;
-    border-radius: 8px;
-    margin-bottom: 10px;
+/* هذا هو الكود الوحيد والنهائي للصور */
+.img-box, .img-box-fixed {
+    width: 100% !important;
+    height: 250px !important; /* هذا هو طول الصندوق الثابت */
+    overflow: hidden !important;
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: #f8f8f8 !important;
+    border-radius: 12px !important;
 }
 
-.product-img-fixed {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* يضمن ملء الصندوق بالكامل بدون أي فراغات */
-    display: block;
+.product-img, .product-img-fixed {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; /* هذا هو السر: يملأ الصندوق ويقص الزوائد تلقائياً */
+    display: block !important;
 }
