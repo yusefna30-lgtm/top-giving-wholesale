@@ -1,54 +1,37 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TOP GIVING | المتجر الرسمي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body onload="filterProducts('tshirt')">
-
-    <div class="header">
-        <img src="TOP GIVING logo.jpg" alt="TOP GIVING" class="brand-logo">
-        <div class="nav-tabs">
-            <div class="tab active" id="tab-tshirt" onclick="filterProducts('tshirt')">تيشيرتات</div>
-            <div class="tab" id="tab-set" onclick="filterProducts('set')">أطقم صيفية</div>
-            <div class="tab" id="tab-pants" onclick="filterProducts('pants')">شورتات</div>
+<div class="grid">
+    <div class="card tshirt show">
+        <div class="img-box"><img src="n5-back.png" id="it01" class="product-img"></div>
+        <div class="color-dots">
+            <div class="dot active" style="background:beige" onclick="v('it01','n5-back.png',this)"></div>
+            <div class="dot" style="background:purple" onclick="v('it01','n5-purple.png',this)"></div>
+            <div class="dot" style="background:#fff" onclick="v('it01','n5-white.png',this)"></div>
+            <div class="dot" style="background:black" onclick="v('it01','n5-black.png',this)"></div>
         </div>
+        <div class="model-name">تيشيرت 01</div>
+        <button class="btn-add" onclick="add('تيشيرت 01','qt01',this)">إضافة</button>
     </div>
 
-    <div class="grid">
-        <div class="card tshirt show">
-            <div class="img-box"><img src="n5-back.png" id="it01" class="product-img"></div>
-            <div class="color-dots">
-                <div class="dot active" style="background:beige; border:1px solid #ccc" onclick="v('it01','n5-back.png',this)"></div>
-                <div class="dot" style="background:purple" onclick="v('it01','n5-purple.png',this)"></div>
-                <div class="dot" style="background:#fff; border:1px solid #ccc" onclick="v('it01','n5-white.png',this)"></div>
-                <div class="dot" style="background:black; border:2px solid #D4AF37" onclick="v('it01','n5-black.png',this)"></div>
-            </div>
-            <div class="model-name">تيشيرت 01</div>
-            <div class="qty-control">
-                <button class="btn-q" onclick="c('qt01',16)">+</button>
-                <span id="qt01">16</span>
-                <button class="btn-q" onclick="c('qt01',-16)">-</button>
-            </div>
-            <button class="btn-add" onclick="add('تيشيرت 01','qt01',this)">إضافة للطلب</button>
+    <div class="card tshirt show">
+        <div class="img-box"><img src="t2-black.png" id="it03" class="product-img"></div>
+        <div class="color-dots">
+            <div class="dot active" style="background:#000" onclick="v('it03','t2-black.png',this)"></div>
+            <div class="dot" style="background:purple" onclick="v('it03','t2-purple.png',this)"></div>
+            <div class="dot" style="background:#fff" onclick="v('it03','t2-white.png',this)"></div>
+            <div class="dot" style="background:gray" onclick="v('it03','t2-grey.png',this)"></div>
         </div>
-        
-        </div>
+        <div class="model-name">تيشيرت 03</div>
+        <button class="btn-add" onclick="add('تيشيرت 03','qt03',this)">إضافة</button>
+    </div>
 
-    <script>
-        function filterProducts(cat) {
-            document.querySelectorAll('.card').forEach(c => { c.classList.remove('show'); if(c.classList.contains(cat)) c.classList.add('show'); });
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            document.getElementById('tab-' + cat).classList.add('active');
-        }
-        function v(id, path, el) { let img = document.getElementById(id); if(img) img.src = path; let dots = el.parentElement.querySelectorAll('.dot'); dots.forEach(d => d.classList.remove('active')); el.classList.add('active'); }
-        function c(id, val) { let el = document.getElementById(id); if(!el) return; let curr = parseInt(el.innerText); if (curr + val >= 1) el.innerText = curr + val; }
-        let order = [];
-        function add(name, qtyId, btn) { let qty = parseInt(document.getElementById(qtyId).innerText); order.push({ name: name, qty: qty }); document.getElementById('cart-bar').style.display = 'block'; updateTotal(); btn.innerText = "تمت ✅"; setTimeout(() => btn.innerText = "إضافة", 1500); }
-        function updateTotal() { let total = order.reduce((sum, i) => sum + i.qty, 0); document.getElementById('cart-info').innerText = `الإجمالي: ${total} حبة`; }
-    </script>
-</body>
-</html>
+    <div class="card tshirt show">
+        <div class="img-box"><img src="tr1-red.png" id="it04" class="product-img"></div>
+        <div class="color-dots">
+            <div class="dot active" style="background:red" onclick="v('it04','tr1-red.png',this)"></div>
+            <div class="dot" style="background:#000" onclick="v('it04','tr2-black.png',this)"></div>
+            <div class="dot" style="background:beige" onclick="v('it04','tr3-beige.png',this)"></div>
+            <div class="dot" style="background:#fff" onclick="v('it04','tr4-white.png',this)"></div>
+        </div>
+        <div class="model-name">تيشيرت 04</div>
+        <button class="btn-add" onclick="add('تيشيرت 04','qt04',this)">إضافة</button>
+    </div>
+</div>
