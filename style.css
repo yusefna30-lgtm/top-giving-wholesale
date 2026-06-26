@@ -1,6 +1,11 @@
-
-:root { --gold: #D4AF37; --black: #000; --card-bg: #0c0c0e; --accent: #1a1a1a; --beige: #f5f5dc; }
-        body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 130px; }
+:root { 
+    --gold: #D4AF37; 
+    --black: #000; 
+    /* عدّل السطر أدناه فقط */
+    --card-bg: rgba(0, 0, 0, 0.5); 
+    --accent: #1a1a1a; 
+    --beige: #f5f5dc; 
+}        body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 130px; }
         .header { padding: 20px 10px; background: #000; border-bottom: 1px solid var(--accent); position: sticky; top: 0; z-index: 1000; }
         .brand-logo { max-height: 100px; width: auto; display: block; margin: 0 auto 15px; filter: drop-shadow(0 0 5px var(--gold)); }
         .nav-tabs { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
