@@ -1,41 +1,20 @@
 /* هذا الكود يحدد طول الصندوق بـ 200 بكسل فقط، مهما كانت الصورة */
-.img-box { 
-    width: 100%; 
-    height: 200px !important; /* تثبيت الطول ليكون متناسقاً */
+.img-box-fixed {
+    width: 100%;
+    height: 250px; /* طول ثابت لجميع المنتجات */
+    overflow: hidden;
     position: relative;
-    overflow: hidden; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    background: transparent; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f8f8;
+    border-radius: 8px;
     margin-bottom: 10px;
 }
 
-/* هذا الكود يجبر الصورة على البقاء داخل الصندوق دون أن تغير طوله */
-.product-img { 
-    max-height: 100%; 
-    max-width: 100%; 
-    object-fit: contain; /* يضمن ظهور كامل التيشيرت دون قص */
-    mix-blend-mode: multiply; /* لإخفاء الخلفية البيضاء */
-}
-/* تنسيق الصندوق الجديد */
-.img-box-fixed { 
-    width: 100%; 
-    height: 180px !important; 
-    overflow: hidden; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    background: transparent; 
-    border-radius: 12px; 
-    margin-bottom: 12px; 
-    position: relative;
-}
-
-/* تنسيق الصورة (مدمج في كتلة واحدة) */
-.product-img-fixed { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; /* سيجعل الصورة تملأ الصندوق بالكامل */
-    mix-blend-mode: multiply; 
+.product-img-fixed {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* يضمن ملء الصندوق بالكامل بدون أي فراغات */
+    display: block;
 }
