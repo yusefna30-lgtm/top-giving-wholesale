@@ -1,21 +1,19 @@
-/* هذا المقاس يعيد الصناديق لحجمها الأصلي (180px) */
 .img-box { 
     width: 100%; 
-    height: 180px; 
+    height: 180px; /* هذا يثبت طول الصندوق */
     border-radius: 12px; 
-    overflow: hidden; 
+    overflow: hidden; /* هذا يمنع الصورة من الخروج عن حدود الصندوق */
     background: transparent; 
     margin-bottom: 12px; 
     display: flex; 
     align-items: center; 
     justify-content: center; 
-    position: relative; 
+    position: relative;
 }
 
-/* هذا يضمن أن الصورة تظهر كاملة بداخل المقاس (180px) دون أن تقص */
 .product-img { 
-    max-width: 90%; 
-    max-height: 90%; 
-    object-fit: contain; 
+    width: 100%;       /* إجبار الصورة على ملء عرض الصندوق */
+    height: 100%;      /* إجبار الصورة على ملء طول الصندوق */
+    object-fit: cover; /* السر هنا: سيجعل كل الصور متساوية تماماً ويقص الزيادات */
     mix-blend-mode: multiply; /* لإخفاء الخلفية البيضاء */
 }
