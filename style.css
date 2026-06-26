@@ -1,14 +1,12 @@
-/* هذا هو الحل النهائي والقوي */
+/* هذا كود شامل لا يعتمد على أسماء كلاسات معقدة */
 .card img {
     width: 100% !important;
-    height: 250px !important; 
-    object-fit: cover !important; 
-    object-position: center !important;
+    height: 250px !important;
+    object-fit: cover !important;
     display: block !important;
 }
 
-/* هذا يضمن أن الصندوق نفسه يأخذ نفس الارتفاع */
-.img-box, .img-box-fixed {
+div[class*="img-box"] {
     height: 250px !important;
     overflow: hidden !important;
 }
