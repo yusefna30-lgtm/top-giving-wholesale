@@ -1,8 +1,8 @@
 .img-box { 
     width: 100%; 
-    height: 180px; /* هذا يثبت طول الصندوق */
+    height: 180px; 
     border-radius: 12px; 
-    overflow: hidden; /* هذا يمنع الصورة من الخروج عن حدود الصندوق */
+    overflow: hidden; 
     background: transparent; 
     margin-bottom: 12px; 
     display: flex; 
@@ -12,8 +12,8 @@
 }
 
 .product-img { 
-    width: 100%;       /* إجبار الصورة على ملء عرض الصندوق */
-    height: 100%;      /* إجبار الصورة على ملء طول الصندوق */
-    object-fit: cover; /* السر هنا: سيجعل كل الصور متساوية تماماً ويقص الزيادات */
-    mix-blend-mode: multiply; /* لإخفاء الخلفية البيضاء */
+    width: 100%;       /* إجبار الصورة على ملء العرض */
+    height: 100%;      /* إجبار الصورة على ملء الطول */
+    object-fit: cover; /* هذا هو السر: سيجعل الصور تملأ الصندوق ويقص الزوائد لتوحيد الشكل */
+    mix-blend-mode: multiply; 
 }
