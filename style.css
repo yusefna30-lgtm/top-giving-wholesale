@@ -1,19 +1,20 @@
-/* هذا هو الكود الوحيد والنهائي للصور */
+/* الكود النهائي الموحد - يطبق على أي كلاس تستخدمه */
 .img-box, .img-box-fixed {
     width: 100% !important;
-    height: 250px !important; /* هذا هو طول الصندوق الثابت */
+    height: 250px !important;  /* هذا هو الطول الثابت للجميع */
     overflow: hidden !important;
     position: relative !important;
     display: flex !important;
-    align-items: center !important;
     justify-content: center !important;
+    align-items: center !important;
     background-color: #f8f8f8 !important;
     border-radius: 12px !important;
+    margin-bottom: 10px !important;
 }
 
 .product-img, .product-img-fixed {
     width: 100% !important;
     height: 100% !important;
-    object-fit: cover !important; /* هذا هو السر: يملأ الصندوق ويقص الزوائد تلقائياً */
+    object-fit: cover !important; /* هذا هو الذي يمنع قص الصورة ويملأ المربع */
     display: block !important;
 }
