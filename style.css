@@ -1,19 +1,20 @@
+/* هذا الكود يحدد طول الصندوق بـ 200 بكسل فقط، مهما كانت الصورة */
 .img-box { 
     width: 100%; 
-    height: 180px; 
-    border-radius: 12px; 
+    height: 200px !important; /* تثبيت الطول ليكون متناسقاً */
+    position: relative;
     overflow: hidden; 
-    background: transparent; 
-    margin-bottom: 12px; 
     display: flex; 
     align-items: center; 
     justify-content: center; 
-    position: relative;
+    background: transparent; 
+    margin-bottom: 10px;
 }
 
+/* هذا الكود يجبر الصورة على البقاء داخل الصندوق دون أن تغير طوله */
 .product-img { 
-    width: 100%;       /* إجبار الصورة على ملء العرض */
-    height: 100%;      /* إجبار الصورة على ملء الطول */
-    object-fit: cover; /* هذا هو السر: سيجعل الصور تملأ الصندوق ويقص الزوائد لتوحيد الشكل */
-    mix-blend-mode: multiply; 
+    max-height: 100%; 
+    max-width: 100%; 
+    object-fit: contain; /* يضمن ظهور كامل التيشيرت دون قص */
+    mix-blend-mode: multiply; /* لإخفاء الخلفية البيضاء */
 }
