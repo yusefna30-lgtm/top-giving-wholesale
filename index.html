@@ -4,22 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOP GIVING | المتجر الرسمي</title>
-    <link href="[https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap](https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap)" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #D4AF37; --black: #000; --card-bg: #0c0c0e; --accent: #1a1a1a; }
         body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; margin: 0; padding-bottom: 100px; }
         .header { padding: 20px; border-bottom: 1px solid var(--accent); text-align: center; }
-        .brand-logo { max-height: 150px; width: auto; margin: 10px auto; mix-blend-mode: screen; filter: drop-shadow(0 0 10px rgba(212,175,55,0.5)); transition: 0.4s; }
+        .brand-logo { max-height: 150px; width: auto; margin: 10px auto; mix-blend-mode: screen; filter: drop-shadow(0 0 10px rgba(212,175,55,0.5)); }
         .nav-tabs { display: flex; justify-content: center; gap: 10px; margin: 20px 0; flex-wrap: wrap; padding: 0 10px; }
         .tab-btn { background: #1a1a1a; color: #fff; border: 1px solid var(--gold); padding: 10px 20px; border-radius: 25px; cursor: pointer; transition: 0.3s; }
         .tab-btn.active, .tab-btn:hover { background: var(--gold); color: #000; font-weight: bold; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; max-width: 1200px; margin: 20px auto; padding: 0 15px; }
         .card { display: none; background: var(--card-bg); padding: 20px; border-radius: 20px; border: 1px solid var(--accent); }
         .card.show { display: block; }
-        .img-box { position: relative; width: 100%; height: 250px; border-radius: 12px; overflow: hidden; background: #fff; border: 2px solid #222; transition: 0.4s; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; }
-        .img-box:hover { border-color: var(--gold); box-shadow: 0 0 20px rgba(212,175,55,0.4); }
-        .product-img { max-width: 90%; max-height: 90%; object-fit: contain; transition: transform 0.5s ease; }
-        .img-box:hover .product-img { transform: scale(1.1); }
+        .img-box { position: relative; width: 100%; height: 250px; border-radius: 12px; overflow: hidden; background: #fff; border: 2px solid #222; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; }
+        .product-img { max-width: 90%; max-height: 90%; object-fit: contain; }
         .arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.6); color: var(--gold); width: 35px; height: 35px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 1px solid var(--gold); z-index: 10; }
         .arrow-right { right: 10px; } .arrow-left { left: 10px; }
         .product-info { margin: 15px 0; text-align: center; }
@@ -39,47 +37,44 @@
 
     <div class="nav-tabs">
         <button class="tab-btn active" onclick="filterSelection('tshirt', this)">تيشيرت</button>
-        <button class="tab-btn" onclick="filterSelection('pants', this)">بناطيل</button>
-        <button class="tab-btn" onclick="filterSelection('shorts', this)">شورتات</button>
         <button class="tab-btn" onclick="filterSelection('sets', this)">أطقم</button>
-        <button class="tab-btn" onclick="filterSelection('shirts', this)">قمصان</button>
     </div>
 
     <div class="grid">
         <div class="card tshirt show">
             <div class="img-box">
                 <div class="arrow arrow-right" onclick="changeImg('it01', 1)">&gt;</div>
-                <img src="n5-back.png" id="it01" class="product-img" data-imgs="n5-back.png,n5-purple.png,n5-white.png,n5-black.png" data-index="0">
+                <img src="boxy-fashion2.png" id="it01" class="product-img" data-imgs="boxy-fashion2.png,boxy-fashion3.png,boxy-fashion4.png" data-index="0">
                 <div class="arrow arrow-left" onclick="changeImg('it01', -1)">&lt;</div>
             </div>
             <div class="product-info">
-                <div class="category-name">تيشيرت أساسي</div>
-                <div class="model-number">موديل: N5-01</div>
+                <div class="category-name">تيشيرت بوكسي</div>
+                <div class="model-number">شد: 16</div>
             </div>
             <div class="qty-control">
                 <button class="btn-q" onclick="updateQty('qt01', 16, 16)">+</button>
                 <span id="qt01">16</span>
                 <button class="btn-q" onclick="updateQty('qt01', 16, -16)">-</button>
             </div>
-            <button class="btn-add" onclick="addToCart('تيشيرت N5-01', 'qt01')">إضافة للطلب</button>
+            <button class="btn-add" onclick="addToCart('تيشيرت بوكسي', 'qt01')">إضافة للطلب</button>
         </div>
 
-        <div class="card pants">
+        <div class="card sets">
             <div class="img-box">
                 <div class="arrow arrow-right" onclick="changeImg('it02', 1)">&gt;</div>
-                <img src="pant-blue.png" id="it02" class="product-img" data-imgs="pant-blue.png,pant-black.png,pant-grey.png" data-index="0">
+                <img src="sea2-brown.png" id="it02" class="product-img" data-imgs="sea2-brown.png,sea2-grey.png,sea2-pink.png" data-index="0">
                 <div class="arrow arrow-left" onclick="changeImg('it02', -1)">&lt;</div>
             </div>
             <div class="product-info">
-                <div class="category-name">بنطلون جينز</div>
-                <div class="model-number">موديل: P-02</div>
+                <div class="category-name">طقم بحري</div>
+                <div class="model-number">شد: 12</div>
             </div>
             <div class="qty-control">
                 <button class="btn-q" onclick="updateQty('qt02', 12, 12)">+</button>
                 <span id="qt02">12</span>
                 <button class="btn-q" onclick="updateQty('qt02', 12, -12)">-</button>
             </div>
-            <button class="btn-add" onclick="addToCart('بنطلون P-02', 'qt02')">إضافة للطلب</button>
+            <button class="btn-add" onclick="addToCart('طقم بحري', 'qt02')">إضافة للطلب</button>
         </div>
     </div>
 
@@ -119,7 +114,7 @@
         function sendOrder() {
             let msg = "📦 طلب جملة جديد من TOP GIVING:%0A%0A";
             cart.forEach(item => { msg += "• " + item.name + " | الكمية: " + item.qty + "%0A"; });
-            window.open("[https://wa.me/966560564719?text=](https://wa.me/966560564719?text=)" + msg);
+            window.open("https://wa.me/966560564719?text=" + msg);
         }
     </script>
 </body>
