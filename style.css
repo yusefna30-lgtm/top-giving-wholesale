@@ -1,20 +1,14 @@
-/* الكود النهائي الموحد - يطبق على أي كلاس تستخدمه */
-.img-box, .img-box-fixed {
+/* هذا هو الحل النهائي والقوي */
+.card img {
     width: 100% !important;
-    height: 250px !important;  /* هذا هو الطول الثابت للجميع */
-    overflow: hidden !important;
-    position: relative !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    background-color: #f8f8f8 !important;
-    border-radius: 12px !important;
-    margin-bottom: 10px !important;
+    height: 250px !important; 
+    object-fit: cover !important; 
+    object-position: center !important;
+    display: block !important;
 }
 
-.product-img, .product-img-fixed {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important; /* هذا هو الذي يمنع قص الصورة ويملأ المربع */
-    display: block !important;
+/* هذا يضمن أن الصندوق نفسه يأخذ نفس الارتفاع */
+.img-box, .img-box-fixed {
+    height: 250px !important;
+    overflow: hidden !important;
 }
