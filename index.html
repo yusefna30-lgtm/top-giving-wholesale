@@ -1,61 +1,284 @@
+
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top Giving Wholesale</title>
-    <link rel="stylesheet" href="style.css">
+    <title>TOP GIVING | المتجر الرسمي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root { --gold: #D4AF37; --black: #000; --card-bg: #0c0c0e; --accent: #1a1a1a; --beige: #f5f5dc; }
+        body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 130px; }
+        .header { padding: 20px 10px; background: #000; border-bottom: 1px solid var(--accent); position: sticky; top: 0; z-index: 1000; }
+        .brand-logo { max-height: 100px; width: auto; display: block; margin: 0 auto 15px; filter: drop-shadow(0 0 5px var(--gold)); }
+        .nav-tabs { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+        .tab { background: #111; color: #fff; padding: 10px 20px; border-radius: 25px; border: 1px solid var(--accent); cursor: pointer; transition: 0.3s; font-size: 0.9rem; }
+        .tab.active { background: var(--gold); color: #000; font-weight: bold; }
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 1200px; margin: 0 auto; padding: 0 12px; }
+        @media (min-width: 992px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+        
+        .card { display: none; background: var(--card-bg); padding: 15px; border-radius: 18px; border: 1px solid var(--accent); flex-direction: column; align-items: center; transition: all 0.3s ease; position: relative; }
+        .card.show { display: flex; }
+        .card:hover { box-shadow: 0 0 20px var(--gold); border-color: var(--gold); transform: translateY(-2px); }
+        
+        .img-box { width: 100%; height: 220px; border-radius: 12px; overflow: hidden; background: #fff; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; position: relative; }
+        .product-img { max-width: 100%; max-height: 100%; object-fit: contain; transform: scale(1.1); transition: transform 0.3s ease; }
+        .img-box:hover .product-img { transform: scale(1.5); }
+        
+        /* التعديل الجديد: الأسهم فوق الصورة مباشرة */
+        .arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0, 0, 0, 0.5); color: var(--gold); width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 1.2rem; font-weight: bold; cursor: pointer; user-select: none; transition: 0.3s; z-index: 10; }
+        .arrow:hover { background: var(--gold); color: #000; box-shadow: 0 0 10px var(--gold); transform: translateY(-50%) scale(1.1); }
+        .arrow-right { right: 8px; }
+        .arrow-left { left: 8px; }
+        
+        .model-info { margin-bottom: 12px; width: 100%; text-align: center; }
+        .item-cat { color: #aaa; font-size: 0.85rem; }
+        .item-mod { color: #fff; font-weight: bold; font-size: 1rem; margin-top: 2px; }
+
+        .qty-control { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px; background: #1a1a1a; padding: 8px; border-radius: 10px; width: 100%; box-sizing: border-box; }
+        .btn-q { background: #252525; color: #fff; border: 1px solid var(--gold); width: 34px; height: 34px; border-radius: 8px; cursor: pointer; }
+        .btn-add { background: linear-gradient(135deg, #D4AF37, #8A6D3B); color: #000; padding: 12px; border-radius: 10px; font-weight: 900; border: none; width: 100%; cursor: pointer; }
+        .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.95); border-top: 2px solid var(--gold); padding: 15px; display: none; z-index: 1001; }
+        .cart-flex { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .btn-clear { background: #333; color: #fff; border: 1px solid #555; padding: 8px 15px; border-radius: 10px; cursor: pointer; font-family: 'Cairo'; }
+    </style>
 </head>
-<body>
-    <header>
-        <div class="logo">
-            <img src="logo.png" alt="Top Giving">
-        </div>
-        <nav class="categories">
-            <button class="cat-btn">شورتات</button>
-            <button class="cat-btn">أطقم صيفية</button>
-            <button class="cat-btn active">تيشيرتات</button>
-        </nav>
-    </header>
+<body onload="filterProducts('tshirt')">
 
-    <main class="grid">
-        <!-- المنتج الأول -->
-        <div class="card tshirt show" data-images="smile-beige.png,smile-black.png,smile-olive.png,smile-white.png" data-index="0">
+    <div class="header">
+        <img src="TOP GIVING logo.jpg" alt="TOP GIVING" class="brand-logo">
+        <div class="nav-tabs">
+            <div class="tab active" id="tab-tshirt" onclick="filterProducts('tshirt')">تيشيرتات</div>
+            <div class="tab" id="tab-set" onclick="filterProducts('set')">أطقم صيفية</div>
+            <div class="tab" id="tab-pants" onclick="filterProducts('pants')">شورتات</div>
+        </div>
+    </div>
+
+    <div class="grid">
+        <div class="card tshirt show" data-images="n5-back.png.png,n5-purple.png.png,n5-white.png.png,n5-black.png.png" data-index="0">
             <div class="img-box">
                 <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
-                <img src="smile-beige.png" id="it08003" class="product-img">
+                <img src="n5-back.png.png" id="it01" class="product-img">
                 <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
             </div>
-            <div class="model-info">
-                <div class="item-cat">الصنف: تيشيرت بوكس</div>
-                <div class="item-mod">موديل: 08095</div>
-            </div>
-            <div class="qty-control">
-                <button class="btn-q" onclick="c('qt012', 1)">+</button>
-                <span id="qt012">16</span>
-                <button class="btn-add" onclick="add('01', 'تيشيرت', 'qt012', this)">إضافة للطلب</button>
-            </div>
+            <div class="model-info"><div class="item-cat">الصنف: تيشيرت رجالي</div><div class="item-mod">موديل: 01</div></div>
+            <div class="qty-control"><button class="btn-q" onclick="c('qt01',16)">+</button><span id="qt01">16</span><button class="btn-q" onclick="c('qt01',-16)">-</button></div>
+            <button class="btn-add" onclick="add('تيشيرت 01','qt01',this)">إضافة للطلب</button>
         </div>
 
-        <!-- المنتج الثاني -->
-        <div class="card tshirt show" data-images="tshirt-gravity1.jpg,tshirt-gravity2.jpg,tshirt-gravity3.jpg,tshirt-gravity4.jpg" data-index="0">
+        <div class="card tshirt show" data-images="t1-white.png,t1-black.png,t1-blue.png,t1-yellow.png" data-index="0">
             <div class="img-box">
                 <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
-                <img src="tshirt-gravity1.jpg" id="it08000" class="product-img">
+                <img src="t1-white.png" id="it02" class="product-img">
                 <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
             </div>
-            <div class="model-info">
-                <div class="item-cat">الصنف: تيشيرت بوكس</div>
-                <div class="item-mod">موديل: 08086</div>
+            <div class="model-info"><div class="item-cat">الصنف: تيشيرت رجالي</div><div class="item-mod">موديل: 02</div></div>
+            <div class="qty-control"><button class="btn-q" onclick="c('qt02',16)">+</button><span id="qt02">16</span><button class="btn-q" onclick="c('qt02',-16)">-</button></div>
+            <button class="btn-add" onclick="add('تيشيرت 02','qt02',this)">إضافة</button>
+        </div>
+
+        <div class="card tshirt show" data-images="t2-black.png.png,t2-purple.png.png,t2-white.png.png,t2-grey.png.png" data-index="0">
+            <div class="img-box">
+                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
+                <img src="t2-black.png.png" id="it03" class="product-img">
+                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
             </div>
-            <div class="qty-control">
-                <button class="btn-q" onclick="c('qt010', 1)">+</button>
-                <span id="qt010">16</span>
-                <button class="btn-add" onclick="add('01', 'تيشيرت', 'qt010', this)">إضافة للطلب</button>
+            <div class="model-info"><div class="item-cat">الصنف: تيشيرت رجالي</div><div class="item-mod">موديل: 03</div></div>
+            <div class="qty-control"><button class="btn-q" onclick="c('qt03',16)">+</button><span id="qt03">16</span><button class="btn-q" onclick="c('qt03',-16)">-</button></div>
+            <button class="btn-add" onclick="add('تيشيرت 03','qt03',this)">إضافة</button>
+        </div>
+
+        <div class="card tshirt show" data-images="tr1-red.png.png,tr2-black.png.png,tr3-beige.png.png,tr4-white.png.png" data-index="0">
+            <div class="img-box">
+                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
+                <img src="tr1-red.png.png" id="it04" class="product-img">
+                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info"><div class="item-cat">الصنف: تيشيرت رجالي</div><div class="item-mod">موديل: 04</div></div>
+            <div class="qty-control"><button class="btn-q" onclick="c('qt04',16)">+</button><span id="qt04">16</span><button class="btn-q" onclick="c('qt04',-16)">-</button></div>
+            <button class="btn-add" onclick="add('تيشيرت 04','qt04',this)">إضافة</button>
+        </div>
+
+        <div class="card tshirt show" data-images="te1-black.png.png,te2-blue.png.png,te3-beige.png.png,te4-white.png.png" data-index="0">
+            <div class="img-box">
+                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
+                <img src="te1-black.png.png" id="it05" class="product-img">
+                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info"><div class="item-cat">الصنف: تيشيرت رجالي</div><div class="item-mod">موديل: 05</div></div>
+            <div class="qty-control"><button class="btn-q" onclick="c('qt05',16)">+</button><span id="qt05">16</span><button class="btn-q" onclick="c('qt05',-16)">-</button></div>
+            <button class="btn-add" onclick="add('تيشيرت 05','qt05',this)">إضافة</button>
+        </div>
+
+        <div class="card set" data-images="s1-white.png.png,s1-grey.png.png,s1-blue.png.png,s1-black.png.png" data-index="0">
+            <div class="img-box">
+                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
+                <img src="s1-white.png.png" id="is01" class="product-img">
+                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info"><div class="item-cat">الصنف: طقم صيفي</div><div class="item-mod">موديل: 01</div></div>
+            <div class="qty-control"><button class="btn-q" onclick="c('qs01',16)">+</button><span id="qs01">16</span><button class="btn-q" onclick="c('qs01',-16)">-</button></div>
+            <button class="btn-add" onclick="add('طقم 01','qs01',this)">إضافة</button>
+        </div>
+
+        <div class="card set" data-images="s2-black.jpg,s2-blue.jpg,s2-grey.jpg,s2-white.jpg" data-index="0">
+            <div class="img-box">
+                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
+                <img src="s2-black.jpg" id="is02" class="product-img">
+                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info"><div class="item-cat">الصنف: طقم صيفي</div><div class="item-mod">موديل: 02</div></div>
+            <div class="qty-control"><button class="btn-q" onclick="c('qs02',16)">+</button><span id="qs02">16</span><button class="btn-q" onclick="c('qs02',-16)">-</button></div>
+            <button class="btn-add" onclick="add('طقم 02','qs02',this)">إضافة</button>
+        </div>
+
+        <div class="card set" data-images="s3-black.jpg,s3-red.jpg,s3-purple.jpg,s3-grey.jpg" data-index="0">
+            <div class="img-box">
+                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
+                <img src="s3-black.jpg" id="is03" class="product-img">
+                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info"><div class="item-cat">الصنف: طقم صيفي</div><div class="item-mod">موديل: 03</div></div>
+            <div class="qty-control"><button class="btn-q" onclick="c('qs03',16)">+</button><span id="qs03">16</span><button class="btn-q" onclick="c('qs03',-16)">-</button></div>
+            <button class="btn-add" onclick="add('طقم 03','qs03',this)">إضافة</button>
+        </div>
+
+        <div class="card set" data-images="s4-black.jpg,s4-green.jpg,s4-beige.jpg,s4-white.jpg" data-index="0">
+            <div class="img-box">
+                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
+                <img src="s4-black.jpg" id="is04" class="product-img">
+                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info"><div class="item-cat">الصنف: طقم صيفي</div><div class="item-mod">موديل: 04</div></div>
+            <div class="qty-control"><button class="btn-q" onclick="c('qs04',16)">+</button><span id="qs04">16</span><button class="btn-q" onclick="c('qs04',-16)">-</button></div>
+            <button class="btn-add" onclick="add('طقم 04','qs04',this)">إضافة</button>
+        </div>
+
+        <div class="card set" data-images="s5-black.jpg,s5-grey.jpg,s5-beige.jpg,s5-white.jpg" data-index="0">
+            <div class="img-box">
+                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
+                <img src="s5-black.jpg" id="is05" class="product-img">
+                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info"><div class="item-cat">الصنف: طقم صيفي</div><div class="item-mod">موديل: 05</div></div>
+            <div class="qty-control"><button class="btn-q" onclick="c('qs05',16)">+</button><span id="qs05">16</span><button class="btn-q" onclick="c('qs05',-16)">-</button></div>
+            <button class="btn-add" onclick="add('طقم 05','qs05',this)">إضافة</button>
+        </div>
+
+        <div class="card set" data-images="sea-black.png,sea-red.png,sea-navy.png" data-index="0">
+            <div class="img-box">
+                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
+                <img src="sea-black.png" id="isea01" class="product-img">
+                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info"><div class="item-cat">الصنف: طقم Sea</div><div class="item-mod">موديل: 01</div></div>
+            <div class="qty-control"><button class="btn-q" onclick="c('qsea01',12)">+</button><span id="qsea01">12</span><button class="btn-q" onclick="c('qsea01',-12)">-</button></div>
+            <button class="btn-add" onclick="add('Sea 01','qsea01',this)">إضافة</button>
+        </div>
+
+        <div class="card set" data-images="sea1-off-withe.png,sea1-black.png,sea1-navy.png" data-index="0">
+            <div class="img-box">
+                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
+                <img src="sea1-off-withe.png" id="isea02" class="product-img">
+                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info"><div class="item-cat">الصنف: طقم Sea</div><div class="item-mod">موديل: 02</div></div>
+            <div class="qty-control"><button class="btn-q" onclick="c('qsea02',12)">+</button><span id="qsea02">12</span><button class="btn-q" onclick="c('qsea02',-12)">-</button></div>
+            <button class="btn-add" onclick="add('Sea 02','qsea02',this)">إضافة</button>
+        </div>
+
+        <div class="card set" data-images="sea2-brown.png,sea2-pink.png,sea2-grey.png" data-index="0">
+            <div class="img-box">
+                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
+                <img src="sea2-brown.png" id="isea03" class="product-img">
+                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info"><div class="item-cat">الصنف: طقم Sea</div><div class="item-mod">موديل: 03</div></div>
+            <div class="qty-control"><button class="btn-q" onclick="c('qsea03',12)">+</button><span id="qsea03">12</span><button class="btn-q" onclick="c('qsea03',-12)">-</button></div>
+            <button class="btn-add" onclick="add('Sea 03','qsea03',this)">إضافة</button>
+        </div>
+
+        <div class="card pants" data-images="mps182-beige.png,mps182-black.png,mps182-blue.png,mps182-white.png" data-index="0">
+            <div class="img-box">
+                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
+                <img src="mps182-beige.png" id="ish01" class="product-img">
+                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info"><div class="item-cat">الصنف: شورت رجالي</div><div class="item-mod">موديل: 182</div></div>
+            <div class="qty-control"><button class="btn-q" onclick="c('qsh01',20)">+</button><span id="qsh01">20</span><button class="btn-q" onclick="c('qsh01',-20)">-</button></div>
+            <button class="btn-add" onclick="add('شورت 182','qsh01',this)">إضافة</button>
+        </div>
+
+        <div class="card pants" data-images="mps185-grey.png,mps185-black.png,mps185-green.png,mps185-white.png" data-index="0">
+            <div class="img-box">
+                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
+                <img src="mps185-grey.png" id="ish02" class="product-img">
+                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info"><div class="item-cat">الصنف: شورت رجالي</div><div class="item-mod">موديل: 185</div></div>
+            <div class="qty-control"><button class="btn-q" onclick="c('qsh02',20)">+</button><span id="qsh02">20</span><button class="btn-q" onclick="c('qsh02',-20)">-</button></div>
+            <button class="btn-add" onclick="add('شورت 185','qsh02',this)">إضافة</button>
+        </div>
+
+        <div class="card pants" data-images="mps0033-heavenly.png,mps0033-black.png,mps0033-white.png,mps0033-green.png" data-index="0">
+            <div class="img-box">
+                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
+                <img src="mps0033-heavenly.png" id="ish03" class="product-img">
+                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info"><div class="item-cat">الصنف: شورت رجالي</div><div class="item-mod">موديل: 0033</div></div>
+            <div class="qty-control"><button class="btn-q" onclick="c('qsh03',20)">+</button><span id="qsh03">20</span><button class="btn-q" onclick="c('qsh03',-20)">-</button></div>
+            <button class="btn-add" onclick="add('شورت 0033','qsh03',this)">إضافة</button>
+        </div>
+
+        <div class="card pants" data-images="mps176-white.png,mps176-black.png,mps176-grey.png,mps176-brown.png" data-index="0">
+            <div class="img-box">
+                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
+                <img src="mps176-white.png" id="ish04" class="product-img">
+                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info"><div class="item-cat">الصنف: شورت رجالي</div><div class="item-mod">موديل: 176</div></div>
+            <div class="qty-control"><button class="btn-q" onclick="c('qsh04',20)">+</button><span id="qsh04">20</span><button class="btn-q" onclick="c('qsh04',-20)">-</button></div>
+            <button class="btn-add" onclick="add('شورت 176','qsh04',this)">إضافة</button>
+        </div>
+    </div>
+
+    <div class="cart-bar" id="cart-bar">
+        <div class="cart-flex">
+            <div id="cart-info" style="color:var(--gold); font-weight:bold;">الإجمالي: 0 حبة</div>
+            <div style="display:flex; gap:10px;">
+                <button class="btn-clear" onclick="clearCart()">تصفير السلة 🗑️</button>
+                <button class="btn-add" style="width:auto; padding:8px 20px;" onclick="send()">إرسال ✅</button>
             </div>
         </div>
-    </main>
+    </div>
 
-    <script src="script.js"></script>
+    <script>
+        function filterProducts(cat) {
+            document.querySelectorAll('.card').forEach(c => { c.classList.remove('show'); if(c.classList.contains(cat)) c.classList.add('show'); });
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.getElementById('tab-' + cat).classList.add('active');
+        }
+        
+        function navImg(btn, dir) {
+            let card = btn.closest('.card');
+            let imgs = card.getAttribute('data-images').split(',');
+            let currIdx = parseInt(card.getAttribute('data-index') || 0);
+            currIdx += dir;
+            if (currIdx < 0) currIdx = imgs.length - 1;
+            if (currIdx >= imgs.length) currIdx = 0;
+            card.setAttribute('data-index', currIdx);
+            card.querySelector('.product-img').src = imgs[currIdx];
+        }
+
+        function c(id, val) { let el = document.getElementById(id); if(!el) return; let curr = parseInt(el.innerText); let min = (id.includes('qsh')) ? 20 : (id.includes('qsea') ? 12 : 16); if (curr + val >= min) el.innerText = curr + val; }
+        
+        let order = [];
+        function add(name, qtyId, btn) { let qty = parseInt(document.getElementById(qtyId).innerText); order.push({ name: name, qty: qty }); document.getElementById('cart-bar').style.display = 'block'; updateTotal(); btn.innerText = "تمت ✅"; setTimeout(() => btn.innerText = "إضافة", 1500); }
+        function updateTotal() { let total = order.reduce((sum, i) => sum + i.qty, 0); document.getElementById('cart-info').innerText = `الإجمالي: ${total} حبة`; }
+        function clearCart() { order = []; document.getElementById('cart-bar').style.display = 'none'; }
+        function send() { if(order.length === 0) return; let msg = "📦 *طلب جديد من TOP GIVING* 📦\n\n"; order.forEach(i => { msg += `• *${i.name}*: ${i.qty} حبة\n`; }); window.open(`https://wa.me/966560564719?text=${encodeURIComponent(msg)}`, '_blank'); }
+    </script>
 </body>
 </html>
