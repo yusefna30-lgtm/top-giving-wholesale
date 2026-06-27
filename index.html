@@ -56,6 +56,26 @@
     </div>
 
     <div class="grid">
+        
+        
+<div class="card">
+    <div class="slider-container">
+        <button class="arrow-btn prev" onclick="changeSlide('smileSlider', -1)">‹</button>
+        <img id="smileSlider" src="smile-white.png?v=1" class="product-img" 
+             data-images='["smile-white.png?v=1", "smile-black.png?v=1", "smile-olive.png?v=1", "smile-beige.png?v=1"]' 
+             data-index="0">
+        <button class="arrow-btn next" onclick="changeSlide('smileSlider', 1)">›</button>
+    </div>
+    <div class="model-name">تيشيرت SMILE</div>
+    <div class="product-model-number">موديل: 08047</div>
+    <div class="qty-control">
+        <button class="btn-q" onclick="c('qt_smile', 16)">+</button>
+        <span id="qt_smile" class="qty-num">16</span>
+        <button class="btn-q" onclick="c('qt_smile', -16)">-</button>
+    </div>
+    <button class="btn-add" onclick="addToCart('تيشيرت SMILE موديل 08047', 'qt_smile', 'smileSlider')">إضافة للطلب</button>
+</div>
+        
         <div class="card tshirt show" data-images="n5-back.png.png,n5-purple.png.png,n5-white.png.png,n5-black.png.png" data-index="0">
             <div class="img-box">
                 <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
