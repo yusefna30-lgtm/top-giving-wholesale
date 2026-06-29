@@ -323,40 +323,35 @@
     <button class="btn-add" onclick="add('بنطلون 341','qsh002',this)">إضافة</button>
 </div>
         
-  <script>
-    function c(elementId, changeAmount) {
-        // رسالة تنبيهية في خلفية المتصفح لنعرف هل الزر يستجيب أصلاً أم لا
-        console.log("تم الضغط على الزر للمعرّف: " + elementId + " بمقدار: " + changeAmount);
-
-        // 1. جلب العنصر
+<script>
+    // 1. الدالة الصحيحة التي تبحث عنها الأزرار
+    function updateQuantity(elementId, changeAmount) {
+        // جلب العنصر المسؤول عن الرقم
         var quantityElement = document.getElementById(elementId);
         
-        // إذا لم يجد المتصفح العنصر، سيطبع خطأ واضحاً هنا
-        if (!quantityElement) {
-            console.error("خطأ: لم يتم العثور في الصفحة على عنصر يحمل الـ ID: " + elementId);
-            return; 
-        }
+        // حماية للكود: إذا لم يجد العنصر لا يتوقف الموقع عن العمل
+        if (!quantityElement) return;
 
-        // 2. قراءة النص وتنظيفه من أي مسافات مخفية قد تسبب أخطاء حسابية
-        var cleanText = quantityElement.textContent.trim();
-        var currentQuantity = parseInt(cleanText);
+        // قراءة الرقم الحالي وتنظيفه من المسافات
+        var currentQuantity = parseInt(quantityElement.textContent.trim()) || 15;
         
-        // إذا كان النص ليس رقماً، نجبره أن يبدأ من 15
-        if (isNaN(currentQuantity)) {
-            currentQuantity = 15;
-        }
-        
-        // 3. الحسبة الجديدة
+        // حساب الحسبة الجديدة (زيادة أو نقصان)
         var newQuantity = currentQuantity + changeAmount;
         
-        // 4. الحارس: منع النزول عن 15
+        // الحارس: التأكد من أن أقل كمية هي 15 دائماً
         if (newQuantity < 15) {
             newQuantity = 15;
         }
         
-        // 5. تحديث الشاشة
+        // تحديث الرقم في الشاشة
         quantityElement.textContent = newQuantity;
-        console.log("الكمية المحدثة بنجاح هي: " + newQuantity);
+    }
+
+    // 2. حل ذكي للخطأ الإملائي:
+    // بما أن الـ Console أظهر وجود زر مكتوب فيه "updateQuanlity" بالخطأ،
+    // هذه السطور ستقوم بتوجيهه تلقائياً للدالة الصحيحة حتى لو لم تعدل الـ HTML.
+    function updateQuanlity(elementId, changeAmount) {
+        updateQuantity(elementId, changeAmount);
     }
 </script>
         
@@ -403,7 +398,6 @@
             <div class="qty-control"><button class="btn-q" onclick="c('qsh04',20)">+</button><span id="qsh04">20</span><button class="btn-q" onclick="c('qsh04',-20)">-</button></div>
             <button class="btn-add" onclick="add('شورت 176','qsh04',this)">إضافة</button>
         </div>
-    </div>
 
     <div class="cart-bar" id="cart-bar">
         <div class="cart-flex">
