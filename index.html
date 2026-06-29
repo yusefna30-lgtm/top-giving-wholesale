@@ -451,8 +451,6 @@
             card.setAttribute('data-index', currIdx);
             card.querySelector('.product-img').src = imgs[currIdx];
         }
-
-        function c(id, val) { let el = document.getElementById(id); if(!el) return; let curr = parseInt(el.innerText); let min = (id.includes('qsh')) ? 20 : (id.includes('qsea') ? 12 : 16); if (curr + val >= min) el.innerText = curr + val; }
         
         let order = [];
         function add(name, qtyId, btn) { let qty = parseInt(document.getElementById(qtyId).innerText); order.push({ name: name, qty: qty }); document.getElementById('cart-bar').style.display = 'block'; updateTotal(); btn.innerText = "تمت ✅"; setTimeout(() => btn.innerText = "إضافة", 1500); }
@@ -460,5 +458,6 @@
         function clearCart() { order = []; document.getElementById('cart-bar').style.display = 'none'; }
         function send() { if(order.length === 0) return; let msg = "📦 *طلب جديد من TOP GIVING* 📦\n\n"; order.forEach(i => { msg += `• *${i.name}*: ${i.qty} حبة\n`; }); window.open(`https://wa.me/966560564719?text=${encodeURIComponent(msg)}`, '_blank'); }
     </script>
+    <script src="script.js"></script>
 </body>
 </html>
