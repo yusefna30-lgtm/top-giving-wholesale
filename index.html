@@ -322,25 +322,41 @@
     
     <button class="btn-add" onclick="add('بنطلون 341','qsh002',this)">إضافة</button>
 </div>
-
- <script>
+        
+  <script>
     function c(elementId, changeAmount) {
-        // 1. جلب العنصر الذي يحتوي على الرقم
+        // رسالة تنبيهية في خلفية المتصفح لنعرف هل الزر يستجيب أصلاً أم لا
+        console.log("تم الضغط على الزر للمعرّف: " + elementId + " بمقدار: " + changeAmount);
+
+        // 1. جلب العنصر
         var quantityElement = document.getElementById(elementId);
         
-        // 2. قراءة الرقم الحالي وتحويله لعدد (وإذا فشل يضع 15 تلقائياً)
-        var currentQuantity = parseInt(quantityElement.innerText) || 15;
+        // إذا لم يجد المتصفح العنصر، سيطبع خطأ واضحاً هنا
+        if (!quantityElement) {
+            console.error("خطأ: لم يتم العثور في الصفحة على عنصر يحمل الـ ID: " + elementId);
+            return; 
+        }
+
+        // 2. قراءة النص وتنظيفه من أي مسافات مخفية قد تسبب أخطاء حسابية
+        var cleanText = quantityElement.textContent.trim();
+        var currentQuantity = parseInt(cleanText);
         
-        // 3. حساب الحسبة الجديدة (جمع أو طرح)
+        // إذا كان النص ليس رقماً، نجبره أن يبدأ من 15
+        if (isNaN(currentQuantity)) {
+            currentQuantity = 15;
+        }
+        
+        // 3. الحسبة الجديدة
         var newQuantity = currentQuantity + changeAmount;
         
-        // 4. الحارس الأمين: إذا نقصت الكمية عن 15، أرجعها إلى 15 فوراً
+        // 4. الحارس: منع النزول عن 15
         if (newQuantity < 15) {
             newQuantity = 15;
         }
         
-        // 5. تحديث الشاشة بالرقم الجديد
-        quantityElement.innerText = newQuantity;
+        // 5. تحديث الشاشة
+        quantityElement.textContent = newQuantity;
+        console.log("الكمية المحدثة بنجاح هي: " + newQuantity);
     }
 </script>
         
