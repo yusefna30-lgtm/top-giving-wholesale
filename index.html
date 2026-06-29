@@ -323,25 +323,24 @@
     <button class="btn-add" onclick="add('بنطلون 341','qsh002',this)">إضافة</button>
 </div>
 
-<script>
-   <script>
-    function updateQuantity(elementId, changeAmount) {
-        // 1. تحديد العنصر الذي يحتوي على الرقم
+ <script>
+    function c(elementId, changeAmount) {
+        // 1. جلب العنصر الذي يحتوي على الرقم
         var quantityElement = document.getElementById(elementId);
         
-        // 2. قراءة الرقم الحالي وتحويله إلى قيمة رياضية (استخدمنا textContent لضمان دقة القراءة)
-        var currentQuantity = parseInt(quantityElement.textContent);
+        // 2. قراءة الرقم الحالي وتحويله لعدد (وإذا فشل يضع 15 تلقائياً)
+        var currentQuantity = parseInt(quantityElement.innerText) || 15;
         
-        // 3. حساب الرقم الجديد (الكمية الحالية + الزيادة أو النقصان)
+        // 3. حساب الحسبة الجديدة (جمع أو طرح)
         var newQuantity = currentQuantity + changeAmount;
         
-        // 4. الشرط الصارم: إذا كانت النتيجة الحسابية 15 أو أقل، ثبت الرقم على 15
-        if (newQuantity <= 15) {
-            newQuantity = 15; 
+        // 4. الحارس الأمين: إذا نقصت الكمية عن 15، أرجعها إلى 15 فوراً
+        if (newQuantity < 15) {
+            newQuantity = 15;
         }
         
-        // 5. عرض النتيجة النهائية للمستخدم
-        quantityElement.textContent = newQuantity;
+        // 5. تحديث الشاشة بالرقم الجديد
+        quantityElement.innerText = newQuantity;
     }
 </script>
         
