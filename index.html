@@ -585,5 +585,18 @@
         function send() { if(order.length === 0) return; let msg = "📦 *طلب جديد من TOP GIVING* 📦\n\n"; order.forEach(i => { msg += `• *${i.name}*: ${i.qty} حبة\n`; }); window.open(`https://wa.me/966560564719?text=${encodeURIComponent(msg)}`, '_blank'); }
     </script>
     <script src="script.js"></script>
+        <div class="fixed-cart-bar">
+    <div class="cart-status">
+        🛒 السلة: <span id="cart-count">0</span> باقة
+    </div>
+    
+    <button onclick="clearCart()" class="btn-clear-cart" title="تصفير السلة">
+        🗑️ تصفير
+    </button>
+    
+    <button onclick="sendOrderToWhatsApp()" class="btn-send-order">
+        💬 إرسال الطلب للواتساب
+    </button>
+</div>
 </body>
 </html>
