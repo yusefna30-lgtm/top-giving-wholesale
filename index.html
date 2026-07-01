@@ -538,26 +538,27 @@
             <button class="btn-add" onclick="add('شورت 176','qsh04',this)">إضافة</button>
         </div>
  
-       <div class="card shirts show" data-images="
-             pm0289_1.png.png" data-index="0"><div class="img-box">
-                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
-                <img src="pm0289_1.png.png" id="it01089" class="product-img">
-                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
-            </div>
-                <div class="model-info"><div class="item-cat">الصنف: قميص رجالي</div><div class="item-mod">موديل: 0289/div></div>
-                <div class="qty-control"><button class="btn-q" onclick="c('qt01089',5)">+</button><span id="qt01089">5</span><button class="btn-q" onclick="c('qt01089',-5)">-</button></div>
-                <button class="btn-add" onclick="add('قميص 0289','qt01089',this)">إضافة للطلب</button>
-        </div>
-           
-    <div class="cart-bar" id="cart-bar">
-        <div class="cart-flex">
-            <div id="cart-info" style="color:var(--gold); font-weight:bold;">الإجمالي: 0 حبة</div>
-            <div style="display:flex; gap:10px;">
-                <button class="btn-clear" onclick="clearCart()">تصفير السلة 🗑️</button>
-                <button class="btn-add" style="width:auto; padding:8px 20px;" onclick="send()">إرسال ✅</button>
-            </div>
-        </div>
+    
+<div class="card shirts show" data-images="pm0289_1.png.png" data-index="0">
+    <div class="img-box">
+        <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
+        <img src="pm0289_1.png.png" id="it01089" class="product-img" alt="قميص رجالي">
+        <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
     </div>
+    
+    <div class="model-info">
+        <div class="item-cat">الصنف: قميص رجالي</div>
+        <div class="item-mod">موديل: 0289_1</div>
+    </div>
+    
+    <div class="qty-control">
+        <button class="btn-q" onclick="c('qt01089', 5)">+</button>
+        <span id="qt01089">5</span>
+        <button class="btn-q" onclick="c('qt01089', -5)">-</button>
+    </div>
+    
+    <button class="btn-add" onclick="add('قميص 0289','qt01089', this)">إضافة للطلب</button>
+</div>
 
     <script>
         function filterProducts(cat) {
