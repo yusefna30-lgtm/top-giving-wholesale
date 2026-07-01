@@ -1,7 +1,7 @@
 // 1. مصفوفة السلة لتخزين كافة المنتجات المضافة
 let orderCart = [];
 
-// 2. دالة التحكم بالكمية (+ و -) التي كانت لديك مسبقاً
+// 2. دالة التحكم بالكمية (+ و -) 
 function c(id, value) {
     let element = document.getElementById(id);
     if (!element) return;
@@ -15,7 +15,7 @@ function c(id, value) {
     element.innerText = newQty;
 }
 
-// 3. دالة إضافة المنتج إلى السلة عند الضغط على "إضافة للطلب"
+// 3. دالة إضافة المنتج إلى السلة وتحديث العداد
 function add(productName, quantityId, buttonElement) {
     let qtyElement = document.getElementById(quantityId);
     if (!qtyElement) return;
@@ -27,7 +27,6 @@ function add(productName, quantityId, buttonElement) {
         return;
     }
 
-    // التحقق إذا كان الموديل مضافاً مسبقاً لتحديث كميته، أو إضافته كجديد
     let existingProduct = orderCart.find(item => item.name === productName);
     
     if (existingProduct) {
@@ -39,7 +38,7 @@ function add(productName, quantityId, buttonElement) {
         });
     }
 
-    // تغيير بصري مؤقت على الزر لتأكيد الحفظ في السلة
+    // تأثير بصري مؤقت على زر الإضافة
     let originalText = buttonElement.innerText;
     buttonElement.innerText = "✓ أُضيف للسلة";
     buttonElement.style.backgroundColor = "#27ae60"; 
@@ -49,10 +48,35 @@ function add(productName, quantityId, buttonElement) {
         buttonElement.style.backgroundColor = ""; 
     }, 1200);
 
-    console.log("السلة الحالية:", orderCart);
+    // تحديث واجهة السلة المرئية
+    updateCartUI();
 }
 
-// 4. دالة إرسال السلة كاملة إلى الواتساب
+// 4. دالة تحديث الأرقام والعدادات في واجهة السلة
+function updateCartUI() {
+    let cartCountElement = document.getElementById('cart-count');
+    if (cartCountElement) {
+        // حساب إجمالي عدد الباقات المضافة
+        let totalItems = orderCart.reduce((sum, item) => sum + item.quantity, 0);
+        cartCountElement.innerText = totalItems;
+    }
+}
+
+// 5. دالة تصفير وإفراغ السلة بالكامل
+function clearCart() {
+    if (orderCart.length === 0) {
+        alert("السلة فارغة بالفعل.");
+        return;
+    }
+    
+    if (confirm("هل أنت متأكد من رغبتك في إفراغ وتصفير السلة؟")) {
+        orderCart = [];
+        updateCartUI();
+        alert("تم تصفير السلة بنجاح.");
+    }
+}
+
+// 6. دالة إرسال السلة كاملة إلى الواتساب
 function sendOrderToWhatsApp() {
     if (orderCart.length === 0) {
         alert("سلتك فارغة حالياً، يرجى إضافة منتجات أولاً.");
@@ -61,17 +85,14 @@ function sendOrderToWhatsApp() {
 
     let whatsappNumber = "966560564719";
     
-    // بداية نص الرسالة
     let message = `مرحباً TOP GIVING،\nأود طلب المنتجات التالية (جملة):\n\n`;
 
-    // تكرار المنتجات المضافة داخل السلة وصياغتها في الرسالة
     orderCart.forEach((item, index) => {
         message += `${index + 1}. 🔹 الموديل: ${item.name}\n📦 الكمية: ${item.quantity} رزمة/باقة\n\n`;
     });
 
     message += `شكراً لكم.`;
 
-    // ترميز الرسالة وفتح الرابط
     let encodedMessage = encodeURIComponent(message);
     let whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
     window.open(whatsappUrl, '_blank');
