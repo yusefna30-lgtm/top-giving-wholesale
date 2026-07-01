@@ -1,4 +1,5 @@
 
+  
 
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -538,6 +539,16 @@
             <button class="btn-add" onclick="add('شورت 176','qsh04',this)">إضافة</button>
         </div>
 
+    <div class="cart-bar" id="cart-bar">
+        <div class="cart-flex">
+            <div id="cart-info" style="color:var(--gold); font-weight:bold;">الإجمالي: 0 حبة</div>
+            <div style="display:flex; gap:10px;">
+                <button class="btn-clear" onclick="clearCart()">تصفير السلة 🗑️</button>
+                <button class="btn-add" style="width:auto; padding:8px 20px;" onclick="send()">إرسال ✅</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         function filterProducts(cat) {
             document.querySelectorAll('.card').forEach(c => { c.classList.remove('show'); if(c.classList.contains(cat)) c.classList.add('show'); });
@@ -563,18 +574,5 @@
         function send() { if(order.length === 0) return; let msg = "📦 *طلب جديد من TOP GIVING* 📦\n\n"; order.forEach(i => { msg += `• *${i.name}*: ${i.qty} حبة\n`; }); window.open(`https://wa.me/966560564719?text=${encodeURIComponent(msg)}`, '_blank'); }
     </script>
     <script src="script.js"></script>
-        <div class="fixed-cart-bar">
-    <div class="cart-status">
-        🛒 السلة: <span id="cart-count">0</span> باقة
-    </div>
-    
-    <button onclick="clearCart()" class="btn-clear-cart" title="تصفير السلة">
-        🗑️ تصفير
-    </button>
-    
-    <button onclick="sendOrderToWhatsApp()" class="btn-send-order">
-        💬 إرسال الطلب للواتساب
-    </button>
-</div>
 </body>
 </html>
