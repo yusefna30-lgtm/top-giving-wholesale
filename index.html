@@ -738,6 +738,27 @@
     <button class="btn-add" onclick="add('قميص pm15289_15', 'qt0150289', this)">إضافة للطلب</button>
 </div>
 
+      <div class="card shirts show" data-images="m0024_1.png.png" data-index="0">
+    <div class="img-box">
+        <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
+        <img src="m0024_1.png.png" id="it00241" class="product-img">
+        <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+    </div>
+    
+    <div class="model-info">
+        <div class="item-cat">الصنف: قميص رجالي</div>
+        <div class="item-mod">موديل: m0024_1. </div>
+    </div>
+    
+    <div class="qty-control">
+        <button class="btn-q" onclick="c('qt00241', 5)">+</button>
+        <span id="qt00241">5</span>
+        <button class="btn-q" onclick="c('qt00241', -5)">-</button>
+    </div>
+    
+    <button class="btn-add" onclick="add('قميص m0024_1', 'qt00241', this)">إضافة للطلب</button>
+</div>
+
     <script>
         function filterProducts(cat) {
             document.querySelectorAll('.card').forEach(c => { c.classList.remove('show'); if(c.classList.contains(cat)) c.classList.add('show'); });
