@@ -869,5 +869,123 @@
         function send() { if(order.length === 0) return; let msg = "📦 *طلب جديد من TOP GIVING* 📦\n\n"; order.forEach(i => { msg += `• *${i.name}*: ${i.qty} حبة\n`; }); window.open(`https://wa.me/966560564719?text=${encodeURIComponent(msg)}`, '_blank'); }
     </script>
     <script src="script.js"></script>
+      <footer class="top-giving-footer" dir="rtl">
+    <style>
+        .top-giving-footer {
+            background-color: #1a1a1a; /* خلفية داكنة فاخرة */
+            color: #ffffff;
+            padding: 40px 20px 20px 20px;
+            font-size: 14px;
+            line-height: 1.6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+            padding: 0 15px;
+            box-sizing: border-box;
+        }
+
+        .footer-column h3 {
+            color: #d4af37; /* لون ذهبي مطفي راقي */
+            font-size: 16px;
+            margin-top: 0;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 8px;
+        }
+
+        .footer-column p {
+            margin: 8px 0;
+            color: #cccccc;
+        }
+
+        .footer-column a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: #d4af37;
+        }
+
+        .footer-icon {
+            display: inline-block;
+            width: 20px;
+            margin-left: 8px;
+            text-align: center;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 30px auto 0 auto;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            text-align: center;
+            color: #888888;
+            font-size: 13px;
+        }
+
+        /* دعم الشاشات الصغيرة والهواتف */
+        @media (max-width: 768px) {
+            .footer-container {
+                display: block;
+            }
+            .footer-column {
+                width: 100%;
+                padding: 0;
+                margin-bottom: 25px;
+            }
+        }
+    </style>
+
+    <div class="footer-container">
+        
+        <div class="footer-column">
+            <h3>المنشأة والمقر</h3>
+            <p><strong>مؤسسة توب جيفينج للتجارة</strong></p>
+            <p><span class="footer-icon">📍</span>المركز الرئيسي: الرياض</p>
+            <p>المملكة العربية السعودية</p>
+        </div>
+
+        <div class="footer-column">
+            <h3>التوثيق القانوني</h3>
+            <p>رقم السجل التجاري: <span style="color: #ffffff; font-family: monospace; letter-spacing: 1px;">[ضع رقم السجل هنا]</span></p>
+            <p>الرقم الضريبي: <span style="color: #ffffff; font-family: monospace; letter-spacing: 1px;">[ضع الرقم الضريبي هنا]</span></p>
+        </div>
+
+        <div class="footer-column">
+            <h3>قنوات التواصل الرسمية</h3>
+            <p>
+                <span class="footer-icon">📞</span>للاتصالات والاستفسار: 
+                <a href="tel:0508444637" dir="ltr">050 844 4637</a>
+            </p>
+            <p>
+                <span class="footer-icon">🟢</span>محادثات الواتساب: 
+                <a href="https://wa.me/966560564719" target="_blank" dir="ltr">056 056 4719</a>
+            </p>
+            <p>
+                <span class="footer-icon">✉️</span>البريد الإلكتروني: 
+                <a href="mailto:twbjyfynj@gmail.com">twbjyfynj@gmail.com</a>
+            </p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>حقوق النشر © Top Giving. جميع الحقوق محفوظة 2026.</p>
+    </div>
+</footer>
 </body>
 </html>
