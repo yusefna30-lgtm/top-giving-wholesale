@@ -10,16 +10,15 @@
         body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 130px; }
         .header { padding: 20px 10px; background: #000; border-bottom: 1px solid var(--accent); position: sticky; top: 0; z-index: 1000; }
         
-        /* الشعار دائري مع هالة ذهبية مشعة وواضحة حول الدائرة */
         .brand-logo { 
-            width: 100px; 
-            height: 100px; 
+            width: 95px; 
+            height: 95px; 
             border-radius: 50%; 
             object-fit: cover; 
             display: block; 
-            margin: 10px auto 20px; 
+            margin: 0 auto 15px; 
             border: 2px solid var(--gold); 
-            box-shadow: 0 0 25px 6px rgba(212, 175, 55, 0.75), 0 0 50px 12px rgba(212, 175, 55, 0.35); 
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); 
         }
 
         .nav-tabs { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
@@ -68,6 +67,7 @@
 </div>
 
 <div class="grid">
+    <!-- الموديل الأول HD-01 -->
     <div class="card tshirt show" data-images="hd01-1.jpg,hd01-2.webp,hd01-3.webp,hd01-4.webp" data-index="0">
         <div class="img-box">
             <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
@@ -84,6 +84,25 @@
             <button class="btn-q" onclick="c('qt-hd01', -16)">-</button>
         </div>
         <button class="btn-add" onclick="add('هودي سحاب HD-01', 'qt-hd01', this)">إضافة للطلب</button>
+    </div>
+
+    <!-- الموديل الثاني HD-02 -->
+    <div class="card tshirt show" data-images="hd02-1.webp,hd02-2.webp,hd02-3.webp,hd02-4.webp" data-index="0">
+        <div class="img-box">
+            <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
+            <img src="hd02-1.webp" id="it-hd02" class="product-img">
+            <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+        </div>
+        <div class="model-info">
+            <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
+            <div class="item-mod">موديل: HD-02</div>
+        </div>
+        <div class="qty-control">
+            <button class="btn-q" onclick="c('qt-hd02', 16)">+</button>
+            <span id="qt-hd02">16</span>
+            <button class="btn-q" onclick="c('qt-hd02', -16)">-</button>
+        </div>
+        <button class="btn-add" onclick="add('هودي بلوفر HD-02', 'qt-hd02', this)">إضافة للطلب</button>
     </div>
 </div>
 
