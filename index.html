@@ -6,7 +6,7 @@
     <title>TOP GIVING | المتجر الرسمي</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #D4AF37; --black: #000; --card-bg: #0c0c0e; --accent: #1a1a1a; }
+        :root { --gold: #D4AF37; --black: #000; --card-bg: #0c0c0e; --accent: #1a1a1a; --beige: #f5f5dc; }
         body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 130px; }
         .header { padding: 20px 10px; background: #000; border-bottom: 1px solid var(--accent); position: sticky; top: 0; z-index: 1000; }
         .brand-logo { max-height: 100px; width: auto; display: block; margin: 0 auto 15px; filter: drop-shadow(0 0 5px var(--gold)); }
@@ -16,8 +16,10 @@
         .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 1200px; margin: 0 auto; padding: 0 12px; }
         @media (min-width: 992px) { .grid { grid-template-columns: repeat(4, 1fr); } }
         
-        .card { background: var(--card-bg); padding: 15px; border-radius: 18px; border: 1px solid var(--accent); display: flex; flex-direction: column; align-items: center; transition: all 0.3s ease; position: relative; }
+        .card { display: none; background: var(--card-bg); padding: 15px; border-radius: 18px; border: 1px solid var(--accent); flex-direction: column; align-items: center; transition: all 0.3s ease; position: relative; }
+        .card.show { display: flex; }
         .card:hover { box-shadow: 0 0 20px var(--gold); border-color: var(--gold); transform: translateY(-2px); }
+        
         .img-box { width: 100%; height: 220px; border-radius: 12px; overflow: hidden; background: #fff; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; position: relative; }
         .product-img { max-width: 100%; max-height: 100%; object-fit: contain; transform: scale(1.1); transition: transform 0.3s ease; }
         .img-box:hover .product-img { transform: scale(1.5); }
@@ -34,35 +36,45 @@
         .qty-control { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px; background: #1a1a1a; padding: 8px; border-radius: 10px; width: 100%; box-sizing: border-box; }
         .btn-q { background: #252525; color: #fff; border: 1px solid var(--gold); width: 34px; height: 34px; border-radius: 8px; cursor: pointer; }
         .btn-add { background: linear-gradient(135deg, #D4AF37, #8A6D3B); color: #000; padding: 12px; border-radius: 10px; font-weight: 900; border: none; width: 100%; cursor: pointer; }
-        
         .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.95); border-top: 2px solid var(--gold); padding: 15px; display: none; z-index: 1001; }
         .cart-flex { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .btn-clear { background: #333; color: #fff; border: 1px solid #555; padding: 8px 15px; border-radius: 10px; cursor: pointer; font-family: 'Cairo'; }
-
-        .top-giving-footer { background-color: #1a1a1a; color: #fff; padding: 30px 20px 15px; font-size: 12px; clear: both; width: 100%; box-sizing: border-box; }
-        .footer-container { max-width: 900px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-around; }
-        .footer-column { flex: 1; min-width: 220px; margin-bottom: 15px; padding: 0 15px; }
-        .footer-column h3 { color: var(--gold); font-size: 13px; border-bottom: 1px solid #333; padding-bottom: 6px; }
-        .footer-column p { margin: 6px 0; color: #ccc; }
-        .footer-column a { color: #fff; text-decoration: none; }
-        .footer-bottom { border-top: 1px solid #333; padding-top: 15px; color: #888; font-size: 11px; margin-top: 20px; }
-        @media (max-width: 768px) { .footer-container { display: block; } .footer-column { width: 100%; padding: 0; margin-bottom: 20px; } }
     </style>
 </head>
-<body>
+<body onload="filterProducts('tshirt')">
 
 <div class="header">
-    <img src="TOP%20GIVING%20logo.jpg" alt="TOP GIVING" class="brand-logo">
+    <img src="TOP%20GIVING%20logo.jpg" alt="TOP GIVING" class="brand-logo">[cite: 1]
+    
     <div class="nav-tabs">
-        <div class="tab active" onclick="filterCategory('hoodie', this)">هودي رجالي</div>
-        <div class="tab" onclick="filterCategory('set', this)">أطقم صيفية</div>
-        <div class="tab" onclick="filterCategory('shorts', this)">شورتات</div>
-        <div class="tab" onclick="filterCategory('pants', this)">بنطلونات</div>
-        <div class="tab" onclick="filterCategory('shirts', this)">قميص</div>
+        <div class="tab active" id="tab-tshirt" onclick="filterProducts('tshirt')">هودي رجالي</div>
+        <div class="tab" id="tab-set" onclick="filterProducts('set')">أطقم صيفية</div>
+        <div class="tab" id="tab-pants" onclick="filterProducts('pants')">شورتات</div>
+        <div class="tab" id="tab-pants.l" onclick="filterProducts('pants.l')">بنطلونات</div>
+        <div class="tab" id="tab-shirts" onclick="filterProducts('shirts')">قميص</div>
     </div>
 </div>
 
-<div class="grid" id="products-container"></div>
+<div class="grid">
+    <!-- موديل الهودي الجديد المضاف مع ألوانه الأربعة -->
+    <div class="card tshirt show" data-images="hd01-1.jpg,hd01-2.webp,hd01-3.webp,hd01-4.webp" data-index="0">[cite: 2, 3, 4, 5]
+        <div class="img-box">
+            <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
+            <img src="hd01-1.jpg" id="it-hd01" class="product-img">[cite: 2]
+            <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+        </div>
+        <div class="model-info">
+            <div class="item-cat">الصنف: هودي سحاب رجالي</div>
+            <div class="item-mod">موديل: HD-01</div>
+        </div>
+        <div class="qty-control">
+            <button class="btn-q" onclick="c('qt-hd01', 12)">+</button>
+            <span id="qt-hd01">12</span>
+            <button class="btn-q" onclick="c('qt-hd01', -12)">-</button>
+        </div>
+        <button class="btn-add" onclick="add('هودي سحاب HD-01', 'qt-hd01', this)">إضافة للطلب</button>
+    </div>
+</div>
 
 <div class="cart-bar" id="cart-bar">
     <div class="cart-flex">
@@ -74,75 +86,49 @@
     </div>
 </div>
 
-<footer class="top-giving-footer">
+<footer class="top-giving-footer" dir="rtl">
+    <style>
+        .top-giving-footer { background-color: #1a1a1a !important; color: #ffffff !important; padding: 30px 20px 15px 20px !important; font-size: 12px !important; line-height: 1.5 !important; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important; display: block !important; width: 100% !important; flex: 0 0 100% !important; max-width: 100% !important; clear: both !important; box-sizing: border-box !important; }
+        .footer-container { max-width: 900px !important; margin: 0 auto !important; display: flex !important; flex-wrap: wrap !important; justify-content: space-around !important; }
+        .footer-column { flex: 1 !important; min-width: 220px !important; margin-bottom: 15px !important; padding: 0 15px !important; box-sizing: border-box !important; }
+        .footer-column h3 { color: #d4af37 !important; font-size: 13px !important; margin-top: 0 !important; margin-bottom: 10px !important; border-bottom: 1px solid #333 !important; padding-bottom: 6px !important; }
+        .footer-column p { margin: 6px 0 !important; color: #cccccc !important; }
+        .footer-column a { color: #ffffff !important; text-decoration: none !important; transition: color 0.3s !important; }
+        .footer-column a:hover { color: #d4af37 !important; }
+        .footer-icon { display: inline-block !important; width: 18px !important; margin-left: 6px !important; text-align: center !important; }
+        .footer-bottom { max-width: 900px !important; margin: 20px auto 0 auto !important; padding-top: 15px !important; border-top: 1px solid #333 !important; text-align: center !important; color: #888888 !important; font-size: 11px !important; width: 100% !important; }
+        @media (max-width: 768px) { .footer-container { display: block !important; } .footer-column { width: 100% !important; padding: 0 !important; margin-bottom: 20px !important; } }
+    </style>
+
     <div class="footer-container">
         <div class="footer-column">
             <h3>التوثيق القانوني</h3>
-            <p>رقم السجل التجاري: <span style="font-family: monospace;">1009026155</span></p>
-            <p>الرقم الضريبي: <span style="font-family: monospace;">300777492300003</span></p>
+            <p>رقم السجل التجاري: <span style="color: #ffffff; font-family: monospace; letter-spacing: 1px;">1009026155</span></p>
+            <p>الرقم الضريبي: <span style="color: #ffffff; font-family: monospace; letter-spacing: 1px;">300777492300003</span></p>
         </div>
         <div class="footer-column">
             <h3>قنوات التواصل الرسمية</h3>
-            <p>📞 للاتصالات والاستفسار: <a href="tel:0508444637" dir="ltr">050 844 4637</a></p>
-            <p>✉️ البريد الإلكتروني: <a href="mailto:twbjyfynj@gmail.com">twbjyfynj@gmail.com</a></p>
+            <p><span class="footer-icon">📞</span>للاتصالات والاستفسار: <a href="tel:0508444637" dir="ltr">050 844 4637</a></p>
+            <p><span class="footer-icon">✉️</span>البريد الإلكتروني: <a href="mailto:twbjyfynj@gmail.com">twbjyfynj@gmail.com</a></p>
         </div>
     </div>
+
     <div class="footer-bottom">
         <p>حقوق النشر © Top Giving. جميع الحقوق محفوظة 2026.</p>
     </div>
 </footer>
 
 <script>
-    // قائمة المنتجات: يمكنك إضافة أي موديل جديد مستقبلاً بإضافة سطر واحد فقط هنا
-    const products = [
-        { 
-            id: 'hd01', 
-            cat: 'hoodie', 
-            name: 'هودي سحاب HD-01', 
-            model: 'HD-01', 
-            desc: 'هودي سحاب رجالي', 
-            qtyStep: 12, 
-            images: ['hd01-1.jpg', 'hd01-2.webp', 'hd01-3.webp', 'hd01-4.webp'] 
-        }
-    ];
-
-    function filterCategory(cat, tabBtn) {
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        if(tabBtn) tabBtn.classList.add('active');
-
-        const container = document.getElementById('products-container');
-        container.innerHTML = '';
-
-        const filtered = products.filter(p => p.cat === cat);
-        filtered.forEach(p => {
-            const hasMultiple = p.images.length > 1;
-            const arrows = hasMultiple ? `
-                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
-                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
-            ` : '';
-
-            const cardHtml = `
-                <div class="card" data-images="${p.images.join(',')}" data-index="0">
-                    <div class="img-box">
-                        ${arrows}
-                        <img src="${p.images[0]}" class="product-img">
-                    </div>
-                    <div class="model-info">
-                        <div class="item-cat">الصنف: ${p.desc}</div>
-                        <div class="item-mod">موديل: ${p.model}</div>
-                    </div>
-                    <div class="qty-control">
-                        <button class="btn-q" onclick="c('qty-${p.id}', ${p.qtyStep})">+</button>
-                        <span id="qty-${p.id}">${p.qtyStep}</span>
-                        <button class="btn-q" onclick="c('qty-${p.id}', -${p.qtyStep})">-</button>
-                    </div>
-                    <button class="btn-add" onclick="add('${p.name}', 'qty-${p.id}', this)">إضافة للطلب</button>
-                </div>
-            `;
-            container.insertAdjacentHTML('beforeend', cardHtml);
+    function filterProducts(cat) {
+        document.querySelectorAll('.card').forEach(c => { 
+            c.classList.remove('show'); 
+            if(c.classList.contains(cat)) c.classList.add('show'); 
         });
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        let activeTab = document.getElementById('tab-' + cat);
+        if(activeTab) activeTab.classList.add('active');
     }
-
+    
     function navImg(btn, dir) {
         let card = btn.closest('.card');
         let imgs = card.getAttribute('data-images').split(',');
@@ -153,7 +139,7 @@
         card.setAttribute('data-index', currIdx);
         card.querySelector('.product-img').src = imgs[currIdx].trim();
     }
-
+    
     function c(elementId, changeAmount) {
         let el = document.getElementById(elementId);
         if(!el) return;
@@ -163,6 +149,8 @@
         if (next < minVal) next = minVal;
         el.textContent = next;
     }
+    function updateQuantity(elementId, changeAmount) { c(elementId, changeAmount); }
+    function updateQuanlity(elementId, changeAmount) { c(elementId, changeAmount); }
 
     let order = [];
     function add(name, qtyId, btn) { 
@@ -173,25 +161,20 @@
         btn.innerText = "تمت ✅"; 
         setTimeout(() => btn.innerText = "إضافة للطلب", 1500); 
     }
-
     function updateTotal() { 
         let total = order.reduce((sum, i) => sum + i.qty, 0); 
         document.getElementById('cart-info').innerText = `الإجمالي: ${total} حبة`; 
     }
-
     function clearCart() { 
         order = []; 
         document.getElementById('cart-bar').style.display = 'none'; 
     }
-
     function send() { 
         if(order.length === 0) return; 
         let msg = "📦 *طلب جديد من TOP GIVING* 📦\n\n"; 
         order.forEach(i => { msg += `• *${i.name}*: ${i.qty} حبة\n`; }); 
         window.open(`https://wa.me/966560564719?text=${encodeURIComponent(msg)}`, '_blank'); 
     }
-
-    window.onload = () => filterCategory('hoodie', document.querySelector('.tab.active'));
 </script>
 </body>
 </html>
