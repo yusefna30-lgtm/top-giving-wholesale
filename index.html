@@ -9,7 +9,19 @@
         :root { --gold: #D4AF37; --black: #000; --card-bg: #0c0c0e; --accent: #1a1a1a; --beige: #f5f5dc; }
         body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 130px; }
         .header { padding: 20px 10px; background: #000; border-bottom: 1px solid var(--accent); position: sticky; top: 0; z-index: 1000; }
-        .brand-logo { max-height: 100px; width: auto; display: block; margin: 0 auto 15px; filter: drop-shadow(0 0 5px var(--gold)); }
+        
+        /* الشعار بشكل دائري أنيق مع توهج ذهبي */
+        .brand-logo { 
+            width: 95px; 
+            height: 95px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            display: block; 
+            margin: 0 auto 15px; 
+            border: 2px solid var(--gold); 
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); 
+        }
+
         .nav-tabs { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
         .tab { background: #111; color: #fff; padding: 10px 20px; border-radius: 25px; border: 1px solid var(--accent); cursor: pointer; transition: 0.3s; font-size: 0.9rem; }
         .tab.active { background: var(--gold); color: #000; font-weight: bold; }
