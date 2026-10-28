@@ -25,7 +25,7 @@
 
         /* أزرار الأقسام في أعلى الصفحة */
         .gateway-section {
-            max-width: 600px;
+            max-width: 650px;
             margin: 0 auto;
             padding: 0 10px;
         }
@@ -49,6 +49,12 @@
             background: var(--gold); 
             color: #000; 
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+        }
+        /* تمييز تبويب التفاصيل */
+        .tab-specs {
+            background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+            border: 1px solid var(--gold);
+            color: var(--gold);
         }
 
         /* شاشة عرض فيديوهات الإعلانات بنمط Reels */
@@ -181,8 +187,8 @@
             box-shadow: 0 0 8px var(--gold); 
         }
 
-        /* حاوية المنتجات */
-        #products-container {
+        /* حاوية المنتجات وحاوية التفاصيل */
+        #products-container, #details-container {
             display: none;
             max-width: 1200px;
             margin: 10px auto 40px;
@@ -216,6 +222,113 @@
             font-size: 0.8rem;
             cursor: pointer;
             font-family: 'Cairo';
+            transition: 0.3s;
+        }
+        .btn-hide-catalog:hover {
+            border-color: var(--gold);
+            color: #fff;
+        }
+
+        /* تصميم قسم التفاصيل والمواصفات (Glassmorphism & Gold) */
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            text-align: right;
+        }
+        @media (min-width: 768px) {
+            .specs-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        .spec-card {
+            background: linear-gradient(145deg, #0f0f12, #070708);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+        .spec-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 18px rgba(212, 175, 55, 0.2);
+        }
+        .spec-card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #1f1f24;
+            padding-bottom: 10px;
+        }
+        .spec-icon {
+            font-size: 1.5rem;
+            background: rgba(212, 175, 55, 0.12);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .spec-title {
+            color: var(--gold);
+            font-size: 1.1rem;
+            font-weight: 900;
+            margin: 0;
+        }
+        .spec-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            color: #ddd;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+        .spec-list li {
+            position: relative;
+            padding-right: 18px;
+            margin-bottom: 6px;
+        }
+        .spec-list li::before {
+            content: "◆";
+            color: var(--gold);
+            position: absolute;
+            right: 0;
+            font-size: 0.75rem;
+            top: 2px;
+        }
+
+        /* جدول المقاسات داخل قسم التفاصيل */
+        .size-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+        .size-table th {
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--gold);
+            padding: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        .size-table td {
+            padding: 8px;
+            border: 1px solid #222;
+            color: #eee;
+            background: #0a0a0c;
+        }
+        .badge-pack {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.82rem;
+            font-weight: bold;
+            margin-top: 8px;
         }
 
         /* شبكة المنتجات */
@@ -279,6 +392,7 @@
             <div class="tab" id="tab-pants" onclick="openCategory('pants', 'جاكت')">جاكت</div>
             <div class="tab" id="tab-pants.l" onclick="openCategory('pants.l', 'بنطلونات')">بنطلونات</div>
             <div class="tab" id="tab-shirts" onclick="openCategory('shirts', 'قميص')">قميص</div>
+            <div class="tab tab-specs" id="tab-details" onclick="openDetails()">📋 التفاصيل</div>
         </div>
     </div>
 </div>
@@ -323,11 +437,98 @@
     </div>
 </div>
 
+<!-- قسم التفاصيل والمواصفات الفنية (يظهر عند الضغط على تبويب التفاصيل) -->
+<div id="details-container">
+    <div class="section-header-bar">
+        <h3 class="section-header-title">📋 دليل المواصفات وتفاصيل الجملة</h3>
+        <button class="btn-hide-catalog" onclick="hideAllSections()">إغلاق ✕</button>
+    </div>
+
+    <div class="specs-grid">
+        <!-- البطاقة 1: مكونات الخامة والنسيج -->
+        <div class="spec-card">
+            <div class="spec-card-header">
+                <div class="spec-icon">🧵</div>
+                <h4 class="spec-title">المكونات وجودة القماش</h4>
+            </div>
+            <ul class="spec-list">
+                <li><strong>نوع الخامة:</strong> قطن ميلتون ثقيل (Heavyweight Fleece) معالج ضد التوبير والانكماش.</li>
+                <li><strong>التبطين الداخلي:</strong> بطانة شتوية ناعمة ومريحة على البشرة تمنح دفئاً مثالياً وثباتاً في القوام.</li>
+                <li><strong>ثبات الألوان:</strong> صباغة عالية الجودة تحافظ على رونق اللون الأساسي حتى مع الغسيل المتكرر.</li>
+                <li><strong>الطباعة والتطريز:</strong> تقنيات طباعة وتطريز عالية الكثافة مقاومة للتقشر أو البهتان.</li>
+            </ul>
+        </div>
+
+        <!-- البطاقة 2: القصة والتصميم (Fit & Cut) -->
+        <div class="spec-card">
+            <div class="spec-card-header">
+                <div class="spec-icon">✂️</div>
+                <h4 class="spec-title">القصة والتفصيل (Fit & Style)</h4>
+            </div>
+            <ul class="spec-list">
+                <li><strong>نوع القصة:</strong> قصة عصرية مريحة (Modern Relaxed / Oversized Fit) تناسب الذوق الشبابي الحديث.</li>
+                <li><strong>القبعة (الزنط):</strong> مبطنة بطبقة مزدوجة بلون متناسق (Double-Layered Hood) لمظهر فخم ومتماسك.</li>
+                <li><strong>الأساور والحاشية:</strong> ريب مطاطي مرن (Ribbed Cuffs & Hem) يحافظ على شكله ولا يرتخي مع الاستخدام.</li>
+                <li><strong>الجيب الأمامي:</strong> جيب كانغرو واسع ومقوى بخياطة مزدوجة عند الزوايا.</li>
+            </ul>
+        </div>
+
+        <!-- البطاقة 3: نظام الباكت وتوزيعة المقاسات والألوان -->
+        <div class="spec-card" style="grid-column: 1 / -1;">
+            <div class="spec-card-header">
+                <div class="spec-icon">📦</div>
+                <h4 class="spec-title">نظام التعبئة وتوزيعة المقاسات (الدستة / الباكت)</h4>
+            </div>
+            <p style="color:#ccc; font-size:0.9rem; margin-top:0;">
+                تُباع المنتجات بنظام الجملة (الباكت الكامل)، حيث يحتوي كل باكت على تشكيلة متكاملة من المقاسات والألوان الجاهزة للعرض المباشر في معرضك:
+            </p>
+            <span class="badge-pack">الباكت القياسي = 16 قطعة (4 مقاسات × 4 ألوان)</span>
+
+            <table class="size-table">
+                <thead>
+                    <tr>
+                        <th>المقاس (Size)</th>
+                        <th>العرض (سم)</th>
+                        <th>الطول (سم)</th>
+                        <th>الكمية داخل الباكت</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>M</strong></td>
+                        <td>56 سم</td>
+                        <td>70 سم</td>
+                        <td>4 قطع (لون من كل شكل)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>L</strong></td>
+                        <td>58 سم</td>
+                        <td>72 سم</td>
+                        <td>4 قطع (لون من كل شكل)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>XL</strong></td>
+                        <td>60 سم</td>
+                        <td>74 سم</td>
+                        <td>4 قطع (لون من كل شكل)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>XXL</strong></td>
+                        <td>62 سم</td>
+                        <td>76 سم</td>
+                        <td>4 قطع (لون من كل شكل)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 <!-- حاوية المنتجات: تفتح بسلاسة تحت الفيديو عند النقر على أي قسم بالأعلى -->
 <div id="products-container">
     <div class="section-header-bar">
         <h3 class="section-header-title" id="current-category-title">الكتالوج</h3>
-        <button class="btn-hide-catalog" onclick="hideCategory()">إغلاق الكتالوج ✕</button>
+        <button class="btn-hide-catalog" onclick="hideAllSections()">إغلاق الكتالوج ✕</button>
     </div>
 
     <div class="grid">
@@ -462,8 +663,9 @@
 </footer>
 
 <script>
-    // فتح القسم والتمرير بسلاسة لمنتجاته
+    // فتح قسم منتجات والتمرير إليه
     function openCategory(cat, title) {
+        document.getElementById('details-container').style.display = 'none';
         const prodContainer = document.getElementById('products-container');
         prodContainer.style.display = 'block';
 
@@ -484,9 +686,22 @@
         prodContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    // إغلاق الكتالوج والعودة لأعلى الصفحة
-    function hideCategory() {
+    // فتح قسم التفاصيل والمواصفات
+    function openDetails() {
         document.getElementById('products-container').style.display = 'none';
+        const detailsContainer = document.getElementById('details-container');
+        detailsContainer.style.display = 'block';
+
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.getElementById('tab-details').classList.add('active');
+
+        detailsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // إغلاق الكتالوج أو التفاصيل والعودة لأعلى الصفحة
+    function hideAllSections() {
+        document.getElementById('products-container').style.display = 'none';
+        document.getElementById('details-container').style.display = 'none';
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
