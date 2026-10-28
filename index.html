@@ -25,21 +25,20 @@
         .tab { background: #111; color: #fff; padding: 10px 20px; border-radius: 25px; border: 1px solid var(--accent); cursor: pointer; transition: 0.3s; font-size: 0.9rem; }
         .tab.active { background: var(--gold); color: #000; font-weight: bold; }
         
-        /* شاشة إعلانات الفيديو المتحركة */
-        .promo-slider-container { max-width: 1200px; margin: 15px auto 25px; padding: 0 12px; }
+        /* شاشة عرض فيديوهات الإعلانات بنمط Reels الفاخر */
+        .promo-slider-container { max-width: 480px; margin: 15px auto 25px; padding: 0 12px; }
         .promo-slider { 
             position: relative; 
-            border-radius: 20px; 
+            border-radius: 22px; 
             overflow: hidden; 
             background: #000; 
-            border: 1px solid rgba(212, 175, 55, 0.4); 
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2); 
-            height: 220px; 
+            border: 2px solid rgba(212, 175, 55, 0.5); 
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.25); 
+            aspect-ratio: 9 / 14; 
             display: flex; 
             align-items: center; 
             justify-content: center;
         }
-        @media (min-width: 768px) { .promo-slider { height: 280px; } }
 
         .promo-slide { 
             display: none; 
@@ -50,7 +49,6 @@
         }
         .promo-slide.active { display: block; }
 
-        /* فيديو الخلفية الترويجي */
         .bg-video {
             width: 100%;
             height: 100%;
@@ -61,84 +59,81 @@
             z-index: 1;
         }
 
-        /* تدرج لوني لضمان قراءة النصوص بوضوح فوق الفيديو */
         .video-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(180deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.85) 100%);
+            background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, transparent 40%, rgba(0,0,0,0.85) 100%);
             z-index: 2;
         }
 
-        /* محتوى الإعلان النصي */
         .promo-content {
-            position: relative;
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            right: 0;
             z-index: 3;
-            height: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
-            padding: 20px 50px;
+            padding: 0 20px;
             box-sizing: border-box;
-            animation: textFade 0.6s ease;
+            animation: textFade 0.5s ease;
         }
-        @keyframes textFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes textFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .promo-badge { 
             display: inline-block; 
-            background: rgba(0, 0, 0, 0.65); 
+            background: rgba(0, 0, 0, 0.7); 
             color: var(--gold); 
             border: 1px solid var(--gold); 
             backdrop-filter: blur(4px);
             padding: 4px 16px; 
             border-radius: 20px; 
-            font-size: 0.85rem; 
+            font-size: 0.8rem; 
             font-weight: bold; 
-            margin-bottom: 8px; 
+            margin-bottom: 6px; 
         }
         .promo-title { 
             color: #fff; 
-            font-size: 1.35rem; 
+            font-size: 1.25rem; 
             font-weight: 900; 
-            margin: 0 0 6px 0; 
+            margin: 0 0 4px 0; 
             text-shadow: 0 2px 10px rgba(0,0,0,0.9);
         }
         .promo-desc { 
-            color: #ddd; 
-            font-size: 0.9rem; 
+            color: #e0e0e0; 
+            font-size: 0.85rem; 
             margin: 0; 
-            max-width: 600px;
-            line-height: 1.5; 
+            line-height: 1.4; 
             text-shadow: 0 2px 8px rgba(0,0,0,0.9);
         }
 
-        /* عناصر التحكم بالسلايدر */
         .slider-arrow { 
             position: absolute; 
             top: 50%; 
             transform: translateY(-50%); 
-            background: rgba(0, 0, 0, 0.7); 
+            background: rgba(0, 0, 0, 0.65); 
             color: var(--gold); 
-            width: 36px; 
-            height: 36px; 
+            width: 38px; 
+            height: 38px; 
             border-radius: 50%; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             cursor: pointer; 
-            border: 1px solid rgba(212, 175, 55, 0.5); 
+            border: 1px solid rgba(212, 175, 55, 0.4); 
             transition: 0.3s; 
             user-select: none; 
             z-index: 10; 
             font-size: 1.1rem; 
         }
-        .slider-arrow:hover { background: var(--gold); color: #000; box-shadow: 0 0 10px var(--gold); }
-        .slider-prev { right: 12px; }
-        .slider-next { left: 12px; }
+        .slider-arrow:hover { background: var(--gold); color: #000; box-shadow: 0 0 12px var(--gold); }
+        .slider-prev { right: 10px; }
+        .slider-next { left: 10px; }
 
         .slider-dots { 
             position: absolute; 
-            bottom: 12px; 
+            bottom: 10px; 
             left: 50%; 
             transform: translateX(-50%); 
             display: flex; 
@@ -149,18 +144,18 @@
             width: 8px; 
             height: 8px; 
             border-radius: 50%; 
-            background: rgba(255, 255, 255, 0.4); 
+            background: rgba(255, 255, 255, 0.35); 
             cursor: pointer; 
             transition: 0.3s; 
         }
         .s-dot.active { 
             background: var(--gold); 
-            width: 24px; 
+            width: 22px; 
             border-radius: 10px; 
             box-shadow: 0 0 8px var(--gold); 
         }
 
-        /* شبكة المنتجات والبطاقات */
+        /* شبكة المنتجات */
         .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 1200px; margin: 0 auto; padding: 0 12px; }
         @media (min-width: 992px) { .grid { grid-template-columns: repeat(4, 1fr); } }
         
@@ -222,58 +217,42 @@
     </div>
 </div>
 
-<!-- شاشة إعلانات الفيديو المتحركة -->
+<!-- شاشة عرض الفيديو الإعلاني الطولي -->
 <div class="promo-slider-container">
     <div class="promo-slider">
         
-        <!-- إعلان فيديو 1: استعراض التشكيلة -->
+        <!-- الفيديو الأول: أنيميشن الشعار الفاخر -->
         <div class="promo-slide active">
-            <video class="bg-video" autoplay muted loop playsinline poster="hd01-1.jpg">
-                <source src="promo-video-1.mp4" type="video/mp4">
+            <video class="bg-video" autoplay muted loop playsinline>
+                <source src="tg-intro.mp4" type="video/mp4">
             </video>
             <div class="video-overlay"></div>
             <div class="promo-content">
-                <span class="promo-badge">🎬 جديد التشكيلة الشتوية</span>
-                <h2 class="promo-title">تصاميم هودي عصرية بجودة استثنائية</h2>
-                <p class="promo-desc">قصات انسيابية دقيقة وألوان متناسقة تلبي أعلى تطلعات عملائك في قطاع التجزئة.</p>
+                <span class="promo-badge">👑 TOP GIVING 2026</span>
+                <h2 class="promo-title">التشكيلة الشتوية الفاخرة</h2>
+                <p class="promo-desc">تصاميم مبتكرة وخامات معتمدة لتجارة الجملة بالمملكة.</p>
             </div>
         </div>
 
-        <!-- إعلان فيديو 2: تفاصيل الخامة والتطريز -->
+        <!-- الفيديو الثاني: استعراض تفاصيل القطعة والتطريز -->
         <div class="promo-slide">
-            <video class="bg-video" muted loop playsinline poster="hd02-1.webp">
-                <source src="promo-video-2.mp4" type="video/mp4">
+            <video class="bg-video" muted loop playsinline>
+                <source src="tg-sweatshirt.mp4" type="video/mp4">
             </video>
             <div class="video-overlay"></div>
             <div class="promo-content">
-                <span class="promo-badge">💎 تفاصيل الخامة والتطريز</span>
-                <h2 class="promo-title">قطن 100% ميلتون ثقيل معالج (320 GSM)</h2>
-                <p class="promo-desc">مقاومة فائقة للوبر والتمدد مع تطريز بارز عالي الدقة يمنح القطعة فخامة تدوم طويلاً.</p>
+                <span class="promo-badge">🧵 تفاصيل الخامة والتطريز</span>
+                <h2 class="promo-title">تطريز بارز وخامات قطنية ثقيلة</h2>
+                <p class="promo-desc">أعلى معايير الجودة لتلبية متطلبات معارض التجزئة.</p>
             </div>
         </div>
 
-        <!-- إعلان فيديو 3: التوريد والتجهيز -->
-        <div class="promo-slide">
-            <video class="bg-video" muted loop playsinline poster="hd03-1.webp">
-                <source src="promo-video-3.mp4" type="video/mp4">
-            </video>
-            <div class="video-overlay"></div>
-            <div class="promo-content">
-                <span class="promo-badge">📦 التوريد المباشر</span>
-                <h2 class="promo-title">تجهيز وشحن فوري لكافة مناطق المملكة</h2>
-                <p class="promo-desc">طلب سريع بنظام الدستة (16 حبة) مع خيارات استلام مباشر من مستودع الرياض.</p>
-            </div>
-        </div>
-
-        <!-- أزرار التنقل -->
         <div class="slider-arrow slider-prev" onclick="movePromo(-1)">❯</div>
         <div class="slider-arrow slider-next" onclick="movePromo(1)">❮</div>
 
-        <!-- مؤشرات السلايدر -->
         <div class="slider-dots">
             <span class="s-dot active" onclick="setPromo(0)"></span>
             <span class="s-dot" onclick="setPromo(1)"></span>
-            <span class="s-dot" onclick="setPromo(2)"></span>
         </div>
     </div>
 </div>
@@ -483,7 +462,6 @@
     function showPromo(idx) {
         if (slides.length === 0) return;
 
-        // إيقاف الفيديو السابق
         let prevVideo = slides[promoIdx].querySelector('video');
         if (prevVideo) {
             prevVideo.pause();
@@ -497,10 +475,9 @@
         slides.forEach((s, i) => s.classList.toggle('active', i === promoIdx));
         dots.forEach((d, i) => d.classList.toggle('active', i === promoIdx));
 
-        // تشغيل فيديو الشريحة النشطة فوراً
         let currVideo = slides[promoIdx].querySelector('video');
         if (currVideo) {
-            currVideo.play().catch(e => console.log("تشغيل الفيديو بانتظار تفاعل المستخدم"));
+            currVideo.play().catch(e => console.log("بانتظار تفاعل المستخدم"));
         }
     }
 
@@ -518,7 +495,7 @@
         clearInterval(promoTimer);
         promoTimer = setInterval(() => {
             showPromo(promoIdx + 1);
-        }, 6500); // الانتقال كل 6.5 ثوانٍ لإتاحة وقت كافٍ لمشاهدة الفيديو
+        }, 8000); // 8 ثوانٍ لتغطية مدة المقطع كاملة
     }
     resetPromoTimer();
 </script>
