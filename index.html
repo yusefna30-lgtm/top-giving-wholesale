@@ -218,67 +218,77 @@
             font-family: 'Cairo';
         }
 
-        /* شبكة المنتجات */
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 0 auto; }
+        /* شبكة المنتجات (مربعة وبارزة) */
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 0 auto; }
         @media (min-width: 992px) { .grid { grid-template-columns: repeat(4, 1fr); } }
         
-        .card { display: none; background: var(--card-bg); padding: 15px; border-radius: 18px; border: 1px solid var(--accent); flex-direction: column; align-items: center; transition: all 0.3s ease; position: relative; }
+        .card { display: none; background: var(--card-bg); padding: 14px; border-radius: 18px; border: 1px solid var(--accent); flex-direction: column; align-items: center; transition: all 0.3s ease; position: relative; }
         .card.show { display: flex; }
         .card:hover { box-shadow: 0 0 20px var(--gold); border-color: var(--gold); transform: translateY(-2px); }
         
-        .img-box { width: 100%; height: 220px; border-radius: 12px; overflow: hidden; background: #fff; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; position: relative; }
-        .product-img { max-width: 100%; max-height: 100%; object-fit: contain; transform: scale(1.1); transition: transform 0.3s ease; cursor: zoom-in; }
-        .img-box:hover .product-img { transform: scale(1.2); }
+        .img-box { 
+            width: 100%; 
+            aspect-ratio: 1 / 1; /* مربعة وبارزة بالكامل */
+            border-radius: 14px; 
+            overflow: hidden; 
+            background: #fff; 
+            margin-bottom: 12px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            position: relative; 
+            cursor: pointer; 
+        }
+        .product-img { max-width: 100%; max-height: 100%; object-fit: contain; transform: scale(1.05); transition: transform 0.3s ease; }
+        .img-box:hover .product-img { transform: scale(1.15); }
         
+        /* تلميح بصري فوق الصورة ليدل على أن النقر يعرض التفاصيل */
+        .img-hint {
+            position: absolute;
+            bottom: 8px;
+            background: rgba(0, 0, 0, 0.75);
+            color: var(--gold);
+            font-size: 0.72rem;
+            padding: 3px 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            pointer-events: none;
+            backdrop-filter: blur(4px);
+        }
+
         .arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0, 0, 0, 0.5); color: var(--gold); width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 1.2rem; font-weight: bold; cursor: pointer; user-select: none; transition: 0.3s; z-index: 10; }
         .arrow:hover { background: var(--gold); color: #000; box-shadow: 0 0 10px var(--gold); transform: translateY(-50%) scale(1.1); }
         .arrow-right { right: 8px; }
         .arrow-left { left: 8px; }
         
-        .model-info { margin-bottom: 12px; width: 100%; text-align: center; }
-        .item-cat { color: #aaa; font-size: 0.85rem; }
-        .item-mod { color: #fff; font-weight: bold; font-size: 1rem; margin-top: 2px; }
+        .model-info { margin-bottom: 10px; width: 100%; text-align: center; }
+        .item-cat { color: #aaa; font-size: 0.8rem; }
+        .item-mod { color: #fff; font-weight: bold; font-size: 0.95rem; margin-top: 2px; }
 
-        .qty-control { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 12px; background: #1a1a1a; padding: 8px; border-radius: 10px; width: 100%; box-sizing: border-box; }
-        .btn-q { background: #252525; color: #fff; border: 1px solid var(--gold); width: 34px; height: 34px; border-radius: 8px; cursor: pointer; }
+        .qty-control { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 12px; background: #1a1a1a; padding: 6px; border-radius: 10px; width: 100%; box-sizing: border-box; }
+        .btn-q { background: #252525; color: #fff; border: 1px solid var(--gold); width: 32px; height: 32px; border-radius: 8px; cursor: pointer; font-size: 1rem; }
         
-        /* أزرار الكرت (إضافة للطلب + التفاصيل بجانب بعض) */
-        .card-actions {
-            display: flex;
-            gap: 8px;
-            width: 100%;
-        }
+        /* زر إضافة للطلب كبير وواضح وبدون ازدحام */
         .btn-add { 
-            flex: 2;
+            width: 100%;
             background: linear-gradient(135deg, #D4AF37, #8A6D3B); 
             color: #000; 
-            padding: 10px 6px; 
+            padding: 11px; 
             border-radius: 10px; 
             font-weight: 900; 
             border: none; 
             cursor: pointer; 
             font-family: 'Cairo';
-            font-size: 0.85rem;
-        }
-        .btn-spec {
-            flex: 1.2;
-            background: #161618;
-            color: var(--gold);
-            border: 1px solid rgba(212, 175, 55, 0.5);
-            padding: 10px 6px;
-            border-radius: 10px;
-            font-weight: bold;
-            cursor: pointer;
-            font-family: 'Cairo';
-            font-size: 0.8rem;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
             transition: 0.3s;
         }
-        .btn-spec:hover {
-            background: var(--gold);
-            color: #000;
+        .btn-add:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
         }
 
-        /* نافذة تفاصيل الموديل المنبثقة (Modal) */
+        /* نافذة تفاصيل الموديل المنبثقة (تفتح عند النقر على الصورة) */
         .spec-modal {
             display: none;
             position: fixed;
@@ -347,7 +357,7 @@
         .cart-flex { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .btn-clear { background: #333; color: #fff; border: 1px solid #555; padding: 8px 15px; border-radius: 10px; cursor: pointer; font-family: 'Cairo'; }
 
-        /* نافذة تكبير الصورة */
+        /* نافذة تكبير الصورة (عند الضغط عليها داخل نافذة التفاصيل أو ما شابه) */
         .img-modal { display: none; position: fixed; z-index: 9999; inset: 0; background: rgba(0, 0, 0, 0.92); backdrop-filter: blur(8px); align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
         .modal-content { max-width: 90vw; max-height: 85vh; object-fit: contain; border-radius: 14px; border: 2px solid var(--gold); box-shadow: 0 0 30px rgba(212, 175, 55, 0.4); animation: zoomIn 0.25s ease; }
         .close-modal { position: absolute; top: 25px; right: 25px; color: var(--gold); font-size: 35px; font-weight: bold; cursor: pointer; line-height: 1; transition: 0.2s; }
@@ -433,10 +443,11 @@
     <div class="grid">
         <!-- الموديل الأول HD-01 -->
         <div class="card tshirt show" data-images="hd01-1.jpg.png,hd01-2.jpg.png,hd01-3.jpg.png,hd01-4.jpg.png" data-index="0">
-            <div class="img-box">
-                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
-                <img src="hd01-1.jpg.png" id="it-hd01" class="product-img" onclick="openModal(this.src)">
-                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            <div class="img-box" onclick="showSpec('HD-01')">
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="hd01-1.jpg.png" id="it-hd01" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
+                <div class="img-hint">🔍 اضغط للصورة أو التفاصيل</div>
             </div>
             <div class="model-info">
                 <div class="item-cat">الصنف: هودي بلوفر رجالي (EXPLORE)</div>
@@ -447,18 +458,16 @@
                 <span id="qt-hd01">16</span>
                 <button class="btn-q" onclick="c('qt-hd01', -16)">-</button>
             </div>
-            <div class="card-actions">
-                <button class="btn-add" onclick="add('هودي بلوفر EXPLORE HD-01', 'qt-hd01', this)">إضافة للطلب</button>
-                <button class="btn-spec" onclick="showSpec('HD-01')">📋 التفاصيل</button>
-            </div>
+            <button class="btn-add" onclick="add('هودي بلوفر EXPLORE HD-01', 'qt-hd01', this)">إضافة للطلب</button>
         </div>
 
         <!-- الموديل الثاني HD-02 -->
         <div class="card tshirt show" data-images="hd02-1.jpg.png,hd02-2.jpg.png,hd02-3.jpg.png,hd02-4.jpg.png" data-index="0">
-            <div class="img-box">
-                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
-                <img src="hd02-1.jpg.png" id="it-hd02" class="product-img" onclick="openModal(this.src)">
-                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            <div class="img-box" onclick="showSpec('HD-02')">
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="hd02-1.jpg.png" id="it-hd02" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
+                <div class="img-hint">🔍 اضغط للصورة أو التفاصيل</div>
             </div>
             <div class="model-info">
                 <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
@@ -469,18 +478,16 @@
                 <span id="qt-hd02">16</span>
                 <button class="btn-q" onclick="c('qt-hd02', -16)">-</button>
             </div>
-            <div class="card-actions">
-                <button class="btn-add" onclick="add('هودي بلوفر HD-02', 'qt-hd02', this)">إضافة للطلب</button>
-                <button class="btn-spec" onclick="showSpec('HD-02')">📋 التفاصيل</button>
-            </div>
+            <button class="btn-add" onclick="add('هودي بلوفر HD-02', 'qt-hd02', this)">إضافة للطلب</button>
         </div>
 
         <!-- الموديل الثالث HD-03 -->
         <div class="card tshirt show" data-images="hd03-1.jpg.png,hd03-2.jpg.png,hd03-3.jpg.png,hd03-4.jpg.png" data-index="0">
-            <div class="img-box">
-                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
-                <img src="hd03-1.jpg.png" id="it-hd03" class="product-img" onclick="openModal(this.src)">
-                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            <div class="img-box" onclick="showSpec('HD-03')">
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="hd03-1.jpg.png" id="it-hd03" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
+                <div class="img-hint">🔍 اضغط للصورة أو التفاصيل</div>
             </div>
             <div class="model-info">
                 <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
@@ -491,18 +498,16 @@
                 <span id="qt-hd03">16</span>
                 <button class="btn-q" onclick="c('qt-hd03', -16)">-</button>
             </div>
-            <div class="card-actions">
-                <button class="btn-add" onclick="add('هودي بلوفر HD-03', 'qt-hd03', this)">إضافة للطلب</button>
-                <button class="btn-spec" onclick="showSpec('HD-03')">📋 التفاصيل</button>
-            </div>
+            <button class="btn-add" onclick="add('هودي بلوفر HD-03', 'qt-hd03', this)">إضافة للطلب</button>
         </div>
 
         <!-- الموديل الرابع HD-04 -->
         <div class="card tshirt show" data-images="hd04-1.jpg.png,hd04-2.jpg.png,hd04-3.jpg.png,hd04-4.jpg.png" data-index="0">
-            <div class="img-box">
-                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
-                <img src="hd04-1.jpg.png" id="it-hd04" class="product-img" onclick="openModal(this.src)">
-                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            <div class="img-box" onclick="showSpec('HD-04')">
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="hd04-1.jpg.png" id="it-hd04" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
+                <div class="img-hint">🔍 اضغط للصورة أو التفاصيل</div>
             </div>
             <div class="model-info">
                 <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
@@ -513,18 +518,16 @@
                 <span id="qt-hd04">16</span>
                 <button class="btn-q" onclick="c('qt-hd04', -16)">-</button>
             </div>
-            <div class="card-actions">
-                <button class="btn-add" onclick="add('هودي بلوفر HD-04', 'qt-hd04', this)">إضافة للطلب</button>
-                <button class="btn-spec" onclick="showSpec('HD-04')">📋 التفاصيل</button>
-            </div>
+            <button class="btn-add" onclick="add('هودي بلوفر HD-04', 'qt-hd04', this)">إضافة للطلب</button>
         </div>
 
         <!-- الموديل الخامس HD-05 -->
         <div class="card tshirt show" data-images="hd05-1.jpg.png,hd05-2.jpg.png,hd05-3.jpg.png,hd05-4.jpg.png" data-index="0">
-            <div class="img-box">
-                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
-                <img src="hd05-1.jpg.png" id="it-hd05" class="product-img" onclick="openModal(this.src)">
-                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            <div class="img-box" onclick="showSpec('HD-05')">
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="hd05-1.jpg.png" id="it-hd05" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
+                <div class="img-hint">🔍 اضغط للصورة أو التفاصيل</div>
             </div>
             <div class="model-info">
                 <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
@@ -535,15 +538,12 @@
                 <span id="qt-hd05">16</span>
                 <button class="btn-q" onclick="c('qt-hd05', -16)">-</button>
             </div>
-            <div class="card-actions">
-                <button class="btn-add" onclick="add('هودي بلوفر HD-05', 'qt-hd05', this)">إضافة للطلب</button>
-                <button class="btn-spec" onclick="showSpec('HD-05')">📋 التفاصيل</button>
-            </div>
+            <button class="btn-add" onclick="add('هودي بلوفر HD-05', 'qt-hd05', this)">إضافة للطلب</button>
         </div>
     </div>
 </div>
 
-<!-- نافذة عرض تفاصيل الموديل (تتغير بياناتها حسب الموديل المختار) -->
+<!-- نافذة عرض تفاصيل الموديل (تفتح بالنقر على الصورة) -->
 <div id="spec-modal" class="spec-modal" onclick="closeSpecModal(event)">
     <div class="spec-modal-box">
         <div class="spec-modal-close" onclick="document.getElementById('spec-modal').style.display='none'">✕</div>
@@ -587,7 +587,7 @@
 </footer>
 
 <script>
-    // قاعدة بيانات مواصفات كل موديل على حدة (يمكنك تعديل أي تفصيل لكل موديل بسهولة)
+    // قاعدة بيانات مواصفات كل موديل على حدة
     const modelSpecs = {
         'HD-01': {
             title: 'مواصفات موديل HD-01 (EXPLORE)',
