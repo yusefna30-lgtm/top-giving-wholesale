@@ -7,7 +7,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #D4AF37; --black: #000; --card-bg: #0c0c0e; --accent: #1a1a1a; --beige: #f5f5dc; }
+        html { scroll-behavior: smooth; }
         body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 130px; }
+        
         .header { padding: 20px 10px; background: #000; border-bottom: 1px solid var(--accent); position: sticky; top: 0; z-index: 1000; }
         
         .brand-logo { 
@@ -16,17 +18,13 @@
             border-radius: 50%; 
             object-fit: cover; 
             display: block; 
-            margin: 0 auto 15px; 
+            margin: 0 auto 12px; 
             border: 2px solid var(--gold); 
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); 
         }
 
-        .nav-tabs { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
-        .tab { background: #111; color: #fff; padding: 10px 20px; border-radius: 25px; border: 1px solid var(--accent); cursor: pointer; transition: 0.3s; font-size: 0.9rem; }
-        .tab.active { background: var(--gold); color: #000; font-weight: bold; }
-        
-        /* شاشة عرض فيديوهات الإعلانات بنمط Reels */
-        .promo-slider-container { max-width: 480px; margin: 15px auto 25px; padding: 0 12px; }
+        /* شاشة عرض فيديوهات الإعلانات بنمط Reels الفاخر */
+        .promo-slider-container { max-width: 480px; margin: 15px auto 20px; padding: 0 12px; }
         .promo-slider { 
             position: relative; 
             border-radius: 22px; 
@@ -62,7 +60,7 @@
         .video-overlay { 
             position: absolute; 
             inset: 0; 
-            background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, transparent 40%, rgba(0,0,0,0.85) 100%); 
+            background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, transparent 40%, rgba(0,0,0,0.85) 100%); 
             z-index: 2; 
         }
 
@@ -155,8 +153,80 @@
             box-shadow: 0 0 8px var(--gold); 
         }
 
+        /* بوابات الأقسام الفاخرة */
+        .gateway-section {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            padding: 0 15px;
+        }
+        .gateway-title {
+            color: var(--gold);
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            margin-bottom: 14px;
+            text-transform: uppercase;
+        }
+        .nav-tabs { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .tab { 
+            background: #111; 
+            color: #fff; 
+            padding: 12px 22px; 
+            border-radius: 25px; 
+            border: 1px solid rgba(212, 175, 55, 0.4); 
+            cursor: pointer; 
+            transition: 0.3s; 
+            font-size: 0.92rem; 
+            font-weight: bold;
+        }
+        .tab:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+        .tab.active { 
+            background: var(--gold); 
+            color: #000; 
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+        }
+
+        /* قسم المنتجات (مخفي بالبداية ويظهر عند اختيار قسم) */
+        #products-container {
+            display: none;
+            max-width: 1200px;
+            margin: 10px auto 40px;
+            padding: 0 12px;
+            animation: fadeIn 0.4s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .section-header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--accent);
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+        .section-header-title {
+            color: var(--gold);
+            font-size: 1.2rem;
+            font-weight: 900;
+            margin: 0;
+        }
+        .btn-hide-catalog {
+            background: #1a1a1a;
+            color: #aaa;
+            border: 1px solid #333;
+            padding: 6px 14px;
+            border-radius: 14px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            font-family: 'Cairo';
+        }
+
         /* شبكة المنتجات */
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 1200px; margin: 0 auto; padding: 0 12px; }
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 0 auto; }
         @media (min-width: 992px) { .grid { grid-template-columns: repeat(4, 1fr); } }
         
         .card { display: none; background: var(--card-bg); padding: 15px; border-radius: 18px; border: 1px solid var(--accent); flex-direction: column; align-items: center; transition: all 0.3s ease; position: relative; }
@@ -203,21 +273,13 @@
         @media (max-width: 768px) { .footer-container { display: block !important; } .footer-column { width: 100% !important; padding: 0 !important; margin-bottom: 20px !important; } }
     </style>
 </head>
-<body onload="filterProducts('tshirt')">
+<body>
 
 <div class="header">
     <img src="TOP%20GIVING%20logo.jpg" alt="TOP GIVING" class="brand-logo">
-    
-    <div class="nav-tabs">
-        <div class="tab active" id="tab-tshirt" onclick="filterProducts('tshirt')">هودي رجالي</div>
-        <div class="tab" id="tab-set" onclick="filterProducts('set')">أطقم شبابي</div>
-        <div class="tab" id="tab-pants" onclick="filterProducts('pants')">جاكت</div>
-        <div class="tab" id="tab-pants.l" onclick="filterProducts('pants.l')">بنطلونات</div>
-        <div class="tab" id="tab-shirts" onclick="filterProducts('shirts')">قميص</div>
-    </div>
 </div>
 
-<!-- شاشة عرض الفيديو الإعلاني الطولي -->
+<!-- واجهة الفيديوهات الترحيبية والترويجية -->
 <div class="promo-slider-container">
     <div class="promo-slider">
         
@@ -257,100 +319,120 @@
     </div>
 </div>
 
-<div class="grid">
-    <!-- الموديل الأول HD-01 -->
-    <div class="card tshirt show" data-images="hd01-1.jpg,hd01-2.webp,hd01-3.webp,hd01-4.webp" data-index="0">
-        <div class="img-box">
-            <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
-            <img src="hd01-1.jpg" id="it-hd01" class="product-img" onclick="openModal(this.src)">
-            <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
-        </div>
-        <div class="model-info">
-            <div class="item-cat">الصنف: هودي سحاب رجالي</div>
-            <div class="item-mod">موديل: HD-01</div>
-        </div>
-        <div class="qty-control">
-            <button class="btn-q" onclick="c('qt-hd01', 16)">+</button>
-            <span id="qt-hd01">16</span>
-            <button class="btn-q" onclick="c('qt-hd01', -16)">-</button>
-        </div>
-        <button class="btn-add" onclick="add('هودي سحاب HD-01', 'qt-hd01', this)">إضافة للطلب</button>
+<!-- بوابات الدخول للأقسام -->
+<div class="gateway-section">
+    <div class="gateway-title">— اختر القسم لتصفح كتالوج الجملة —</div>
+    <div class="nav-tabs">
+        <div class="tab" id="tab-tshirt" onclick="openCategory('tshirt', 'هودي رجالي')">هودي رجالي</div>
+        <div class="tab" id="tab-set" onclick="openCategory('set', 'أطقم شبابي')">أطقم شبابي</div>
+        <div class="tab" id="tab-pants" onclick="openCategory('pants', 'جاكت')">جاكت</div>
+        <div class="tab" id="tab-pants.l" onclick="openCategory('pants.l', 'بنطلونات')">بنطلونات</div>
+        <div class="tab" id="tab-shirts" onclick="openCategory('shirts', 'قميص')">قميص</div>
+    </div>
+</div>
+
+<!-- حاوية المنتجات: تفتح تلقائياً عند النقر على أي قسم -->
+<div id="products-container">
+    <div class="section-header-bar">
+        <h3 class="section-header-title" id="current-category-title">الكتالوج</h3>
+        <button class="btn-hide-catalog" onclick="hideCategory()">إغلاق الكتالوج ✕</button>
     </div>
 
-    <!-- الموديل الثاني HD-02 -->
-    <div class="card tshirt show" data-images="hd02-1.webp,hd02-2.webp,hd02-3.webp,hd02-4.webp" data-index="0">
-        <div class="img-box">
-            <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
-            <img src="hd02-1.webp" id="it-hd02" class="product-img" onclick="openModal(this.src)">
-            <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+    <div class="grid">
+        <!-- الموديل الأول HD-01 -->
+        <div class="card tshirt show" data-images="hd01-1.jpg,hd01-2.webp,hd01-3.webp,hd01-4.webp" data-index="0">
+            <div class="img-box">
+                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
+                <img src="hd01-1.jpg" id="it-hd01" class="product-img" onclick="openModal(this.src)">
+                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info">
+                <div class="item-cat">الصنف: هودي سحاب رجالي</div>
+                <div class="item-mod">موديل: HD-01</div>
+            </div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt-hd01', 16)">+</button>
+                <span id="qt-hd01">16</span>
+                <button class="btn-q" onclick="c('qt-hd01', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('هودي سحاب HD-01', 'qt-hd01', this)">إضافة للطلب</button>
         </div>
-        <div class="model-info">
-            <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
-            <div class="item-mod">موديل: HD-02</div>
-        </div>
-        <div class="qty-control">
-            <button class="btn-q" onclick="c('qt-hd02', 16)">+</button>
-            <span id="qt-hd02">16</span>
-            <button class="btn-q" onclick="c('qt-hd02', -16)">-</button>
-        </div>
-        <button class="btn-add" onclick="add('هودي بلوفر HD-02', 'qt-hd02', this)">إضافة للطلب</button>
-    </div>
 
-    <!-- الموديل الثالث HD-03 -->
-    <div class="card tshirt show" data-images="hd03-1.webp,hd03-2.webp,hd03-3.webp,hd03-4.png" data-index="0">
-        <div class="img-box">
-            <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
-            <img src="hd03-1.webp" id="it-hd03" class="product-img" onclick="openModal(this.src)">
-            <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+        <!-- الموديل الثاني HD-02 -->
+        <div class="card tshirt show" data-images="hd02-1.webp,hd02-2.webp,hd02-3.webp,hd02-4.webp" data-index="0">
+            <div class="img-box">
+                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
+                <img src="hd02-1.webp" id="it-hd02" class="product-img" onclick="openModal(this.src)">
+                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info">
+                <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
+                <div class="item-mod">موديل: HD-02</div>
+            </div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt-hd02', 16)">+</button>
+                <span id="qt-hd02">16</span>
+                <button class="btn-q" onclick="c('qt-hd02', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('هودي بلوفر HD-02', 'qt-hd02', this)">إضافة للطلب</button>
         </div>
-        <div class="model-info">
-            <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
-            <div class="item-mod">موديل: HD-03</div>
-        </div>
-        <div class="qty-control">
-            <button class="btn-q" onclick="c('qt-hd03', 16)">+</button>
-            <span id="qt-hd03">16</span>
-            <button class="btn-q" onclick="c('qt-hd03', -16)">-</button>
-        </div>
-        <button class="btn-add" onclick="add('هودي بلوفر HD-03', 'qt-hd03', this)">إضافة للطلب</button>
-    </div>
 
-    <!-- الموديل الرابع HD-04 -->
-    <div class="card tshirt show" data-images="hd04-1.webp,hd04-2.webp,hd04-3.webp,hd04-4.webp" data-index="0">
-        <div class="img-box">
-            <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
-            <img src="hd04-1.webp" id="it-hd04" class="product-img" onclick="openModal(this.src)">
-            <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+        <!-- الموديل الثالث HD-03 -->
+        <div class="card tshirt show" data-images="hd03-1.webp,hd03-2.webp,hd03-3.webp,hd03-4.png" data-index="0">
+            <div class="img-box">
+                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
+                <img src="hd03-1.webp" id="it-hd03" class="product-img" onclick="openModal(this.src)">
+                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info">
+                <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
+                <div class="item-mod">موديل: HD-03</div>
+            </div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt-hd03', 16)">+</button>
+                <span id="qt-hd03">16</span>
+                <button class="btn-q" onclick="c('qt-hd03', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('هودي بلوفر HD-03', 'qt-hd03', this)">إضافة للطلب</button>
         </div>
-        <div class="model-info">
-            <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
-            <div class="item-mod">موديل: HD-04</div>
-        </div>
-        <div class="qty-control">
-            <button class="btn-q" onclick="c('qt-hd04', 16)">+</button>
-            <span id="qt-hd04">16</span>
-            <button class="btn-q" onclick="c('qt-hd04', -16)">-</button>
-        </div>
-        <button class="btn-add" onclick="add('هودي بلوفر HD-04', 'qt-hd04', this)">إضافة للطلب</button>
-    </div>
 
-    <!-- الموديل الخامس HD-05 -->
-    <div class="card tshirt show" data-images="hd05-1.webp,hd05-2.webp,hd05-3.webp,hd05-4.webp" data-index="0">
-        <div class="img-box">
-            <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
-            <img src="hd05-1.webp" id="it-hd05" class="product-img" onclick="openModal(this.src)">
-            <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+        <!-- الموديل الرابع HD-04 -->
+        <div class="card tshirt show" data-images="hd04-1.webp,hd04-2.webp,hd04-3.webp,hd04-4.webp" data-index="0">
+            <div class="img-box">
+                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
+                <img src="hd04-1.webp" id="it-hd04" class="product-img" onclick="openModal(this.src)">
+                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info">
+                <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
+                <div class="item-mod">موديل: HD-04</div>
+            </div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt-hd04', 16)">+</button>
+                <span id="qt-hd04">16</span>
+                <button class="btn-q" onclick="c('qt-hd04', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('هودي بلوفر HD-04', 'qt-hd04', this)">إضافة للطلب</button>
         </div>
-        <div class="model-info">
-            <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
-            <div class="item-mod">موديل: HD-05</div>
+
+        <!-- الموديل الخامس HD-05 -->
+        <div class="card tshirt show" data-images="hd05-1.webp,hd05-2.webp,hd05-3.webp,hd05-4.webp" data-index="0">
+            <div class="img-box">
+                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
+                <img src="hd05-1.webp" id="it-hd05" class="product-img" onclick="openModal(this.src)">
+                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info">
+                <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
+                <div class="item-mod">موديل: HD-05</div>
+            </div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt-hd05', 16)">+</button>
+                <span id="qt-hd05">16</span>
+                <button class="btn-q" onclick="c('qt-hd05', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('هودي بلوفر HD-05', 'qt-hd05', this)">إضافة للطلب</button>
         </div>
-        <div class="qty-control">
-            <button class="btn-q" onclick="c('qt-hd05', 16)">+</button>
-            <span id="qt-hd05">16</span>
-            <button class="btn-q" onclick="c('qt-hd05', -16)">-</button>
-        </div>
-        <button class="btn-add" onclick="add('هودي بلوفر HD-05', 'qt-hd05', this)">إضافة للطلب</button>
     </div>
 </div>
 
@@ -388,16 +470,35 @@
 </footer>
 
 <script>
-    function filterProducts(cat) {
+    // فتح القسم والتمرير السلس إليه
+    function openCategory(cat, title) {
+        const prodContainer = document.getElementById('products-container');
+        prodContainer.style.display = 'block';
+
+        document.getElementById('current-category-title').innerText = `كتالوج: ${title}`;
+
+        // إظهار بطاقات القسم المطلوب
         document.querySelectorAll('.card').forEach(c => { 
             c.classList.remove('show'); 
             if(c.classList.contains(cat)) c.classList.add('show'); 
         });
+
+        // تمييز التبويب النشط
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
         let activeTab = document.getElementById('tab-' + cat);
-        if(activeTab) activeTab.classList.add('active'); 
+        if(activeTab) activeTab.classList.add('active');
+
+        // التمرير إلى قسم المنتجات بسلاسة
+        prodContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-    
+
+    // إغلاق الكتالوج والرجوع للواجهة السينمائية
+    function hideCategory() {
+        document.getElementById('products-container').style.display = 'none';
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     function navImg(btn, dir) {
         let card = btn.closest('.card');
         let imgs = card.getAttribute('data-images').split(',');
