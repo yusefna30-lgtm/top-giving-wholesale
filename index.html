@@ -25,7 +25,7 @@
 
         /* أزرار الأقسام في أعلى الصفحة */
         .gateway-section {
-            max-width: 650px;
+            max-width: 600px;
             margin: 0 auto;
             padding: 0 10px;
         }
@@ -49,12 +49,6 @@
             background: var(--gold); 
             color: #000; 
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
-        }
-        /* تمييز تبويب التفاصيل */
-        .tab-specs {
-            background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
-            border: 1px solid var(--gold);
-            color: var(--gold);
         }
 
         /* شاشة عرض فيديوهات الإعلانات بنمط Reels */
@@ -187,8 +181,8 @@
             box-shadow: 0 0 8px var(--gold); 
         }
 
-        /* حاوية المنتجات وحاوية التفاصيل */
-        #products-container, #details-container {
+        /* حاوية المنتجات */
+        #products-container {
             display: none;
             max-width: 1200px;
             margin: 10px auto 40px;
@@ -222,113 +216,6 @@
             font-size: 0.8rem;
             cursor: pointer;
             font-family: 'Cairo';
-            transition: 0.3s;
-        }
-        .btn-hide-catalog:hover {
-            border-color: var(--gold);
-            color: #fff;
-        }
-
-        /* تصميم قسم التفاصيل والمواصفات (Glassmorphism & Gold) */
-        .specs-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 16px;
-            text-align: right;
-        }
-        @media (min-width: 768px) {
-            .specs-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        .spec-card {
-            background: linear-gradient(145deg, #0f0f12, #070708);
-            border: 1px solid rgba(212, 175, 55, 0.35);
-            border-radius: 18px;
-            padding: 20px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
-            position: relative;
-            overflow: hidden;
-        }
-        .spec-card:hover {
-            border-color: var(--gold);
-            box-shadow: 0 0 18px rgba(212, 175, 55, 0.2);
-        }
-        .spec-card-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 12px;
-            border-bottom: 1px solid #1f1f24;
-            padding-bottom: 10px;
-        }
-        .spec-icon {
-            font-size: 1.5rem;
-            background: rgba(212, 175, 55, 0.12);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .spec-title {
-            color: var(--gold);
-            font-size: 1.1rem;
-            font-weight: 900;
-            margin: 0;
-        }
-        .spec-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            color: #ddd;
-            font-size: 0.9rem;
-            line-height: 1.8;
-        }
-        .spec-list li {
-            position: relative;
-            padding-right: 18px;
-            margin-bottom: 6px;
-        }
-        .spec-list li::before {
-            content: "◆";
-            color: var(--gold);
-            position: absolute;
-            right: 0;
-            font-size: 0.75rem;
-            top: 2px;
-        }
-
-        /* جدول المقاسات داخل قسم التفاصيل */
-        .size-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            font-size: 0.85rem;
-            text-align: center;
-        }
-        .size-table th {
-            background: rgba(212, 175, 55, 0.2);
-            color: var(--gold);
-            padding: 8px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-        }
-        .size-table td {
-            padding: 8px;
-            border: 1px solid #222;
-            color: #eee;
-            background: #0a0a0c;
-        }
-        .badge-pack {
-            display: inline-block;
-            background: rgba(212, 175, 55, 0.15);
-            color: var(--gold);
-            border: 1px solid var(--gold);
-            padding: 4px 12px;
-            border-radius: 12px;
-            font-size: 0.82rem;
-            font-weight: bold;
-            margin-top: 8px;
         }
 
         /* شبكة المنتجات */
@@ -352,9 +239,109 @@
         .item-cat { color: #aaa; font-size: 0.85rem; }
         .item-mod { color: #fff; font-weight: bold; font-size: 1rem; margin-top: 2px; }
 
-        .qty-control { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px; background: #1a1a1a; padding: 8px; border-radius: 10px; width: 100%; box-sizing: border-box; }
+        .qty-control { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 12px; background: #1a1a1a; padding: 8px; border-radius: 10px; width: 100%; box-sizing: border-box; }
         .btn-q { background: #252525; color: #fff; border: 1px solid var(--gold); width: 34px; height: 34px; border-radius: 8px; cursor: pointer; }
-        .btn-add { background: linear-gradient(135deg, #D4AF37, #8A6D3B); color: #000; padding: 12px; border-radius: 10px; font-weight: 900; border: none; width: 100%; cursor: pointer; }
+        
+        /* أزرار الكرت (إضافة للطلب + التفاصيل بجانب بعض) */
+        .card-actions {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+        }
+        .btn-add { 
+            flex: 2;
+            background: linear-gradient(135deg, #D4AF37, #8A6D3B); 
+            color: #000; 
+            padding: 10px 6px; 
+            border-radius: 10px; 
+            font-weight: 900; 
+            border: none; 
+            cursor: pointer; 
+            font-family: 'Cairo';
+            font-size: 0.85rem;
+        }
+        .btn-spec {
+            flex: 1.2;
+            background: #161618;
+            color: var(--gold);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            padding: 10px 6px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: 'Cairo';
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+        .btn-spec:hover {
+            background: var(--gold);
+            color: #000;
+        }
+
+        /* نافذة تفاصيل الموديل المنبثقة (Modal) */
+        .spec-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        .spec-modal-box {
+            background: linear-gradient(145deg, #111115, #08080a);
+            border: 1.5px solid var(--gold);
+            border-radius: 20px;
+            max-width: 440px;
+            width: 100%;
+            padding: 22px 18px;
+            text-align: right;
+            position: relative;
+            box-shadow: 0 0 35px rgba(212, 175, 55, 0.3);
+            animation: zoomIn 0.25s ease;
+        }
+        .spec-modal-close {
+            position: absolute;
+            top: 14px;
+            left: 16px;
+            background: #1f1f24;
+            color: var(--gold);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+        .spec-modal-title {
+            color: var(--gold);
+            font-size: 1.15rem;
+            font-weight: 900;
+            margin: 0 0 14px 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #222;
+        }
+        .spec-item-row {
+            margin-bottom: 10px;
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: #ddd;
+            background: #141418;
+            padding: 9px 12px;
+            border-radius: 10px;
+            border-right: 3px solid var(--gold);
+        }
+        .spec-item-row strong {
+            color: #fff;
+            display: inline-block;
+            margin-left: 5px;
+        }
         
         .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.95); border-top: 2px solid var(--gold); padding: 15px; display: none; z-index: 1001; }
         .cart-flex { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
@@ -392,7 +379,6 @@
             <div class="tab" id="tab-pants" onclick="openCategory('pants', 'جاكت')">جاكت</div>
             <div class="tab" id="tab-pants.l" onclick="openCategory('pants.l', 'بنطلونات')">بنطلونات</div>
             <div class="tab" id="tab-shirts" onclick="openCategory('shirts', 'قميص')">قميص</div>
-            <div class="tab tab-specs" id="tab-details" onclick="openDetails()">📋 التفاصيل</div>
         </div>
     </div>
 </div>
@@ -437,98 +423,11 @@
     </div>
 </div>
 
-<!-- قسم التفاصيل والمواصفات الفنية (يظهر عند الضغط على تبويب التفاصيل) -->
-<div id="details-container">
-    <div class="section-header-bar">
-        <h3 class="section-header-title">📋 دليل المواصفات وتفاصيل الجملة</h3>
-        <button class="btn-hide-catalog" onclick="hideAllSections()">إغلاق ✕</button>
-    </div>
-
-    <div class="specs-grid">
-        <!-- البطاقة 1: مكونات الخامة والنسيج -->
-        <div class="spec-card">
-            <div class="spec-card-header">
-                <div class="spec-icon">🧵</div>
-                <h4 class="spec-title">المكونات وجودة القماش</h4>
-            </div>
-            <ul class="spec-list">
-                <li><strong>نوع الخامة:</strong> قطن ميلتون ثقيل (Heavyweight Fleece) معالج ضد التوبير والانكماش.</li>
-                <li><strong>التبطين الداخلي:</strong> بطانة شتوية ناعمة ومريحة على البشرة تمنح دفئاً مثالياً وثباتاً في القوام.</li>
-                <li><strong>ثبات الألوان:</strong> صباغة عالية الجودة تحافظ على رونق اللون الأساسي حتى مع الغسيل المتكرر.</li>
-                <li><strong>الطباعة والتطريز:</strong> تقنيات طباعة وتطريز عالية الكثافة مقاومة للتقشر أو البهتان.</li>
-            </ul>
-        </div>
-
-        <!-- البطاقة 2: القصة والتصميم (Fit & Cut) -->
-        <div class="spec-card">
-            <div class="spec-card-header">
-                <div class="spec-icon">✂️</div>
-                <h4 class="spec-title">القصة والتفصيل (Fit & Style)</h4>
-            </div>
-            <ul class="spec-list">
-                <li><strong>نوع القصة:</strong> قصة عصرية مريحة (Modern Relaxed / Oversized Fit) تناسب الذوق الشبابي الحديث.</li>
-                <li><strong>القبعة (الزنط):</strong> مبطنة بطبقة مزدوجة بلون متناسق (Double-Layered Hood) لمظهر فخم ومتماسك.</li>
-                <li><strong>الأساور والحاشية:</strong> ريب مطاطي مرن (Ribbed Cuffs & Hem) يحافظ على شكله ولا يرتخي مع الاستخدام.</li>
-                <li><strong>الجيب الأمامي:</strong> جيب كانغرو واسع ومقوى بخياطة مزدوجة عند الزوايا.</li>
-            </ul>
-        </div>
-
-        <!-- البطاقة 3: نظام الباكت وتوزيعة المقاسات والألوان -->
-        <div class="spec-card" style="grid-column: 1 / -1;">
-            <div class="spec-card-header">
-                <div class="spec-icon">📦</div>
-                <h4 class="spec-title">نظام التعبئة وتوزيعة المقاسات (الدستة / الباكت)</h4>
-            </div>
-            <p style="color:#ccc; font-size:0.9rem; margin-top:0;">
-                تُباع المنتجات بنظام الجملة (الباكت الكامل)، حيث يحتوي كل باكت على تشكيلة متكاملة من المقاسات والألوان الجاهزة للعرض المباشر في معرضك:
-            </p>
-            <span class="badge-pack">الباكت القياسي = 16 قطعة (4 مقاسات × 4 ألوان)</span>
-
-            <table class="size-table">
-                <thead>
-                    <tr>
-                        <th>المقاس (Size)</th>
-                        <th>العرض (سم)</th>
-                        <th>الطول (سم)</th>
-                        <th>الكمية داخل الباكت</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>M</strong></td>
-                        <td>56 سم</td>
-                        <td>70 سم</td>
-                        <td>4 قطع (لون من كل شكل)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>L</strong></td>
-                        <td>58 سم</td>
-                        <td>72 سم</td>
-                        <td>4 قطع (لون من كل شكل)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>XL</strong></td>
-                        <td>60 سم</td>
-                        <td>74 سم</td>
-                        <td>4 قطع (لون من كل شكل)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>XXL</strong></td>
-                        <td>62 سم</td>
-                        <td>76 سم</td>
-                        <td>4 قطع (لون من كل شكل)</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
 <!-- حاوية المنتجات: تفتح بسلاسة تحت الفيديو عند النقر على أي قسم بالأعلى -->
 <div id="products-container">
     <div class="section-header-bar">
         <h3 class="section-header-title" id="current-category-title">الكتالوج</h3>
-        <button class="btn-hide-catalog" onclick="hideAllSections()">إغلاق الكتالوج ✕</button>
+        <button class="btn-hide-catalog" onclick="hideCategory()">إغلاق الكتالوج ✕</button>
     </div>
 
     <div class="grid">
@@ -548,7 +447,10 @@
                 <span id="qt-hd01">16</span>
                 <button class="btn-q" onclick="c('qt-hd01', -16)">-</button>
             </div>
-            <button class="btn-add" onclick="add('هودي بلوفر EXPLORE HD-01', 'qt-hd01', this)">إضافة للطلب</button>
+            <div class="card-actions">
+                <button class="btn-add" onclick="add('هودي بلوفر EXPLORE HD-01', 'qt-hd01', this)">إضافة للطلب</button>
+                <button class="btn-spec" onclick="showSpec('HD-01')">📋 التفاصيل</button>
+            </div>
         </div>
 
         <!-- الموديل الثاني HD-02 -->
@@ -567,7 +469,10 @@
                 <span id="qt-hd02">16</span>
                 <button class="btn-q" onclick="c('qt-hd02', -16)">-</button>
             </div>
-            <button class="btn-add" onclick="add('هودي بلوفر HD-02', 'qt-hd02', this)">إضافة للطلب</button>
+            <div class="card-actions">
+                <button class="btn-add" onclick="add('هودي بلوفر HD-02', 'qt-hd02', this)">إضافة للطلب</button>
+                <button class="btn-spec" onclick="showSpec('HD-02')">📋 التفاصيل</button>
+            </div>
         </div>
 
         <!-- الموديل الثالث HD-03 -->
@@ -586,7 +491,10 @@
                 <span id="qt-hd03">16</span>
                 <button class="btn-q" onclick="c('qt-hd03', -16)">-</button>
             </div>
-            <button class="btn-add" onclick="add('هودي بلوفر HD-03', 'qt-hd03', this)">إضافة للطلب</button>
+            <div class="card-actions">
+                <button class="btn-add" onclick="add('هودي بلوفر HD-03', 'qt-hd03', this)">إضافة للطلب</button>
+                <button class="btn-spec" onclick="showSpec('HD-03')">📋 التفاصيل</button>
+            </div>
         </div>
 
         <!-- الموديل الرابع HD-04 -->
@@ -605,7 +513,10 @@
                 <span id="qt-hd04">16</span>
                 <button class="btn-q" onclick="c('qt-hd04', -16)">-</button>
             </div>
-            <button class="btn-add" onclick="add('هودي بلوفر HD-04', 'qt-hd04', this)">إضافة للطلب</button>
+            <div class="card-actions">
+                <button class="btn-add" onclick="add('هودي بلوفر HD-04', 'qt-hd04', this)">إضافة للطلب</button>
+                <button class="btn-spec" onclick="showSpec('HD-04')">📋 التفاصيل</button>
+            </div>
         </div>
 
         <!-- الموديل الخامس HD-05 -->
@@ -624,11 +535,24 @@
                 <span id="qt-hd05">16</span>
                 <button class="btn-q" onclick="c('qt-hd05', -16)">-</button>
             </div>
-            <button class="btn-add" onclick="add('هودي بلوفر HD-05', 'qt-hd05', this)">إضافة للطلب</button>
+            <div class="card-actions">
+                <button class="btn-add" onclick="add('هودي بلوفر HD-05', 'qt-hd05', this)">إضافة للطلب</button>
+                <button class="btn-spec" onclick="showSpec('HD-05')">📋 التفاصيل</button>
+            </div>
         </div>
     </div>
 </div>
 
+<!-- نافذة عرض تفاصيل الموديل (تتغير بياناتها حسب الموديل المختار) -->
+<div id="spec-modal" class="spec-modal" onclick="closeSpecModal(event)">
+    <div class="spec-modal-box">
+        <div class="spec-modal-close" onclick="document.getElementById('spec-modal').style.display='none'">✕</div>
+        <h3 class="spec-modal-title" id="spec-modal-title">تفاصيل الموديل</h3>
+        <div id="spec-modal-body"></div>
+    </div>
+</div>
+
+<!-- نافذة تكبير الصورة -->
 <div id="image-modal" class="img-modal" onclick="closeModal()">
     <span class="close-modal">&times;</span>
     <img id="modal-img" class="modal-content">
@@ -663,9 +587,73 @@
 </footer>
 
 <script>
-    // فتح قسم منتجات والتمرير إليه
+    // قاعدة بيانات مواصفات كل موديل على حدة (يمكنك تعديل أي تفصيل لكل موديل بسهولة)
+    const modelSpecs = {
+        'HD-01': {
+            title: 'مواصفات موديل HD-01 (EXPLORE)',
+            fabric: 'قطن ميلتون ثقيل مبطن ناعم (معالج ضد التوبير والانكماش)',
+            cut: 'قصة عصرية مريحة (Oversized / Relaxed Fit) بقبعة مبطنة بلون متناسق',
+            sizes: 'M - L - XL - XXL',
+            colors: '4 ألوان (أسود، رمادي فحمي، سكري، زيتي فاتح)',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        },
+        'HD-02': {
+            title: 'مواصفات موديل HD-02',
+            fabric: 'قطن شتوي فاخر عالي الكثافة وثبات ألوان ممتاز',
+            cut: 'قصة شبابية قياسية مريحة مع أساور وحاشية مرنة (Ribbed)',
+            sizes: 'M - L - XL - XXL',
+            colors: '4 ألوان أساسية متناسقة داخل الباكت',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        },
+        'HD-03': {
+            title: 'مواصفات موديل HD-03',
+            fabric: 'قطن ميلتون ثقيل مبطن بتشطيب احترافي',
+            cut: 'قصة عصرية (Modern Fit) مع جيب أمامي مقوى',
+            sizes: 'M - L - XL - XXL',
+            colors: '4 ألوان متنوعة',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        },
+        'HD-04': {
+            title: 'مواصفات موديل HD-04',
+            fabric: 'قطن مخلوط فاخر يمنح دفئاً ونعومة فائقة',
+            cut: 'قصة شبابية مريحة تناسب الاستخدام اليومي',
+            sizes: 'M - L - XL - XXL',
+            colors: '4 ألوان مميزة',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        },
+        'HD-05': {
+            title: 'مواصفات موديل HD-05',
+            fabric: 'قطن ميلتون ثقيل عالي الجودة مقاوم للغسيل المتكرر',
+            cut: 'قصة عصرية متناسقة مع تطريز/طباعة متقنة',
+            sizes: 'M - L - XL - XXL',
+            colors: '4 ألوان جذابة الأكثر طلباً',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        }
+    };
+
+    function showSpec(modelCode) {
+        const spec = modelSpecs[modelCode];
+        if (!spec) return;
+
+        document.getElementById('spec-modal-title').innerText = `📋 ${spec.title}`;
+        document.getElementById('spec-modal-body').innerHTML = `
+            <div class="spec-item-row"><strong>🧵 المكونات والخامة:</strong> ${spec.fabric}</div>
+            <div class="spec-item-row"><strong>✂️ القصة والتفصيل:</strong> ${spec.cut}</div>
+            <div class="spec-item-row"><strong>📏 المقاسات المتوفرة:</strong> ${spec.sizes}</div>
+            <div class="spec-item-row"><strong>🎨 الألوان في الباكت:</strong> ${spec.colors}</div>
+            <div class="spec-item-row"><strong>📦 تعبئة الدستة:</strong> ${spec.pack}</div>
+        `;
+        document.getElementById('spec-modal').style.display = 'flex';
+    }
+
+    function closeSpecModal(e) {
+        if (e.target.id === 'spec-modal') {
+            document.getElementById('spec-modal').style.display = 'none';
+        }
+    }
+
+    // فتح القسم والتمرير بسلاسة لمنتجاته
     function openCategory(cat, title) {
-        document.getElementById('details-container').style.display = 'none';
         const prodContainer = document.getElementById('products-container');
         prodContainer.style.display = 'block';
 
@@ -686,22 +674,9 @@
         prodContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    // فتح قسم التفاصيل والمواصفات
-    function openDetails() {
+    // إغلاق الكتالوج والعودة لأعلى الصفحة
+    function hideCategory() {
         document.getElementById('products-container').style.display = 'none';
-        const detailsContainer = document.getElementById('details-container');
-        detailsContainer.style.display = 'block';
-
-        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.getElementById('tab-details').classList.add('active');
-
-        detailsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    // إغلاق الكتالوج أو التفاصيل والعودة لأعلى الصفحة
-    function hideAllSections() {
-        document.getElementById('products-container').style.display = 'none';
-        document.getElementById('details-container').style.display = 'none';
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
