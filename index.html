@@ -25,23 +25,142 @@
         .tab { background: #111; color: #fff; padding: 10px 20px; border-radius: 25px; border: 1px solid var(--accent); cursor: pointer; transition: 0.3s; font-size: 0.9rem; }
         .tab.active { background: var(--gold); color: #000; font-weight: bold; }
         
-        /* شاشة الإعلانات المتحركة */
+        /* شاشة إعلانات الفيديو المتحركة */
         .promo-slider-container { max-width: 1200px; margin: 15px auto 25px; padding: 0 12px; }
-        .promo-slider { position: relative; border-radius: 18px; overflow: hidden; background: radial-gradient(circle at center, #1c180a 0%, #0c0c0e 85%); border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 0 25px rgba(212, 175, 55, 0.15); min-height: 140px; display: flex; align-items: center; }
-        .promo-slide { display: none; width: 100%; padding: 22px 50px 28px; box-sizing: border-box; text-align: center; animation: fadeSlide 0.6s ease; }
-        .promo-slide.active { display: block; }
-        @keyframes fadeSlide { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-        .promo-badge { display: inline-block; background: rgba(212, 175, 55, 0.15); color: var(--gold); border: 1px solid var(--gold); padding: 3px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-bottom: 8px; }
-        .promo-title { color: #fff; font-size: 1.25rem; font-weight: 900; margin: 0 0 6px 0; }
-        .promo-desc { color: #bbb; font-size: 0.88rem; margin: 0; line-height: 1.5; }
-        .slider-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0, 0, 0, 0.6); color: var(--gold); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 1px solid rgba(212, 175, 55, 0.3); transition: 0.3s; user-select: none; z-index: 5; font-size: 1rem; }
-        .slider-arrow:hover { background: var(--gold); color: #000; }
-        .slider-prev { right: 10px; }
-        .slider-next { left: 10px; }
-        .slider-dots { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 5; }
-        .s-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 255, 255, 0.25); cursor: pointer; transition: 0.3s; }
-        .s-dot.active { background: var(--gold); width: 22px; border-radius: 10px; box-shadow: 0 0 6px var(--gold); }
+        .promo-slider { 
+            position: relative; 
+            border-radius: 20px; 
+            overflow: hidden; 
+            background: #000; 
+            border: 1px solid rgba(212, 175, 55, 0.4); 
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2); 
+            height: 220px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+        }
+        @media (min-width: 768px) { .promo-slider { height: 280px; } }
 
+        .promo-slide { 
+            display: none; 
+            width: 100%; 
+            height: 100%;
+            position: absolute;
+            inset: 0;
+        }
+        .promo-slide.active { display: block; }
+
+        /* فيديو الخلفية الترويجي */
+        .bg-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        /* تدرج لوني لضمان قراءة النصوص بوضوح فوق الفيديو */
+        .video-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.85) 100%);
+            z-index: 2;
+        }
+
+        /* محتوى الإعلان النصي */
+        .promo-content {
+            position: relative;
+            z-index: 3;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 50px;
+            box-sizing: border-box;
+            animation: textFade 0.6s ease;
+        }
+        @keyframes textFade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        .promo-badge { 
+            display: inline-block; 
+            background: rgba(0, 0, 0, 0.65); 
+            color: var(--gold); 
+            border: 1px solid var(--gold); 
+            backdrop-filter: blur(4px);
+            padding: 4px 16px; 
+            border-radius: 20px; 
+            font-size: 0.85rem; 
+            font-weight: bold; 
+            margin-bottom: 8px; 
+        }
+        .promo-title { 
+            color: #fff; 
+            font-size: 1.35rem; 
+            font-weight: 900; 
+            margin: 0 0 6px 0; 
+            text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+        }
+        .promo-desc { 
+            color: #ddd; 
+            font-size: 0.9rem; 
+            margin: 0; 
+            max-width: 600px;
+            line-height: 1.5; 
+            text-shadow: 0 2px 8px rgba(0,0,0,0.9);
+        }
+
+        /* عناصر التحكم بالسلايدر */
+        .slider-arrow { 
+            position: absolute; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            background: rgba(0, 0, 0, 0.7); 
+            color: var(--gold); 
+            width: 36px; 
+            height: 36px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            cursor: pointer; 
+            border: 1px solid rgba(212, 175, 55, 0.5); 
+            transition: 0.3s; 
+            user-select: none; 
+            z-index: 10; 
+            font-size: 1.1rem; 
+        }
+        .slider-arrow:hover { background: var(--gold); color: #000; box-shadow: 0 0 10px var(--gold); }
+        .slider-prev { right: 12px; }
+        .slider-next { left: 12px; }
+
+        .slider-dots { 
+            position: absolute; 
+            bottom: 12px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            display: flex; 
+            gap: 6px; 
+            z-index: 10; 
+        }
+        .s-dot { 
+            width: 8px; 
+            height: 8px; 
+            border-radius: 50%; 
+            background: rgba(255, 255, 255, 0.4); 
+            cursor: pointer; 
+            transition: 0.3s; 
+        }
+        .s-dot.active { 
+            background: var(--gold); 
+            width: 24px; 
+            border-radius: 10px; 
+            box-shadow: 0 0 8px var(--gold); 
+        }
+
+        /* شبكة المنتجات والبطاقات */
         .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 1200px; margin: 0 auto; padding: 0 12px; }
         @media (min-width: 992px) { .grid { grid-template-columns: repeat(4, 1fr); } }
         
@@ -103,28 +222,54 @@
     </div>
 </div>
 
-<!-- شاشة الإعلانات المتحركة -->
+<!-- شاشة إعلانات الفيديو المتحركة -->
 <div class="promo-slider-container">
     <div class="promo-slider">
+        
+        <!-- إعلان فيديو 1: استعراض التشكيلة -->
         <div class="promo-slide active">
-            <span class="promo-badge">🔥 عروض الجملة الحصرية</span>
-            <h2 class="promo-title">توريد مباشر لجميع مناطق المملكة</h2>
-            <p class="promo-desc">خصومات للكميات الكبيرة مع إمكانية الشحن السريع أو الاستلام من مستودع الرياض.</p>
-        </div>
-        <div class="promo-slide">
-            <span class="promo-badge">💎 جودة التصنيع</span>
-            <h2 class="promo-title">قطن 100% ثقيل معالج (320 GSM)</h2>
-            <p class="promo-desc">خامات ميلتون فاخرة مقاومة للانكماش وثبات فائق للألوان مع تطريز عالي الدقة.</p>
-        </div>
-        <div class="promo-slide">
-            <span class="promo-badge">📄 مبيعات B2B</span>
-            <h2 class="promo-title">إصدار مسودة فاتورة وعرض سعر فوري</h2>
-            <p class="promo-desc">اختر طلبك واحصل على مسودة رسمية موثقة بالسجل التجاري والرقم الضريبي للتحويل البنكي.</p>
+            <video class="bg-video" autoplay muted loop playsinline poster="hd01-1.jpg">
+                <source src="promo-video-1.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+            <div class="promo-content">
+                <span class="promo-badge">🎬 جديد التشكيلة الشتوية</span>
+                <h2 class="promo-title">تصاميم هودي عصرية بجودة استثنائية</h2>
+                <p class="promo-desc">قصات انسيابية دقيقة وألوان متناسقة تلبي أعلى تطلعات عملائك في قطاع التجزئة.</p>
+            </div>
         </div>
 
+        <!-- إعلان فيديو 2: تفاصيل الخامة والتطريز -->
+        <div class="promo-slide">
+            <video class="bg-video" muted loop playsinline poster="hd02-1.webp">
+                <source src="promo-video-2.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+            <div class="promo-content">
+                <span class="promo-badge">💎 تفاصيل الخامة والتطريز</span>
+                <h2 class="promo-title">قطن 100% ميلتون ثقيل معالج (320 GSM)</h2>
+                <p class="promo-desc">مقاومة فائقة للوبر والتمدد مع تطريز بارز عالي الدقة يمنح القطعة فخامة تدوم طويلاً.</p>
+            </div>
+        </div>
+
+        <!-- إعلان فيديو 3: التوريد والتجهيز -->
+        <div class="promo-slide">
+            <video class="bg-video" muted loop playsinline poster="hd03-1.webp">
+                <source src="promo-video-3.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay"></div>
+            <div class="promo-content">
+                <span class="promo-badge">📦 التوريد المباشر</span>
+                <h2 class="promo-title">تجهيز وشحن فوري لكافة مناطق المملكة</h2>
+                <p class="promo-desc">طلب سريع بنظام الدستة (16 حبة) مع خيارات استلام مباشر من مستودع الرياض.</p>
+            </div>
+        </div>
+
+        <!-- أزرار التنقل -->
         <div class="slider-arrow slider-prev" onclick="movePromo(-1)">❯</div>
         <div class="slider-arrow slider-next" onclick="movePromo(1)">❮</div>
 
+        <!-- مؤشرات السلايدر -->
         <div class="slider-dots">
             <span class="s-dot active" onclick="setPromo(0)"></span>
             <span class="s-dot" onclick="setPromo(1)"></span>
@@ -329,7 +474,7 @@
         document.getElementById('image-modal').style.display = 'none';
     }
 
-    // إدارة شاشة الإعلانات
+    // إدارة شاشة إعلانات الفيديو التلقائية
     let promoIdx = 0;
     const slides = document.querySelectorAll('.promo-slide');
     const dots = document.querySelectorAll('.s-dot');
@@ -337,12 +482,26 @@
 
     function showPromo(idx) {
         if (slides.length === 0) return;
+
+        // إيقاف الفيديو السابق
+        let prevVideo = slides[promoIdx].querySelector('video');
+        if (prevVideo) {
+            prevVideo.pause();
+            prevVideo.currentTime = 0;
+        }
+
         if (idx >= slides.length) promoIdx = 0;
         else if (idx < 0) promoIdx = slides.length - 1;
         else promoIdx = idx;
 
         slides.forEach((s, i) => s.classList.toggle('active', i === promoIdx));
         dots.forEach((d, i) => d.classList.toggle('active', i === promoIdx));
+
+        // تشغيل فيديو الشريحة النشطة فوراً
+        let currVideo = slides[promoIdx].querySelector('video');
+        if (currVideo) {
+            currVideo.play().catch(e => console.log("تشغيل الفيديو بانتظار تفاعل المستخدم"));
+        }
     }
 
     function movePromo(dir) {
@@ -359,7 +518,7 @@
         clearInterval(promoTimer);
         promoTimer = setInterval(() => {
             showPromo(promoIdx + 1);
-        }, 4500);
+        }, 6500); // الانتقال كل 6.5 ثوانٍ لإتاحة وقت كافٍ لمشاهدة الفيديو
     }
     resetPromoTimer();
 </script>
