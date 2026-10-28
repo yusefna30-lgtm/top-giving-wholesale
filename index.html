@@ -37,47 +37,47 @@
             aspect-ratio: 9 / 14; 
             display: flex; 
             align-items: center; 
-            justify-content: center;
+            justify-content: center; 
         }
 
         .promo-slide { 
             display: none; 
             width: 100%; 
-            height: 100%;
-            position: absolute;
-            inset: 0;
+            height: 100%; 
+            position: absolute; 
+            inset: 0; 
         }
         .promo-slide.active { display: block; }
 
-        .bg-video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
+        .bg-video { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            z-index: 1; 
         }
 
-        .video-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, transparent 40%, rgba(0,0,0,0.85) 100%);
-            z-index: 2;
+        .video-overlay { 
+            position: absolute; 
+            inset: 0; 
+            background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, transparent 40%, rgba(0,0,0,0.85) 100%); 
+            z-index: 2; 
         }
 
-        .promo-content {
-            position: absolute;
-            bottom: 30px;
-            left: 0;
-            right: 0;
-            z-index: 3;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 0 20px;
-            box-sizing: border-box;
-            animation: textFade 0.5s ease;
+        .promo-content { 
+            position: absolute; 
+            bottom: 30px; 
+            left: 0; 
+            right: 0; 
+            z-index: 3; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding: 0 20px; 
+            box-sizing: border-box; 
+            animation: textFade 0.5s ease; 
         }
         @keyframes textFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -86,7 +86,7 @@
             background: rgba(0, 0, 0, 0.7); 
             color: var(--gold); 
             border: 1px solid var(--gold); 
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px); 
             padding: 4px 16px; 
             border-radius: 20px; 
             font-size: 0.8rem; 
@@ -98,14 +98,14 @@
             font-size: 1.25rem; 
             font-weight: 900; 
             margin: 0 0 4px 0; 
-            text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.9); 
         }
         .promo-desc { 
             color: #e0e0e0; 
             font-size: 0.85rem; 
             margin: 0; 
             line-height: 1.4; 
-            text-shadow: 0 2px 8px rgba(0,0,0,0.9);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.9); 
         }
 
         .slider-arrow { 
@@ -221,10 +221,10 @@
 <div class="promo-slider-container">
     <div class="promo-slider">
         
-        <!-- الفيديو الأول: أنيميشن الشعار الفاخر -->
+        <!-- الفيديو الأول -->
         <div class="promo-slide active">
             <video class="bg-video" autoplay muted loop playsinline preload="auto">
-                <source src="tg-intro.mp4" type="video/mp4">
+                <source src="tg-sweatshirt.mp4.mp4" type="video/mp4">
             </video>
             <div class="video-overlay"></div>
             <div class="promo-content">
@@ -234,10 +234,10 @@
             </div>
         </div>
 
-        <!-- الفيديو الثاني: استعراض تفاصيل القطعة والتطريز -->
+        <!-- الفيديو الثاني -->
         <div class="promo-slide">
             <video class="bg-video" autoplay muted loop playsinline preload="auto">
-                <source src="tg-sweatshirt.mp4(3).mp4" type="video/mp4">
+                <source src="tg-sweatshirt.mp4%20(3).mp4" type="video/mp4">
             </video>
             <div class="video-overlay"></div>
             <div class="promo-content">
@@ -395,7 +395,7 @@
         });
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
         let activeTab = document.getElementById('tab-' + cat);
-        if(activeTab) activeTab.classList.add('active');
+        if(activeTab) activeTab.classList.add('active'); 
     }
     
     function navImg(btn, dir) {
