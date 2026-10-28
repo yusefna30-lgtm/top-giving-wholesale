@@ -10,11 +10,11 @@
         html { scroll-behavior: smooth; }
         body { font-family: 'Cairo', sans-serif; background: var(--black); color: #fff; text-align: center; margin: 0; padding-bottom: 130px; }
         
-        .header { padding: 20px 10px; background: #000; border-bottom: 1px solid var(--accent); position: sticky; top: 0; z-index: 1000; }
+        .header { padding: 18px 10px 12px; background: #000; border-bottom: 1px solid var(--accent); position: sticky; top: 0; z-index: 1000; }
         
         .brand-logo { 
-            width: 95px; 
-            height: 95px; 
+            width: 85px; 
+            height: 85px; 
             border-radius: 50%; 
             object-fit: cover; 
             display: block; 
@@ -23,8 +23,36 @@
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.5); 
         }
 
-        /* شاشة عرض فيديوهات الإعلانات بنمط Reels الفاخر */
-        .promo-slider-container { max-width: 480px; margin: 15px auto 20px; padding: 0 12px; }
+        /* أزرار الأقسام في أعلى الصفحة */
+        .gateway-section {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 10px;
+        }
+        .nav-tabs { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+        .tab { 
+            background: #111; 
+            color: #fff; 
+            padding: 9px 18px; 
+            border-radius: 22px; 
+            border: 1px solid rgba(212, 175, 55, 0.4); 
+            cursor: pointer; 
+            transition: 0.3s; 
+            font-size: 0.88rem; 
+            font-weight: bold;
+        }
+        .tab:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+        .tab.active { 
+            background: var(--gold); 
+            color: #000; 
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
+        }
+
+        /* شاشة عرض فيديوهات الإعلانات بنمط Reels */
+        .promo-slider-container { max-width: 480px; margin: 18px auto 25px; padding: 0 12px; }
         .promo-slider { 
             position: relative; 
             border-radius: 22px; 
@@ -153,42 +181,7 @@
             box-shadow: 0 0 8px var(--gold); 
         }
 
-        /* بوابات الأقسام الفاخرة */
-        .gateway-section {
-            max-width: 600px;
-            margin: 0 auto 30px;
-            padding: 0 15px;
-        }
-        .gateway-title {
-            color: var(--gold);
-            font-size: 0.95rem;
-            letter-spacing: 1px;
-            margin-bottom: 14px;
-            text-transform: uppercase;
-        }
-        .nav-tabs { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-        .tab { 
-            background: #111; 
-            color: #fff; 
-            padding: 12px 22px; 
-            border-radius: 25px; 
-            border: 1px solid rgba(212, 175, 55, 0.4); 
-            cursor: pointer; 
-            transition: 0.3s; 
-            font-size: 0.92rem; 
-            font-weight: bold;
-        }
-        .tab:hover {
-            border-color: var(--gold);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
-        }
-        .tab.active { 
-            background: var(--gold); 
-            color: #000; 
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
-        }
-
-        /* قسم المنتجات (مخفي بالبداية ويظهر عند اختيار قسم) */
+        /* حاوية المنتجات */
         #products-container {
             display: none;
             max-width: 1200px;
@@ -275,11 +268,22 @@
 </head>
 <body>
 
+<!-- ترويسة الصفحة وبوابات الأقسام في الأعلى مباشرة -->
 <div class="header">
     <img src="TOP%20GIVING%20logo.jpg" alt="TOP GIVING" class="brand-logo">
+    
+    <div class="gateway-section">
+        <div class="nav-tabs">
+            <div class="tab" id="tab-tshirt" onclick="openCategory('tshirt', 'هودي رجالي')">هودي رجالي</div>
+            <div class="tab" id="tab-set" onclick="openCategory('set', 'أطقم شبابي')">أطقم شبابي</div>
+            <div class="tab" id="tab-pants" onclick="openCategory('pants', 'جاكت')">جاكت</div>
+            <div class="tab" id="tab-pants.l" onclick="openCategory('pants.l', 'بنطلونات')">بنطلونات</div>
+            <div class="tab" id="tab-shirts" onclick="openCategory('shirts', 'قميص')">قميص</div>
+        </div>
+    </div>
 </div>
 
-<!-- واجهة الفيديوهات الترحيبية والترويجية -->
+<!-- واجهة الفيديوهات الترحيبية -->
 <div class="promo-slider-container">
     <div class="promo-slider">
         
@@ -319,19 +323,7 @@
     </div>
 </div>
 
-<!-- بوابات الدخول للأقسام -->
-<div class="gateway-section">
-    <div class="gateway-title">— اختر القسم لتصفح كتالوج الجملة —</div>
-    <div class="nav-tabs">
-        <div class="tab" id="tab-tshirt" onclick="openCategory('tshirt', 'هودي رجالي')">هودي رجالي</div>
-        <div class="tab" id="tab-set" onclick="openCategory('set', 'أطقم شبابي')">أطقم شبابي</div>
-        <div class="tab" id="tab-pants" onclick="openCategory('pants', 'جاكت')">جاكت</div>
-        <div class="tab" id="tab-pants.l" onclick="openCategory('pants.l', 'بنطلونات')">بنطلونات</div>
-        <div class="tab" id="tab-shirts" onclick="openCategory('shirts', 'قميص')">قميص</div>
-    </div>
-</div>
-
-<!-- حاوية المنتجات: تفتح تلقائياً عند النقر على أي قسم -->
+<!-- حاوية المنتجات: تفتح بسلاسة تحت الفيديو عند النقر على أي قسم بالأعلى -->
 <div id="products-container">
     <div class="section-header-bar">
         <h3 class="section-header-title" id="current-category-title">الكتالوج</h3>
@@ -470,29 +462,29 @@
 </footer>
 
 <script>
-    // فتح القسم والتمرير السلس إليه
+    // فتح القسم والتمرير بسلاسة لمنتجاته
     function openCategory(cat, title) {
         const prodContainer = document.getElementById('products-container');
         prodContainer.style.display = 'block';
 
         document.getElementById('current-category-title').innerText = `كتالوج: ${title}`;
 
-        // إظهار بطاقات القسم المطلوب
+        // إظهار منتجات القسم المطلوب
         document.querySelectorAll('.card').forEach(c => { 
             c.classList.remove('show'); 
             if(c.classList.contains(cat)) c.classList.add('show'); 
         });
 
-        // تمييز التبويب النشط
+        // تنشيط التبويب
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
         let activeTab = document.getElementById('tab-' + cat);
         if(activeTab) activeTab.classList.add('active');
 
-        // التمرير إلى قسم المنتجات بسلاسة
+        // النزول السلس إلى المنتجات
         prodContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    // إغلاق الكتالوج والرجوع للواجهة السينمائية
+    // إغلاق الكتالوج والعودة لأعلى الصفحة
     function hideCategory() {
         document.getElementById('products-container').style.display = 'none';
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -554,7 +546,7 @@
         document.getElementById('image-modal').style.display = 'none';
     }
 
-    // إدارة شاشة إعلانات الفيديو وضمان تشغيل المقطعين بسلاسة
+    // إدارة شاشة إعلانات الفيديو التلقائية
     let promoIdx = 0;
     const slides = document.querySelectorAll('.promo-slide');
     const dots = document.querySelectorAll('.s-dot');
