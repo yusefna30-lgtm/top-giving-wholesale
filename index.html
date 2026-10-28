@@ -25,7 +25,7 @@
         .tab { background: #111; color: #fff; padding: 10px 20px; border-radius: 25px; border: 1px solid var(--accent); cursor: pointer; transition: 0.3s; font-size: 0.9rem; }
         .tab.active { background: var(--gold); color: #000; font-weight: bold; }
         
-        /* شاشة عرض فيديوهات الإعلانات بنمط Reels الفاخر */
+        /* شاشة عرض فيديوهات الإعلانات بنمط Reels */
         .promo-slider-container { max-width: 480px; margin: 15px auto 25px; padding: 0 12px; }
         .promo-slider { 
             position: relative; 
@@ -223,7 +223,7 @@
         
         <!-- الفيديو الأول: أنيميشن الشعار الفاخر -->
         <div class="promo-slide active">
-            <video class="bg-video" autoplay muted loop playsinline>
+            <video class="bg-video" autoplay muted loop playsinline preload="auto">
                 <source src="tg-intro.mp4" type="video/mp4">
             </video>
             <div class="video-overlay"></div>
@@ -236,8 +236,8 @@
 
         <!-- الفيديو الثاني: استعراض تفاصيل القطعة والتطريز -->
         <div class="promo-slide">
-            <video class="bg-video" muted loop playsinline>
-                <source src="tg-sweatshirt.mp4" type="video/mp4">
+            <video class="bg-video" autoplay muted loop playsinline preload="auto">
+                <source src="tg-sweatshirt.mp4%20(3).mp4" type="video/mp4">
             </video>
             <div class="video-overlay"></div>
             <div class="promo-content">
@@ -453,7 +453,7 @@
         document.getElementById('image-modal').style.display = 'none';
     }
 
-    // إدارة شاشة إعلانات الفيديو التلقائية
+    // إدارة شاشة إعلانات الفيديو وضمان تشغيل المقطعين بسلاسة
     let promoIdx = 0;
     const slides = document.querySelectorAll('.promo-slide');
     const dots = document.querySelectorAll('.s-dot');
@@ -477,7 +477,12 @@
 
         let currVideo = slides[promoIdx].querySelector('video');
         if (currVideo) {
-            currVideo.play().catch(e => console.log("بانتظار تفاعل المستخدم"));
+            currVideo.muted = true;
+            currVideo.currentTime = 0;
+            let playPromise = currVideo.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {});
+            }
         }
     }
 
@@ -495,9 +500,17 @@
         clearInterval(promoTimer);
         promoTimer = setInterval(() => {
             showPromo(promoIdx + 1);
-        }, 8000); // 8 ثوانٍ لتغطية مدة المقطع كاملة
+        }, 8000);
     }
-    resetPromoTimer();
+
+    window.addEventListener('DOMContentLoaded', () => {
+        let firstVideo = slides[0]?.querySelector('video');
+        if (firstVideo) {
+            firstVideo.muted = true;
+            firstVideo.play().catch(() => {});
+        }
+        resetPromoTimer();
+    });
 </script>
 </body>
 </html>
