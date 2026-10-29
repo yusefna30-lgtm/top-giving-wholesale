@@ -218,30 +218,140 @@
             font-family: 'Cairo';
         }
 
-        /* شبكة المنتجات */
+        /* شبكة المنتجات المرتبة */
         .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 0 auto; }
         @media (min-width: 992px) { .grid { grid-template-columns: repeat(4, 1fr); } }
         
-        .card { display: none; background: var(--card-bg); padding: 15px; border-radius: 18px; border: 1px solid var(--accent); flex-direction: column; align-items: center; transition: all 0.3s ease; position: relative; }
+        .card { display: none; background: var(--card-bg); padding: 12px; border-radius: 16px; border: 1px solid var(--accent); flex-direction: column; align-items: center; transition: all 0.3s ease; position: relative; }
         .card.show { display: flex; }
         .card:hover { box-shadow: 0 0 20px var(--gold); border-color: var(--gold); transform: translateY(-2px); }
         
-        .img-box { width: 100%; height: 220px; border-radius: 12px; overflow: hidden; background: #fff; margin-bottom: 12px; display: flex; align-items: center; justify-content: center; position: relative; }
-        .product-img { max-width: 100%; max-height: 100%; object-fit: contain; transform: scale(1.1); transition: transform 0.3s ease; cursor: zoom-in; }
-        .img-box:hover .product-img { transform: scale(1.2); }
+        .img-box { 
+            width: 100%; 
+            height: 195px; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            background: #fff; 
+            margin-bottom: 10px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            position: relative; 
+            cursor: pointer; 
+        }
+        .product-img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.3s ease; }
+        .img-box:hover .product-img { transform: scale(1.06); }
         
-        .arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0, 0, 0, 0.5); color: var(--gold); width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 1.2rem; font-weight: bold; cursor: pointer; user-select: none; transition: 0.3s; z-index: 10; }
-        .arrow:hover { background: var(--gold); color: #000; box-shadow: 0 0 10px var(--gold); transform: translateY(-50%) scale(1.1); }
-        .arrow-right { right: 8px; }
-        .arrow-left { left: 8px; }
-        
-        .model-info { margin-bottom: 12px; width: 100%; text-align: center; }
-        .item-cat { color: #aaa; font-size: 0.85rem; }
-        .item-mod { color: #fff; font-weight: bold; font-size: 1rem; margin-top: 2px; }
+        .img-info-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(0, 0, 0, 0.75);
+            color: var(--gold);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            backdrop-filter: blur(4px);
+            z-index: 5;
+        }
 
-        .qty-control { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 15px; background: #1a1a1a; padding: 8px; border-radius: 10px; width: 100%; box-sizing: border-box; }
-        .btn-q { background: #252525; color: #fff; border: 1px solid var(--gold); width: 34px; height: 34px; border-radius: 8px; cursor: pointer; }
-        .btn-add { background: linear-gradient(135deg, #D4AF37, #8A6D3B); color: #000; padding: 12px; border-radius: 10px; font-weight: 900; border: none; width: 100%; cursor: pointer; }
+        .arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0, 0, 0, 0.5); color: var(--gold); width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 1.1rem; font-weight: bold; cursor: pointer; user-select: none; transition: 0.3s; z-index: 10; }
+        .arrow:hover { background: var(--gold); color: #000; box-shadow: 0 0 10px var(--gold); transform: translateY(-50%) scale(1.1); }
+        .arrow-right { right: 6px; }
+        .arrow-left { left: 6px; }
+        
+        .model-info { margin-bottom: 8px; width: 100%; text-align: center; }
+        .item-cat { color: #aaa; font-size: 0.78rem; }
+        .item-mod { color: #fff; font-weight: bold; font-size: 0.9rem; margin-top: 2px; }
+
+        .qty-control { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px; background: #1a1a1a; padding: 5px; border-radius: 8px; width: 100%; box-sizing: border-box; }
+        .btn-q { background: #252525; color: #fff; border: 1px solid var(--gold); width: 28px; height: 28px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; }
+        
+        .btn-add { 
+            width: 100%;
+            background: linear-gradient(135deg, #D4AF37, #8A6D3B); 
+            color: #000; 
+            padding: 9px; 
+            border-radius: 9px; 
+            font-weight: 900; 
+            border: none; 
+            cursor: pointer; 
+            font-family: 'Cairo';
+            font-size: 0.85rem;
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+            transition: 0.3s;
+        }
+        .btn-add:hover { opacity: 0.9; transform: scale(1.02); }
+
+        /* نافذة تفاصيل الموديل المنبثقة */
+        .spec-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.88);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        .spec-modal-box {
+            background: linear-gradient(145deg, #111115, #08080a);
+            border: 1.5px solid var(--gold);
+            border-radius: 20px;
+            max-width: 440px;
+            width: 100%;
+            padding: 22px 18px;
+            text-align: right;
+            position: relative;
+            box-shadow: 0 0 35px rgba(212, 175, 55, 0.3);
+            animation: zoomIn 0.25s ease;
+        }
+        .spec-modal-close {
+            position: absolute;
+            top: 14px;
+            left: 16px;
+            background: #1f1f24;
+            color: var(--gold);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+        .spec-modal-title {
+            color: var(--gold);
+            font-size: 1.15rem;
+            font-weight: 900;
+            margin: 0 0 14px 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #222;
+        }
+        .spec-item-row {
+            margin-bottom: 10px;
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: #ddd;
+            background: #141418;
+            padding: 9px 12px;
+            border-radius: 10px;
+            border-right: 3px solid var(--gold);
+        }
+        .spec-item-row strong {
+            color: #fff;
+            display: inline-block;
+            margin-left: 5px;
+        }
         
         .cart-bar { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.95); border-top: 2px solid var(--gold); padding: 15px; display: none; z-index: 1001; }
         .cart-flex { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
@@ -323,7 +433,7 @@
     </div>
 </div>
 
-<!-- حاوية المنتجات: تفتح بسلاسة تحت الفيديو عند النقر على أي قسم بالأعلى -->
+<!-- حاوية المنتجات -->
 <div id="products-container">
     <div class="section-header-bar">
         <h3 class="section-header-title" id="current-category-title">الكتالوج</h3>
@@ -333,10 +443,11 @@
     <div class="grid">
         <!-- الموديل الأول HD-01 -->
         <div class="card tshirt show" data-images="hd01-1.jpg.png,hd01-2.jpg.png,hd01-3.jpg.png,hd01-4.jpg.png" data-index="0">
-            <div class="img-box">
-                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
-                <img src="hd01-1.jpg.png" id="it-hd01" class="product-img" onclick="openModal(this.src)">
-                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            <div class="img-box" onclick="showSpec('HD-01')">
+                <div class="img-info-badge">📋</div>
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="hd01-1.jpg.png" id="it-hd01" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
             </div>
             <div class="model-info">
                 <div class="item-cat">الصنف: هودي بلوفر رجالي (EXPLORE)</div>
@@ -352,10 +463,11 @@
 
         <!-- الموديل الثاني HD-02 -->
         <div class="card tshirt show" data-images="hd02-1.jpg.png,hd02-2.jpg.png,hd02-3.jpg.png,hd02-4.jpg.png" data-index="0">
-            <div class="img-box">
-                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
-                <img src="hd02-1.jpg.png" id="it-hd02" class="product-img" onclick="openModal(this.src)">
-                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            <div class="img-box" onclick="showSpec('HD-02')">
+                <div class="img-info-badge">📋</div>
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="hd02-1.jpg.png" id="it-hd02" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
             </div>
             <div class="model-info">
                 <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
@@ -371,10 +483,11 @@
 
         <!-- الموديل الثالث HD-03 -->
         <div class="card tshirt show" data-images="hd03-1.jpg.png,hd03-2.jpg.png,hd03-3.jpg.png,hd03-4.jpg.png" data-index="0">
-            <div class="img-box">
-                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
-                <img src="hd03-1.jpg.png" id="it-hd03" class="product-img" onclick="openModal(this.src)">
-                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            <div class="img-box" onclick="showSpec('HD-03')">
+                <div class="img-info-badge">📋</div>
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="hd03-1.jpg.png" id="it-hd03" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
             </div>
             <div class="model-info">
                 <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
@@ -390,10 +503,11 @@
 
         <!-- الموديل الرابع HD-04 -->
         <div class="card tshirt show" data-images="hd04-1.jpg.png,hd04-2.jpg.png,hd04-3.jpg.png,hd04-4.jpg.png" data-index="0">
-            <div class="img-box">
-                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
-                <img src="hd04-1.jpg.png" id="it-hd04" class="product-img" onclick="openModal(this.src)">
-                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            <div class="img-box" onclick="showSpec('HD-04')">
+                <div class="img-info-badge">📋</div>
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="hd04-1.jpg.png" id="it-hd04" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
             </div>
             <div class="model-info">
                 <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
@@ -409,10 +523,11 @@
 
         <!-- الموديل الخامس HD-05 -->
         <div class="card tshirt show" data-images="hd05-1.jpg.png,hd05-2.jpg.png,hd05-3.jpg.png,hd05-4.jpg.png" data-index="0">
-            <div class="img-box">
-                <span class="arrow arrow-right" onclick="navImg(this, 1)">&gt;</span>
-                <img src="hd05-1.jpg.png" id="it-hd05" class="product-img" onclick="openModal(this.src)">
-                <span class="arrow arrow-left" onclick="navImg(this, -1)">&lt;</span>
+            <div class="img-box" onclick="showSpec('HD-05')">
+                <div class="img-info-badge">📋</div>
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="hd05-1.jpg.png" id="it-hd05" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
             </div>
             <div class="model-info">
                 <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
@@ -425,9 +540,59 @@
             </div>
             <button class="btn-add" onclick="add('هودي بلوفر HD-05', 'qt-hd05', this)">إضافة للطلب</button>
         </div>
+
+        <!-- الموديل السادس M9009 (أطقم شبابي) -->
+        <div class="card set show" data-images="M9009-1.jpg.png,M9009-2.jpg.png,M9009-3.jpg.png,M9009-4.jpg.png" data-index="0">
+            <div class="img-box" onclick="showSpec('M9009')">
+                <div class="img-info-badge">📋</div>
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="M9009-1.jpg.png" id="it-m9009" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info">
+                <div class="item-cat">الصنف: أطقم شبابي فاخرة</div>
+                <div class="item-mod">موديل: M9009</div>
+            </div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt-m9009', 16)">+</button>
+                <span id="qt-m9009">16</span>
+                <button class="btn-q" onclick="c('qt-m9009', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('أطقم شبابي M9009', 'qt-m9009', this)">إضافة للطلب</button>
+        </div>
+
+        <!-- الموديل السابع M9023 (أطقم شبابي) -->
+        <div class="card set show" data-images="M9023-1.jpg.png,M9023-2.jpg.png,M9023-3.jpg.png,M9023-4.jpg.png" data-index="0">
+            <div class="img-box" onclick="showSpec('M9023')">
+                <div class="img-info-badge">📋</div>
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="M9023-1.jpg.png" id="it-m9023" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info">
+                <div class="item-cat">الصنف: أطقم شبابي فاخرة</div>
+                <div class="item-mod">موديل: M9023</div>
+            </div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt-m9023', 16)">+</button>
+                <span id="qt-m9023">16</span>
+                <button class="btn-q" onclick="c('qt-m9023', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('أطقم شبابي M9023', 'qt-m9023', this)">إضافة للطلب</button>
+        </div>
     </div>
 </div>
 
+<!-- نافذة عرض تفاصيل الموديل -->
+<div id="spec-modal" class="spec-modal" onclick="closeSpecModal(event)">
+    <div class="spec-modal-box">
+        <div class="spec-modal-close" onclick="document.getElementById('spec-modal').style.display='none'">✕</div>
+        <h3 class="spec-modal-title" id="spec-modal-title">تفاصيل الموديل</h3>
+        <div id="spec-modal-body"></div>
+    </div>
+</div>
+
+<!-- نافذة تكبير الصورة -->
 <div id="image-modal" class="img-modal" onclick="closeModal()">
     <span class="close-modal">&times;</span>
     <img id="modal-img" class="modal-content">
@@ -462,29 +627,104 @@
 </footer>
 
 <script>
-    // فتح القسم والتمرير بسلاسة لمنتجاته
+    const modelSpecs = {
+        'HD-01': {
+            title: 'مواصفات موديل HD-01 (EXPLORE)',
+            fabric: 'قطن ميلتون ثقيل مبطن ناعم (معالج ضد التوبير والانكماش)',
+            cut: 'قصة عصرية مريحة (Oversized / Relaxed Fit) بقبعة مبطنة بلون متناسق',
+            sizes: 'M - L - XL - XXL',
+            colors: '4 ألوان (أسود، رمادي فحمي، سكري، زيتي فاتح)',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        },
+        'HD-02': {
+            title: 'مواصفات موديل HD-02',
+            fabric: 'قطن شتوي فاخر عالي الكثافة وثبات ألوان ممتاز',
+            cut: 'قصة شبابية قياسية مريحة مع أساور وحاشية مرنة (Ribbed)',
+            sizes: 'M - L - XL - XXL',
+            colors: '4 ألوان أساسية متناسقة داخل الباكت',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        },
+        'HD-03': {
+            title: 'مواصفات موديل HD-03',
+            fabric: 'قطن ميلتون ثقيل مبطن بتشطيب احترافي',
+            cut: 'قصة عصرية (Modern Fit) مع جيب أمامي مقوى',
+            sizes: 'M - L - XL - XXL',
+            colors: '4 ألوان متنوعة',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        },
+        'HD-04': {
+            title: 'مواصفات موديل HD-04',
+            fabric: 'قطن مخلوط فاخر يمنح دفئاً ونعومة فائقة',
+            cut: 'قصة شبابية مريحة تناسب الاستخدام اليومي',
+            sizes: 'M - L - XL - XXL',
+            colors: '4 ألوان مميزة',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        },
+        'HD-05': {
+            title: 'مواصفات موديل HD-05',
+            fabric: 'قطن ميلتون ثقيل عالي الجودة مقاوم للغسيل المتكرر',
+            cut: 'قصة عصرية متناسقة مع تطريز/طباعة متقنة',
+            sizes: 'M - L - XL - XXL',
+            colors: '4 ألوان جذابة الأكثر طلباً',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        },
+        'M9009': {
+            title: 'مواصفات موديل M9009 (أطقم شبابي)',
+            fabric: 'قماش أطقم فاخر عالي الجودة معالج للإنكماش والوبر',
+            cut: 'قصة رياضية شبابية مريحة وعصرية',
+            sizes: 'M - L - XL - XXL',
+            colors: 'تنسيق ألوان متكامل داخل الباكت',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        },
+        'M9023': {
+            title: 'مواصفات موديل M9023 (أطقم شبابي)',
+            fabric: 'قماش أطقم شتوي/صيفي فاخر ومريح',
+            cut: 'قصة عصرية تناسب الاستخدام اليومي والمعارض',
+            sizes: 'M - L - XL - XXL',
+            colors: 'تنسيق ألوان متكامل داخل الباكت',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        }
+    };
+
+    function showSpec(modelCode) {
+        const spec = modelSpecs[modelCode];
+        if (!spec) return;
+
+        document.getElementById('spec-modal-title').innerText = `📋 ${spec.title}`;
+        document.getElementById('spec-modal-body').innerHTML = `
+            <div class="spec-item-row"><strong>🧵 المكونات والخامة:</strong> ${spec.fabric}</div>
+            <div class="spec-item-row"><strong>✂️ القصة والتفصيل:</strong> ${spec.cut}</div>
+            <div class="spec-item-row"><strong>📏 المقاسات المتوفرة:</strong> ${spec.sizes}</div>
+            <div class="spec-item-row"><strong>🎨 الألوان في الباكت:</strong> ${spec.colors}</div>
+            <div class="spec-item-row"><strong>📦 تعبئة الدستة:</strong> ${spec.pack}</div>
+        `;
+        document.getElementById('spec-modal').style.display = 'flex';
+    }
+
+    function closeSpecModal(e) {
+        if (e.target.id === 'spec-modal') {
+            document.getElementById('spec-modal').style.display = 'none';
+        }
+    }
+
     function openCategory(cat, title) {
         const prodContainer = document.getElementById('products-container');
         prodContainer.style.display = 'block';
 
         document.getElementById('current-category-title').innerText = `كتالوج: ${title}`;
 
-        // إظهار منتجات القسم المطلوب
         document.querySelectorAll('.card').forEach(c => { 
             c.classList.remove('show'); 
             if(c.classList.contains(cat)) c.classList.add('show'); 
         });
 
-        // تنشيط التبويب
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
         let activeTab = document.getElementById('tab-' + cat);
         if(activeTab) activeTab.classList.add('active');
 
-        // النزول السلس إلى المنتجات
         prodContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    // إغلاق الكتالوج والعودة لأعلى الصفحة
     function hideCategory() {
         document.getElementById('products-container').style.display = 'none';
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
@@ -546,7 +786,6 @@
         document.getElementById('image-modal').style.display = 'none';
     }
 
-    // إدارة شاشة إعلانات الفيديو التلقائية
     let promoIdx = 0;
     const slides = document.querySelectorAll('.promo-slide');
     const dots = document.querySelectorAll('.s-dot');
