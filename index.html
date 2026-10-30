@@ -187,7 +187,7 @@
             max-width: 1200px;
             margin: 10px auto 40px;
             padding: 0 12px;
-            animation: fadeIn 0.4s ease;
+            animation: fadeIn 0.4s ease; 
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(15px); }
@@ -581,7 +581,7 @@
             <button class="btn-add" onclick="add('هودي بلوفر M9023', 'qt-m9023', this)">إضافة للطلب</button>
         </div>
 
-        <!-- الموديل الجديد M902 -->
+        <!-- الموديل الثامن M902 -->
         <div class="card tshirt show" data-images="M902-1.png.png,M902-2.png.png,M902-3.png.png,M902-4.png.png" data-index="0">
             <div class="img-box" onclick="showSpec('M902')">
                 <div class="img-info-badge">📋</div>
@@ -599,6 +599,26 @@
                 <button class="btn-q" onclick="c('qt-m902', -16)">-</button>
             </div>
             <button class="btn-add" onclick="add('هودي بلوفر M902', 'qt-m902', this)">إضافة للطلب</button>
+        </div>
+
+        <!-- الموديل التاسع M900 -->
+        <div class="card tshirt show" data-images="M900-1.png.webp,M900-2.png.webp,M900-3.png.webp,M900-4.png.webp" data-index="0">
+            <div class="img-box" onclick="showSpec('M900')">
+                <div class="img-info-badge">📋</div>
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="M900-1.png.webp" id="it-m900" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info">
+                <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
+                <div class="item-mod">موديل: M900</div>
+            </div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt-m900', 16)">+</button>
+                <span id="qt-m900">16</span>
+                <button class="btn-q" onclick="c('qt-m900', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('هودي بلوفر M900', 'qt-m900', this)">إضافة للطلب</button>
         </div>
     </div>
 </div>
@@ -706,6 +726,14 @@
         },
         'M902': {
             title: 'مواصفات موديل M902',
+            fabric: 'قطن ميلتون ثقيل فاخر عالي الكثافة',
+            cut: 'قصة عصرية مريحة (Relaxed Fit)',
+            sizes: 'M - L - XL - XXL',
+            colors: '4 ألوان متناسقة داخل الباكت',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        },
+        'M900': {
+            title: 'مواصفات موديل M900',
             fabric: 'قطن ميلتون ثقيل فاخر عالي الكثافة',
             cut: 'قصة عصرية مريحة (Relaxed Fit)',
             sizes: 'M - L - XL - XXL',
