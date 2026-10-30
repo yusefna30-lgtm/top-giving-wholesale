@@ -1064,6 +1064,19 @@
         }
         resetPromoTimer();
     });
+
+    // كود التسريع: تحميل وتخزين جميع صور الموديلات في خلفية المتصفح فوراً
+    window.addEventListener('load', () => {
+        document.querySelectorAll('.card').forEach(card => {
+            const images = card.getAttribute('data-images');
+            if (images) {
+                images.split(',').forEach(imgSrc => {
+                    const img = new Image();
+                    img.src = imgSrc.trim();
+                });
+            }
+        });
+    });
 </script>
 </body>
 </html>
