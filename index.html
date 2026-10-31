@@ -474,15 +474,314 @@
     </div>
 </div>
 
-<!-- حاوية المنتجات الديناميكية المرتبطة بـ Firebase -->
+<!-- حاوية المنتجات -->
 <div id="products-container">
     <div class="section-header-bar">
         <h3 class="section-header-title" id="current-category-title">الكتالوج</h3>
         <button class="btn-hide-catalog" onclick="hideCategory()">إغلاق الكتالوج ✕</button>
     </div>
 
-    <!-- شبكة المنتجات التي ستتعبأ تلقائياً من قاعدة البيانات -->
-    <div class="grid" id="products-grid"></div>
+    <div class="grid">
+        <!-- الموديل الأول HD-01 -->
+        <div class="card tshirt show" data-images="hd01-1.jpg.png,hd01-2.jpg.png,hd01-3.jpg.png,hd01-4.jpg.png" data-index="0">
+            <div class="img-box" onclick="showSpec('HD-01')">
+                <div class="img-info-badge">📋</div>
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="hd01-1.jpg.png" id="it-hd01" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info">
+                <div class="item-cat">الصنف: هودي بلوفر رجالي (EXPLORE)</div>
+                <div class="item-mod">موديل: HD-01</div>
+            </div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt-hd01', 16)">+</button>
+                <span id="qt-hd01">16</span>
+                <button class="btn-q" onclick="c('qt-hd01', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('هودي بلوفر EXPLORE HD-01', 'qt-hd01', this)">إضافة للطلب</button>
+        </div>
+
+        <!-- الموديل الثاني HD-02 -->
+        <div class="card tshirt show" data-images="hd02-1.jpg.png,hd02-2.jpg.png,hd02-3.jpg.png,hd02-4.jpg.png" data-index="0">
+            <div class="img-box" onclick="showSpec('HD-02')">
+                <div class="img-info-badge">📋</div>
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="hd02-1.jpg.png" id="it-hd02" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info">
+                <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
+                <div class="item-mod">موديل: HD-02</div>
+            </div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt-hd02', 16)">+</button>
+                <span id="qt-hd02">16</span>
+                <button class="btn-q" onclick="c('qt-hd02', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('هودي بلوفر HD-02', 'qt-hd02', this)">إضافة للطلب</button>
+        </div>
+
+        <!-- الموديل الثالث HD-03 -->
+        <div class="card tshirt show" data-images="hd03-1.jpg.png,hd03-2.jpg.png,hd03-3.jpg.png,hd03-4.jpg.png" data-index="0">
+            <div class="img-box" onclick="showSpec('HD-03')">
+                <div class="img-info-badge">📋</div>
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="hd03-1.jpg.png" id="it-hd03" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info">
+                <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
+                <div class="item-mod">موديل: HD-03</div>
+            </div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt-hd03', 16)">+</button>
+                <span id="qt-hd03">16</span>
+                <button class="btn-q" onclick="c('qt-hd03', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('هودي بلوفر HD-03', 'qt-hd03', this)">إضافة للطلب</button>
+        </div>
+
+        <!-- الموديل الرابع HD-04 -->
+        <div class="card tshirt show" data-images="hd04-1.jpg.png,hd04-2.jpg.png,hd04-3.jpg.png,hd04-4.jpg.png" data-index="0">
+            <div class="img-box" onclick="showSpec('HD-04')">
+                <div class="img-info-badge">📋</div>
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="hd04-1.jpg.png" id="it-hd04" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info">
+                <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
+                <div class="item-mod">موديل: HD-04</div>
+            </div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt-hd04', 16)">+</button>
+                <span id="qt-hd04">16</span>
+                <button class="btn-q" onclick="c('qt-hd04', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('هودي بلوفر HD-04', 'qt-hd04', this)">إضافة للطلب</button>
+        </div>
+
+        <!-- الموديل الخامس HD-05 -->
+        <div class="card tshirt show" data-images="hd05-1.jpg.png,hd05-2.jpg.png,hd05-3.jpg.png,hd05-4.jpg.png" data-index="0">
+            <div class="img-box" onclick="showSpec('HD-05')">
+                <div class="img-info-badge">📋</div>
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="hd05-1.jpg.png" id="it-hd05" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info">
+                <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
+                <div class="item-mod">موديل: HD-05</div>
+            </div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt-hd05', 16)">+</button>
+                <span id="qt-hd05">16</span>
+                <button class="btn-q" onclick="c('qt-hd05', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('هودي بلوفر HD-05', 'qt-hd05', this)">إضافة للطلب</button>
+        </div>
+
+        <!-- الموديل السادس M9009 -->
+        <div class="card tshirt show" data-images="M9009-1jpg.png,M9009-2jpg.png,M9009-3jpg.png,M9009-4jpg.png" data-index="0">
+            <div class="img-box" onclick="showSpec('M9009')">
+                <div class="img-info-badge">📋</div>
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="M9009-1jpg.png" id="it-m9009" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info">
+                <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
+                <div class="item-mod">موديل: M9009</div>
+            </div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt-m9009', 16)">+</button>
+                <span id="qt-m9009">16</span>
+                <button class="btn-q" onclick="c('qt-m9009', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('هودي بلوفر M9009', 'qt-m9009', this)">إضافة للطلب</button>
+        </div>
+
+        <!-- الموديل السابع M9023 -->
+        <div class="card tshirt show" data-images="M9023-1jpg.png,M9023-2jpg.png,M9023-3jpg.png,M9023-4jpg.png" data-index="0">
+            <div class="img-box" onclick="showSpec('M9023')">
+                <div class="img-info-badge">📋</div>
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="M9023-1jpg.png" id="it-m9023" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info">
+                <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
+                <div class="item-mod">موديل: M9023</div>
+            </div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt-m9023', 16)">+</button>
+                <span id="qt-m9023">16</span>
+                <button class="btn-q" onclick="c('qt-m9023', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('هودي بلوفر M9023', 'qt-m9023', this)">إضافة للطلب</button>
+        </div>
+
+        <!-- الموديل الثامن M902 -->
+        <div class="card tshirt show" data-images="M902-1.png.png,M902-2.png.png,M902-3.png.png,M902-4.png.png" data-index="0">
+            <div class="img-box" onclick="showSpec('M902')">
+                <div class="img-info-badge">📋</div>
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="M902-1.png.png" id="it-m902" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info">
+                <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
+                <div class="item-mod">موديل: M902</div>
+            </div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt-m902', 16)">+</button>
+                <span id="qt-m902">16</span>
+                <button class="btn-q" onclick="c('qt-m902', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('هودي بلوفر M902', 'qt-m902', this)">إضافة للطلب</button>
+        </div>
+
+        <!-- الموديل التاسع M900 -->
+        <div class="card tshirt show" data-images="M900-1.png.webp,M900-2.png.webp,M900-3.png.webp,M900-4.png.webp" data-index="0">
+            <div class="img-box" onclick="showSpec('M900')">
+                <div class="img-info-badge">📋</div>
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="M900-1.png.webp" id="it-m900" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info">
+                <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
+                <div class="item-mod">موديل: M900</div>
+            </div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt-m900', 16)">+</button>
+                <span id="qt-m900">16</span>
+                <button class="btn-q" onclick="c('qt-m900', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('هودي بلوفر M900', 'qt-m900', this)">إضافة للطلب</button>
+        </div>
+
+        <!-- الموديل العاشر M9004 -->
+        <div class="card tshirt show" data-images="M9004-1.png.webp,M9004-2.png.webp,M9004-3.png.webp,M9004-4.png.webp" data-index="0">
+            <div class="img-box" onclick="showSpec('M9004')">
+                <div class="img-info-badge">📋</div>
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="M9004-1.png.webp" id="it-m9004" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info">
+                <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
+                <div class="item-mod">موديل: M9004</div>
+            </div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt-m9004', 16)">+</button>
+                <span id="qt-m9004">16</span>
+                <button class="btn-q" onclick="c('qt-m9004', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('هودي بلوفر M9004', 'qt-m9004', this)">إضافة للطلب</button>
+        </div>
+
+        <!-- الموديل الحادي عشر M9011 -->
+        <div class="card tshirt show" data-images="M9011-1.png.webp,M9011-2.png.webp,M9011-3.png.webp,M9011-4.png.webp" data-index="0">
+            <div class="img-box" onclick="showSpec('M9011')">
+                <div class="img-info-badge">📋</div>
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="M9011-1.png.webp" id="it-m9011" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info">
+                <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
+                <div class="item-mod">موديل: M9011</div>
+            </div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt-m9011', 16)">+</button>
+                <span id="qt-m9011">16</span>
+                <button class="btn-q" onclick="c('qt-m9011', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('هودي بلوفر M9011', 'qt-m9011', this)">إضافة للطلب</button>
+        </div>
+
+        <!-- الموديل الثاني عشر M9030 -->
+        <div class="card tshirt show" data-images="M9030-1.png.jpg,M9030-2.png.jpg,M9030-3.png.jpg,M9030-4.png.jpg" data-index="0">
+            <div class="img-box" onclick="showSpec('M9030')">
+                <div class="img-info-badge">📋</div>
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="M9030-1.png.jpg" id="it-m9030" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info">
+                <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
+                <div class="item-mod">موديل: M9030</div>
+            </div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt-m9030', 16)">+</button>
+                <span id="qt-m9030">16</span>
+                <button class="btn-q" onclick="c('qt-m9030', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('هودي بلوفر M9030', 'qt-m9030', this)">إضافة للطلب</button>
+        </div>
+
+        <!-- الموديل الثالث عشر M9021 -->
+        <div class="card tshirt show" data-images="M9021-1.png.jpg,M9021-2.png.jpg,M9021-3.png.jpg,M9021-4.png.jpg" data-index="0">
+            <div class="img-box" onclick="showSpec('M9021')">
+                <div class="img-info-badge">📋</div>
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="M9021-1.png.jpg" id="it-m9021" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info">
+                <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
+                <div class="item-mod">موديل: M9021</div>
+            </div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt-m9021', 16)">+</button>
+                <span id="qt-m9021">16</span>
+                <button class="btn-q" onclick="c('qt-m9021', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('هودي بلوفر M9021', 'qt-m9021', this)">إضافة للطلب</button>
+        </div>
+
+        <!-- الموديل الرابع عشر M901 -->
+        <div class="card tshirt show" data-images="M901-1.png.jpg,M901-2.png.jpg,M901-3.png.jpg,M901-4.png.jpg" data-index="0">
+            <div class="img-box" onclick="showSpec('M901')">
+                <div class="img-info-badge">📋</div>
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="M901-1.png.jpg" id="it-m901" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info">
+                <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
+                <div class="item-mod">موديل: M901</div>
+            </div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt-m901', 16)">+</button>
+                <span id="qt-m901">16</span>
+                <button class="btn-q" onclick="c('qt-m901', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('هودي بلوفر M901', 'qt-m901', this)">إضافة للطلب</button>
+        </div>
+
+        <!-- الموديل الخامس عشر M5007-1 -->
+        <div class="card tshirt show" data-images="M5007-1.1.png.jpg,M5007-1.2.png.jpg,M5007-1.3.png.jpg,M5007-1.4.png.jpg" data-index="0">
+            <div class="img-box" onclick="showSpec('M5007-1')">
+                <div class="img-info-badge">📋</div>
+                <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
+                <img src="M5007-1.1.png.jpg" id="it-m5007-1" class="product-img">
+                <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
+            </div>
+            <div class="model-info">
+                <div class="item-cat">الصنف: هودي بلوفر رجالي</div>
+                <div class="item-mod">موديل: M5007-1</div>
+            </div>
+            <div class="qty-control">
+                <button class="btn-q" onclick="c('qt-m5007-1', 16)">+</button>
+                <span id="qt-m5007-1">16</span>
+                <button class="btn-q" onclick="c('qt-m5007-1', -16)">-</button>
+            </div>
+            <button class="btn-add" onclick="add('هودي بلوفر M5007-1', 'qt-m5007-1', this)">إضافة للطلب</button>
+        </div>
+    </div>
 </div>
 
 <!-- نافذة عرض تفاصيل الموديل -->
@@ -528,68 +827,7 @@
     </div>
 </footer>
 
-<!-- استدعاء مكتبات Firebase للويب -->
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-
 <script>
-    // إعدادات الاتصال بمشروع Firebase الخاص بك
-    const firebaseConfig = {
-      apiKey: "AIzaSyCwKhAHxiT35Vet5y5W0jCWYhNhD0NsDM",
-      authDomain: "top-giving-store.firebaseapp.com",
-      databaseURL: "https://top-giving-store-default-rtdb.firebaseio.com",
-      projectId: "top-giving-store",
-      storageBucket: "top-giving-store.firebasestorage.app",
-      messagingSenderId: "825534578271",
-      appId: "1:825534578271:web:4d697aa4aac48204fd25ea",
-      measurementId: "G-M8GCZY6437"
-    };
-
-    // تهيئة الاتصال بقاعدة البيانات
-    firebase.initializeApp(firebaseConfig);
-    const dbRef = firebase.database().ref('products');
-
-    // جلب المنتجات تلقائياً وتوليد الكاردات في المتجر
-    dbRef.on('value', (snapshot) => {
-        const products = snapshot.val();
-        const gridContainer = document.getElementById('products-grid');
-        if (!gridContainer) return;
-        
-        gridContainer.innerHTML = '';
-
-        if (products) {
-            Object.keys(products).forEach((key) => {
-                const product = products[key];
-                const imagesArray = product.images ? product.images.split(',').map(img => img.trim()) : [];
-                const firstImg = imagesArray.length > 0 ? imagesArray[0] : '';
-                const minQty = parseInt(product.minQty) || 16;
-                const cardId = 'qt-' + product.code.toLowerCase();
-
-                const cardHTML = `
-                    <div class="card ${product.category}" data-images="${product.images || ''}" data-index="0">
-                        <div class="img-box" onclick="showSpec('${product.code}')">
-                            <div class="img-info-badge">📋</div>
-                            <span class="arrow arrow-right" onclick="event.stopPropagation(); navImg(this, 1)">&gt;</span>
-                            <img src="${firstImg}" id="it-${product.code.toLowerCase()}" class="product-img">
-                            <span class="arrow arrow-left" onclick="event.stopPropagation(); navImg(this, -1)">&lt;</span>
-                        </div>
-                        <div class="model-info">
-                            <div class="item-cat">الصنف: ${product.categoryName}</div>
-                            <div class="item-mod">موديل: ${product.code} - ${product.title}</div>
-                        </div>
-                        <div class="qty-control">
-                            <button class="btn-q" onclick="c('${cardId}', ${minQty})">+</button>
-                            <span id="${cardId}">${minQty}</span>
-                            <button class="btn-q" onclick="c('${cardId}', -${minQty})">-</button>
-                        </div>
-                        <button class="btn-add" onclick="add('${product.title} (${product.code})', '${cardId}', this)">إضافة للطلب</button>
-                    </div>
-                `;
-                gridContainer.innerHTML += cardHTML;
-            });
-        }
-    });
-
     const modelSpecs = {
         'HD-01': {
             title: 'مواصفات موديل HD-01 (EXPLORE)',
@@ -598,18 +836,124 @@
             sizes: 'M - L - XL - XXL',
             colors: '4 ألوان (أسود، رمادي فحمي، سكري، زيتي فاتح)',
             pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        },
+        'HD-02': {
+            title: 'مواصفات موديل HD-02',
+            fabric: 'قطن شتوي فاخر عالي الكثافة وثبات ألوان ممتاز',
+            cut: 'قصة شبابية قياسية مريحة مع أساور وحاشية مرنة (Ribbed)',
+            sizes: 'M - L - XL - XXL',
+            colors: '4 ألوان أساسية متناسقة داخل الباكت',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        },
+        'HD-03': {
+            title: 'مواصفات موديل HD-03',
+            fabric: 'قطن ميلتون ثقيل مبطن بتشطيب احترافي',
+            cut: 'قصة عصرية (Modern Fit) مع جيب أمامي مقوى',
+            sizes: 'M - L - XL - XXL',
+            colors: '4 ألوان متنوعة',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        },
+        'HD-04': {
+            title: 'مواصفات موديل HD-04',
+            fabric: 'قطن مخلوط فاخر يمنح دفئاً ونعومة فائقة',
+            cut: 'قصة شبابية مريحة تناسب الاستخدام اليومي',
+            sizes: 'M - L - XL - XXL',
+            colors: '4 ألوان مميزة',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        },
+        'HD-05': {
+            title: 'مواصفات موديل HD-05',
+            fabric: 'قطن ميلتون ثقيل عالي الجودة مقاوم للغسيل المتكرر',
+            cut: 'قصة عصرية متناسقة مع تطريز/طباعة متقنة',
+            sizes: 'M - L - XL - XXL',
+            colors: '4 ألوان جذابة الأكثر طلباً',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        },
+        'M9009': {
+            title: 'مواصفات موديل M9009',
+            fabric: 'قطن ميلتون ثقيل فاخر معالج ضد الوبر والإنكماش',
+            cut: 'قصة عصرية مريحة (Relaxed Fit)',
+            sizes: 'M - L - XL - XXL',
+            colors: '4 ألوان متناسقة داخل الباكت',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        },
+        'M9023': {
+            title: 'مواصفات موديل M9023',
+            fabric: 'قطن شتوي عالي الكثافة ومبطن بنعومة',
+            cut: 'قصة شبابية متميزة',
+            sizes: 'M - L - XL - XXL',
+            colors: '4 ألوان أساسية',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        },
+        'M902': {
+            title: 'مواصفات موديل M902',
+            fabric: 'قطن ميلتون ثقيل فاخر عالي الكثافة',
+            cut: 'قصة عصرية مريحة (Relaxed Fit)',
+            sizes: 'M - L - XL - XXL',
+            colors: '4 ألوان متناسقة داخل الباكت',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        },
+        'M900': {
+            title: 'مواصفات موديل M900',
+            fabric: 'قطن ميلتون ثقيل فاخر عالي الكثافة',
+            cut: 'قصة عصرية مريحة (Relaxed Fit)',
+            sizes: 'M - L - XL - XXL',
+            colors: '4 ألوان متناسقة داخل الباكت',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        },
+        'M9004': {
+            title: 'مواصفات موديل M9004',
+            fabric: 'قطن ميلتون ثقيل فاخر معالج',
+            cut: 'قصة عصرية مريحة (Relaxed Fit)',
+            sizes: 'M - L - XL - XXL',
+            colors: '4 ألوان متناسقة داخل الباكت',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        },
+        'M9011': {
+            title: 'مواصفات موديل M9011',
+            fabric: 'قطن ميلتون ثقيل فاخر معالج',
+            cut: 'قصة عصرية مريحة (Relaxed Fit)',
+            sizes: 'M - L - XL - XXL',
+            colors: '4 ألوان متناسقة داخل الباكت',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        },
+        'M9030': {
+            title: 'مواصفات موديل M9030',
+            fabric: 'قطن ميلتون ثقيل فاخر عالي الكثافة',
+            cut: 'قصة عصرية مريحة (Relaxed Fit)',
+            sizes: 'M - L - XL - XXL',
+            colors: '4 ألوان متناسقة داخل الباكت',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        },
+        'M9021': {
+            title: 'مواصفات موديل M9021',
+            fabric: 'قطن ميلتون ثقيل فاخر عالي الكثافة',
+            cut: 'قصة عصرية مريحة (Relaxed Fit)',
+            sizes: 'M - L - XL - XXL',
+            colors: '4 ألوان متناسقة داخل الباكت',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        },
+        'M901': {
+            title: 'مواصفات موديل M901',
+            fabric: 'قطن ميلتون ثقيل فاخر عالي الكثافة',
+            cut: 'قصة عصرية مريحة (Relaxed Fit)',
+            sizes: 'M - L - XL - XXL',
+            colors: '4 ألوان متناسقة داخل الباكت',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
+        },
+        'M5007-1': {
+            title: 'مواصفات موديل M5007-1',
+            fabric: 'قطن ميلتون ثقيل فاخر عالي الكثافة',
+            cut: 'قصة عصرية مريحة (Relaxed Fit)',
+            sizes: 'M - L - XL - XXL',
+            colors: '4 ألوان متناسقة داخل الباكت',
+            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
         }
     };
 
     function showSpec(modelCode) {
-        const spec = modelSpecs[modelCode] || {
-            title: 'مواصفات موديل ' + modelCode,
-            fabric: 'قطن ميلتون ثقيل فاخر عالي الكثافة معالج ضد الوبر',
-            cut: 'قصة عصرية مريحة (Relaxed Fit)',
-            sizes: 'M - L - XL - XXL',
-            colors: '4 ألوان أساسية متناسقة',
-            pack: 'الباكت 16 حبة (4 مقاسات × 4 ألوان متكاملة)'
-        };
+        const spec = modelSpecs[modelCode];
+        if (!spec) return;
 
         document.getElementById('spec-modal-title').innerText = `📋 ${spec.title}`;
         document.getElementById('spec-modal-body').innerHTML = `
@@ -654,9 +998,7 @@
 
     function navImg(btn, dir) {
         let card = btn.closest('.card');
-        let imgsAttr = card.getAttribute('data-images');
-        if (!imgsAttr) return;
-        let imgs = imgsAttr.split(',');
+        let imgs = card.getAttribute('data-images').split(',');
         let currIdx = parseInt(card.getAttribute('data-index') || 0);
         currIdx += dir;
         if (currIdx < 0) currIdx = imgs.length - 1;
@@ -677,9 +1019,7 @@
 
     let order = [];
     function add(name, qtyId, btn) { 
-        let qtyEl = document.getElementById(qtyId);
-        if(!qtyEl) return;
-        let qty = parseInt(qtyEl.innerText); 
+        let qty = parseInt(document.getElementById(qtyId).innerText); 
         order.push({ name: name, qty: qty }); 
         document.getElementById('cart-bar').style.display = 'block'; 
         updateTotal(); 
@@ -767,6 +1107,19 @@
             firstVideo.play().catch(() => {});
         }
         resetPromoTimer();
+    });
+
+    // كود التسريع: تحميل وتخزين جميع صور الموديلات في خلفية المتصفح فوراً
+    window.addEventListener('load', () => {
+        document.querySelectorAll('.card').forEach(card => {
+            const images = card.getAttribute('data-images');
+            if (images) {
+                images.split(',').forEach(imgSrc => {
+                    const img = new Image();
+                    img.src = imgSrc.trim();
+                });
+            }
+        });
     });
 </script>
 </body>
